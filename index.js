@@ -8,12 +8,14 @@ canvas.height = window.innerHeight
 // global variables. 
 const gravity = 0.5
 const floor = 0 //50 // pixel from th bottom player stops at
-const jump = 10 // amount player should jump
+const jump = 8 // amount player should jump
 const playerMovement = 10 //  amount player moves left and right
-let keyPressed = ''
+let scrollOffset = 0
 
+
+ 
 class Player {
-    constructor() {
+    constructor() { //  passing in x & y positions
         this.position = {
             x: 100,
             y: 100
@@ -46,10 +48,10 @@ class Player {
 
 // classes are a blueprint for creating objects that share the same properties and methods.
 class Platform {    
-    constructor() {
+    constructor({ x, y }) {
         this.position = {
-            x: 600,
-            y: 300
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
         }
         this.width = 200
         this.height = 20
@@ -65,7 +67,7 @@ class Platform {
 
 const player = new Player() //  calling the "Player" class
 // const platform = new Platform() //  calling the "Platform" class
-const platforms = [new Platform()]
+const platforms = [new Platform({x: 600, y: 300}), new Platform({x: 300, y: 450}), new Platform({x: 825, y: 200})] // Need to pass in x & y.
 
 const keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
     right: {
@@ -76,17 +78,17 @@ const keys = {      // access using keys.left.pressed, or keys.right.pressed etc
     }
 }
 
-function animate() {
+function animate() { // ------ MAIN ANIMATION FUNCTION ------
     requestAnimationFrame(animate)
     console.log('animate function');  
     c.clearRect(0, 0, canvas.width, canvas.height)
 
     player.update() // ------ PLAYER UPDATE
     platforms.forEach(platform => { // loop through array of platforms
-        platform.draw() // ------ PLATFORM INITIAL DRAW 
+        platform.draw() // ------ DRAW PLATFORM
     })
 
-    // ---- Player Movement ----
+    // ---- PLAYER MOVEMENT ----
     if (keys.left.pressed == true && keys.right.pressed == true ) {
         player.velocity.x = 0
         console.log('both')
@@ -100,7 +102,7 @@ function animate() {
         player.velocity.x = 0
         console.log('none');
 
-        // ---- Platform Scroll ----
+        // ---- PLATFORM SCROLL ----
         if (keys.right.pressed) { // if right key is pressed, move platform to the left by playMovement
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
@@ -114,7 +116,7 @@ function animate() {
         }
     }
     
-    // ---- Platform collision detection ----
+    // ---- PLATFORM COLLISION DETECTION ----
     platforms.forEach(platform => { 
     if (//player bottom is HIGHER than platform top
         player.position.y + player.height <= platform.position.y  &&
@@ -131,7 +133,7 @@ function animate() {
 }
 animate()
 
-//Listen for a Key Pressed
+// ---- LISTEN FOR A KEY PRESSED ----
 addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode, key is event.key. ONLY works if they're listed in the EventListener
     // console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
     switch (keyCode) {

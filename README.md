@@ -9,8 +9,8 @@ To Do List
 3. Gravity --  DONE
 4. Player Movement -- DONE
 5. Platforms -- DONE
-6. "scroll" the background --  In progress
-7. Win scenario
+6. "scroll" the background -- DONE
+7. Win scenario -- In progress
 8. Image platforms
 9. Parallax Scroll
 10. Death Pits
