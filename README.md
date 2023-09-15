@@ -8,8 +8,8 @@ To Do List
 2. Player Creation -- DONE
 3. Gravity --  DONE
 4. Player Movement -- DONE
-5. Platforms
-6. "scroll" the background
+5. Platforms -- DONE
+6. "scroll" the background --  In progress
 7. Win scenario
 8. Image platforms
 9. Parallax Scroll

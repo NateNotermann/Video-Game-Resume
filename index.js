@@ -86,18 +86,24 @@ function animate() {
     if (keys.left.pressed == true && keys.right.pressed == true ) {
         player.velocity.x = 0
         console.log('both')
-    } else if (keys.right.pressed) {
-        player.velocity.x = 5
+    } else if (keys.right.pressed && player.position.x < 400) {  // allow player to move right unless at 400px
+        player.velocity.x = playerMovement
         console.log('right');
-    } else if (keys.left.pressed) {
-        player.velocity.x = -5 
+    } else if (keys.left.pressed && player.position.x > 100) {  // allow player to move left unless at 100px
+        player.velocity.x = -playerMovement 
         console.log('left');
     } else {
         player.velocity.x = 0
         console.log('none');
+
+        if (keys.right.pressed) { // if right key is pressed, move platform to the left by 5
+            platform.position.x -= playerMovement
+        } else if(keys.left.pressed) {
+            platform.position.x += playerMovement
+        }
     }
     
-    // ---- Platform collision detection
+    // ---- Platform collision detection ----
     if (//player bottom is HIGHER than platform top
         player.position.y + player.height <= platform.position.y  &&
         // player bottom overlap with platform top side. (Player lands on platform)
