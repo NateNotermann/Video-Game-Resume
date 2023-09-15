@@ -64,7 +64,8 @@ class Platform {
 
 
 const player = new Player() //  calling the "Player" class
-const platform = new Platform() //  calling the "Platform" class
+// const platform = new Platform() //  calling the "Platform" class
+const platforms = [new Platform()]
 
 const keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
     right: {
@@ -81,8 +82,11 @@ function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height)
 
     player.update() // ------ PLAYER UPDATE
-    platform.draw() // ------ PLATFORM INITIAL DRAW 
+    platforms.forEach(platform => { // loop through array of platforms
+        platform.draw() // ------ PLATFORM INITIAL DRAW 
+    })
 
+    // ---- Player Movement ----
     if (keys.left.pressed == true && keys.right.pressed == true ) {
         player.velocity.x = 0
         console.log('both')
@@ -96,14 +100,22 @@ function animate() {
         player.velocity.x = 0
         console.log('none');
 
-        if (keys.right.pressed) { // if right key is pressed, move platform to the left by 5
-            platform.position.x -= playerMovement
-        } else if(keys.left.pressed) {
-            platform.position.x += playerMovement
+        // ---- Platform Scroll ----
+        if (keys.right.pressed) { // if right key is pressed, move platform to the left by playMovement
+            platforms.forEach(platform => { // loop through array of platforms
+                // platform.draw() // ------ PLATFORM INITIAL DRAW 
+                platform.position.x -= playerMovement
+            })
+        } else if(keys.left.pressed) {  // if left key is pressed, move platform to the right by playMovement
+            platforms.forEach(platform => { // llop through array of platforms
+                // platform.draw() // ------ PLATFORM INITIAL DRAW 
+                platform.position.x += playerMovement
+            })
         }
     }
     
     // ---- Platform collision detection ----
+    platforms.forEach(platform => { 
     if (//player bottom is HIGHER than platform top
         player.position.y + player.height <= platform.position.y  &&
         // player bottom overlap with platform top side. (Player lands on platform)
@@ -114,7 +126,7 @@ function animate() {
         player.position.x + player.width >= platform.position.x 
         ) {player.velocity.y = 0 
     }
-
+})
 
 }
 animate()
