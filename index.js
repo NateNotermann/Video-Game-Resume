@@ -22,11 +22,9 @@ class Player {
              x: 0, // positive values move right, negative values more left.
              y: 1 // positive values move down, negative values move up
         }
-
         this.width = 30
         this.height = 30
     }
-
     draw() { // draw a rectangle that matches the size and position of the Player Sprite
         c.fillStyle = 'red' 
         c.fillRect(
@@ -35,7 +33,6 @@ class Player {
             this.width, 
             this.height)
     }
-
     update() {
         this.draw()
         this.position.x += this.velocity.x // add/increase velocity (X axes only)(aka Movement) 
@@ -45,11 +42,30 @@ class Player {
             this.velocity.y += gravity // velocity += gravity (0.5) repeat over and over.
             else this.velocity.y = 0 // else set velocity to 0. (If player position + player height is greater or equal to canvas height)
     } 
-
 } // End of player Sprite
+
+// classes are a blueprint for creating objects that share the same properties and methods.
+class Platform {    
+    constructor() {
+        this.position = {
+            x: 600,
+            y: 300
+        }
+        this.width = 200
+        this.height = 20
+    }
+    draw() {   
+        // platform's rectangle
+        c.fillStyle = 'blue'
+        c.fillRect(this.position.x, this.position.y, this.width, this.height) 
+    }
+}
+ 
 
 
 const player = new Player() //  calling the "Player" class
+const platform = new Platform() //  calling the "Platform" class
+
 const keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
     right: {
         pressed: false
@@ -63,7 +79,10 @@ function animate() {
     requestAnimationFrame(animate)
     console.log('animate function');  
     c.clearRect(0, 0, canvas.width, canvas.height)
-    player.update()
+
+    player.update() // ------ PLAYER UPDATE
+    platform.draw() // ------ PLATFORM INITIAL DRAW 
+
     if (keys.left.pressed == true && keys.right.pressed == true ) {
         player.velocity.x = 0
         console.log('both')
@@ -71,13 +90,25 @@ function animate() {
         player.velocity.x = 5
         console.log('right');
     } else if (keys.left.pressed) {
-        player.velocity.x = -5
+        player.velocity.x = -5 
         console.log('left');
     } else {
         player.velocity.x = 0
         console.log('none');
     }
     
+    // ---- Platform collision detection
+    if (//player bottom is HIGHER than platform top
+        player.position.y + player.height <= platform.position.y  &&
+        // player bottom overlap with platform top side. (Player lands on platform)
+        player.position.y + player.height + player.velocity.y >= platform.position.y &&
+        //  // players left side overlap with platform right side
+        player.position.x <= platform.position.x + platform.width &&
+        //  // players right side overlap with platform left side
+        player.position.x + player.width >= platform.position.x 
+        ) {player.velocity.y = 0 
+    }
+
 
 }
 animate()
@@ -107,6 +138,8 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
     }
     console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed);
 })
+
+
 
 //Listen for Key UnPressed
 addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, key is event.key. ONLY works if they're listed in the EventListener
