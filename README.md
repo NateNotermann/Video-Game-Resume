@@ -10,8 +10,8 @@ To Do List
 4. Player Movement -- DONE
 5. Platforms -- DONE
 6. "scroll" the background -- DONE
-7. Win scenario -- In progress
-8. Image platforms
+7. Win scenario -- DONE
+8. Image platforms -- In progress
 9. Parallax Scroll
 10. Death Pits
 11. Level Creation 

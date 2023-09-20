@@ -104,16 +104,19 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
 
         // ---- PLATFORM SCROLL ----
         if (keys.right.pressed) { // if right key is pressed, move platform to the left by playMovement
+            scrollOffset +=playerMovement // record how much platforms are offsetting
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x -= playerMovement
             })
         } else if(keys.left.pressed) {  // if left key is pressed, move platform to the right by playMovement
-            platforms.forEach(platform => { // llop through array of platforms
+            scrollOffset -=playerMovement // record how much platforms are offsetting
+            platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x += playerMovement
             })
         }
+        console.log('scrollOffset:', scrollOffset); // check how much scroll is currently offsetting
     }
     
     // ---- PLATFORM COLLISION DETECTION ----
@@ -129,6 +132,10 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
         ) {player.velocity.y = 0 
     }
 })
+
+if (scrollOffset > 1500) {
+    console.log('You WIN!!!');
+}
 
 }
 animate()
@@ -161,7 +168,7 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
 
 
 
-//Listen for Key UnPressed
+//Listen for Key UNPRESSED 
 addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, key is event.key. ONLY works if they're listed in the EventListener
     // console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
     switch (keyCode) {
