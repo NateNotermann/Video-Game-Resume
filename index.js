@@ -1,3 +1,6 @@
+import platform from './img/platform.png';
+
+
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
@@ -12,7 +15,7 @@ const jump = 8 // amount player should jump
 const playerMovement = 10 //  amount player moves left and right
 let scrollOffset = 0
 
-
+ 
  
 class Player {
     constructor() { //  passing in x & y positions
