@@ -1,4 +1,4 @@
-// import platform from './img/platform.png';
+// import platform from '../img/platform.png';
 
 
 const canvas = document.querySelector('canvas');
@@ -51,27 +51,39 @@ class Player {
 
 // classes are a blueprint for creating objects that share the same properties and methods.
 class Platform {    
-    constructor({ x, y }) {
+    constructor({ x, y, image }) {
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
             y: y // y is now equal to the passed in y.  // y: 300
         }
-        this.width = 200
-        this.height = 20
+        this.image = image
+        this.width = image.width  //200
+        this.height = image.height //20
+
     }
     draw() {   
         // platform's rectangle
-        c.fillStyle = 'blue'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height) 
+        // c.fillStyle = 'blue'
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        c.drawImage(this.image,  this.position.x, this.position.y ) 
+
     }
 }
- 
 
-
+const image = new Image()
+image.src = './img/platform.png'
+// console.log('image width:', image.width, 'image height:', image.height); (BREAKS THE POSITION)
 const player = new Player() //  calling the "Player" class
 // const platform = new Platform() //  calling the "Platform" class
-const platforms = [new Platform({x: 600, y: 300}), new Platform({x: 300, y: 450}), new Platform({x: 825, y: 200})] // Need to pass in x & y.
-
+const platforms = [
+    new Platform({x: 0, y: canvas.height - 75, image: image}), // Platform 1; Ground 1
+    new Platform({x: image.width - 1, y: canvas.height - 75, image: image}), // Platform 1: Ground 2
+    new Platform({x: (image.width * 2) - 2, y: canvas.height - 75, image: image}), // Platform 1: Ground 3
+    new Platform({x: (image.width * 3) + 100, y: canvas.height - 75, image: image}), // Platform 1: Ground 4
+    new Platform({x: (image.width * 4) + 99, y: canvas.height - 75, image: image}), // Platform 1: Ground 5
+    // new Platform({x: 300, y: 300, image: image}), // Platform 1: Ground 2
+    new Platform({x: 800, y: 200, image: image})] // Platform 3
+    
 const keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
     right: {
         pressed: false
@@ -84,12 +96,14 @@ const keys = {      // access using keys.left.pressed, or keys.right.pressed etc
 function animate() { // ------ MAIN ANIMATION FUNCTION ------
     requestAnimationFrame(animate)
     console.log('animate function');  
-    c.clearRect(0, 0, canvas.width, canvas.height)
+    // c.clearRect(0, 0, canvas.width, canvas.height)
+    c.fillStyle = 'grey'
+    c.fillRect(0, 0, canvas.width, canvas.height)
 
-    player.update() // ------ PLAYER UPDATE
     platforms.forEach(platform => { // loop through array of platforms
         platform.draw() // ------ DRAW PLATFORM
     })
+    player.update() // ------ PLAYER UPDATE. Call this last, to render in front
 
     // ---- PLAYER MOVEMENT ----
     if (keys.left.pressed == true && keys.right.pressed == true ) {
