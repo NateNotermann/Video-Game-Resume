@@ -1,4 +1,4 @@
-// import platform from './img/platform.png';
+// import platform from '../img/platform.png';
 
 
 const canvas = document.querySelector('canvas');
@@ -51,26 +51,34 @@ class Player {
 
 // classes are a blueprint for creating objects that share the same properties and methods.
 class Platform {    
-    constructor({ x, y }) {
+    constructor({ x, y, image }) {
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
             y: y // y is now equal to the passed in y.  // y: 300
         }
-        this.width = 200
-        this.height = 20
+        this.image = image
+        this.width = image.width  //200
+        this.height = image.height //20
+
     }
     draw() {   
         // platform's rectangle
-        c.fillStyle = 'blue'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height) 
+        // c.fillStyle = 'blue'
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        c.drawImage(this.image,  this.position.x, this.position.y ) 
+
     }
 }
- 
 
+const image = new Image()
+image.src = './img/platform.png'
 
 const player = new Player() //  calling the "Player" class
 // const platform = new Platform() //  calling the "Platform" class
-const platforms = [new Platform({x: 600, y: 300}), new Platform({x: 300, y: 450}), new Platform({x: 825, y: 200})] // Need to pass in x & y.
+const platforms = [
+    new Platform({x: 600, y: 300, image: image}), 
+    new Platform({x: 300, y: 450, image: image}), 
+    new Platform({x: 825, y: 200, image: image})] // Need to pass in x & y.
 
 const keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
     right: {
