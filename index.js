@@ -58,7 +58,8 @@ class Player {
 
         if (this.position.y + this.height + this.velocity.y <= canvas.height + this.height) //Player can fall below bottom of screen. //- floor)  // if the BOTTOM of our player + it's velocity is LESS than the BOTTOM of the canvas keep adding gravity. 
             this.velocity.y += gravity // velocity += gravity (0.5) repeat over and over.
-            else this.velocity.y = 0 // else set velocity to 0. (If player position + player height is greater or equal to canvas height)
+            // PLAYER CAN NOW FALL FOREVER.. FOREVER.. FOREVER..
+           // else this.velocity.y = 0 // else set velocity to 0. (If player position + player height is greater or equal to canvas height)
     } 
 } // End of player Sprite
 
@@ -234,7 +235,7 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
                 background.position.x += (playerMovement/8)
             });
         }
-        console.log('scrollOffset:', scrollOffset); // check how much scroll is currently offsetting
+        // console.log('scrollOffset:', scrollOffset); // -------- check how much scroll is currently offsetting
     }
     
     // ---- PLATFORM COLLISION DETECTION ----
@@ -254,7 +255,10 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
 if (scrollOffset > 1500) {
     console.log('You WIN!!!');
 }
-
+// ---- LOOSE SCROLL ----
+if (player.position.y > (canvas.height) ){
+    console.log('Player fell off. You LOOSE!!');
+}
 }
 animate()
 
