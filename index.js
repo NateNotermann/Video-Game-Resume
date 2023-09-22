@@ -64,7 +64,7 @@ class Player {
 } // End of player Sprite
 
 // classes are a blueprint for creating objects that share the same properties and methods.
-class Platform {    // ---- Platform Class used for ground and all platforms.
+class Platform {    // ------ Platform Class used for ground and all platforms. ------
     constructor({ x, y, image }) {
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
@@ -84,9 +84,7 @@ class Platform {    // ---- Platform Class used for ground and all platforms.
             this.position.y ) 
     }
 }
-
-
-class Hill {    // ---- Hill Class used for Hills
+class Hill {    // ------ Hill Class used for Hills ------
     constructor({ x, y, image }) {
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
@@ -103,9 +101,7 @@ class Hill {    // ---- Hill Class used for Hills
             this.position.y ) 
     }
 }
-
-
-class Background {    // ---- Background Class used for Background Image
+class Background {    // ---- Background Class used for Background Image ------
     constructor({ x, y, image }) {
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
@@ -121,7 +117,7 @@ class Background {    // ---- Background Class used for Background Image
             this.position.y ) 
     }
 }
-class Cloud {    // ---- Background Class used for Cloud Image
+class Cloud {    // ---- Background Class used for Cloud Image ------
     constructor({ x, y, image }) {
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
@@ -143,11 +139,10 @@ class Cloud {    // ---- Background Class used for Cloud Image
 //     return image
 // }; 
 // const testBullshit = createImage(platformImage)
-
 // -------- ELEMENT VARIABLES --------
-const player = new Player() //  calling the "Player" class
+let player = new Player() //  calling the "Player" class
 // const platform = new Platform() //  calling the "Platform" class
-const platforms = [     // Array of Platforms
+let platforms = [     // Array of Platforms
     new Platform({x: 0, y: canvas.height - 75, image: platformImage}), // Ground 1
     new Platform({x: platformImage.width - 1, y: canvas.height - 75, image: platformImage}), // Ground 2
     new Platform({x: (platformImage.width * 2) - 2, y: canvas.height - 75, image: platformImage}), // Ground 3
@@ -156,19 +151,38 @@ const platforms = [     // Array of Platforms
     new Platform({x: 300, y: 300, image: platformImage}), // Platform 1
     new Platform({x: 800, y: 200, image: platformImage})]; // Platform 2
 
-const hills = [new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
-const backgrounds = [new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
-const clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
+let hills = [new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
+let backgrounds = [new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
+let clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
-const keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
+let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
     right: {
         pressed: false
     },
     left: {
         pressed: false
     }
+}
+
+function init() {
+// -------- ELEMENT VARIABLES --------
+    player = new Player() //  calling the "Player" class
+    // const platform = new Platform() //  calling the "Platform" class 
+    platforms = [     // Array of Platforms
+        new Platform({x: 0, y: canvas.height - 75, image: platformImage}), // Ground 1
+        new Platform({x: platformImage.width - 1, y: canvas.height - 75, image: platformImage}), // Ground 2
+        new Platform({x: (platformImage.width * 2) - 2, y: canvas.height - 75, image: platformImage}), // Ground 3
+        new Platform({x: (platformImage.width * 3) + 100, y: canvas.height - 75, image: platformImage}), // Ground 4
+        new Platform({x: (platformImage.width * 4) + 99, y: canvas.height - 75, image: platformImage}), // Ground 5
+        new Platform({x: 300, y: 300, image: platformImage}), // Platform 1
+        new Platform({x: 800, y: 200, image: platformImage})]; // Platform 2
+
+    hills = [new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
+    backgrounds = [new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
+    clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
+    // -------- ELEMENT VARIABLES --------
 }
 
 function animate() { // ------ MAIN ANIMATION FUNCTION ------
@@ -258,6 +272,7 @@ if (scrollOffset > 1500) {
 // ---- LOOSE SCROLL ----
 if (player.position.y > (canvas.height) ){
     console.log('Player fell off. You LOOSE!!');
+    init();
 }
 }
 animate()
