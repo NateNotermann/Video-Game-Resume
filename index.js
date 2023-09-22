@@ -14,6 +14,7 @@ const floor = 0 //50 // pixel from th bottom player stops at
 const jump = 8 // amount player should jump
 const playerMovement = 10 //  amount player moves left and right
 let scrollOffset = 0
+let time = 1
 let animateRunning = false
 // -------- IMAGE VARIABLES --------
 const platformImage = new Image()   // image = platform image
@@ -24,6 +25,9 @@ hillImage.src = './img/hills.png'
 
 const backgroundImage = new Image()   // Hill Image
 backgroundImage.src = './img/background.png'
+
+const cloudImage = new Image()   // Cloud Image
+cloudImage.src = './img/cloud.png'
 // -------- IMAGE VARIABLES --------
 
 class Player {
@@ -59,8 +63,7 @@ class Player {
 } // End of player Sprite
 
 // classes are a blueprint for creating objects that share the same properties and methods.
-// ---- Platform Class used for ground and all platforms.
-class Platform {    
+class Platform {    // ---- Platform Class used for ground and all platforms.
     constructor({ x, y, image }) {
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
@@ -81,8 +84,8 @@ class Platform {
     }
 }
 
-// ---- Hill Class used for Hills
-class Hill {    
+
+class Hill {    // ---- Hill Class used for Hills
     constructor({ x, y, image }) {
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
@@ -100,8 +103,24 @@ class Hill {
     }
 }
 
-// ---- Background Class used for Background Image
-class Background {    
+
+class Background {    // ---- Background Class used for Background Image
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width  //200
+        this.height = image.height //20
+    }
+    draw() {   
+        c.drawImage(this.image,  
+            this.position.x, 
+            this.position.y ) 
+    }
+}
+class Cloud {    // ---- Background Class used for Cloud Image
     constructor({ x, y, image }) {
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
@@ -137,8 +156,8 @@ const platforms = [     // Array of Platforms
     new Platform({x: 800, y: 200, image: platformImage})]; // Platform 2
 
 const hills = [new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
-
 const backgrounds = [new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
+const clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
@@ -159,15 +178,17 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
     c.fillStyle = 'grey'
     c.fillRect(0, 0, canvas.width, canvas.height)
 
-    backgrounds.forEach(background => { // loop through array of platforms
-        background.draw() // ------ DRAW PLATFORM
+    backgrounds.forEach(background => { // loop through array of Backgrounds
+        background.draw() // ------ DRAW BACKGROUND
     })
-    
-    hills.forEach(hill => {
-        hill.draw()
+    clouds.forEach(cloud => { // loop through array of clouds
+        cloud.position.x += (0.2 * time)
+        cloud.draw() // ------ DRAW CLOUDS
+    })
+    hills.forEach(hill => { // loop through array of Hills
+        hill.draw()     // ------ DRAW HILL
     }) 
-
-    platforms.forEach(platform => { // loop through array of platforms
+    platforms.forEach(platform => { // loop through array of Platforms
         platform.draw() // ------ DRAW PLATFORM
     })
 
@@ -195,19 +216,23 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
                 platform.position.x -= playerMovement
             });
             hills.forEach(hill => { // ---- HILL SCROLL ----
-                // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 hill.position.x -= (playerMovement/3)
+            });
+            backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
+                background.position.x -= (playerMovement/8)
             });
         } else if(keys.left.pressed) {  // if left key is pressed, move platform to the right by playMovement
             scrollOffset -=playerMovement // record how much platforms are offsetting
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x += playerMovement
-            })
+            });
             hills.forEach(hill => { // // ---- HILL SCROLL ----
-                // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 hill.position.x += (playerMovement/3)
-            })
+            });
+            backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
+                background.position.x += (playerMovement/8)
+            });
         }
         console.log('scrollOffset:', scrollOffset); // check how much scroll is currently offsetting
     }

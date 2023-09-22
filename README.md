@@ -12,8 +12,8 @@ To Do List
 6. "scroll" the background -- DONE
 7. Win scenario -- DONE
 8. Image platforms -- DONE
-9. Parallax Scroll -- In progress
-10. Death Pits
+9. Parallax Scroll -- DONE
+10. Death Pits -- In progress
 11. Level Creation 
 12. Fine-Tuning
 
