@@ -193,12 +193,20 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x -= playerMovement
-            })
+            });
+            hills.forEach(hill => { // ---- HILL SCROLL ----
+                // platform.draw() // ------ PLATFORM INITIAL DRAW 
+                hill.position.x -= (playerMovement/3)
+            });
         } else if(keys.left.pressed) {  // if left key is pressed, move platform to the right by playMovement
             scrollOffset -=playerMovement // record how much platforms are offsetting
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x += playerMovement
+            })
+            hills.forEach(hill => { // // ---- HILL SCROLL ----
+                // platform.draw() // ------ PLATFORM INITIAL DRAW 
+                hill.position.x += (playerMovement/3)
             })
         }
         console.log('scrollOffset:', scrollOffset); // check how much scroll is currently offsetting
