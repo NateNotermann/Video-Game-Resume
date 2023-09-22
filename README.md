@@ -13,8 +13,8 @@ To Do List
 7. Win scenario -- DONE
 8. Image platforms -- DONE
 9. Parallax Scroll -- DONE
-10. Death Pits -- In progress
-11. Level Creation 
+10. Death Pits -- DONE
+11. Level Creation -- In progress
 12. Fine-Tuning
 
 Custom Steps:

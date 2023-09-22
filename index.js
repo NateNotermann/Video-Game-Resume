@@ -142,18 +142,17 @@ class Cloud {    // ---- Background Class used for Cloud Image ------
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
 // const platform = new Platform() //  calling the "Platform" class
-let platforms = [     // Array of Platforms
-    new Platform({x: 0, y: canvas.height - 75, image: platformImage}), // Ground 1
-    new Platform({x: platformImage.width - 1, y: canvas.height - 75, image: platformImage}), // Ground 2
-    new Platform({x: (platformImage.width * 2) - 2, y: canvas.height - 75, image: platformImage}), // Ground 3
-    new Platform({x: (platformImage.width * 3) + 100, y: canvas.height - 75, image: platformImage}), // Ground 4
-    new Platform({x: (platformImage.width * 4) + 99, y: canvas.height - 75, image: platformImage}), // Ground 5
-    new Platform({x: 300, y: 300, image: platformImage}), // Platform 1
-    new Platform({x: 800, y: 200, image: platformImage})]; // Platform 2
-
-let hills = [new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
-let backgrounds = [new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
-let clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
+let platforms = []     // Array of Platforms
+    // new Platform({x: 0, y: canvas.height - 75, image: platformImage}), // Ground 1
+    // new Platform({x: platformImage.width - 1, y: canvas.height - 75, image: platformImage}), // Ground 2
+    // new Platform({x: (platformImage.width * 2) - 2, y: canvas.height - 75, image: platformImage}), // Ground 3
+    // new Platform({x: (platformImage.width * 3) + 100, y: canvas.height - 75, image: platformImage}), // Ground 4
+    // new Platform({x: (platformImage.width * 4) + 99, y: canvas.height - 75, image: platformImage}), // Ground 5
+    // new Platform({x: 300, y: 300, image: platformImage}), // Platform 1
+    // new Platform({x: 800, y: 200, image: platformImage})]; // Platform 2
+let hills = []  //new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
+let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
+let clouds = [] //new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
@@ -254,27 +253,29 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
     
     // ---- PLATFORM COLLISION DETECTION ----
     platforms.forEach(platform => { 
-    if (//player bottom is HIGHER than platform top
-        player.position.y + player.height <= platform.position.y  &&
-        // player bottom overlap with platform top side. (Player lands on platform)
-        player.position.y + player.height + player.velocity.y >= platform.position.y &&
-        //  // players left side overlap with platform right side
-        player.position.x <= platform.position.x + platform.width &&
-        //  // players right side overlap with platform left side
-        player.position.x + player.width >= platform.position.x 
-        ) {player.velocity.y = 0 
+        if (//player bottom is HIGHER than platform top
+            player.position.y + player.height <= platform.position.y  &&
+            // player bottom overlap with platform top side. (Player lands on platform)
+            player.position.y + player.height + player.velocity.y >= platform.position.y &&
+            //  // players left side overlap with platform right side
+            player.position.x <= platform.position.x + platform.width &&
+            //  // players right side overlap with platform left side
+            player.position.x + player.width >= platform.position.x 
+            ) {player.velocity.y = 0 
+        }
+    })
+    // ---- WIN SCROLL ----
+    if (scrollOffset > 1500) {
+        console.log('You WIN!!!');
     }
-})
-// ---- WIN SCROLL ----
-if (scrollOffset > 1500) {
-    console.log('You WIN!!!');
+    // ---- LOOSE SCROLL ----
+    if (player.position.y > (canvas.height) ){
+        console.log('Player fell off. You LOOSE!!');
+        init();
+    }
 }
-// ---- LOOSE SCROLL ----
-if (player.position.y > (canvas.height) ){
-    console.log('Player fell off. You LOOSE!!');
-    init();
-}
-}
+
+init();
 animate()
 
 // ---- LISTEN FOR A KEY PRESSED ----
