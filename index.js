@@ -14,6 +14,17 @@ const floor = 0 //50 // pixel from th bottom player stops at
 const jump = 8 // amount player should jump
 const playerMovement = 10 //  amount player moves left and right
 let scrollOffset = 0
+let animateRunning = false
+// -------- IMAGE VARIABLES --------
+const platformImage = new Image()   // image = platform image
+platformImage.src = './img/platform.png'
+
+const hillImage = new Image()   // Hill Image
+hillImage.src = './img/hills.png'
+
+const backgroundImage = new Image()   // Hill Image
+backgroundImage.src = './img/background.png'
+// -------- IMAGE VARIABLES --------
 
 class Player {
     constructor() { //  passing in x & y positions
@@ -58,19 +69,20 @@ class Platform {
         this.image = image
         this.width = image.width  //200
         this.height = image.height //20
-
     }
     draw() {   
         // platform's rectangle
         // c.fillStyle = 'blue'
         // c.fillRect(this.position.x, this.position.y, this.width, this.height)
-        c.drawImage(this.image,  this.position.x, this.position.y ) 
-
+        c.drawImage(
+            this.image,  
+            this.position.x, 
+            this.position.y ) 
     }
 }
 
-// ---- GenericObject Class used for Hills
-class BackgroundObject {    
+// ---- Hill Class used for Hills
+class Hill {    
     constructor({ x, y, image }) {
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
@@ -81,18 +93,30 @@ class BackgroundObject {
         this.height = image.height //20
     }
     draw() {   
-        c.drawImage(this.image,  this.position.x, this.position.y ) 
+        c.drawImage(
+            this.image,  
+            this.position.x, 
+            this.position.y ) 
     }
 }
 
-// -------- IMAGE VARIABLES --------
-const platformImage = new Image()   // image = platform image
-platformImage.src = './img/platform.png'
-
-const hillImage = new Image()   // Hill Image
-hillImage.src = './img/hills.png'
-// -------- IMAGE VARIABLES --------
-
+// ---- Background Class used for Background Image
+class Background {    
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width  //200
+        this.height = image.height //20
+    }
+    draw() {   
+        c.drawImage(this.image,  
+            this.position.x, 
+            this.position.y ) 
+    }
+}
 // function createImage(imageSrc) { // Send image filepath/source as argument. Ex: (./img/platform.png')
 //     const image = new Image()   // image = platform image
 //     image.src = imageSrc        // then set the new const image source to the argument passed. Ex: (./img/platform.png')
@@ -100,24 +124,22 @@ hillImage.src = './img/hills.png'
 // }; 
 // const testBullshit = createImage(platformImage)
 
-
 // -------- ELEMENT VARIABLES --------
 const player = new Player() //  calling the "Player" class
 // const platform = new Platform() //  calling the "Platform" class
-const platforms = [
-    new Platform({x: 200, y: 300, image: hillImage}), // Ground 5
+const platforms = [     // Array of Platforms
     new Platform({x: 0, y: canvas.height - 75, image: platformImage}), // Ground 1
     new Platform({x: platformImage.width - 1, y: canvas.height - 75, image: platformImage}), // Ground 2
     new Platform({x: (platformImage.width * 2) - 2, y: canvas.height - 75, image: platformImage}), // Ground 3
     new Platform({x: (platformImage.width * 3) + 100, y: canvas.height - 75, image: platformImage}), // Ground 4
     new Platform({x: (platformImage.width * 4) + 99, y: canvas.height - 75, image: platformImage}), // Ground 5
-    new Platform({x: 300, y: 300, image: platformImage}), // Platform 1: Ground 2
-    new Platform({x: 800, y: 200, image: platformImage})]; // Platform 3
+    new Platform({x: 300, y: 300, image: platformImage}), // Platform 1
+    new Platform({x: 800, y: 200, image: platformImage})]; // Platform 2
 
-const Backgrounds = [
-    new BackgroundObject({x: 20, y: 200, image: hillImage})
-]
-    // -------- ELEMENT VARIABLES --------
+const hills = [new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
+
+const backgrounds = [new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
+// -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
 const keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
@@ -130,15 +152,25 @@ const keys = {      // access using keys.left.pressed, or keys.right.pressed etc
 }
 
 function animate() { // ------ MAIN ANIMATION FUNCTION ------
+    animateRunning = true // variable to check if animate function is running
     requestAnimationFrame(animate)
-    console.log('animate function');  
+    
     // c.clearRect(0, 0, canvas.width, canvas.height)
     c.fillStyle = 'grey'
     c.fillRect(0, 0, canvas.width, canvas.height)
 
+    backgrounds.forEach(background => { // loop through array of platforms
+        background.draw() // ------ DRAW PLATFORM
+    })
+    
+    hills.forEach(hill => {
+        hill.draw()
+    }) 
+
     platforms.forEach(platform => { // loop through array of platforms
         platform.draw() // ------ DRAW PLATFORM
     })
+
     player.update() // ------ PLAYER UPDATE. Call this last, to render in front
 
     // ---- PLAYER MOVEMENT ----
@@ -185,7 +217,7 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
         ) {player.velocity.y = 0 
     }
 })
-
+// ---- WIN SCROLL ----
 if (scrollOffset > 1500) {
     console.log('You WIN!!!');
 }
@@ -219,9 +251,7 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
     console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed);
 })
 
-
-
-//Listen for Key UNPRESSED 
+// ---- LISTEN FOR A KEY UNPRESSED ---- 
 addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, key is event.key. ONLY works if they're listed in the EventListener
     // console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
     switch (keyCode) {
@@ -253,6 +283,7 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
 // }
 
 function test() {
+    if (animateRunning) { console.log('animate function running: ' + animateRunning);  }
     console.log('Index.js is Connected');
     console.log('canvas W: ' + canvas.width, 'canvas H: ' + canvas.height ); // check Canvas W & H
     console.log('Window W: ' + window.innerWidth, 'Window H: ' + window.innerHeight ); // check Window W & H
