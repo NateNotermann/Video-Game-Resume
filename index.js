@@ -15,8 +15,6 @@ const jump = 8 // amount player should jump
 const playerMovement = 10 //  amount player moves left and right
 let scrollOffset = 0
 
- 
- 
 class Player {
     constructor() { //  passing in x & y positions
         this.position = {
@@ -50,6 +48,7 @@ class Player {
 } // End of player Sprite
 
 // classes are a blueprint for creating objects that share the same properties and methods.
+// ---- Platform Class used for ground and all platforms.
 class Platform {    
     constructor({ x, y, image }) {
         this.position = {
@@ -70,20 +69,57 @@ class Platform {
     }
 }
 
-const image = new Image()
-image.src = './img/platform.png'
-// console.log('image width:', image.width, 'image height:', image.height); (BREAKS THE POSITION)
+// ---- GenericObject Class used for Hills
+class BackgroundObject {    
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width  //200
+        this.height = image.height //20
+    }
+    draw() {   
+        c.drawImage(this.image,  this.position.x, this.position.y ) 
+    }
+}
+
+// -------- IMAGE VARIABLES --------
+const platformImage = new Image()   // image = platform image
+platformImage.src = './img/platform.png'
+
+const hillImage = new Image()   // Hill Image
+hillImage.src = './img/hills.png'
+// -------- IMAGE VARIABLES --------
+
+// function createImage(imageSrc) { // Send image filepath/source as argument. Ex: (./img/platform.png')
+//     const image = new Image()   // image = platform image
+//     image.src = imageSrc        // then set the new const image source to the argument passed. Ex: (./img/platform.png')
+//     return image
+// }; 
+// const testBullshit = createImage(platformImage)
+
+
+// -------- ELEMENT VARIABLES --------
 const player = new Player() //  calling the "Player" class
 // const platform = new Platform() //  calling the "Platform" class
 const platforms = [
-    new Platform({x: 0, y: canvas.height - 75, image: image}), // Platform 1; Ground 1
-    new Platform({x: image.width - 1, y: canvas.height - 75, image: image}), // Platform 1: Ground 2
-    new Platform({x: (image.width * 2) - 2, y: canvas.height - 75, image: image}), // Platform 1: Ground 3
-    new Platform({x: (image.width * 3) + 100, y: canvas.height - 75, image: image}), // Platform 1: Ground 4
-    new Platform({x: (image.width * 4) + 99, y: canvas.height - 75, image: image}), // Platform 1: Ground 5
-    // new Platform({x: 300, y: 300, image: image}), // Platform 1: Ground 2
-    new Platform({x: 800, y: 200, image: image})] // Platform 3
-    
+    new Platform({x: 200, y: 300, image: hillImage}), // Ground 5
+    new Platform({x: 0, y: canvas.height - 75, image: platformImage}), // Ground 1
+    new Platform({x: platformImage.width - 1, y: canvas.height - 75, image: platformImage}), // Ground 2
+    new Platform({x: (platformImage.width * 2) - 2, y: canvas.height - 75, image: platformImage}), // Ground 3
+    new Platform({x: (platformImage.width * 3) + 100, y: canvas.height - 75, image: platformImage}), // Ground 4
+    new Platform({x: (platformImage.width * 4) + 99, y: canvas.height - 75, image: platformImage}), // Ground 5
+    new Platform({x: 300, y: 300, image: platformImage}), // Platform 1: Ground 2
+    new Platform({x: 800, y: 200, image: platformImage})]; // Platform 3
+
+const Backgrounds = [
+    new BackgroundObject({x: 20, y: 200, image: hillImage})
+]
+    // -------- ELEMENT VARIABLES --------
+
+// ---- Key pressed variables ----
 const keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
     right: {
         pressed: false
