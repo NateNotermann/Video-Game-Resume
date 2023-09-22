@@ -10,7 +10,7 @@ canvas.height = window.innerHeight
 
 // global variables. 
 const gravity = 0.5
-const floor = 0 //50 // pixel from th bottom player stops at
+const floor = 0 //50 // pixel from the bottom player stops at
 const jump = 8 // amount player should jump
 const playerMovement = 10 //  amount player moves left and right
 let scrollOffset = 0
@@ -56,7 +56,7 @@ class Player {
         this.position.x += this.velocity.x // add/increase velocity (X axes only)(aka Movement) 
         this.position.y += this.velocity.y // add/increase velocity (Y axes only)(aka Gravity) 
 
-        if (this.position.y + this.height + this.velocity.y <= canvas.height - floor)  // if the BOTTOM of our player + it's velocity is LESS than the BOTTOM of the canvas keep adding gravity. 
+        if (this.position.y + this.height + this.velocity.y <= canvas.height + this.height) //Player can fall below bottom of screen. //- floor)  // if the BOTTOM of our player + it's velocity is LESS than the BOTTOM of the canvas keep adding gravity. 
             this.velocity.y += gravity // velocity += gravity (0.5) repeat over and over.
             else this.velocity.y = 0 // else set velocity to 0. (If player position + player height is greater or equal to canvas height)
     } 
