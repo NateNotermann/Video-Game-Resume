@@ -14,10 +14,16 @@ To Do List
 8. Image platforms -- DONE
 9. Parallax Scroll -- DONE
 10. Death Pits -- DONE
-11. Level Creation -- In progress
-12. Fine-Tuning
+11. Basic Level Creation -- DONE
+12. Fine-Tuning -- In progress
+13. Deploy to Netlify
+
 
 Custom Steps:
-Custom player: https://aescripts.com/deekay-tool/
-13. Add Xbox Controller API Support
-14. Netlify - Front End Only
+14. Add Xbox Controller API Support
+15. Custom Player Art
+16. Custom Platform Art
+17. Finish Level Creation
+18. Custom Building Art
+19. Add settings page
+20. Celebratory Dance

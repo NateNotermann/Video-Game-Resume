@@ -11,7 +11,7 @@ canvas.height = window.innerHeight
 // global variables. 
 const gravity = 0.5
 const floor = 0 //50 // pixel from the bottom player stops at
-const jump = 8 // amount player should jump
+const jump = 15 // amount player should jump
 const playerMovement = 10 //  amount player moves left and right
 let scrollOffset = 0
 let time = 1
@@ -19,6 +19,9 @@ let animateRunning = false
 // -------- IMAGE VARIABLES --------
 const platformImage = new Image()   // image = platform image
 platformImage.src = './img/platform.png'
+
+const tallPlatform = new Image()   // image = platform image
+tallPlatform.src = './img/platformSmallTall.png'
 
 const hillImage = new Image()   // Hill Image
 hillImage.src = './img/hills.png'
@@ -176,7 +179,9 @@ function init() {
         new Platform({x: (platformImage.width * 3) + 100, y: canvas.height - 75, image: platformImage}), // Ground 4
         new Platform({x: (platformImage.width * 4) + 99, y: canvas.height - 75, image: platformImage}), // Ground 5
         new Platform({x: 300, y: 300, image: platformImage}), // Platform 1
-        new Platform({x: 800, y: 200, image: platformImage})]; // Platform 2
+        new Platform({x: 800, y: 200, image: platformImage}), // Platform 2
+        new Platform({x: platformImage.width * 6, y: canvas.height - 300, image: platformImage}), // Platform 3
+        new Platform({x: platformImage.width * 4.5, y: canvas.height - (tallPlatform.height + 75), image: tallPlatform})]; // Platform 4, Winning Podium
 
     hills = [new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
     backgrounds = [new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
@@ -249,6 +254,7 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             });
         }
         // console.log('scrollOffset:', scrollOffset); // -------- check how much scroll is currently offsetting
+
     }
     
     // ---- PLATFORM COLLISION DETECTION ----
@@ -265,8 +271,10 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
         }
     })
     // ---- WIN SCROLL ----
-    if (scrollOffset > 1500) {
+    // if (scrollOffset > 1500) {
+    if (scrollOffset > platformImage.width * 6) {
         console.log('You WIN!!!');
+        // console.log('You WIN!!!', scrollOffset, '>', platformImage.width * 6); // Confirm winning area location it correct
     }
     // ---- LOOSE SCROLL ----
     if (player.position.y > (canvas.height) ){
@@ -318,14 +326,15 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
             keys.left.pressed = false
             // player.velocity.x = 0 // set velocity to 0
             break
-        case 87:        // W
-            console.log('Jump/up/W');
-            player.velocity.y += - jump // subtract jump level
-            break
-        case 32:        // Space
-            console.log('Jump/up/Space');
-            player.velocity.y += - jump // subtract jump level
-            break
+            // ---- KEYUP JUMP - Don't really need any key up stuff for jump.
+        // case 87:        // W
+        //     console.log('KEYUP - Jump/up/W');
+        //     // player.velocity.y += - jump // subtract jump level
+        //     break
+        // case 32:        // Space
+        //     console.log('KEYUP - Jump/up/Space');
+        //     // player.velocity.y += - jump // subtract jump level
+        //     break
     }
     console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed);
 })
