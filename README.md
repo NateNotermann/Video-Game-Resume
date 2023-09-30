@@ -16,14 +16,15 @@ To Do List
 10. Death Pits -- DONE
 11. Basic Level Creation -- DONE
 12. Fine-Tuning -- In progress
-13. Deploy to Netlify
+13. Add tutorial player sprites
 
 
 Custom Steps:
-14. Add Xbox Controller API Support
-15. Custom Player Art
-16. Custom Platform Art
-17. Finish Level Creation
-18. Custom Building Art
-19. Add settings page
-20. Celebratory Dance
+14. Deploy to Netlify
+15. Add Xbox Controller API Support
+16. Custom Player Art
+17. Custom Platform Art
+18. Finish Level Creation
+19. Custom Building Art
+20. Add settings page
+21. Celebratory Dance

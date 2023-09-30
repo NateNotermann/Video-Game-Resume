@@ -220,7 +220,8 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
     } else if (keys.right.pressed && player.position.x < 400) {  // allow player to move right unless at 400px
         player.velocity.x = playerMovement
         console.log('right');
-    } else if (keys.left.pressed && player.position.x > 100) {  // allow player to move left unless at 100px
+    } else if ((keys.left.pressed && player.position.x > 100) 
+        || (keys.left.pressed && scrollOffset === 0 && player.position.x > 0)) {  // allow player to move left unless at 100px
         player.velocity.x = -playerMovement 
         console.log('left');
     } else {
@@ -240,7 +241,7 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
                 background.position.x -= (playerMovement/8)
             });
-        } else if(keys.left.pressed) {  // if left key is pressed, move platform to the right by playMovement
+        } else if(keys.left.pressed && player.position.x > 0) {  // if left key is pressed, move platform to the right by playMovement
             scrollOffset -=playerMovement // record how much platforms are offsetting
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
