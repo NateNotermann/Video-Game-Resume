@@ -13,7 +13,11 @@ const gravity = 0.5
 const floor = 0 //50 // pixel from the bottom player stops at
 const jump = 15 // amount player should jump
 const playerMovement = 10 //  amount player moves left and right
+const platformWidth = 579 // actually 580 but leaves 1px gap if 580
+const platformHeight = 125 // actually 580 but leaves 1px gap if 580
+let groundPosition = canvas.height - platformHeight
 let scrollOffset = 0
+let scrollOffsetUp = 0
 let time = 1
 let animateRunning = false
 // -------- IMAGE VARIABLES --------
@@ -144,15 +148,7 @@ class Cloud {    // ---- Background Class used for Cloud Image ------
 // const testBullshit = createImage(platformImage)
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
-// const platform = new Platform() //  calling the "Platform" class
 let platforms = []     // Array of Platforms
-    // new Platform({x: 0, y: canvas.height - 75, image: platformImage}), // Ground 1
-    // new Platform({x: platformImage.width - 1, y: canvas.height - 75, image: platformImage}), // Ground 2
-    // new Platform({x: (platformImage.width * 2) - 2, y: canvas.height - 75, image: platformImage}), // Ground 3
-    // new Platform({x: (platformImage.width * 3) + 100, y: canvas.height - 75, image: platformImage}), // Ground 4
-    // new Platform({x: (platformImage.width * 4) + 99, y: canvas.height - 75, image: platformImage}), // Ground 5
-    // new Platform({x: 300, y: 300, image: platformImage}), // Platform 1
-    // new Platform({x: 800, y: 200, image: platformImage})]; // Platform 2
 let hills = []  //new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
 let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let clouds = [] //new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
@@ -165,28 +161,32 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
     },
     left: {
         pressed: false
+    },
+    jump: {
+        pressed: false
     }
 }
 
 function init() {
 // -------- ELEMENT VARIABLES --------
-    player = new Player() //  calling the "Player" class
-    // const platform = new Platform() //  calling the "Platform" class 
-    platforms = [     // Array of Platforms
-        new Platform({x: 0, y: canvas.height - 75, image: platformImage}), // Ground 1
-        new Platform({x: platformImage.width - 1, y: canvas.height - 75, image: platformImage}), // Ground 2
-        new Platform({x: (platformImage.width * 2) - 2, y: canvas.height - 75, image: platformImage}), // Ground 3
-        new Platform({x: (platformImage.width * 3) + 100, y: canvas.height - 75, image: platformImage}), // Ground 4
-        new Platform({x: (platformImage.width * 4) + 99, y: canvas.height - 75, image: platformImage}), // Ground 5
-        new Platform({x: 300, y: 300, image: platformImage}), // Platform 1
-        new Platform({x: 800, y: 200, image: platformImage}), // Platform 2
-        new Platform({x: platformImage.width * 6, y: canvas.height - 300, image: platformImage}), // Platform 3
-        new Platform({x: platformImage.width * 4.5, y: canvas.height - (tallPlatform.height + 75), image: tallPlatform})]; // Platform 4, Winning Podium
+player = new Player() //  calling the "Player" class
+// const platform = new Platform() //  calling the "Platform" class 
+hills = [new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
+backgrounds = [new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
+platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
+new Platform({x: 0, y: canvas.height - 75, image: platformImage}), // Ground 1
+new Platform({x: platformWidth, y: canvas.height - 75, image: platformImage}), // Ground 2
+new Platform({x: (platformWidth * 2), y: canvas.height - 75, image: platformImage}), // Ground 3
+new Platform({x: (platformWidth* 3) + 100, y: canvas.height - 75, image: platformImage}), // Ground 4
+new Platform({x: (platformWidth * 4) + 99, y: canvas.height - 75, image: platformImage}), // Ground 5
+new Platform({x: platformWidth* 6, y: canvas.height - 300, image: platformImage}), // Platform 3
+new Platform({x: platformWidth * 4.5, y: canvas.height - (tallPlatform.height + 75), image: tallPlatform})]; // Platform 4, Winning Podium
 
-    hills = [new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
-    backgrounds = [new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
-    clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
-    // -------- ELEMENT VARIABLES --------
+new Platform({x: 300, y: 300, image: platformImage}), // Platform 1 (Floating)
+new Platform({x: 800, y: 200, image: platformImage}), // Platform 2 (Floating)
+
+clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
+// -------- ELEMENT VARIABLES --------
 }
 
 function animate() { // ------ MAIN ANIMATION FUNCTION ------
@@ -213,7 +213,7 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
 
     player.update() // ------ PLAYER UPDATE. Call this last, to render in front
 
-    // ---- PLAYER MOVEMENT ----
+    // ------ PLAYER MOVEMENT ------
     if (keys.left.pressed == true && keys.right.pressed == true ) {
         player.velocity.x = 0
         console.log('both')
@@ -227,7 +227,7 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
         player.velocity.x = 0
         console.log('none');
 
-        // ---- PLATFORM SCROLL ----
+        // ------ PLATFORM SCROLL LEFT/RIGHT ------
         if (keys.right.pressed) { // if right key is pressed, move platform to the left by playMovement
             scrollOffset +=playerMovement // record how much platforms are offsetting
             platforms.forEach(platform => { // loop through array of platforms
@@ -254,10 +254,16 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             });
         }
         // console.log('scrollOffset:', scrollOffset); // -------- check how much scroll is currently offsetting
-
     }
     
-    // ---- PLATFORM COLLISION DETECTION ----
+    // ------ PLATFORM SCROLL UP/DOWN ------
+    if (keys.jump.pressed && player.position.y < 400 ) { // if JUMP key is pressed, move platforms to the Down by JUMP level
+        scrollOffsetUp +=jump // record how much platforms are offsetting UP
+        platforms.forEach(platform => {
+            platform.position.y +=jump
+        })
+    } 
+    // ------ PLATFORM COLLISION DETECTION ------
     platforms.forEach(platform => { 
         if (//player bottom is HIGHER than platform top
             player.position.y + player.height <= platform.position.y  &&
@@ -301,15 +307,17 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
             // player.velocity.x = -playerMovement // Subtract playerMovement
             break
         case 87:        // W
-            console.log('Jump/up/W');
+            console.log('Jump/W');
             player.velocity.y += - jump // subtract jump level
+            keys.jump.pressed = true
             break
         case 32:        // Space
-            console.log('Jump/up/Space');
+            console.log('Jump/Space');
             player.velocity.y += - jump // subtract jump level
+            keys.jump.pressed = true
             break
     }
-    console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed);
+    console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed, 'jump pressed:', keys.jump.pressed);
 })
 
 // ---- LISTEN FOR A KEY UNPRESSED ---- 
@@ -327,16 +335,18 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
             // player.velocity.x = 0 // set velocity to 0
             break
             // ---- KEYUP JUMP - Don't really need any key up stuff for jump.
-        // case 87:        // W
-        //     console.log('KEYUP - Jump/up/W');
-        //     // player.velocity.y += - jump // subtract jump level
-        //     break
-        // case 32:        // Space
-        //     console.log('KEYUP - Jump/up/Space');
-        //     // player.velocity.y += - jump // subtract jump level
-        //     break
+        case 87:        // W
+            console.log('KEYUP - Jump/up/W');
+            keys.jump.pressed = false
+            // player.velocity.y += - jump // subtract jump level
+            break
+        case 32:        // Space
+            console.log('KEYUP - Jump/up/Space');
+            keys.jump.pressed = false
+            // player.velocity.y += - jump // subtract jump level
+            break
     }
-    console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed);
+    console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed, 'jump pressed:', keys.jump.pressed);
 })
 
 // function keysPressed() { // console log if key(s) are pressed
