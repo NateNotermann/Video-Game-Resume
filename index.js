@@ -15,26 +15,42 @@ const jump = 15 // amount player should jump
 const playerMovement = 10 //  amount player moves left and right
 const platformWidth = 579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 580
+let playerWidth = 66
+let playerHeight = 150
 let groundPosition = canvas.height - platformHeight
 let scrollOffset = 0
 let scrollOffsetUp = 0
 let time = 1
 let animateRunning = false
+
 // -------- IMAGE VARIABLES --------
-const platformImage = new Image()   // image = platform image
+const platformImage = new Image()   // image = platform image - Dimensions
 platformImage.src = './img/platform.png'
 
-const tallPlatform = new Image()   // image = platform image
+const tallPlatform = new Image()   // image = platform image - Dimensions
 tallPlatform.src = './img/platformSmallTall.png'
 
-const hillImage = new Image()   // Hill Image
+const hillImage = new Image()   // Hill Image - Dimensions
 hillImage.src = './img/hills.png'
 
-const backgroundImage = new Image()   // Hill Image
+const backgroundImage = new Image()   // Hill Image - Dimensions
 backgroundImage.src = './img/background.png'
 
-const cloudImage = new Image()   // Cloud Image
+const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
 cloudImage.src = './img/cloud.png'
+
+const spriteRunLeft = new Image()   // spriteRunLeft Image - Dimensions
+spriteRunLeft.src = './img/spriteRunLeft.png'
+
+const spriteRunRight = new Image()   // spriteRunRight Image - Dimensions
+spriteRunRight.src = './img/spriteRunRight.png'
+
+const spriteStandLeft = new Image()   // spriteStandLeft Image - Dimensions
+spriteStandLeft.src = './img/spriteStandLeft.png'
+
+const spriteStandRight = new Image()   // spriteStandRight Image - Dimensions
+spriteStandRight.src = './img/spriteStandRight.png'
+
 // -------- IMAGE VARIABLES --------
 
 class Player {
@@ -43,22 +59,36 @@ class Player {
             x: 100,
             y: 100
         }
-        this.velocity = {
+        this.velocity = { 
              x: 0, // positive values move right, negative values more left.
              y: 1 // positive values move down, negative values move up
         }
-        this.width = 30
-        this.height = 30
+        this.width = 66
+        this.height = 150
+
+        this.image = spriteStandRight
+        this.frames = 0
     }
-    draw() { // draw a rectangle that matches the size and position of the Player Sprite
-        c.fillStyle = 'red' 
-        c.fillRect(
+    draw() { 
+        c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+
+        c.drawImage( // player sprite image
+            this.image, 
+            177 * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+            0,                  // crop image Y
+            177,                // crop image Y
+            400,                // crop image X
             this.position.x, 
-            this.position.y, 
-            this.width, 
-            this.height)
+            this.position.y,
+            this.width,
+            this.height ) 
     }
+
     update() {
+        this.frames++
+        if (this.frames > 28) this.frames = 0 // loop every 28 frames. 
+        
         this.draw()
         this.position.x += this.velocity.x // add/increase velocity (X axes only)(aka Movement) 
         this.position.y += this.velocity.y // add/increase velocity (Y axes only)(aka Gravity) 
@@ -88,7 +118,9 @@ class Platform {    // ------ Platform Class used for ground and all platforms. 
         c.drawImage(
             this.image,  
             this.position.x, 
-            this.position.y ) 
+            this.position.y,
+            this.width, 
+            this.height ) 
     }
 }
 class Hill {    // ------ Hill Class used for Hills ------
