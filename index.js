@@ -15,6 +15,7 @@ const jump = 15 // amount player should jump
 const playerMovement = 10 //  amount player moves left and right
 const platformWidth = 579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 580
+let lastKey
 let playerWidth = 66
 let playerHeight = 150
 let groundPosition = canvas.height - platformHeight
@@ -63,21 +64,38 @@ class Player {
              x: 0, // positive values move right, negative values more left.
              y: 1 // positive values move down, negative values move up
         }
-        this.width = 66
-        this.height = 150
+        this.width = 66 //default width
+        this.height = 150 //default height
 
         this.image = spriteStandRight
         this.frames = 0
+        this.sprites = {
+            stand: {
+                right: spriteStandRight,
+                left: spriteStandLeft,
+                cropWidth: 177,
+                width: 66
+            },
+            run: {
+                right: spriteRunRight,
+                left: spriteRunLeft,
+                cropWidth: 341,
+                width: 127.875
+            }
+        }
+        this.currentSprite = this.sprites.stand.right
+        this.currentCropWidth = 177
     }
     draw() { 
-        c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
-        c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
 
         c.drawImage( // player sprite image
-            this.image, 
-            177 * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+            // this.image,
+            this.currentSprite, 
+            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
             0,                  // crop image Y
-            177,                // crop image Y
+            this.currentCropWidth,                // crop image Y
             400,                // crop image X
             this.position.x, 
             this.position.y,
@@ -87,10 +105,22 @@ class Player {
 
     update() {
         this.frames++
-        if (this.frames > 28) this.frames = 0 // loop every 28 frames. 
-        
+        if (this.frames > 59 && 
+            (this.currentSprite === this.sprites.stand.right 
+            || this.currentSprite === this.sprites.stand.left)) { // loop every 28 frames. 
+            this.frames = 0 
+        } else if (this.frames > 29 && 
+            (this.currentSprite === this.sprites.run.right 
+            || this.currentSprite === this.sprites.run.left)) { // loop every 60 frames. 
+            this.frames = 0 
+        } 
+        // else if (    this.frames > 59 && this.currentSprite === this.sprites.stand.left) {
+        //     this.frames = 0 
+        // } else if (this.frames > 29 && this.currentSprite === this.sprites.run.left) {
+        //     this.frames = 0 
+        // }
         this.draw()
-        this.position.x += this.velocity.x // add/increase velocity (X axes only)(aka Movement) 
+        this.position.x += this.velocity.x // add/increase velocity (X axes o nly)(aka Movement) 
         this.position.y += this.velocity.y // add/increase velocity (Y axes only)(aka Gravity) 
 
         if (this.position.y + this.height + this.velocity.y <= canvas.height + this.height) //Player can fall below bottom of screen. //- floor)  // if the BOTTOM of our player + it's velocity is LESS than the BOTTOM of the canvas keep adding gravity. 
@@ -172,12 +202,7 @@ class Cloud {    // ---- Background Class used for Cloud Image ------
             this.position.y ) 
     }
 }
-// function createImage(imageSrc) { // Send image filepath/source as argument. Ex: (./img/platform.png')
-//     const image = new Image()   // image = platform image
-//     image.src = imageSrc        // then set the new const image source to the argument passed. Ex: (./img/platform.png')
-//     return image
-// }; 
-// const testBullshit = createImage(platformImage)
+
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
 let platforms = []     // Array of Platforms
@@ -309,6 +334,50 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             ) {player.velocity.y = 0 
         }
     })
+    // ------ SPRITE SWITCHING ------ 
+    if (
+        keys.right.pressed &&
+        lastKey === 'right' && 
+        player.currentSprite !== player.sprites.run.right) { // if sprite is not run right, then 
+            player.frames = 1 // restart any animation back to frame 1.
+            player.currentSprite = player.sprites.run.right // set it to run right
+            player.currentCropWidth = player.sprites.run.cropWidth
+            player.width = player.sprites.run.width
+    } else if (
+        keys.left.pressed &&
+        lastKey === 'left' && 
+        player.currentSprite != player.sprites.run.left) {
+            player.frames = 1 // restart any animation back to frame 1.
+            player.currentSprite = player.sprites.run.left
+            player.currentCropWidth = player.sprites.run.cropWidth
+            player.width = player.sprites.run.width
+    }  else if (
+        !keys.left.pressed &&
+        lastKey === 'left' && 
+        player.currentSprite != player.sprites.stand.left) {
+            player.frames = 1 // restart any animation back to frame 1.
+            player.currentSprite = player.sprites.stand.left
+            player.currentCropWidth = player.sprites.stand.cropWidth
+            player.width = player.sprites.stand.width
+    }  else if (
+        !keys.right.pressed &&
+        lastKey === 'right' && 
+        player.currentSprite != player.sprites.stand.right) {
+            player.frames = 1 // restart any animation back to frame 1.
+            player.currentSprite = player.sprites.stand.right
+            player.currentCropWidth = player.sprites.stand.cropWidth
+            player.width = player.sprites.stand.width
+    }  else if (
+        !keys.right.pressed &&
+        lastKey === 'right' && 
+        player.currentSprite != player.sprites.stand.right) {
+            player.frames = 1 // restart any animation back to frame 1.
+            player.currentSprite = player.sprites.stand.right
+            player.currentCropWidth = player.sprites.stand.cropWidth
+            player.width = player.sprites.stand.width
+    }
+
+
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
     if (scrollOffset > platformImage.width * 6) {
@@ -332,12 +401,18 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
         case 68:        // D
             console.log('right/D');
             keys.right.pressed = true
-            // player.velocity.x = playerMovement // Add playerMovement
+            lastKey = 'right'
+            // player.currentSprite = player.sprites.run.right
+            // player.currentCropWidth= player.sprites.run.cropWidth
+            // player.width = player.sprites.run.width
             break
-        case 65:        // 'A'
+            case 65:        // 'A'
             console.log('left/A');
             keys.left.pressed = true
-            // player.velocity.x = -playerMovement // Subtract playerMovement
+            lastKey = 'left'
+            // player.currentSprite = player.sprites.run.left
+            // player.currentCropWidth= player.sprites.run.cropWidth
+            // player.width = player.sprites.run.width
             break
         case 87:        // W
             console.log('Jump/W');
@@ -360,11 +435,17 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
         case 68:        // D
             console.log('right/D');
             keys.right.pressed = false
+            // player.currentSprite = player.sprites.stand.right
+            // player.currentCropWidth = player.sprites.stand.cropWidth 
+            // player.width = player.sprites.stand.width
             // player.velocity.x = 0 // set velocity to 0
             break
         case 65:        // 'A'
             console.log('left/A');
             keys.left.pressed = false
+            // player.currentSprite = player.sprites.stand.left
+            // player.currentCropWidth = player.sprites.stand.cropWidth 
+            // player.width = player.sprites.stand.width
             // player.velocity.x = 0 // set velocity to 0
             break
             // ---- KEYUP JUMP - Don't really need any key up stuff for jump.
