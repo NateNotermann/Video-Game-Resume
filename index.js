@@ -274,16 +274,44 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
     if (keys.left.pressed == true && keys.right.pressed == true ) {
         player.velocity.x = 0
         console.log('both')
-    } else if (keys.right.pressed && player.position.x < 400) {  // allow player to move right unless at 400px
+        if (lastKey === 'right') {
+            player.currentSprite = player.sprites.stand.left
+            player.currentCropWidth = player.sprites.stand.cropWidth
+            player.width = player.sprites.stand.width
+        } else if (lastKey === 'left') {
+            player.currentSprite = player.sprites.stand.right
+            player.currentCropWidth = player.sprites.stand.cropWidth
+        player.width = player.sprites.stand.width
+        }
+    } else if (keys.right.pressed) {// && player.position.x < 400) {  // allow player to move right unless at 400px
         player.velocity.x = playerMovement
         console.log('right');
+        // player.frames = 1 // restart any animation back to frame 1.
+        player.currentSprite = player.sprites.run.right // set it to run right
+        player.currentCropWidth = player.sprites.run.cropWidth
+        player.width = player.sprites.run.width
     } else if ((keys.left.pressed && player.position.x > 100) 
         || (keys.left.pressed && scrollOffset === 0 && player.position.x > 0)) {  // allow player to move left unless at 100px
         player.velocity.x = -playerMovement 
         console.log('left');
-    } else {
+            // player.frames = 1 // restart any animation back to frame 1.
+            player.currentSprite = player.sprites.run.left
+            player.currentCropWidth = player.sprites.run.cropWidth
+            player.width = player.sprites.run.width
+    } else { // If player is NOT moving left/right, use standing sprite, based on if left/right was pressed last.
         player.velocity.x = 0
         console.log('none');
+            // player.frames = 1 // restart any animation back to frame 1.
+            if (lastKey === 'right') {
+                player.currentSprite = player.sprites.stand.right
+                player.currentCropWidth = player.sprites.stand.cropWidth
+                player.width = player.sprites.stand.width
+            } else if (lastKey === 'left') {
+                player.currentSprite = player.sprites.stand.left
+                player.currentCropWidth = player.sprites.stand.cropWidth
+            player.width = player.sprites.stand.width
+            }
+    // ------ PLAYER MOVEMENT ------
 
         // ------ PLATFORM SCROLL LEFT/RIGHT ------
         if (keys.right.pressed) { // if right key is pressed, move platform to the left by playMovement
@@ -335,47 +363,47 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
         }
     })
     // ------ SPRITE SWITCHING ------ 
-    if (
-        keys.right.pressed &&
-        lastKey === 'right' && 
-        player.currentSprite !== player.sprites.run.right) { // if sprite is not run right, then 
-            player.frames = 1 // restart any animation back to frame 1.
-            player.currentSprite = player.sprites.run.right // set it to run right
-            player.currentCropWidth = player.sprites.run.cropWidth
-            player.width = player.sprites.run.width
-    } else if (
-        keys.left.pressed &&
-        lastKey === 'left' && 
-        player.currentSprite != player.sprites.run.left) {
-            player.frames = 1 // restart any animation back to frame 1.
-            player.currentSprite = player.sprites.run.left
-            player.currentCropWidth = player.sprites.run.cropWidth
-            player.width = player.sprites.run.width
-    }  else if (
-        !keys.left.pressed &&
-        lastKey === 'left' && 
-        player.currentSprite != player.sprites.stand.left) {
-            player.frames = 1 // restart any animation back to frame 1.
-            player.currentSprite = player.sprites.stand.left
-            player.currentCropWidth = player.sprites.stand.cropWidth
-            player.width = player.sprites.stand.width
-    }  else if (
-        !keys.right.pressed &&
-        lastKey === 'right' && 
-        player.currentSprite != player.sprites.stand.right) {
-            player.frames = 1 // restart any animation back to frame 1.
-            player.currentSprite = player.sprites.stand.right
-            player.currentCropWidth = player.sprites.stand.cropWidth
-            player.width = player.sprites.stand.width
-    }  else if (
-        !keys.right.pressed &&
-        lastKey === 'right' && 
-        player.currentSprite != player.sprites.stand.right) {
-            player.frames = 1 // restart any animation back to frame 1.
-            player.currentSprite = player.sprites.stand.right
-            player.currentCropWidth = player.sprites.stand.cropWidth
-            player.width = player.sprites.stand.width
-    }
+    // if (
+    //     keys.right.pressed &&
+    //     lastKey === 'right' && 
+    //     player.currentSprite !== player.sprites.run.right) { // if sprite is not run right, then 
+    //         // player.frames = 1 // restart any animation back to frame 1.
+    //         // player.currentSprite = player.sprites.run.right // set it to run right
+    //         // player.currentCropWidth = player.sprites.run.cropWidth
+    //         // player.width = player.sprites.run.width
+    // } else if (
+    //     keys.left.pressed &&
+    //     lastKey === 'left' && 
+    //     player.currentSprite != player.sprites.run.left) {
+    //         player.frames = 1 // restart any animation back to frame 1.
+    //         player.currentSprite = player.sprites.run.left
+    //         player.currentCropWidth = player.sprites.run.cropWidth
+    //         player.width = player.sprites.run.width
+    // }  else if (
+    //     !keys.left.pressed &&
+    //     lastKey === 'left' && 
+    //     player.currentSprite != player.sprites.stand.left) {
+    //         player.frames = 1 // restart any animation back to frame 1.
+    //         player.currentSprite = player.sprites.stand.left
+    //         player.currentCropWidth = player.sprites.stand.cropWidth
+    //         player.width = player.sprites.stand.width
+    // }  else if (
+    //     !keys.right.pressed &&
+    //     lastKey === 'right' && 
+    //     player.currentSprite != player.sprites.stand.right) {
+    //         player.frames = 1 // restart any animation back to frame 1.
+    //         player.currentSprite = player.sprites.stand.right
+    //         player.currentCropWidth = player.sprites.stand.cropWidth
+    //         player.width = player.sprites.stand.width
+    // }  else if (
+    //     !keys.right.pressed &&
+    //     lastKey === 'right' && 
+    //     player.currentSprite != player.sprites.stand.right) {
+    //         player.frames = 1 // restart any animation back to frame 1.
+    //         player.currentSprite = player.sprites.stand.right
+    //         player.currentCropWidth = player.sprites.stand.cropWidth
+    //         player.width = player.sprites.stand.width
+    // }
 
 
     // ---- WIN SCROLL ----
@@ -435,6 +463,7 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
         case 68:        // D
             console.log('right/D');
             keys.right.pressed = false
+            lastKey = 'right'
             // player.currentSprite = player.sprites.stand.right
             // player.currentCropWidth = player.sprites.stand.cropWidth 
             // player.width = player.sprites.stand.width
@@ -443,6 +472,7 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
         case 65:        // 'A'
             console.log('left/A');
             keys.left.pressed = false
+            lastKey = 'left'
             // player.currentSprite = player.sprites.stand.left
             // player.currentCropWidth = player.sprites.stand.cropWidth 
             // player.width = player.sprites.stand.width
