@@ -283,7 +283,7 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             player.currentCropWidth = player.sprites.stand.cropWidth
         player.width = player.sprites.stand.width
         }
-    } else if (keys.right.pressed) {// && player.position.x < 400) {  // allow player to move right unless at 400px
+    } else if (keys.right.pressed && player.position.x < 400) {  // allow player to move right unless at 400px
         player.velocity.x = playerMovement
         console.log('right');
         // player.frames = 1 // restart any animation back to frame 1.
@@ -298,19 +298,24 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             player.currentSprite = player.sprites.run.left
             player.currentCropWidth = player.sprites.run.cropWidth
             player.width = player.sprites.run.width
-    } else { // If player is NOT moving left/right, use standing sprite, based on if left/right was pressed last.
+    } else { // If player is NOT moving left/right then..
         player.velocity.x = 0
         console.log('none');
             // player.frames = 1 // restart any animation back to frame 1.
-            if (lastKey === 'right') {
-                player.currentSprite = player.sprites.stand.right
-                player.currentCropWidth = player.sprites.stand.cropWidth
-                player.width = player.sprites.stand.width
-            } else if (lastKey === 'left') {
-                player.currentSprite = player.sprites.stand.left
-                player.currentCropWidth = player.sprites.stand.cropWidth
-            player.width = player.sprites.stand.width
-            }
+            // if (!keys.right.pressed) {
+            //     player.currentSprite = player.sprites.stand.right
+            //     player.currentCropWidth = player.sprites.stand.cropWidth
+            //     player.width = player.sprites.stand.width
+            // }
+            // if (lastKey === 'right' && !keys.right.pressed || lastKey === 'right' && !keys.left.pressed ) { // if last pressed = right AND  R/L are NOT pressed then..
+            //     player.currentSprite = player.sprites.stand.right
+            //     player.currentCropWidth = player.sprites.stand.cropWidth
+            //     player.width = player.sprites.stand.width
+            // } else if (lastKey === 'left' && (!keys.right.pressed && !keys.left.pressed)) { // if last pressed = left AND  R/L are NOT pressed then..
+            //     player.currentSprite = player.sprites.stand.left
+            //     player.currentCropWidth = player.sprites.stand.cropWidth
+            //     player.width = player.sprites.stand.width
+            // }
     // ------ PLAYER MOVEMENT ------
 
         // ------ PLATFORM SCROLL LEFT/RIGHT ------
@@ -326,7 +331,11 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
                 background.position.x -= (playerMovement/8)
             });
-        } else if(keys.left.pressed && player.position.x > 0) {  // if left key is pressed, move platform to the right by playMovement
+            console.log('move = 0, but SCROLLING----R----');
+            player.currentSprite = player.sprites.run.right
+            player.currentCropWidth = player.sprites.run.cropWidth
+            player.width = player.sprites.run.width
+        } else if(keys.left.pressed && player.position.x > 0) {  // if left key pressed & player.X GREATER than 0, move platform to the right by playMovement
             scrollOffset -=playerMovement // record how much platforms are offsetting
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
@@ -338,6 +347,17 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
                 background.position.x += (playerMovement/8)
             });
+            console.log('move = 0, but SCROLLING----L----');
+        } else {
+                if (lastKey === 'right') { // if last pressed = right AND  R/L are NOT pressed then..
+                player.currentSprite = player.sprites.stand.right
+                player.currentCropWidth = player.sprites.stand.cropWidth
+                player.width = player.sprites.stand.width
+            } else {
+                player.currentSprite = player.sprites.stand.left
+                player.currentCropWidth = player.sprites.stand.cropWidth
+                player.width = player.sprites.stand.width
+            }
         }
         // console.log('scrollOffset:', scrollOffset); // -------- check how much scroll is currently offsetting
     }
@@ -362,7 +382,7 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             ) {player.velocity.y = 0 
         }
     })
-    // ------ SPRITE SWITCHING ------ 
+    // ------ SPRITE SWITCHING ------ Moved this to the player movement section
     // if (
     //     keys.right.pressed &&
     //     lastKey === 'right' && 
@@ -463,7 +483,7 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
         case 68:        // D
             console.log('right/D');
             keys.right.pressed = false
-            lastKey = 'right'
+            // lastKey = 'right'
             // player.currentSprite = player.sprites.stand.right
             // player.currentCropWidth = player.sprites.stand.cropWidth 
             // player.width = player.sprites.stand.width
@@ -472,7 +492,7 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
         case 65:        // 'A'
             console.log('left/A');
             keys.left.pressed = false
-            lastKey = 'left'
+            // lastKey = 'left'
             // player.currentSprite = player.sprites.stand.left
             // player.currentCropWidth = player.sprites.stand.cropWidth 
             // player.width = player.sprites.stand.width
