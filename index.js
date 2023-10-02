@@ -51,8 +51,30 @@ spriteStandLeft.src = './img/spriteStandLeft.png'
 
 const spriteStandRight = new Image()   // spriteStandRight Image - Dimensions
 spriteStandRight.src = './img/spriteStandRight.png'
+// -------- IMAGE VARIABLES -------- //
 
-// -------- IMAGE VARIABLES --------
+// -------- GAMEPAD VARIABLES -------- //
+// let playerWidthAndHeight = 0
+// let playerX = 0;
+// let playerY = 0;
+// let playerColor = 'orange';
+// let velocity = 0;
+
+let controllerIndex = null;
+let leftPressed = false;
+let rightPressed = false;
+let upPressed = false;
+let downPressed = false;
+
+let bluePressed = false;
+let yellowPressed = false;
+let redPressed = false;
+let greenPressed = false;
+
+let connected = false
+let animateLoop = false
+// -------- GAMEPAD VARIABLES -------- //
+
 
 class Player {
     constructor() { //  passing in x & y positions
@@ -243,12 +265,14 @@ new Platform({x: 300, y: 300, image: platformImage}), // Platform 1 (Floating)
 new Platform({x: 800, y: 200, image: platformImage}), // Platform 2 (Floating)
 
 clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
-// -------- ELEMENT VARIABLES --------
 }
+// -------- ELEMENT VARIABLES -------- //
 
-function animate() { // ------ MAIN ANIMATION FUNCTION ------
+
+// ------ MAIN ANIMATION FUNCTION ------ //
+function animate() { 
     animateRunning = true // variable to check if animate function is running
-    requestAnimationFrame(animate)
+    // requestAnimationFrame(animate)
     
     // c.clearRect(0, 0, canvas.width, canvas.height)
     c.fillStyle = 'grey'
@@ -270,10 +294,12 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
 
     player.update() // ------ PLAYER UPDATE. Call this last, to render in front
 
-    // ------ PLAYER MOVEMENT ------
-    if (keys.left.pressed == true && keys.right.pressed == true ) {
-        player.velocity.x = 0
-        console.log('both')
+    // ------------ PLAYER MOVEMENT ------------
+    // ------ LEFT & RIGHT ------
+    if (keys.left.pressed == true && keys.right.pressed == true ) { // if BOTH Left & Right pressed
+        player.velocity.x = 0       
+        console.log('both L/R Pressed')
+        // If BOTH L&R pressed, don't move, but do pick a L/R standing sprite
         if (lastKey === 'right') {
             player.currentSprite = player.sprites.stand.left
             player.currentCropWidth = player.sprites.stand.cropWidth
@@ -283,24 +309,30 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             player.currentCropWidth = player.sprites.stand.cropWidth
         player.width = player.sprites.stand.width
         }
-    } else if (keys.right.pressed && player.position.x < 400) {  // allow player to move right unless at 400px
+    // ------ RIGHT ------
+    } else if ((keys.right.pressed && player.position.x < 400) || (rightPressed && player.position.x < 400)) {  // allow player to move right unless at 400px
         player.velocity.x = playerMovement
         console.log('right');
         // player.frames = 1 // restart any animation back to frame 1.
         player.currentSprite = player.sprites.run.right // set it to run right
         player.currentCropWidth = player.sprites.run.cropWidth
         player.width = player.sprites.run.width
-    } else if ((keys.left.pressed && player.position.x > 100) 
-        || (keys.left.pressed && scrollOffset === 0 && player.position.x > 0)) {  // allow player to move left unless at 100px
+    // ------ LEFT ------
+    } else if (((keys.left.pressed && player.position.x > 100) // if left pressed, and player.X > 100, 
+        || (keys.left.pressed && scrollOffset === 0 && player.position.x > 0)) // if left pressed, AND ScrollOffset is at 0, BUT player not at left wall yet
+        || ((leftPressed && player.position.x > 100) // if CONTROLLER left pressed, and not touching left wall
+        || (leftPressed && scrollOffset === 0 && player.position.x > 0) )) {  // if CONTROLLER left pressed, AND ScrollOffset is at 0, BUT player not at left wall yet
         player.velocity.x = -playerMovement 
         console.log('left');
             // player.frames = 1 // restart any animation back to frame 1.
             player.currentSprite = player.sprites.run.left
             player.currentCropWidth = player.sprites.run.cropWidth
             player.width = player.sprites.run.width
+
+    // ------------ IF VELOCITY IS 0, then.. ------------
     } else { // If player is NOT moving left/right then..
         player.velocity.x = 0
-        console.log('none');
+        console.log('velocity = O');
             // player.frames = 1 // restart any animation back to frame 1.
             // if (!keys.right.pressed) {
             //     player.currentSprite = player.sprites.stand.right
@@ -316,10 +348,11 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             //     player.currentCropWidth = player.sprites.stand.cropWidth
             //     player.width = player.sprites.stand.width
             // }
-    // ------ PLAYER MOVEMENT ------
+    // ------ PLAYER MOVEMENT END ------
 
-        // ------ PLATFORM SCROLL LEFT/RIGHT ------
-        if (keys.right.pressed) { // if right key is pressed, move platform to the left by playMovement
+    // ------ IF VELOCITY IS STILL 0, AND  L/R PRESSED ------ 
+        // ------------ PLATFORM SCROLL LEFT/RIGHT ------------
+        if (keys.right.pressed || rightPressed) { // if right key is pressed, move platform to the left by playMovement
             scrollOffset +=playerMovement // record how much platforms are offsetting
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
@@ -335,7 +368,7 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
             player.currentSprite = player.sprites.run.right
             player.currentCropWidth = player.sprites.run.cropWidth
             player.width = player.sprites.run.width
-        } else if(keys.left.pressed && player.position.x > 0) {  // if left key pressed & player.X GREATER than 0, move platform to the right by playMovement
+        } else if((keys.left.pressed && player.position.x > 0) || ( leftPressed && player.position.x > 0)) {  // if left key pressed & player.X GREATER than 0, move platform to the right by playMovement
             scrollOffset -=playerMovement // record how much platforms are offsetting
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
@@ -363,7 +396,7 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
     }
     
     // ------ PLATFORM SCROLL UP/DOWN ------
-    if (keys.jump.pressed && player.position.y < 400 ) { // if JUMP key is pressed, move platforms to the Down by JUMP level
+    if (keys.jump.pressed && player.position.y < 400) { // if JUMP key is pressed, move platforms to the Down by JUMP level
         scrollOffsetUp +=jump // record how much platforms are offsetting UP
         platforms.forEach(platform => {
             platform.position.y +=jump
@@ -435,11 +468,14 @@ function animate() { // ------ MAIN ANIMATION FUNCTION ------
     // ---- LOOSE SCROLL ----
     if (player.position.y > (canvas.height) ){
         console.log('Player fell off. You LOOSE!!');
-        init();
+        init(); // Restarts Game
     }
+    controllerInput()
+    checkButtonPressed()
+    requestAnimationFrame(animate) 
 }
 
-init();
+init(); // Restarts Game
 animate()
 
 // ---- LISTEN FOR A KEY PRESSED ----
@@ -450,17 +486,11 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
             console.log('right/D');
             keys.right.pressed = true
             lastKey = 'right'
-            // player.currentSprite = player.sprites.run.right
-            // player.currentCropWidth= player.sprites.run.cropWidth
-            // player.width = player.sprites.run.width
             break
             case 65:        // 'A'
             console.log('left/A');
             keys.left.pressed = true
             lastKey = 'left'
-            // player.currentSprite = player.sprites.run.left
-            // player.currentCropWidth= player.sprites.run.cropWidth
-            // player.width = player.sprites.run.width
             break
         case 87:        // W
             console.log('Jump/W');
@@ -484,19 +514,11 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
             console.log('right/D');
             keys.right.pressed = false
             // lastKey = 'right'
-            // player.currentSprite = player.sprites.stand.right
-            // player.currentCropWidth = player.sprites.stand.cropWidth 
-            // player.width = player.sprites.stand.width
-            // player.velocity.x = 0 // set velocity to 0
             break
         case 65:        // 'A'
             console.log('left/A');
             keys.left.pressed = false
             // lastKey = 'left'
-            // player.currentSprite = player.sprites.stand.left
-            // player.currentCropWidth = player.sprites.stand.cropWidth 
-            // player.width = player.sprites.stand.width
-            // player.velocity.x = 0 // set velocity to 0
             break
             // ---- KEYUP JUMP - Don't really need any key up stuff for jump.
         case 87:        // W
@@ -525,4 +547,105 @@ function test() {
     console.log('Window W: ' + window.innerWidth, 'Window H: ' + window.innerHeight ); // check Window W & H
 }
 test()
+
+
+window.addEventListener('gamepadconnected', (event) => {    // gamepad Connected event listener. Must press button first.
+    connected = true
+    controllerIndex = event.gamepad.index;
+    checkPlayerAttributes();
+})
+
+window.addEventListener('gamepaddisconnected', (event) => {    // gamepad Disconnected event listener
+    connected = false
+    controllerIndex = event.gamepad.index;
+})
+
+console.log('gamepad Connected Status: ', connected);
+
+const connectedControllers = [];
+
+function checkPlayerAttributes (){
+    console.log('gamepad Connected Status: ', connected);
+    if (animateLoop) { console.log('animateLoop running');}
+}
+
+function updateConnectedControllers() {
+    const gamepadsArray = navigator.getGamepads();
+    console.log('gamepadsArray', gamepadsArray);
+    //clear array before updating
+    connectedControllers.length = 0;
+
+    for (let i = 0; i < gamepadsArray.length; i++) {
+        const gamepad = gamepadsArray[i];
+        if (gamepad !== null) {
+            connectedControllers.push({
+                index: gamepad.index, 
+                id: gamepad.id
+            });
+            console.log('connectedControllers', connectedControllers);
+        }
+    }
+}
+
+updateConnectedControllers();
+
+
+// -------- BASIC CONTROLLER LEFT/RIGHT INPUT TEMPLATE FUNCTION -------- NOT X/Y/B/A or Green/red/yellow/blue //
+function controllerInput() {
+    if(controllerIndex !== null) {
+        const gamepad = navigator.getGamepads()[controllerIndex]
+        const buttons = gamepad.buttons;
+        upPressed = buttons[12].pressed;
+        downPressed = buttons[13].pressed;
+        leftPressed = buttons[14].pressed;
+        rightPressed = buttons[15].pressed;
+
+        const stickDeadZone = 0.4;              // change to 0.8 to only allow movement in one direction at a time.
+        const leftRightValue = gamepad.axes[0];
+        const upDownValue = gamepad.axes[1];
+
+        if(leftRightValue >= stickDeadZone) {   // if gamepad left/right axes is >= than deadZone, move right
+            rightPressed = true;
+        } 
+        else if (leftRightValue <= -stickDeadZone) {    // if gamepad left/right axes is <= than deadZone, move left
+            leftPressed = true;
+        }
+
+        if(upDownValue >= stickDeadZone) { // if gamepad up/down axes is >= than deadZone, move up
+            downPressed = true;
+        } 
+        else if (upDownValue <= -stickDeadZone) { // if gamepad up/down axes is <= than deadZone, move down
+            upPressed = true;
+        }
+        greenPressed = buttons[0].pressed;
+        redPressed = buttons[1].pressed;
+        bluePressed = buttons[2].pressed;
+        yellowPressed = buttons[3].pressed;
+
+    }
+};
+
+function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS Only --> green[0], red[1], blue[2], yellow[3]
+    if (controllerIndex !== null ){
+
+        const gamepad = navigator.getGamepads()[controllerIndex]
+        const buttons = gamepad.buttons;
+
+        if(buttons[0].pressed) {        // [0]
+            player.velocity.y = -jump   // subtract jump level
+            console.log('GREEN');
+        } 
+        if(buttons[1].pressed) {        // [1]
+            console.log('RED');      
+        } 
+        if(buttons[2].pressed) {        // [2]
+            // player1.attack()
+            console.log('BLUE');      
+        } 
+        if(buttons[3].pressed) {        // [3]
+            console.log('YELLOW');   
+        }
+    }
+}
+
 
