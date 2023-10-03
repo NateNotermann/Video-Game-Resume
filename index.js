@@ -1,12 +1,15 @@
 // import platform from '../img/platform.png';
 
-
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
+// ---- window.onload fixed the rendering issues ----
+window.onload = function () {
+init();
+  };
 //responsive canvas based on window size
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
+canvas.width = window.innerWidth    // canvas.width 1920
+canvas.height = window.innerHeight  // canvas.height 687
 
 // global variables. 
 const gravity = 0.5
@@ -18,7 +21,7 @@ const platformHeight = 125 // actually 580 but leaves 1px gap if 580
 let lastKey
 let playerWidth = 66
 let playerHeight = 150
-let groundPosition = canvas.height - platformHeight
+let groundPosition = 125 //canvas.height - platformHeight
 let scrollOffset = 0
 let scrollOffsetUp = 0
 let time = 1
@@ -54,12 +57,6 @@ spriteStandRight.src = './img/spriteStandRight.png'
 // -------- IMAGE VARIABLES -------- //
 
 // -------- GAMEPAD VARIABLES -------- //
-// let playerWidthAndHeight = 0
-// let playerX = 0;
-// let playerY = 0;
-// let playerColor = 'orange';
-// let velocity = 0;
-
 let controllerIndex = null;
 let leftPressed = false;
 let rightPressed = false;
@@ -75,12 +72,11 @@ let connected = false
 let animateLoop = false
 // -------- GAMEPAD VARIABLES -------- //
 
-
 class Player {
     constructor() { //  passing in x & y positions
         this.position = {
-            x: 100,
-            y: 100
+            x: 500,
+            y: canvas.height - 500
         }
         this.velocity = { 
              x: 0, // positive values move right, negative values more left.
@@ -109,8 +105,8 @@ class Player {
         this.currentCropWidth = 177
     }
     draw() { 
-        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
-        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+        c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        c.fillRect(this.position.x,  this.position.y, this.width, this.height)
 
         c.drawImage( // player sprite image
             // this.image,
@@ -136,13 +132,8 @@ class Player {
             || this.currentSprite === this.sprites.run.left)) { // loop every 60 frames. 
             this.frames = 0 
         } 
-        // else if (    this.frames > 59 && this.currentSprite === this.sprites.stand.left) {
-        //     this.frames = 0 
-        // } else if (this.frames > 29 && this.currentSprite === this.sprites.run.left) {
-        //     this.frames = 0 
-        // }
         this.draw()
-        this.position.x += this.velocity.x // add/increase velocity (X axes o nly)(aka Movement) 
+        this.position.x += this.velocity.x // add/increase velocity (X axes only)(aka Movement) 
         this.position.y += this.velocity.y // add/increase velocity (Y axes only)(aka Gravity) 
 
         if (this.position.y + this.height + this.velocity.y <= canvas.height + this.height) //Player can fall below bottom of screen. //- floor)  // if the BOTTOM of our player + it's velocity is LESS than the BOTTOM of the canvas keep adding gravity. 
@@ -152,6 +143,50 @@ class Player {
     } 
 } // End of player Sprite
 
+
+class PlatformTwo {
+        constructor() { //  passing in x & y positions
+            this.position = {
+                x: 100,
+                y: canvas.height - 200
+            }
+            this.width = 580 //default width
+            this.height = 125 //default height
+    
+            this.image = platformImage
+            this.frames = 0
+ 
+            this.currentSprite = platformImage
+            // this.currentCropWidth = 580
+        }
+        draw() { 
+            c.fillStyle = 'purple' // draw a rectangle that matches the size and position of the Player Sprite
+            c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+    
+            c.drawImage( // player sprite image
+                // this.image,
+                this.currentSprite, 
+                // this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+                // 0,                  // crop image Y
+                // this.currentCropWidth,                // crop image Y
+                // 400,                // crop image X
+                this.position.x, 
+                this.position.y,
+                this.width,
+                this.height ) 
+        }
+    
+        update() {
+            // this.frames++
+            // if (this.frames > 59 && 
+            //     (this.currentSprite === this.sprites.stand.right 
+            //     || this.currentSprite === this.sprites.stand.left)) { // loop every 28 frames. 
+            //     this.frames = 0 
+            // } 
+            this.draw()
+        } 
+    } // End of player Sprite
+
 // classes are a blueprint for creating objects that share the same properties and methods.
 class Platform {    // ------ Platform Class used for ground and all platforms. ------
     constructor({ x, y, image }) {
@@ -160,19 +195,22 @@ class Platform {    // ------ Platform Class used for ground and all platforms. 
             y: y // y is now equal to the passed in y.  // y: 300
         }
         this.image = image
-        this.width = image.width  //200
-        this.height = image.height //20
+        this.width = image.width  //580
+        this.height = image.height //125
     }
     draw() {   
         // platform's rectangle
-        // c.fillStyle = 'blue'
+        // c.fillStyle = 'red'
         // c.fillRect(this.position.x, this.position.y, this.width, this.height)
         c.drawImage(
             this.image,  
             this.position.x, 
-            this.position.y,
-            this.width, 
-            this.height ) 
+            this.position.y)
+            // this.width, 
+            // this.height ) 
+    }
+    update() {
+        this.draw
     }
 }
 class Hill {    // ------ Hill Class used for Hills ------
@@ -180,7 +218,7 @@ class Hill {    // ------ Hill Class used for Hills ------
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
             y: y // y is now equal to the passed in y.  // y: 300
-        }
+        }       // Hills image: 7545 × 592
         this.image = image
         this.width = image.width  //200
         this.height = image.height //20
@@ -227,6 +265,10 @@ class Cloud {    // ---- Background Class used for Cloud Image ------
 
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
+player.draw()
+player.update()
+let platformTwo = new PlatformTwo()// version 2 of platforms
+let platformTwos
 let platforms = []     // Array of Platforms
 let hills = []  //new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
 let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
@@ -249,12 +291,14 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 function init() {
 // -------- ELEMENT VARIABLES --------
 player = new Player() //  calling the "Player" class
+// platformTwo = new PlatformTwo()
+platformTwos = [platformTwo, platformTwo]
 // const platform = new Platform() //  calling the "Platform" class 
-hills = [new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
+hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
 backgrounds = [new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
-new Platform({x: 0, y: canvas.height - 75, image: platformImage}), // Ground 1
-new Platform({x: platformWidth, y: canvas.height - 75, image: platformImage}), // Ground 2
+new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
+new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
 new Platform({x: (platformWidth * 2), y: canvas.height - 75, image: platformImage}), // Ground 3
 new Platform({x: (platformWidth* 3) + 100, y: canvas.height - 75, image: platformImage}), // Ground 4
 new Platform({x: (platformWidth * 4) + 99, y: canvas.height - 75, image: platformImage}), // Ground 5
@@ -268,14 +312,14 @@ clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 15
 }
 // -------- ELEMENT VARIABLES -------- //
 
-
 // ------ MAIN ANIMATION FUNCTION ------ //
 function animate() { 
+    // requestAnimationFrame(animate) 
     animateRunning = true // variable to check if animate function is running
     // requestAnimationFrame(animate)
     
     // c.clearRect(0, 0, canvas.width, canvas.height)
-    c.fillStyle = 'grey'
+    c.fillStyle = 'blue'
     c.fillRect(0, 0, canvas.width, canvas.height)
 
     backgrounds.forEach(background => { // loop through array of Backgrounds
@@ -291,9 +335,11 @@ function animate() {
     platforms.forEach(platform => { // loop through array of Platforms
         platform.draw() // ------ DRAW PLATFORM
     })
+    platformTwos.forEach(plate => {
+        plate.draw()
+    })
 
     player.update() // ------ PLAYER UPDATE. Call this last, to render in front
-
     // ------------ PLAYER MOVEMENT ------------
     // ------ LEFT & RIGHT ------
     if (keys.left.pressed == true && keys.right.pressed == true ) { // if BOTH Left & Right pressed
@@ -354,6 +400,7 @@ function animate() {
         // ------------ PLATFORM SCROLL LEFT/RIGHT ------------
         if (keys.right.pressed || rightPressed) { // if right key is pressed, move platform to the left by playMovement
             scrollOffset +=playerMovement // record how much platforms are offsetting
+            platformTwo.position.x -= playerMovement
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x -= playerMovement
@@ -370,6 +417,7 @@ function animate() {
             player.width = player.sprites.run.width
         } else if((keys.left.pressed && player.position.x > 0) || ( leftPressed && player.position.x > 0)) {  // if left key pressed & player.X GREATER than 0, move platform to the right by playMovement
             scrollOffset -=playerMovement // record how much platforms are offsetting
+            platformTwo.position.x += playerMovement
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x += playerMovement
@@ -398,23 +446,41 @@ function animate() {
     // ------ PLATFORM SCROLL UP/DOWN ------
     if (keys.jump.pressed && player.position.y < 400) { // if JUMP key is pressed, move platforms to the Down by JUMP level
         scrollOffsetUp +=jump // record how much platforms are offsetting UP
+        platformTwo.position.y += jump
         platforms.forEach(platform => {
             platform.position.y +=jump
         })
     } 
+
+    
     // ------ PLATFORM COLLISION DETECTION ------
     platforms.forEach(platform => { 
         if (//player bottom is HIGHER than platform top
-            player.position.y + player.height <= platform.position.y  &&
+            player.position.y + player.height <= platform.position.y
             // player bottom overlap with platform top side. (Player lands on platform)
-            player.position.y + player.height + player.velocity.y >= platform.position.y &&
+            && player.position.y + player.height + player.velocity.y >= platform.position.y
             //  // players left side overlap with platform right side
-            player.position.x <= platform.position.x + platform.width &&
+            && player.position.x <= platform.position.x + platform.width 
             //  // players right side overlap with platform left side
-            player.position.x + player.width >= platform.position.x 
-            ) {player.velocity.y = 0 
+            && player.position.x + player.width >= platform.position.x 
+            ) 
+            {player.velocity.y = 0 
         }
     })
+
+    
+        if (//player bottom is HIGHER than platform top
+            player.position.y + player.height <= platformTwo.position.y
+            // player bottom overlap with platform top side. (Player lands on platform)
+            && player.position.y + player.height + player.velocity.y >= platformTwo.position.y
+            //  // players left side overlap with platform right side
+            && player.position.x <= platformTwo.position.x + platformTwo.width 
+            //  // players right side overlap with platform left side
+            && player.position.x + player.width >= platformTwo.position.x 
+            ) 
+            {player.velocity.y = 0 
+        }
+
     // ------ SPRITE SWITCHING ------ Moved this to the player movement section
     // if (
     //     keys.right.pressed &&
@@ -470,12 +536,16 @@ function animate() {
         console.log('Player fell off. You LOOSE!!');
         init(); // Restarts Game
     }
+    // if (player.position.y < 50 ){
+    //     console.log('false start!!');
+    //     init();
+    // }
     controllerInput()
     checkButtonPressed()
     requestAnimationFrame(animate) 
 }
 
-init(); // Restarts Game
+init() // Restarts Game
 animate()
 
 // ---- LISTEN FOR A KEY PRESSED ----
@@ -540,13 +610,6 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
 //     console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
 // }
 
-function test() {
-    if (animateRunning) { console.log('animate function running: ' + animateRunning);  }
-    console.log('Index.js is Connected');
-    console.log('canvas W: ' + canvas.width, 'canvas H: ' + canvas.height ); // check Canvas W & H
-    console.log('Window W: ' + window.innerWidth, 'Window H: ' + window.innerHeight ); // check Window W & H
-}
-test()
 
 
 window.addEventListener('gamepadconnected', (event) => {    // gamepad Connected event listener. Must press button first.
@@ -560,7 +623,6 @@ window.addEventListener('gamepaddisconnected', (event) => {    // gamepad Discon
     controllerIndex = event.gamepad.index;
 })
 
-console.log('gamepad Connected Status: ', connected);
 
 const connectedControllers = [];
 
@@ -649,3 +711,11 @@ function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS On
 }
 
 
+function test() {
+    if (animateRunning) { console.log('animate function running: ' + animateRunning);  }
+    console.log('Index.js is Connected');
+    console.log('canvas W: ' + canvas.width, 'canvas H: ' + canvas.height ); // check Canvas W & H
+    console.log('Window W: ' + window.innerWidth, 'Window H: ' + window.innerHeight ); // check Window W & H
+    console.log('gamepad Connected Status: ', connected);
+}
+test()
