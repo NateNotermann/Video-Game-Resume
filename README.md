@@ -1,8 +1,9 @@
 # Mario-Game
 Javascript based side-scrolling video game
 
-To Do List
-Tutorial Steps:
+## To Do List
+
+### Tutorial Steps:
 1. Project Setup -- DONE
 2. Player Creation -- DONE
 3. Gravity --  DONE
@@ -17,17 +18,21 @@ Tutorial Steps:
 12. Fine-Tuning -- DONE
 13. Add tutorial player sprites -- DONE
 
-Custom Steps:
-14. Add Xbox Controller API Support
-15. Custom Building Art 
-16. Custom Platform Art
-17. Custom Player Art
-18. Custom Background & responsive size
-19. Fix Hill placement
-20. Finish Level Creation
-21. Deploy to Netlify
-22. Celebratory Dance
+### Custom Steps:
 
-Stretch Goals:
-23. Add settings page
-24. Make responsive to window size
+14. Add Xbox Controller API Support -- DONE
+15. add scroll up -- DONE
+
+16. Add scroll down -- In Progress
+17. Custom Building Art 
+18. Custom Platform Art
+19. Custom Player Art
+20. Custom Background & responsive size
+21. Fix Hill placement
+22. Finish Level Creation
+23. Deploy to Netlify
+24. Celebratory Dance
+
+### Stretch Goals:
+25. Add settings page
+26. Make responsive to window size
