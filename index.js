@@ -318,9 +318,9 @@ function animate() {
     animateRunning = true // variable to check if animate function is running
     // requestAnimationFrame(animate)
     
-    // c.clearRect(0, 0, canvas.width, canvas.height)
-    c.fillStyle = 'blue'
-    c.fillRect(0, 0, canvas.width, canvas.height)
+    c.clearRect(0, 0, canvas.width, canvas.height)
+    // c.fillStyle = 'blue'
+    // c.fillRect(0, 0, canvas.width, canvas.height)
 
     backgrounds.forEach(background => { // loop through array of Backgrounds
         background.draw() // ------ DRAW BACKGROUND
@@ -378,7 +378,7 @@ function animate() {
     // ------------ IF VELOCITY IS 0, then.. ------------
     } else { // If player is NOT moving left/right then..
         player.velocity.x = 0
-        console.log('velocity = O');
+        // console.log('velocity = O');
             // player.frames = 1 // restart any animation back to frame 1.
             // if (!keys.right.pressed) {
             //     player.currentSprite = player.sprites.stand.right
@@ -444,13 +444,23 @@ function animate() {
     }
     
     // ------ PLATFORM SCROLL UP/DOWN ------
-    if (keys.jump.pressed && player.position.y < 400) { // if JUMP key is pressed, move platforms to the Down by JUMP level
-        scrollOffsetUp +=jump // record how much platforms are offsetting UP
-        platformTwo.position.y += jump
-        platforms.forEach(platform => {
-            platform.position.y +=jump
-        })
-    } 
+    // if (keys.jump.pressed && player.position.y < 400) { // if JUMP key is pressed, move platforms to the Down by JUMP level
+    //     scrollOffsetUp += jump // record how much platforms are offsetting UP
+    //     platformTwo.position.y += jump
+    //     platforms.forEach(platform => {
+    //         platform.position.y += jump
+    //     })
+    //     console.log('scrollOffsetUp', scrollOffsetUp );
+    // } else if (player.position.y > (canvas.height - 300) && scrollOffsetUp > 0 ) {
+        
+    //     scrollOffsetUp -= jump
+    //     platformTwo.position.y -= jump
+    //     platforms.forEach(platform => {
+    //         platform.position.y -=jump
+    //     })
+    // }
+    // console.log('scrollOffsetUp', scrollOffsetUp, 'player.y', player.position.y, );
+
 
     
     // ------ PLATFORM COLLISION DETECTION ------
@@ -553,27 +563,27 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
     // console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
     switch (keyCode) {
         case 68:        // D
-            console.log('right/D');
+            // console.log('right/D');
             keys.right.pressed = true
             lastKey = 'right'
             break
             case 65:        // 'A'
-            console.log('left/A');
+            // console.log('left/A');
             keys.left.pressed = true
             lastKey = 'left'
             break
         case 87:        // W
-            console.log('Jump/W');
+            // console.log('Jump/W');
             player.velocity.y += - jump // subtract jump level
             keys.jump.pressed = true
             break
         case 32:        // Space
-            console.log('Jump/Space');
+            // console.log('Jump/Space');
             player.velocity.y += - jump // subtract jump level
             keys.jump.pressed = true
             break
     }
-    console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed, 'jump pressed:', keys.jump.pressed);
+    // console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed, 'jump pressed:', keys.jump.pressed);
 })
 
 // ---- LISTEN FOR A KEY UNPRESSED ---- 
@@ -581,28 +591,28 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
     // console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
     switch (keyCode) {
         case 68:        // D
-            console.log('right/D');
+            // console.log('right/D');
             keys.right.pressed = false
             // lastKey = 'right'
             break
         case 65:        // 'A'
-            console.log('left/A');
+            // console.log('left/A');
             keys.left.pressed = false
             // lastKey = 'left'
             break
             // ---- KEYUP JUMP - Don't really need any key up stuff for jump.
         case 87:        // W
-            console.log('KEYUP - Jump/up/W');
+            // console.log('KEYUP - Jump/up/W');
             keys.jump.pressed = false
             // player.velocity.y += - jump // subtract jump level
             break
         case 32:        // Space
-            console.log('KEYUP - Jump/up/Space');
+            // console.log('KEYUP - Jump/up/Space');
             keys.jump.pressed = false
-            // player.velocity.y += - jump // subtract jump level
+            // player.velocity.y += - jump // subtract jump leveld
             break
     }
-    console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed, 'jump pressed:', keys.jump.pressed);
+    // console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed, 'jump pressed:', keys.jump.pressed);
 })
 
 // function keysPressed() { // console log if key(s) are pressed
@@ -633,7 +643,7 @@ function checkPlayerAttributes (){
 
 function updateConnectedControllers() {
     const gamepadsArray = navigator.getGamepads();
-    console.log('gamepadsArray', gamepadsArray);
+    // console.log('gamepadsArray', gamepadsArray);
     //clear array before updating
     connectedControllers.length = 0;
 
@@ -712,10 +722,11 @@ function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS On
 
 
 function test() {
-    if (animateRunning) { console.log('animate function running: ' + animateRunning);  }
-    console.log('Index.js is Connected');
-    console.log('canvas W: ' + canvas.width, 'canvas H: ' + canvas.height ); // check Canvas W & H
-    console.log('Window W: ' + window.innerWidth, 'Window H: ' + window.innerHeight ); // check Window W & H
-    console.log('gamepad Connected Status: ', connected);
+    // if (animateRunning) { console.log('animate function running: ' + animateRunning);  }
+    // console.log('Index.js is Connected');
+    // console.log('canvas W: ' + canvas.width, 'canvas H: ' + canvas.height ); // check Canvas W & H
+    // console.log('Window W: ' + window.innerWidth, 'Window H: ' + window.innerHeight ); // check Window W & H
+    // console.log('gamepad Connected Status: ', connected);
+    console.log('scrolloffset', scrollOffset);
 }
 test()
