@@ -5,13 +5,24 @@ const c = canvas.getContext('2d');
 
 // ---- window.onload fixed the rendering issues ----
 window.onload = function () {
+canvasHeight = canvas.height
+windowInnerHeight = window.innerHeight  
+canvasWidth = canvas.width
+windowWidth = window.innerWidth
 init();
   };
 //responsive canvas based on window size
 canvas.width = window.innerWidth    // canvas.width 1920
 canvas.height = window.innerHeight  // canvas.height 687
-
 // global variables. 
+
+let canvasHeight = canvas.height
+let windowInnerHeight = window.innerHeight  
+let canvasWidth = canvas.width
+let windowWidth = window.innerWidth
+
+console.log( canvasHeight, windowInnerHeight, canvasWidth, windowWidth );
+
 const gravity = 0.5
 const floor = 0 //50 // pixel from the bottom player stops at
 const jump = 15 // amount player should jump
@@ -38,7 +49,7 @@ const hillImage = new Image()   // Hill Image - Dimensions
 hillImage.src = './img/hills.png'
 
 const backgroundImage = new Image()   // Hill Image - Dimensions
-backgroundImage.src = './img/background.png'
+backgroundImage.src = './img/background.jpg'
 
 const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
 cloudImage.src = './img/cloud.png'
@@ -136,7 +147,7 @@ class Player {
         this.position.x += this.velocity.x // add/increase velocity (X axes only)(aka Movement) 
         this.position.y += this.velocity.y // add/increase velocity (Y axes only)(aka Gravity) 
 
-        if (this.position.y + this.height + this.velocity.y <= canvas.height + this.height) //Player can fall below bottom of screen. //- floor)  // if the BOTTOM of our player + it's velocity is LESS than the BOTTOM of the canvas keep adding gravity. 
+        if (this.position.y + this.height + this.velocity.y <= canvas.height - 125)//+ this.height) //Player can fall below bottom of screen. //- floor)  // if the BOTTOM of our player + it's velocity is LESS than the BOTTOM of the canvas keep adding gravity. 
             this.velocity.y += gravity // velocity += gravity (0.5) repeat over and over.
             // PLAYER CAN NOW FALL FOREVER.. FOREVER.. FOREVER..
            // else this.velocity.y = 0 // else set velocity to 0. (If player position + player height is greater or equal to canvas height)
@@ -295,7 +306,7 @@ player = new Player() //  calling the "Player" class
 platformTwos = [platformTwo, platformTwo]
 // const platform = new Platform() //  calling the "Platform" class 
 hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
-backgrounds = [new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
+backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, image: backgroundImage})] // Array of Backgrounds
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
 new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
 new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
