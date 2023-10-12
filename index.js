@@ -65,6 +65,9 @@ spriteStandLeft.src = './img/spriteStandLeft.png'
 
 const spriteStandRight = new Image()   // spriteStandRight Image - Dimensions
 spriteStandRight.src = './img/spriteStandRight.png'
+
+const MCTC = new Image()   // spriteStandRight Image - Dimensions
+MCTC.src = './img/MCTC LONG.png'
 // -------- IMAGE VARIABLES -------- //
 
 // -------- GAMEPAD VARIABLES -------- //
@@ -154,6 +157,55 @@ class Player {
     } 
 } // End of player Sprite
 
+class Building {
+    constructor(x, y, image) { //  passing in x & y positions
+        this.position = {
+            x: 1500,
+            y: canvas.height - 468
+        }
+        this.width = 650 //default width
+        this.height = 468 //default height
+
+        this.image = MCTC
+        this.frames = 0
+        this.sprites = {
+            stand: {
+                MCTC: MCTC,
+                cropWidth: 468,
+                width: 650
+            },
+        }
+        this.currentSprite = this.sprites.stand.MCTC
+        this.currentCropWidth = 650
+    }
+    draw() { 
+        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+
+        c.drawImage( // player sprite image
+            // this.image,
+            this.currentSprite, 
+            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+            0,                  // crop image Y
+            this.currentCropWidth,                // crop image Y
+            650,                // crop image X
+            this.position.x, 
+            this.position.y,
+            this.width,
+            this.height ) 
+    }
+
+    update() {
+            this.frames++;
+        if (this.frames > 29 ) {
+            // && (this.currentSprite === this.sprites.stand.MCTC )) { // loop every 28 frames. 
+            this.frames = 0;
+        } 
+        this.draw()
+    } 
+} // End of player Sprite
+
+
 
 class PlatformTwo {
         constructor() { //  passing in x & y positions
@@ -224,6 +276,8 @@ class Platform {    // ------ Platform Class used for ground and all platforms. 
         this.draw
     }
 }
+
+
 class Hill {    // ------ Hill Class used for Hills ------
     constructor({ x, y, image }) {
         this.position = {
@@ -284,6 +338,7 @@ let platforms = []     // Array of Platforms
 let hills = []  //new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
 let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let clouds = [] //new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
+let buildings = []
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
@@ -305,27 +360,47 @@ player = new Player() //  calling the "Player" class
 // platformTwo = new PlatformTwo()
 platformTwos = [platformTwo, platformTwo]
 // const platform = new Platform() //  calling the "Platform" class 
-hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
+// hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
 backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, image: backgroundImage})] // Array of Backgrounds
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
 new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
 new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
-new Platform({x: (platformWidth * 2), y: canvas.height - 75, image: platformImage}), // Ground 3
-new Platform({x: (platformWidth* 3) + 100, y: canvas.height - 75, image: platformImage}), // Ground 4
-new Platform({x: (platformWidth * 4) + 99, y: canvas.height - 75, image: platformImage}), // Ground 5
+new Platform({x: (platformWidth * 2), y: canvas.height - groundPosition, image: platformImage}), // Ground 3
+new Platform({x: (platformWidth* 3) + 100, y: canvas.height - groundPosition, image: platformImage}), // Ground 4
+new Platform({x: (platformWidth * 4) + 99, y: canvas.height - groundPosition, image: platformImage}), // Ground 5
 new Platform({x: platformWidth* 6, y: canvas.height - 300, image: platformImage}), // Platform 3
 new Platform({x: platformWidth * 4.5, y: canvas.height - (tallPlatform.height + 75), image: tallPlatform})]; // Platform 4, Winning Podium
 
-new Platform({x: 300, y: 300, image: platformImage}), // Platform 1 (Floating)
+buildings = [ new Building()]
+
+new Platform({x: 300, y: 300, image: platformImage}), // Platform 1 (Floating)d
 new Platform({x: 800, y: 200, image: platformImage}), // Platform 2 (Floating)
 
 clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
 }
 // -------- ELEMENT VARIABLES -------- //
 
+
+// ------ frame/refresh rate limiting code: variables: start ------ //
+let fps = 60;
+let now;
+let then = Date.now();
+let interval = 1000/fps;
+let delta;
+// ------ frame/refresh rate limiting code: variables: end ------ //
+
 // ------ MAIN ANIMATION FUNCTION ------ //
 function animate() { 
     // requestAnimationFrame(animate) 
+    // window.requestAnimationFrame(animate)
+        // ------ frame/refresh rate limiting code: start ------ //
+        now = Date.now();
+        delta = now - then;
+        if (delta > interval) {   // ------------------ BRACKET START HERE --------------------------
+            then = now - (delta % interval);
+        // ------ frame/refresh rate limiting code: open bracket ------ //
+
+
     animateRunning = true // variable to check if animate function is running
     // requestAnimationFrame(animate)
     
@@ -340,6 +415,10 @@ function animate() {
         cloud.position.x += (0.2 * time)
         cloud.draw() // ------ DRAW CLOUDS
     })
+    buildings.forEach(building => { // loop through array of buildings
+        building.draw()     // ------ DRAW HILL
+        building.update()
+    }) 
     hills.forEach(hill => { // loop through array of Hills
         hill.draw()     // ------ DRAW HILL
     }) 
@@ -416,6 +495,9 @@ function animate() {
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x -= playerMovement
             });
+            buildings.forEach(building => { // ---- HILL SCROLL ----
+                building.position.x -= (playerMovement)
+            });
             hills.forEach(hill => { // ---- HILL SCROLL ----
                 hill.position.x -= (playerMovement/3)
             });
@@ -432,6 +514,9 @@ function animate() {
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x += playerMovement
+            });
+            buildings.forEach(building => { // ---- HILL SCROLL ----
+                building.position.x += (playerMovement)
             });
             hills.forEach(hill => { // // ---- HILL SCROLL ----
                 hill.position.x += (playerMovement/3)
@@ -452,6 +537,7 @@ function animate() {
             }
         }
         // console.log('scrollOffset:', scrollOffset); // -------- check how much scroll is currently offsetting
+    }  // ------ frame/refresh rate limiting code: closing bracket ------ //
     }
     
     // ------ PLATFORM SCROLL UP/DOWN ------
