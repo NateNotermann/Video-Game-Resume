@@ -20,12 +20,17 @@ Javascript based side-scrolling video game
 
 ### Custom Steps:
 14. Add Xbox Controller API Support -- DONE
-15. Add scroll UP & DOWN -- In Progress
 
-16. Limit requestAnimationFrame to 60 fps
-17. Custom Building Art 
+15. Limit requestAnimationFrame to 60 fps
+
+16. Custom Building Background Art 
+    A. Sky Background
+    B. Far Buildings
+16. Custom Close Building Animation
+17. Moving Clouds Custom Art
 18. Custom Platform Art
-19. Custom Player Art
+
+19. Custom Player Animation
 20. Custom Background & responsive size
 21. Fix Hill placement
 22. Finish Level Creation
