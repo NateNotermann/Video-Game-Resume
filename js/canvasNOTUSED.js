@@ -80,6 +80,7 @@ const platforms = [
     new Platform({x: 300, y: 450, image: image}), 
     new Platform({x: 825, y: 200, image: image})] // Need to pass in x & y.
 
+    
 const keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
     right: {
         pressed: false

@@ -68,6 +68,10 @@ spriteStandRight.src = './img/spriteStandRight.png'
 
 const MCTC = new Image()   // spriteStandRight Image - Dimensions
 MCTC.src = './img/MCTC LONG.png'
+
+
+const CBRE = new Image()   // spriteStandRight Image - Dimensions
+CBRE.src = './img/CBRE LONG.png'
 // -------- IMAGE VARIABLES -------- //
 
 // -------- GAMEPAD VARIABLES -------- //
@@ -158,25 +162,36 @@ class Player {
 } // End of player Sprite
 
 class Building {
-    constructor(x, y, image) { //  passing in x & y positions
+    constructor(x, y, w, h, image) { //  passing in x & y positions
         this.position = {
-            x: 1500,
-            y: canvas.height - 468
+            x: x, //1500,
+            y: y //canvas.height - 468
         }
-        this.width = 650 //default width
-        this.height = 468 //default height
+        this.width = w //650 //default width
+        this.height = h //468 //default height
 
-        this.image = MCTC
+        this.image = image
         this.frames = 0
         this.sprites = {
-            stand: {
+            MCTC: {
                 MCTC: MCTC,
-                cropWidth: 468,
+                cropWidth:  468,
                 width: 650
             },
+            CBRE: {
+                CBRE: CBRE,
+                cropWidth:  250,
+                width:  250
+            }
         }
-        this.currentSprite = this.sprites.stand.MCTC
-        this.currentCropWidth = 650
+        if (image = CBRE) {
+            this.currentSprite = this.sprites.MCTC.MCTC
+            this.currentSprite = this.sprites.CBRE.CBRE
+            this.currentCropWidth = 250
+        } else if (image = MCTC) {
+            this.currentSprite = this.sprites.MCTC.MCTC
+            this.currentCropWidth = 650
+        }
     }
     draw() { 
         // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
@@ -188,7 +203,7 @@ class Building {
             this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
             0,                  // crop image Y
             this.currentCropWidth,                // crop image Y
-            650,                // crop image X
+            this.height, // 650,                // crop image X
             this.position.x, 
             this.position.y,
             this.width,
@@ -371,7 +386,8 @@ new Platform({x: (platformWidth * 4) + 99, y: canvas.height - groundPosition, im
 new Platform({x: platformWidth* 6, y: canvas.height - 300, image: platformImage}), // Platform 3
 new Platform({x: platformWidth * 4.5, y: canvas.height - (tallPlatform.height + 75), image: tallPlatform})]; // Platform 4, Winning Podium
 
-buildings = [ new Building()]
+buildings = [ new Building(100, 300, 250, 422, MCTC), new Building(800, 300, 250, 422, CBRE)]
+// buildings = [ new Building(200, 300, 250, 422, CBRE)]
 
 new Platform({x: 300, y: 300, image: platformImage}), // Platform 1 (Floating)d
 new Platform({x: 800, y: 200, image: platformImage}), // Platform 2 (Floating)
@@ -562,7 +578,7 @@ function animate() {
     
     // ------ PLATFORM COLLISION DETECTION ------
     platforms.forEach(platform => { 
-        if (//player bottom is HIGHER than platform top
+        if (//player bottom is LESS than platform top
             player.position.y + player.height <= platform.position.y
             // player bottom overlap with platform top side. (Player lands on platform)
             && player.position.y + player.height + player.velocity.y >= platform.position.y
