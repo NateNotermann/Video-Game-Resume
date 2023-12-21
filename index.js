@@ -3,26 +3,33 @@
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
-// ---- window.onload fixed the rendering issues ----
-window.onload = function () {
-canvasHeight = canvas.height
-windowInnerHeight = window.innerHeight  
-canvasWidth = canvas.width
-windowWidth = window.innerWidth
-init();
-  };
-//responsive canvas based on window size
-canvas.width = window.innerWidth    // canvas.width 1920
-canvas.height = window.innerHeight  // canvas.height 687
-// global variables. 
+// canvas.width = window.innerWidth
+// canvas.height = window.innerHeight
+canvas.width =  1920  //visualViewport.width - 10
+canvas.height = 1080  //visualViewport.height - 10
 
 let canvasHeight = canvas.height
-let windowInnerHeight = window.innerHeight  
 let canvasWidth = canvas.width
-let windowWidth = window.innerWidth
+let windowInnerHeight = window.innerHeight  
+let windowInnerWidth = window.innerWidth
 
-console.log( canvasHeight, windowInnerHeight, canvasWidth, windowWidth );
+// ---- window.onload fixed the rendering issues ----
+window.onload = function () {
+    // initial canvas dimensions options 1
+    canvasHeight = canvas.height
+    canvasWidth = canvas.width
+    
+    // initial canvas dimensions options 2
+    windowInnerHeight = window.innerHeight  
+    windowInnerWidth = window.innerWidth
+    init();
+  };
+// - Trying to "RESIZE" Canvas live causes child elements size issues. Makes them not relative to canvas.
+// canvas.width = windowInnerWidth //window.innerWidth    // canvas.width 1920
+// canvas.height = windowInnerHeight //  aspectRatio  //window.innerHeight  // canvas.height 687
+console.log( canvasHeight, windowInnerHeight, canvasWidth, windowInnerWidth );
 
+// global variables. 
 const gravity = 0.5
 const floor = 0 //50 // pixel from the bottom player stops at
 const jump = 15 // amount player should jump
