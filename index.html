@@ -6,19 +6,36 @@
         <style> 
         body {
             margin: 0;
-            background-color: black;
+            background-color: lightgreen;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh
         }
+
+        canvas {
+				box-sizing: border-box;
+				background-color: blue;
+				width:calc(100%);
+				min-width: 300px;
+                /* min-width:(ABOVE) - is just in case window gets really small */
+				border-radius: 30px;
+				border: 5px solid black;
+                margin-left: 5%;
+                margin-right: 5%;
+                margin-top: 10%;
+                margin-bottom: 10%;
+			}
+
+
         </style>
         <title>mario-game</title>
     </head>
 
 
     <body>
-        <canvas></canvas>`
+        <canvas></canvas>
+
     </body>
 
 <!-- <script src="index.js" type="module"></ script> -->
