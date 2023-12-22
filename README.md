@@ -17,6 +17,12 @@ The original app uses just basic **HTML**, **CSS** and **Javascript**. I then ad
     [GamePad Tester](https://github.com/NateNotermann/GamePad-API),
     [GamePad Game](https://github.com/NateNotermann/GamePad-API-Test-Game)
 
+## Development Evolution
+### A.Early Preview, B.Original Template WITHOUT Custom Art
+A.-><img src="img/EarlyPreview.gif" style="width: 350px;"> -> B.<img src="img/FinishedPreview.gif" style="width: 350px;"> 
+
+### A. Character & Movement Tests 1, B. Custom Character Test 2
+A.-><img src="img/screenvid3.gif" style="width: 350px;"> -> B.<img src="img/screenvid4.gif" style="width: 350px;"> 
 
 ### Background (work in progress)
 <img src="img/backgroundPreview.jpg" style="width: 100%;">
@@ -24,12 +30,6 @@ The original app uses just basic **HTML**, **CSS** and **Javascript**. I then ad
 ### Foreground Buildings (work in progress)
 <img src="img/foregroundBuildingspreview.gif" style="width: 1000px;">   
 
-## Development evolution
-### A.Early Preview, B.Original Template WITHOUT Custom Art
-A.<img src="img/EarlyPreview.gif" style="width: 350px;"> -> B.<img src="img/FinishedPreview.gif" style="width: 350px;"> 
-
-### A. Character & Movement Tests 1, B. Custom Character Test 2
-A.<img src="img/screenvid3.gif" style="width: 350px;"> -> B.<img src="img/screenvid4.gif" style="width: 350px;"> 
 
 
 
