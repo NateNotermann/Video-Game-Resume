@@ -141,7 +141,7 @@ platformTwos = [platformTwo, platformTwo]
 // hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
 backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, image: backgroundImage})] // Array of Backgrounds
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
-    new Platform({x: platformWidth * 4.5, y: canvas.height - (tallPlatform.height + 75), image: tallPlatform}), // Platform 4, Winning Podium
+    new Platform({x: platformWidth * 7, y: canvas.height - (tallPlatform.height + 75), image: tallPlatform}), // Platform 4, Winning Podium
 
     new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
     new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2

@@ -7,10 +7,23 @@
         body {
             margin: 0;
             background-color: lightgreen;
+            /* display: flex;
+            align-items: center;
+            justify-content: center; */
+            height: 100vh
+        }
+
+        .screenDiv {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh
+        }
+
+        .buttonsDiv {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
         }
 
         canvas {
@@ -26,15 +39,119 @@
                 margin-top: 10%;
                 margin-bottom: 10%;
 			}
+ 
+        .circle1 {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            border-radius: 50%;
+        }
 
+        .circle2 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+        }
 
+        .oval1 {
+            width: 100px;
+            height: 25px;
+            background-color: orange;
+            border-radius: 50%;
+        }
+
+        .oval2 {
+            width: 100px;
+            height: 25px;
+            background-color: blue;
+            border-radius: 50%;
+        }
+
+        .rect1 {
+            width: 50px;
+            height: 150px;
+            background-color: gray;
+        }
+
+        .rect2 {
+            width: 150px;
+            height: 50px;
+            background-color: gray;
+        }
+
+        .border {
+            border-radius: 2px;
+            border-style: solid;
+            border-color: black;
+        }
+
+        .flex {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pushable {
+            background: hsl(340deg 100% 32%);
+            border-radius: 12px;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            outline-offset: 4px;
+        }
+        .front {
+            display: block;
+            padding: 12px 42px;
+            border-radius: 12px;
+            font-size: 1.25rem;
+            background: hsl(345deg 100% 47%);
+            color: white;
+            transform: translateY(-6px);
+        }
+
+        .pushable:active .front {
+            transform: translateY(-2px);
+        }
         </style>
         <title>mario-game</title>
     </head>
 
 
     <body>
-        <canvas></canvas>
+        <div class="screenDiv">
+
+            <canvas></canvas>
+
+        </div>
+        <div class="buttonsDiv">
+            <div class="flex">
+                <div class="rect1 border"></div>
+                <label>up/down</label>
+                <div class="rect2 border"></div>
+                <label>left/right</label>
+            </div>
+            
+            <div class="flex">
+                <div class="oval1"></div>
+                <label>select</label>
+                <div class="oval2"></div>
+                <label>start</label>
+            </div>
+
+            <div class="flex">
+                <div class="circle1"></div>
+                <label>green</label>
+                <div class="circle2"></div>
+                <label>red</label>
+                <button class="pushable">
+                    <span class="front">
+                      Push me
+                    </span>
+                  </button>
+            </div>
+        </div>
 
     </body>
 
