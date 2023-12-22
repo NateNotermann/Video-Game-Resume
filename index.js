@@ -27,7 +27,14 @@ window.onload = function () {
 // - Trying to "RESIZE" Canvas live causes child elements size issues. Makes them not relative to canvas.
 // canvas.width = windowInnerWidth //window.innerWidth    // canvas.width 1920
 // canvas.height = windowInnerHeight //  aspectRatio  //window.innerHeight  // canvas.height 687
-console.log( canvasHeight, windowInnerHeight, canvasWidth, windowInnerWidth );
+
+function tests() {
+    console.log('CanvasHeight:', canvasHeight );
+    console.log('windowInnerHeight:', windowInnerHeight);
+    console.log('canvasWidth:', canvasWidth);
+    console.log('windowInnerWidth:', windowInnerWidth);
+}
+tests();
 
 // global variables. 
 const gravity = 0.5
@@ -168,82 +175,82 @@ class Player {
     } 
 } // End of player Sprite
 
-class Building {
-    constructor(x, y, w, h, image) { //  passing in x & y positions
-        this.position = {
-            x: x, //1500,
-            y: y
-        }
-        this.width = w //650 //default width
-        this.height = h //468 //default height
-        this.currentCropWidth = 250
+// class Building {
+//     constructor(x, y, w, h, image) { //  passing in x & y positions
+//         this.position = {
+//             x: x, //1500,
+//             y: y
+//         }
+//         this.width = w //650 //default width
+//         this.height = h //468 //default height
+//         this.currentCropWidth = 250
 
-        this.image = image
-        this.frames = 0
-        this.currentSprite = CBRE
-    }
-    draw() { 
-        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
-        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
-        c.drawImage( // player sprite image
-            // this.image,
-            this.currentSprite, 
-            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
-            0,                  // crop image Y
-            this.currentCropWidth,                // crop image Y
-            this.height, // 650,                // crop image X
-            this.position.x, 
-            this.position.y,
-            this.width,
-            this.height ) 
-    }
+//         this.image = image
+//         this.frames = 0
+//         this.currentSprite = CBRE
+//     }
+//     draw() { 
+//         // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+//         // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+//         c.drawImage( // player sprite image
+//             // this.image,
+//             this.currentSprite, 
+//             this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+//             0,                  // crop image Y
+//             this.currentCropWidth,                // crop image Y
+//             this.height, // 650,                // crop image X
+//             this.position.x, 
+//             this.position.y,
+//             this.width,
+//             this.height ) 
+//     }
 
-    update() {
-            this.frames++;
-        if (this.frames > 29 ) {
-            this.frames = 0;
-        } 
-        this.draw()
-    } 
-} // End of Building1 Sprite
+//     update() {
+//             this.frames++;
+//         if (this.frames > 29 ) {
+//             this.frames = 0;
+//         } 
+//         this.draw()
+//     } 
+// } // End of Building1 Sprite
 
-class Building2 {
-    constructor(x, y, w, h, image) { //  passing in x & y positions
-        this.position = {
-            x: x, //1500,
-            y: y //canvas.height - 468
-        }
-        this.width = 650 //w //650 //default width
-        this.height = 468 //h //468 //default height
-        this.currentCropWidth = 650
-        // this.image = MCTC
-        this.frames = 0
-        this.currentSprite = MCTC
-    }
-    draw() { 
-        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
-        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
-        c.drawImage( // player sprite image
-            // this.image,
-            this.currentSprite, 
-            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
-            0,                  // crop image Y
-            this.currentCropWidth,                // crop image Y
-            this.height, // 650,                // crop image X
-            this.position.x, 
-            this.position.y,
-            this.width,
-            this.height ) 
-    }
+// class Building2 {
+//     constructor(x, y, w, h, image) { //  passing in x & y positions
+//         this.position = {
+//             x: x, //1500,
+//             y: y //canvas.height - 468
+//         }
+//         this.width = 650 //w //650 //default width
+//         this.height = 468 //h //468 //default height
+//         this.currentCropWidth = 650
+//         // this.image = MCTC
+//         this.frames = 0
+//         this.currentSprite = MCTC
+//     }
+//     draw() { 
+//         // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+//         // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+//         c.drawImage( // player sprite image
+//             // this.image,
+//             this.currentSprite, 
+//             this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+//             0,                  // crop image Y
+//             this.currentCropWidth,                // crop image Y
+//             this.height, // 650,                // crop image X
+//             this.position.x, 
+//             this.position.y,
+//             this.width,
+//             this.height ) 
+//     }
 
-    update() {
-            this.frames++;
-        if (this.frames > 29 ) {
-            this.frames = 0;
-        } 
-        this.draw()
-    } 
-} // End of Building2 Sprite
+//     update() {
+//             this.frames++;
+//         if (this.frames > 29 ) {
+//             this.frames = 0;
+//         } 
+//         this.draw()
+//     } 
+// } // End of Building2 Sprite
 
 
 class PlatformTwo {
@@ -289,32 +296,32 @@ class PlatformTwo {
         } 
     } // End of player Sprite
 
-// classes are a blueprint for creating objects that share the same properties and methods.
-class Platform {    // ------ Platform Class used for ground and all platforms. ------
-    constructor({ x, y, image }) {
-        this.position = {
-            x: x, // x is now equal to the passed in x.  // x: 600,
-            y: y // y is now equal to the passed in y.  // y: 300
-        }
-        this.image = image
-        this.width = image.width  //580
-        this.height = image.height //125
-    }
-    draw() {   
-        // platform's rectangle
-        // c.fillStyle = 'red'
-        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
-        c.drawImage(
-            this.image,  
-            this.position.x, 
-            this.position.y)
-            // this.width, 
-            // this.height ) 
-    }
-    update() {
-        this.draw
-    }
-}
+// // classes are a blueprint for creating objects that share the same properties and methods.
+// class Platform {    // ------ Platform Class used for ground and all platforms. ------
+//     constructor({ x, y, image }) {
+//         this.position = {
+//             x: x, // x is now equal to the passed in x.  // x: 600,
+//             y: y // y is now equal to the passed in y.  // y: 300
+//         }
+//         this.image = image
+//         this.width = image.width  //580
+//         this.height = image.height //125
+//     }
+//     draw() {   
+//         // platform's rectangle
+//         // c.fillStyle = 'red'
+//         // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+//         c.drawImage(
+//             this.image,  
+//             this.position.x, 
+//             this.position.y)
+//             // this.width, 
+//             // this.height ) 
+//     }
+//     update() {
+//         this.draw
+//     }
+// }
 
 
 class Hill {    // ------ Hill Class used for Hills ------
@@ -350,6 +357,7 @@ class Background {    // ---- Background Class used for Background Image ------
             this.position.y ) 
     }
 }
+
 class Cloud {    // ---- Background Class used for Cloud Image ------
     constructor({ x, y, image }) {
         this.position = {
@@ -403,16 +411,18 @@ platformTwos = [platformTwo, platformTwo]
 // hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
 backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, image: backgroundImage})] // Array of Backgrounds
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
-new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
-new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
-new Platform({x: (platformWidth * 2), y: canvas.height - groundPosition, image: platformImage}), // Ground 3
-new Platform({x: (platformWidth* 3) + 100, y: canvas.height - groundPosition, image: platformImage}), // Ground 4
-new Platform({x: (platformWidth * 4) + 99, y: canvas.height - groundPosition, image: platformImage}), // Ground 5
-new Platform({x: platformWidth* 6, y: canvas.height - 300, image: platformImage}), // Platform 3
-new Platform({x: platformWidth * 4.5, y: canvas.height - (tallPlatform.height + 75), image: tallPlatform})]; // Platform 4, Winning Podium
+    new Platform({x: platformWidth * 4.5, y: canvas.height - (tallPlatform.height + 75), image: tallPlatform}), // Platform 4, Winning Podium
+
+    new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
+    new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
+    new Platform({x: (platformWidth * 2), y: canvas.height - groundPosition, image: platformImage}), // Ground 3
+    new Platform({x: (platformWidth* 3) + 100, y: canvas.height - groundPosition, image: platformImage}), // Ground 4
+    new Platform({x: (platformWidth * 4) + 99, y: canvas.height - groundPosition, image: platformImage}), // Ground 5
+    new Platform({x: platformWidth* 6, y: canvas.height - 300, image: platformImage}), // Platform 3
+];
 
 building1 = [ new Building2(800, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC
-building2 = [ new Building(1200, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE
+building2 = [ new Building(2500, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE
 // building3 = [ new Building(1200, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 // building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
 
