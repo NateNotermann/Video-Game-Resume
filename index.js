@@ -172,38 +172,19 @@ class Building {
     constructor(x, y, w, h, image) { //  passing in x & y positions
         this.position = {
             x: x, //1500,
-            y: y //canvas.height - 468
+            y: y
         }
         this.width = w //650 //default width
         this.height = h //468 //default height
+        this.currentCropWidth = 250
 
         this.image = image
         this.frames = 0
-        this.sprites = {
-            MCTC: {
-                MCTC: MCTC,
-                cropWidth:  468,
-                width: 650
-            },
-            CBRE: {
-                CBRE: CBRE,
-                cropWidth:  250,
-                width:  250
-            }
-        }
-        if (image = CBRE) {
-            this.currentSprite = this.sprites.MCTC.MCTC
-            this.currentSprite = this.sprites.CBRE.CBRE
-            this.currentCropWidth = 250
-        } else if (image = MCTC) {
-            this.currentSprite = this.sprites.MCTC.MCTC
-            this.currentCropWidth = 650
-        }
+        this.currentSprite = CBRE
     }
     draw() { 
         // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
         // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
-
         c.drawImage( // player sprite image
             // this.image,
             this.currentSprite, 
@@ -220,13 +201,49 @@ class Building {
     update() {
             this.frames++;
         if (this.frames > 29 ) {
-            // && (this.currentSprite === this.sprites.stand.MCTC )) { // loop every 28 frames. 
             this.frames = 0;
         } 
         this.draw()
     } 
-} // End of player Sprite
+} // End of Building1 Sprite
 
+class Building2 {
+    constructor(x, y, w, h, image) { //  passing in x & y positions
+        this.position = {
+            x: x, //1500,
+            y: y //canvas.height - 468
+        }
+        this.width = 650 //w //650 //default width
+        this.height = 468 //h //468 //default height
+        this.currentCropWidth = 650
+        // this.image = MCTC
+        this.frames = 0
+        this.currentSprite = MCTC
+    }
+    draw() { 
+        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+        c.drawImage( // player sprite image
+            // this.image,
+            this.currentSprite, 
+            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+            0,                  // crop image Y
+            this.currentCropWidth,                // crop image Y
+            this.height, // 650,                // crop image X
+            this.position.x, 
+            this.position.y,
+            this.width,
+            this.height ) 
+    }
+
+    update() {
+            this.frames++;
+        if (this.frames > 29 ) {
+            this.frames = 0;
+        } 
+        this.draw()
+    } 
+} // End of Building2 Sprite
 
 
 class PlatformTwo {
@@ -360,7 +377,8 @@ let platforms = []     // Array of Platforms
 let hills = []  //new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
 let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let clouds = [] //new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
-let buildings = []
+let building1 = []
+let building2 = []
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
@@ -393,8 +411,10 @@ new Platform({x: (platformWidth * 4) + 99, y: canvas.height - groundPosition, im
 new Platform({x: platformWidth* 6, y: canvas.height - 300, image: platformImage}), // Platform 3
 new Platform({x: platformWidth * 4.5, y: canvas.height - (tallPlatform.height + 75), image: tallPlatform})]; // Platform 4, Winning Podium
 
-buildings = [ new Building(100, 300, 250, 422, MCTC), new Building(800, 300, 250, 422, CBRE)]
-// buildings = [ new Building(200, 300, 250, 422, CBRE)]
+building1 = [ new Building2(800, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC
+building2 = [ new Building(1200, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE
+// building3 = [ new Building(1200, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
+// building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
 
 new Platform({x: 300, y: 300, image: platformImage}), // Platform 1 (Floating)d
 new Platform({x: 800, y: 200, image: platformImage}), // Platform 2 (Floating)
@@ -438,8 +458,12 @@ function animate() {
         cloud.position.x += (0.2 * time)
         cloud.draw() // ------ DRAW CLOUDS
     })
-    buildings.forEach(building => { // loop through array of buildings
-        building.draw()     // ------ DRAW HILL
+    building1.forEach(building => { // loop through array of building1
+        building.draw()     // ------ DRAW building1
+        building.update()
+    }) 
+    building2.forEach(building => { // loop through array of building2
+        building.draw()     // ------ DRAW building2
         building.update()
     }) 
     hills.forEach(hill => { // loop through array of Hills
@@ -518,7 +542,10 @@ function animate() {
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x -= playerMovement
             });
-            buildings.forEach(building => { // ---- HILL SCROLL ----
+            building1.forEach(building => { // ---- HILL SCROLL ----
+                building.position.x -= (playerMovement)
+            });
+            building2.forEach(building => { // ---- HILL SCROLL ----
                 building.position.x -= (playerMovement)
             });
             hills.forEach(hill => { // ---- HILL SCROLL ----
@@ -538,7 +565,10 @@ function animate() {
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x += playerMovement
             });
-            buildings.forEach(building => { // ---- Building SCROLL ----
+            building1.forEach(building => { // ---- Building SCROLL ----
+                building.position.x += (playerMovement)
+            });
+            building2.forEach(building => { // ---- Building SCROLL ----
                 building.position.x += (playerMovement)
             });
             hills.forEach(hill => { // // ---- HILL SCROLL ----
