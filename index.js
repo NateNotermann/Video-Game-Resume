@@ -253,48 +253,48 @@ class Player {
 // } // End of Building2 Sprite
 
 
-class PlatformTwo {
-        constructor() { //  passing in x & y positions
-            this.position = {
-                x: 100,
-                y: canvas.height - 200
-            }
-            this.width = 580 //default width
-            this.height = 125 //default height
+// class PlatformTwo {
+//         constructor() { //  passing in x & y positions
+//             this.position = {
+//                 x: 100,
+//                 y: canvas.height - 200
+//             }
+//             this.width = 580 //default width
+//             this.height = 125 //default height
     
-            this.image = platformImage
-            this.frames = 0
+//             this.image = platformImage
+//             this.frames = 0
  
-            this.currentSprite = platformImage
-            // this.currentCropWidth = 580
-        }
-        draw() { 
-            c.fillStyle = 'purple' // draw a rectangle that matches the size and position of the Player Sprite
-            c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+//             this.currentSprite = platformImage
+//             // this.currentCropWidth = 580
+//         }
+//         draw() { 
+//             c.fillStyle = 'purple' // draw a rectangle that matches the size and position of the Player Sprite
+//             c.fillRect(this.position.x,  this.position.y, this.width, this.height)
     
-            c.drawImage( // player sprite image
-                // this.image,
-                this.currentSprite, 
-                // this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
-                // 0,                  // crop image Y
-                // this.currentCropWidth,                // crop image Y
-                // 400,                // crop image X
-                this.position.x, 
-                this.position.y,
-                this.width,
-                this.height ) 
-        }
+//             c.drawImage( // player sprite image
+//                 // this.image,
+//                 this.currentSprite, 
+//                 // this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+//                 // 0,                  // crop image Y
+//                 // this.currentCropWidth,                // crop image Y
+//                 // 400,                // crop image X
+//                 this.position.x, 
+//                 this.position.y,
+//                 this.width,
+//                 this.height ) 
+//         }
     
-        update() {
-            // this.frames++
-            // if (this.frames > 59 && 
-            //     (this.currentSprite === this.sprites.stand.right 
-            //     || this.currentSprite === this.sprites.stand.left)) { // loop every 28 frames. 
-            //     this.frames = 0 
-            // } 
-            this.draw()
-        } 
-    } // End of player Sprite
+//         update() {
+//             // this.frames++
+//             // if (this.frames > 59 && 
+//             //     (this.currentSprite === this.sprites.stand.right 
+//             //     || this.currentSprite === this.sprites.stand.left)) { // loop every 28 frames. 
+//             //     this.frames = 0 
+//             // } 
+//             this.draw()
+//         } 
+//     } // End of player Sprite
 
 // // classes are a blueprint for creating objects that share the same properties and methods.
 // class Platform {    // ------ Platform Class used for ground and all platforms. ------
@@ -324,56 +324,57 @@ class PlatformTwo {
 // }
 
 
-class Hill {    // ------ Hill Class used for Hills ------
-    constructor({ x, y, image }) {
-        this.position = {
-            x: x, // x is now equal to the passed in x.  // x: 600,
-            y: y // y is now equal to the passed in y.  // y: 300
-        }       // Hills image: 7545 × 592
-        this.image = image
-        this.width = image.width  //200
-        this.height = image.height //20
-    }
-    draw() {   
-        c.drawImage(
-            this.image,  
-            this.position.x, 
-            this.position.y ) 
-    }
-}
-class Background {    // ---- Background Class used for Background Image ------
-    constructor({ x, y, image }) {
-        this.position = {
-            x: x, // x is now equal to the passed in x.  // x: 600,
-            y: y // y is now equal to the passed in y.  // y: 300
-        }
-        this.image = image
-        this.width = image.width  //200
-        this.height = image.height //20
-    }
-    draw() {   
-        c.drawImage(this.image,  
-            this.position.x, 
-            this.position.y ) 
-    }
-}
+// class Hill {    // ------ Hill Class used for Hills ------
+//     constructor({ x, y, image }) {
+//         this.position = {
+//             x: x, // x is now equal to the passed in x.  // x: 600,
+//             y: y // y is now equal to the passed in y.  // y: 300
+//         }       // Hills image: 7545 × 592
+//         this.image = image
+//         this.width = image.width  //200
+//         this.height = image.height //20
+//     }
+//     draw() {   
+//         c.drawImage(
+//             this.image,  
+//             this.position.x, 
+//             this.position.y ) 
+//     }
+// }
 
-class Cloud {    // ---- Background Class used for Cloud Image ------
-    constructor({ x, y, image }) {
-        this.position = {
-            x: x, // x is now equal to the passed in x.  // x: 600,
-            y: y // y is now equal to the passed in y.  // y: 300
-        }
-        this.image = image
-        this.width = image.width  //200
-        this.height = image.height //20
-    }
-    draw() {   
-        c.drawImage(this.image,  
-            this.position.x, 
-            this.position.y ) 
-    }
-}
+// class Background {    // ---- Background Class used for Background Image ------
+//     constructor({ x, y, image }) {
+//         this.position = {
+//             x: x, // x is now equal to the passed in x.  // x: 600,
+//             y: y // y is now equal to the passed in y.  // y: 300
+//         }
+//         this.image = image
+//         this.width = image.width  //200
+//         this.height = image.height //20
+//     }
+//     draw() {   
+//         c.drawImage(this.image,  
+//             this.position.x, 
+//             this.position.y ) 
+//     }
+// }
+
+// class Cloud {    // ---- Background Class used for Cloud Image ------
+//     constructor({ x, y, image }) {
+//         this.position = {
+//             x: x, // x is now equal to the passed in x.  // x: 600,
+//             y: y // y is now equal to the passed in y.  // y: 300
+//         }
+//         this.image = image
+//         this.width = image.width  //200
+//         this.height = image.height //20
+//     }
+//     draw() {   
+//         c.drawImage(this.image,  
+//             this.position.x, 
+//             this.position.y ) 
+//     }
+// }
 
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
