@@ -29,7 +29,7 @@ The original app uses just basic **HTML**, **CSS** and **Javascript**. I then ad
 A.<img src="img/EarlyPreview.gif" style="width: 350px;"> -> B.<img src="img/FinishedPreview.gif" style="width: 350px;"> 
 
 ### A. Character & Movement Tests 1, B. Custom Character Test 2
-A.<img src="img/screenvid3.gif" style="width: 350px;"> -> B.<img src="img/screenvid3.gif" style="width: 350px;"> 
+A.<img src="img/screenvid3.gif" style="width: 350px;"> -> B.<img src="img/screenvid4.gif" style="width: 350px;"> 
 
 
 
