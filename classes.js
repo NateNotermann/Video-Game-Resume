@@ -35,8 +35,8 @@ class Player {
         this.currentCropWidth = 177
     }
     draw() { 
-        c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sparite
-        c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sparite
+        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
 
         c.drawImage( // player sprite image
             // this.image,
