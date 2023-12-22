@@ -130,7 +130,7 @@ class Player {
         this.currentCropWidth = 177
     }
     draw() { 
-        c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sparite
         c.fillRect(this.position.x,  this.position.y, this.width, this.height)
 
         c.drawImage( // player sprite image
@@ -538,7 +538,7 @@ function animate() {
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x += playerMovement
             });
-            buildings.forEach(building => { // ---- HILL SCROLL ----
+            buildings.forEach(building => { // ---- Building SCROLL ----
                 building.position.x += (playerMovement)
             });
             hills.forEach(hill => { // // ---- HILL SCROLL ----
