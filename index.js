@@ -104,76 +104,76 @@ let connected = false
 let animateLoop = false
 // -------- GAMEPAD VARIABLES -------- //
 
-class Player {
-    constructor() { //  passing in x & y positions
-        this.position = {
-            x: 500,
-            y: canvas.height - 500
-        }
-        this.velocity = { 
-             x: 0, // positive values move right, negative values more left.
-             y: 1 // positive values move down, negative values move up
-        }
-        this.width = 66 //default width
-        this.height = 150 //default height
+// class Player {
+//     constructor() { //  passing in x & y positions
+//         this.position = {
+//             x: 500,
+//             y: canvas.height - 500
+//         }
+//         this.velocity = { 
+//              x: 0, // positive values move right, negative values more left.
+//              y: 1 // positive values move down, negative values move up
+//         }
+//         this.width = 66 //default width
+//         this.height = 150 //default height
 
-        this.image = spriteStandRight
-        this.frames = 0
-        this.sprites = {
-            stand: {
-                right: spriteStandRight,
-                left: spriteStandLeft,
-                cropWidth: 177,
-                width: 66
-            },
-            run: {
-                right: spriteRunRight,
-                left: spriteRunLeft,
-                cropWidth: 341,
-                width: 127.875
-            }
-        }
-        this.currentSprite = this.sprites.stand.right
-        this.currentCropWidth = 177
-    }
-    draw() { 
-        c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sparite
-        c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+//         this.image = spriteStandRight
+//         this.frames = 0
+//         this.sprites = {
+//             stand: {
+//                 right: spriteStandRight,
+//                 left: spriteStandLeft,
+//                 cropWidth: 177,
+//                 width: 66
+//             },
+//             run: {
+//                 right: spriteRunRight,
+//                 left: spriteRunLeft,
+//                 cropWidth: 341,
+//                 width: 127.875
+//             }
+//         }
+//         this.currentSprite = this.sprites.stand.right
+//         this.currentCropWidth = 177
+//     }
+//     draw() { 
+//         c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sparite
+//         c.fillRect(this.position.x,  this.position.y, this.width, this.height)
 
-        c.drawImage( // player sprite image
-            // this.image,
-            this.currentSprite, 
-            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
-            0,                  // crop image Y
-            this.currentCropWidth,                // crop image Y
-            400,                // crop image X
-            this.position.x, 
-            this.position.y,
-            this.width,
-            this.height ) 
-    }
+//         c.drawImage( // player sprite image
+//             // this.image,
+//             this.currentSprite, 
+//             this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+//             0,                  // crop image Y
+//             this.currentCropWidth,                // crop image Y
+//             400,                // crop image X
+//             this.position.x, 
+//             this.position.y,
+//             this.width,
+//             this.height ) 
+//     }
 
-    update() {
-        this.frames++
-        if (this.frames > 59 && 
-            (this.currentSprite === this.sprites.stand.right 
-            || this.currentSprite === this.sprites.stand.left)) { // loop every 28 frames. 
-            this.frames = 0 
-        } else if (this.frames > 29 && 
-            (this.currentSprite === this.sprites.run.right 
-            || this.currentSprite === this.sprites.run.left)) { // loop every 60 frames. 
-            this.frames = 0 
-        } 
-        this.draw()
-        this.position.x += this.velocity.x // add/increase velocity (X axes only)(aka Movement) 
-        this.position.y += this.velocity.y // add/increase velocity (Y axes only)(aka Gravity) 
+//     update() {
+//         this.frames++
+//         if (this.frames > 59 && 
+//             (this.currentSprite === this.sprites.stand.right 
+//             || this.currentSprite === this.sprites.stand.left)) { // loop every 28 frames. 
+//             this.frames = 0 
+//         } else if (this.frames > 29 && 
+//             (this.currentSprite === this.sprites.run.right 
+//             || this.currentSprite === this.sprites.run.left)) { // loop every 60 frames. 
+//             this.frames = 0 
+//         } 
+//         this.draw()
+//         this.position.x += this.velocity.x // add/increase velocity (X axes only)(aka Movement) 
+//         this.position.y += this.velocity.y // add/increase velocity (Y axes only)(aka Gravity) 
 
-        if (this.position.y + this.height + this.velocity.y <= canvas.height - 125)//+ this.height) //Player can fall below bottom of screen. //- floor)  // if the BOTTOM of our player + it's velocity is LESS than the BOTTOM of the canvas keep adding gravity. 
-            this.velocity.y += gravity // velocity += gravity (0.5) repeat over and over.
-            // PLAYER CAN NOW FALL FOREVER.. FOREVER.. FOREVER..
-           // else this.velocity.y = 0 // else set velocity to 0. (If player position + player height is greater or equal to canvas height)
-    } 
-} // End of player Sprite
+//         if (this.position.y + this.height + this.velocity.y <= canvas.height - 125)//+ this.height) //Player can fall below bottom of screen. //- floor)  // if the BOTTOM of our player + it's velocity is LESS than the BOTTOM of the canvas keep adding gravity. 
+//             this.velocity.y += gravity // velocity += gravity (0.5) repeat over and over.
+//             // PLAYER CAN NOW FALL FOREVER.. FOREVER.. FOREVER..
+//            // else this.velocity.y = 0 // else set velocity to 0. (If player position + player height is greater or equal to canvas height)
+//     } 
+// } // End of player Sprite
 
 // class Building {
 //     constructor(x, y, w, h, image) { //  passing in x & y positions
