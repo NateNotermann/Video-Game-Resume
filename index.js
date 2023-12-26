@@ -457,7 +457,18 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
             keys.right.pressed = true
             lastKey = 'right'
             break
-            case 65:        // 'A'
+        case 65:        // 'A'
+            // console.log('left/A');
+            keys.left.pressed = true
+            lastKey = 'left'
+            break
+         // -- Left and Right Keys --    
+        case 39:        // D
+            // console.log('right/D');
+            keys.right.pressed = true
+            lastKey = 'right'
+            break
+        case 37:        // 'A'
             // console.log('left/A');
             keys.left.pressed = true
             lastKey = 'left'
@@ -501,6 +512,19 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
             keys.jump.pressed = false
             // player.velocity.y += - jump // subtract jump leveld
             break
+        // -- Left and Right Keys --
+        case 39:        // D
+            // console.log('right/D');
+            keys.right.pressed = false
+            // lastKey = 'right'
+            break
+        case 37:        // 'A'
+            // console.log('left/A');
+            keys.left.pressed = false
+            // lastKey = 'left'
+            break
+            // ---- KEYUP JUMP - Don't really need any key up stuff for jump.
+
     }
     // console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed, 'jump pressed:', keys.jump.pressed);
 })
