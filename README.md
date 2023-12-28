@@ -19,16 +19,16 @@ The original app uses just basic **HTML**, **CSS** and **Javascript**. I then ad
 
 ## Development Evolution
 ### A.Early Preview, B.Original Template WITHOUT Custom Art
-A.-><img src="img/EarlyPreview.gif" style="width: 350px;"> -> B.<img src="img/FinishedPreview.gif" style="width: 350px;"> 
+A.-><img src="img/ReadMe/EarlyPreview.gif" style="width: 350px;"> -> B.<img src="img/ReadMe/FinishedPreview.gif" style="width: 350px;"> 
 
 ### A. Character & Movement Tests 1, B. Custom Character Test 2
-A.-><img src="img/screenvid3.gif" style="width: 350px;"> -> B.<img src="img/screenvid4.gif" style="width: 350px;"> 
+A.-><img src="img/ReadMe/screenvid3.gif" style="width: 350px;"> -> B.<img src="img/ReadMe/screenvid4.gif" style="width: 350px;"> 
 
 ### Background (work in progress)
-<img src="img/backgroundPreview.jpg" style="width: 100%;">
+<img src="img/ReadMe/backgroundPreview.jpg" style="width: 100%;">
 
 ### Foreground Buildings (work in progress)
-<img src="img/foregroundBuildingspreview.gif" style="width: 1000px;">   
+<img src="img/ReadMe/foregroundBuildingspreview.gif" style="width: 1000px;">   
 
 
 
@@ -81,37 +81,57 @@ Pushing Live - DONE
 
 ### Phase 2. (Platformer Functionality & Custom Pixel Art) **CURRENT PHASE**
 #### Adding Platformer Game Functionality
-Add a frame around the video game canvas to look like a Game Boy. Or BMO from Adventure Time. -- DONE
+Add a frame around the video game canvas to look like a Game Boy. Or BMO from Adventure Time. -- DONE    
 Make Game Boy frame responsive/resize when window changes size. -- DONE
 Remove Health bar 2 player win/loose scenarios -- Done 
 Moved Player 2 movement into player one. -- Done     
 
 
-#### Platforms -----  In Progress  
-**Add Platform collision functionality -- Need to migrate code**
-
-"scroll" the background - Need to migrate code
-Add Parallax Scroll to all elements - Need to migrate code
-Custom Platform Sprite - Need to migrate code
-Place All Platforms - Need to migrate code
-
-
-Scrolling Win scenario - Need to migrate code
-Add Death Pits - Need to migrate code
-Add controller & keyboard buttons to the Game Boy frame.
-Make controller & keyboard buttons react when pressed.
+#### Platforms
+Add Platform collision functionality -- Done
+Add scroll animation to the background - Done
+Add Parallax Scroll to all elements - Done
+Scrolling Win scenario - Rework code
+Add Death Pits - Done
 
 
 #### Custom Pixel Art
- Custom Building Background Art    
-    A. Custom Sky Background   
-    B. Custom Far Buildings   
-    C. Custom Close Building Animation   
-Moving Clouds Custom Art - Need to migrate code   
-Custom Platform Art   
+Custom Player Sprites -- **In Progress**
+    A. Sprite Standing Right - Done
+    B. Sprite Standing Left - Done
+    C. Sprite Running Right - Done
+    D. Sprite Running Left - Done
+    E. Sprite Jumping Right <-------------------------- in progress   
+    F. Sprite Jumping Left  <-------------------------- in progress   
 
-#### Final Steps    
-Custom Player Animation   
+
+Custom Building Background Art      
+    A. Custom Sky Background   Redo with 1080p Height <-------------------------- in progress  
+    B. Custom Far Buildings    <-------------------------- in progress  
+    C. Custom Close Building Animations   <-------------------------- in progress  
+        1. MCTC - Done  
+        <!-- 2. Restaurants - maybe..   -->
+        2. Coyote   
+        3. CBRE - Done  
+        4. Prime  
+        5. HGA  
+    D. Add collision descriptions and highlights to Main buildings.   
+    E. Add light up arrow pointing where to go.   
+
+Custom Element Art   
+Custom Platform Art - Done  
+Moving Clouds Custom Art - Done  
+    Add more clouds & make scroll with player <-------------------------- in progress  
+
+
+## Game Boy Frame & Buttons  <---- in progress  
+Add controller & keyboard buttons to the Game Boy frame.  <-------------------------- in progress  
+Make controller & keyboard buttons react when pressed.    <-------------------------- in progress  
+
+
+Place More/All Platforms <-------------------------- in progress    
+
+#### Final Steps      
 Add javascript sound effects from other repo   
 Deploy to Netlify   
 Celebratory Dance    
