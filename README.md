@@ -122,6 +122,7 @@ Custom Building Background Art
         5. Prime
         6. HGA
     D. Add collision descriptions and highlights to Main buildings.
+    E. Add light up arrow pointing where to go.
 
         
 Moving Clouds Custom Art - Done 

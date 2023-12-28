@@ -152,8 +152,8 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
     new Platform({x: platformWidth* 6, y: canvas.height - 300, image: platformImage}), // Platform 3
 ];
 
-building1 = [ new Building2(800, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC
-building2 = [ new Building(2500, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE
+building1 = [ new Building2(800, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+building2 = [ new Building(2500, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
 // building3 = [ new Building(1200, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 // building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
 
