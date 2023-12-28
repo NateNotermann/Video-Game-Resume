@@ -6,14 +6,14 @@ class Player {
     constructor() { //  passing in x & y positions
         this.position = {
             x: 500,
-            y: canvas.height - 500
+            y: canvas.height - 550
         }
         this.velocity = { 
              x: 0, // positive values move right, negative values more left.
              y: 1 // positive values move down, negative values move up
         }
-        this.width = 66 //default width
-        this.height = 150 //default height
+        // this.width = (66*playerSize) //default width // Turned off on 12/27/23 (gets set in this.sprites)
+        this.height = (150*playerSize) //default height
 
         this.image = spriteStandRight
         this.frames = 0
@@ -22,13 +22,13 @@ class Player {
                 right: spriteStandRight,
                 left: spriteStandLeft,
                 cropWidth: 177,
-                width: 66
+                width: (66*playerSize)
             },
             run: {
                 right: spriteRunRight,
                 left: spriteRunLeft,
                 cropWidth: 341,
-                width: 127.875
+                width: (127.875*playerSize)
             }
         }
         this.currentSprite = this.sprites.stand.right
@@ -55,11 +55,11 @@ class Player {
         this.frames++
         if (this.frames > 59 && 
             (this.currentSprite === this.sprites.stand.right 
-            || this.currentSprite === this.sprites.stand.left)) { // loop every 28 frames. 
+            || this.currentSprite === this.sprites.stand.left)) { // loop every 60 frames. 
             this.frames = 0 
         } else if (this.frames > 29 && 
             (this.currentSprite === this.sprites.run.right 
-            || this.currentSprite === this.sprites.run.left)) { // loop every 60 frames. 
+            || this.currentSprite === this.sprites.run.left)) { // loop every 30 frames. 
             this.frames = 0 
         } 
         this.draw()
