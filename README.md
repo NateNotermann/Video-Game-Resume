@@ -19,16 +19,16 @@ The original app uses just basic **HTML**, **CSS** and **Javascript**. I then ad
 
 ## Development Evolution
 ### A.Early Preview, B.Original Template WITHOUT Custom Art
-A.-><img src="img/EarlyPreview.gif" style="width: 350px;"> -> B.<img src="img/FinishedPreview.gif" style="width: 350px;"> 
+A.-><img src="img/ReadMe/EarlyPreview.gif" style="width: 350px;"> -> B.<img src="img/ReadMe/FinishedPreview.gif" style="width: 350px;"> 
 
 ### A. Character & Movement Tests 1, B. Custom Character Test 2
-A.-><img src="img/screenvid3.gif" style="width: 350px;"> -> B.<img src="img/screenvid4.gif" style="width: 350px;"> 
+A.-><img src="img/ReadMe/screenvid3.gif" style="width: 350px;"> -> B.<img src="img/ReadMe/screenvid4.gif" style="width: 350px;"> 
 
 ### Background (work in progress)
-<img src="img/backgroundPreview.jpg" style="width: 100%;">
+<img src="img/ReadMe/backgroundPreview.jpg" style="width: 100%;">
 
 ### Foreground Buildings (work in progress)
-<img src="img/foregroundBuildingspreview.gif" style="width: 1000px;">   
+<img src="img/ReadMe/foregroundBuildingspreview.gif" style="width: 1000px;">   
 
 
 
