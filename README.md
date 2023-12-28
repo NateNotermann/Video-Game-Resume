@@ -94,41 +94,42 @@ Add Parallax Scroll to all elements - Done
 Scrolling Win scenario - Rework code
 Add Death Pits - Done
 
-Place All Platforms - TODO 
-
-## Game Boy Frame & Buttons
-Add controller & keyboard buttons to the Game Boy frame.
-Make controller & keyboard buttons react when pressed.
-
 
 #### Custom Pixel Art
 Custom Player Sprites -- **In Progress**
     A. Sprite Standing Right - Done
-    B. Sprite Standing Left - **In Progress**
-    C. Sprite Running Right
-    D. Sprite Running Left
-    E. Sprite Jumping Right
-    F. Sprite Jumping Left
+    B. Sprite Standing Left - Done
+    C. Sprite Running Right - Done
+    D. Sprite Running Left - Done
+    E. Sprite Jumping Right <-------------------------- in progress   
+    F. Sprite Jumping Left  <-------------------------- in progress   
 
 
-Custom Building Background Art    
-    A. Custom Sky Background   Redo with 1080p Height <-------------------------- in progress
-    B. Custom Far Buildings    <-------------------------- in progress
-    C. Custom Close Building Animations   <-------------------------- in progress
-        1. MCTC - Done
-        2. Restaurants - maybe..
-        3. Coyote 
-        4. CBRE
-        5. Prime
-        6. HGA
-    D. Add collision descriptions and highlights to Main buildings.
-    E. Add light up arrow pointing where to go.
+Custom Building Background Art      
+    A. Custom Sky Background   Redo with 1080p Height <-------------------------- in progress  
+    B. Custom Far Buildings    <-------------------------- in progress  
+    C. Custom Close Building Animations   <-------------------------- in progress  
+        1. MCTC - Done  
+        <!-- 2. Restaurants - maybe..   -->
+        2. Coyote   
+        3. CBRE - Done  
+        4. Prime  
+        5. HGA  
+    D. Add collision descriptions and highlights to Main buildings.   
+    E. Add light up arrow pointing where to go.   
 
-        
-Moving Clouds Custom Art - Done 
-    Add more clouds <-------------------------- in progress
+Custom Element Art   
 Custom Platform Art - Done  
+Moving Clouds Custom Art - Done  
+    Add more clouds & make scroll with player <-------------------------- in progress  
 
+
+## Game Boy Frame & Buttons  <---- in progress  
+Add controller & keyboard buttons to the Game Boy frame.  <-------------------------- in progress  
+Make controller & keyboard buttons react when pressed.    <-------------------------- in progress  
+
+
+Place More/All Platforms <-------------------------- in progress    
 
 #### Final Steps      
 Add javascript sound effects from other repo   
