@@ -44,6 +44,8 @@ const playerMovement = 10 //  amount player moves left and right
 const platformWidth = 579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 580
 const playerSize = 2 // used when referencing height in player class
+const buildingSize = 1.5
+const buildingSize2 = 2
 let lastKey
 let playerWidth = 66
 let playerHeight = 150

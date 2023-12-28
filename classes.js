@@ -152,9 +152,9 @@ class Building {
             x: x, //1500,
             y: y
         }
-        this.width = w //650 //default width
-        this.height = h //468 //default height
-        this.currentCropWidth = 250
+        this.width = w*buildingSize2 //650 //default width
+        this.height = h*buildingSize2 //468 //default height
+        this.currentCropWidth = 250*buildingSize2
 
         this.image = image
         this.frames = 0
@@ -192,9 +192,10 @@ class Building2 {
             x: x, //1500,
             y: y //canvas.height - 468
         }
-        this.width = 650 //w //650 //default width
-        this.height = 468 //h //468 //default height
-        this.currentCropWidth = 650
+        // -- ACTUAL Building size is relative to the actual image file size/dimensions. -- //
+        this.width = 650*buildingSize //w //650 //default width // Added *2 on 12/27/23
+        this.height = 468*buildingSize //h //468 //default height // Added *2 on 12/27/23
+        this.currentCropWidth = 650*buildingSize
         // this.image = MCTC
         this.frames = 0
         this.currentSprite = MCTC
