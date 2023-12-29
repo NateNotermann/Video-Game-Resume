@@ -152,9 +152,9 @@ class Building {
             x: x, //1500,
             y: y
         }
-        this.width = w*buildingSize2 //650 //default width
-        this.height = h*buildingSize2 //468 //default height
-        this.currentCropWidth = 250*buildingSize2
+        this.width = w*buildingSize //650 //default width
+        this.height = h*buildingSize //468 //default height
+        this.currentCropWidth = 250*buildingSize
 
         this.image = image
         this.frames = 0
@@ -193,9 +193,9 @@ class Building2 {
             y: y //canvas.height - 468
         }
         // -- ACTUAL Building size is relative to the actual image file size/dimensions. -- //
-        this.width = 650*buildingSize //w //650 //default width // Added *2 on 12/27/23
-        this.height = 468*buildingSize //h //468 //default height // Added *2 on 12/27/23
-        this.currentCropWidth = 650*buildingSize
+        this.width = 650*buildingSize2 //w //650 //default width // Added *2 on 12/27/23
+        this.height = 468*buildingSize2 //h //468 //default height // Added *2 on 12/27/23
+        this.currentCropWidth = 650*buildingSize2
         // this.image = MCTC
         this.frames = 0
         this.currentSprite = MCTC
@@ -245,6 +245,47 @@ class Hill {    // ------ Hill Class used for Hills ------
             this.position.y ) 
     }
 }
+
+
+// -------- BUILDING CLASS -------- //
+class Building3 {
+    constructor(x, y, w, h, image) { //  passing in x & y positions
+        this.position = {
+            x: x, //1500,
+            y: y
+        }
+        this.width =  1000 //w*buildingSize3 //650 //default width
+        this.height = 820 //h*buildingSize3 //468 //default height
+        this.currentCropWidth = 966 //*buildingSize3
+
+        this.image = image
+        this.frames = 0
+        this.currentSprite = HGA
+    }
+    draw() { 
+        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+        c.drawImage( // player sprite image
+            // this.image,
+            this.currentSprite, 
+            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+            0,                  // crop image Y
+            this.currentCropWidth,                // crop image Y
+            this.height, // 650,                // crop image X
+            this.position.x, 
+            this.position.y,
+            this.width,
+            this.height ) 
+    }
+
+    update() {
+            this.frames++;
+        if (this.frames > 29 ) {
+            this.frames = 0;
+        } 
+        this.draw()
+    } 
+} // End of Building1 Sprite
 
 
 // -------- BACKGROUND CLASS -------- //
