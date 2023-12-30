@@ -44,8 +44,9 @@ const playerMovement = 10 //  amount player moves left and right
 const platformWidth = 579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 580
 const playerSize = 2 // used when referencing height in player class
-const buildingSize = 1.5
-const buildingSize2 = 2
+const buildingSize = 2
+const buildingSize2 = 1.5
+const buildingSize3 = 2
 let lastKey
 let playerWidth = 66
 let playerHeight = 150
@@ -86,9 +87,12 @@ spriteStandRight.src = './img/spriteStandRight.png'
 const MCTC = new Image()   // spriteStandRight Image - Dimensions
 MCTC.src = './img/MCTC LONG.png'
 
-
 const CBRE = new Image()   // spriteStandRight Image - Dimensions
 CBRE.src = './img/CBRE LONG.png'
+
+const HGA = new Image()   // spriteStandRight Image - Dimensions
+HGA.src = './img/HGA Long.png'
+
 // -------- IMAGE VARIABLES -------- //
 
 // -------- GAMEPAD VARIABLES -------- //
@@ -120,6 +124,7 @@ let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] //
 let clouds = [] //new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
 let building1 = []
 let building2 = []
+let building3 = []
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
@@ -149,13 +154,16 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
     new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
     new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
     new Platform({x: (platformWidth * 2), y: canvas.height - groundPosition, image: platformImage}), // Ground 3
-    new Platform({x: (platformWidth* 3) + 100, y: canvas.height - groundPosition, image: platformImage}), // Ground 4
-    new Platform({x: (platformWidth * 4) + 99, y: canvas.height - groundPosition, image: platformImage}), // Ground 5
-    new Platform({x: platformWidth* 6, y: canvas.height - 300, image: platformImage}), // Platform 3
+    new Platform({x: (platformWidth* 3), y: canvas.height - groundPosition, image: platformImage}), // Ground 4
+    new Platform({x: (platformWidth * 4), y: canvas.height - groundPosition, image: platformImage}), // Ground 5
+    new Platform({x: (platformWidth * 5), y: canvas.height - groundPosition, image: platformImage}), // Ground 6
+    new Platform({x: platformWidth* 6, y: canvas.height - 300, image: platformImage}), // Platform 7
+    new Platform({x: platformWidth* 7, y: canvas.height - 300, image: platformImage}), // Platform 8
 ];
 
 building1 = [ new Building2(800, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
 building2 = [ new Building(2500, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
+building3 = [ new Building3(3500, canvas.height - HGA.height - platformHeight-165, 250, 422, HGA)] // CBRE (x,y,w,h,image,)
 // building3 = [ new Building(1200, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 // building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
 
@@ -207,6 +215,10 @@ function animate() {
     }) 
     building2.forEach(building => { // loop through array of building2
         building.draw()     // ------ DRAW building2
+        building.update()
+    }) 
+    building3.forEach(building => { // loop through array of building2
+        building.draw()     // ------ DRAW building3
         building.update()
     }) 
     hills.forEach(hill => { // loop through array of Hills
@@ -285,10 +297,13 @@ function animate() {
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x -= playerMovement
             });
-            building1.forEach(building => { // ---- HILL SCROLL ----
+            building1.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
-            building2.forEach(building => { // ---- HILL SCROLL ----
+            building2.forEach(building => { // ---- building SCROLL ----
+                building.position.x -= (playerMovement)
+            });
+            building3.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
             hills.forEach(hill => { // ---- HILL SCROLL ----
@@ -312,6 +327,9 @@ function animate() {
                 building.position.x += (playerMovement)
             });
             building2.forEach(building => { // ---- Building SCROLL ----
+                building.position.x += (playerMovement)
+            });
+            building3.forEach(building => { // ---- Building SCROLL ----
                 building.position.x += (playerMovement)
             });
             hills.forEach(hill => { // // ---- HILL SCROLL ----
