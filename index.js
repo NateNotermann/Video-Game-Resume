@@ -430,7 +430,8 @@ function animate() {
                 //     console.log("stop1");
                 // } 
         }
-
+        
+        // ---- SIDE COLLISION ---- //
         if (
             player.position.x < platform.position.x + platform.width // player left plat right
             && player.position.x + player.width > platform.position.x   // player right plat left 
@@ -458,6 +459,9 @@ function animate() {
             }  
                 
             }
+        // ---- SIDE COLLISION ---- //
+
+
         // player overlaps left and right sides with the sides of a platform
         // if ( 
         //     // player RIGHT side overlap with platform LEFT side 
