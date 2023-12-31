@@ -37,12 +37,12 @@ function tests() {
 tests();
 
 // global variables. 
-const gravity = 0.5
+const gravity = 2
 const floor = 0 //50 // pixel from the bottom player stops at
-const jump = 15 // amount player should jump
+const jump = 35 // amount player should jump
 const playerMovement = 10 //  amount player moves left and right
 const platformWidth = 579 // actually 580 but leaves 1px gap if 580
-const platformHeight = 125 // actually 580 but leaves 1px gap if 580
+const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
 const playerSize = 2 // used when referencing height in player class
 const buildingSize = 2
 const buildingSize2 = 1.5
@@ -55,6 +55,11 @@ let scrollOffset = 0
 let scrollOffsetUp = 0
 let time = 1
 let animateRunning = false
+let glowMCTC = false
+let glowCOYOTE = false
+let glowCBRE = false
+let glowPRIME = false
+let glowHGA = false
 
 // -------- IMAGE VARIABLES --------
 const platformImage = new Image()   // image = platform image - Dimensions
@@ -157,10 +162,10 @@ backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, i
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
     new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
     new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
-    new Platform({x: (platformWidth * 2), y: canvas.height - groundPosition-500, image: platformImage}), // Ground 3
-    new Platform({x: (platformWidth* 3), y: canvas.height - groundPosition, image: platformImage}), // Ground 4
-    new Platform({x: (platformWidth * 4), y: canvas.height - groundPosition, image: platformImage}), // Ground 5
-    new Platform({x: (platformWidth * 5), y: canvas.height - groundPosition, image: platformImage}), // Ground 6
+    new Platform({x: platformWidth * 2, y: canvas.height - groundPosition*3, image: platformImage}), // Ground 3
+    new Platform({x: platformWidth* 3, y: canvas.height - groundPosition*2, image: platformImage}), // Ground 4
+    new Platform({x: platformWidth * 4, y: canvas.height - groundPosition, image: platformImage}), // Ground 5
+    new Platform({x: platformWidth * 5, y: canvas.height - groundPosition, image: platformImage}), // Ground 6
     new Platform({x: platformWidth* 6, y: canvas.height - 125, image: platformImage}), // Platform 7
     new Platform({x: platformWidth* 7, y: canvas.height - 125, image: platformImage}), // Platform 8
     new Platform({x: platformWidth* 8, y: canvas.height - 125, image: platformImage}), // Platform 9
@@ -169,6 +174,11 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580�
     new Platform({x: platformWidth* 11, y: canvas.height - 125, image: platformImage}), // Platform 12
     new Platform({x: platformWidth* 12, y: canvas.height - 125, image: platformImage}), // Platform 13
     new Platform({x: platformWidth* 13, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 14, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 15, y: canvas.height - 125*2, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 16.5, y: canvas.height - 125*2, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 18, y: canvas.height - 125*3, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 19.5, y: canvas.height - 125, image: platformImage}), // Platform 14
 ];
 
 buildingMCTC = [ new BuildingMCTC(525, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
@@ -404,23 +414,162 @@ function animate() {
     
     // ------ PLATFORM COLLISION DETECTION ------
     platforms.forEach(platform => { 
-        if (//player bottom is LESS than platform top
+        if (//player bottom is <= than platform top
             player.position.y + player.height <= platform.position.y
-            // player bottom overlap with platform top side. (Player lands on platform)
+            // player bottom + player Velocity >= with platform top side. (Player lands on platform)
             && player.position.y + player.height + player.velocity.y >= platform.position.y
             //  // players left side overlap with platform right side
             && player.position.x <= platform.position.x + platform.width 
             //  // players right side overlap with platform left side
             && player.position.x + player.width >= platform.position.x 
-
+            // // players top overlap with platform bottom (Players head is under but still colliding with platform bottom)
             && player.position.y + player.velocity.y <= platform.position.y + platform.height
             ) 
-            {player.velocity.y = 0 
-                console.log("don't fall");
+            {   
+                player.velocity.y = 0   // player does not fall
+                // if (
+                   
+                //     player.position.y + player.height <= platform.position.y //player bottom is <= than platform top
+                //     && keys.right.pressed
+                //     //  // players left side overlap with platform right side
+                //     && player.position.x <= platform.position.x + platform.width 
+                //     //  // players right side overlap with platform left side
+                //     && player.position.x + player.width >= platform.position.x 
+                //     ) {
+                //     player.velocity.x = 0 
+                //     console.log("stop1");
+                // } 
         }
+
+        // ---- SIDE COLLISION ---- //
+        // if (
+        //     player.position.x < platform.position.x + platform.width // player left plat right
+        //     && player.position.x + player.width > platform.position.x   // player right plat left 
+        //     && player.position.y < platform.position.y + platform.height // player top UNDER plat bottom
+        //     && player.position.y + player.height > platform.position.y  // player bottom ABOVE plat top 
+        //     // && keys.right.pressed
+        // ) {
+            
+        //     if (keys.right.pressed && keys.left.pressed ) {
+        //         player.velocity.x = 0
+        //         console.log( "test moving out of collision");
+        //     } else if (keys.right.pressed  
+        //         && player.position.x + player.width > platform.position.x // player right > plat left 
+        //         ) { 
+        //         player.velocity.x = -15
+        //         // player.position.x = player.position.x -15
+        //         console.log("Collide Right");
+        //     } else if (keys.left.pressed 
+        //         && player.position.x < platform.position.x + platform.width // player left < plat right
+        //         ) { 
+
+        //             player.velocity.x = +15
+        //         // player.position.x = player.position.x +15
+        //         console.log("collide left");
+        //     }  
+                
+        //     }
+        // ---- SIDE COLLISION ---- //
+
+
+        
+
+        // player overlaps left and right sides with the sides of a platform
+        // if ( 
+        //     // player RIGHT side overlap with platform LEFT side 
+        //     player.position.x + playerWidth.width + player.velocity.x >= platform.position.x 
+        //     // player LEFT side overlap with platform RIGHT side 
+        //     && player.position.x + player.velocity.x <= platform.position.x + platform.width 
+        // ) 
+
+        // player RIGHT >= platform left  AND   player LEFT Less than platform left
+        // if (player.position.x + player.width >= platform.position.x 
+        //     // player LEFT < 
+        //     // && player.position < platform.position.x
+        //     // Right key is pressed
+        //     && keys.right.pressed
+        //     && player.velocity.y <= 0
+
+        //     ) 
+        //     {
+        //     player.velocity.x = 0
+        //     console.log("stop");
+        // } 
+        // // else if (player.position.x < platform.position.x + platform.width && player.position.x + player.width > platform.position.x + platform.width) {
+        //     player.velocity.x = 0
+        // }
+        // {
+        //     player.velocity.x = 0
+        //     console.log('STOP!');
+        // }
     })
 
     
+    // building MCTC
+    buildingMCTC.forEach(buildingMCTC => {
+        if (
+            player.position.x < buildingMCTC.position.x + buildingMCTC.width // player left plat right
+            && player.position.x + player.width > buildingMCTC.position.x   // player right plat left 
+            && player.position.y < buildingMCTC.position.y + buildingMCTC.height // player top UNDER plat bottom
+            && player.position.y + player.height > buildingMCTC.position.y  // player bottom ABOVE plat top 
+        ) {
+            glowMCTC = true
+        } else {
+            glowMCTC = false
+        }
+    })
+    //building CBRE
+    buildingCBRE.forEach(buildingCBRE => {
+        if (
+            player.position.x < buildingCBRE.position.x + buildingCBRE.width // player left plat right
+            && player.position.x + player.width > buildingCBRE.position.x   // player right plat left 
+            && player.position.y < buildingCBRE.position.y + buildingCBRE.height // player top UNDER plat bottom
+            && player.position.y + player.height > buildingCBRE.position.y  // player bottom ABOVE plat top 
+        ) {
+            glowCBRE = true
+        } else {
+            glowCBRE = false
+        }
+    })
+    //buildingCOYOTE
+    buildingCOYOTE.forEach(buildingCOYOTE => {
+        if (
+            player.position.x < buildingCOYOTE.position.x + buildingCOYOTE.width // player left plat right
+            && player.position.x + player.width > buildingCOYOTE.position.x   // player right plat left 
+            && player.position.y < buildingCOYOTE.position.y + buildingCOYOTE.height // player top UNDER plat bottom
+            && player.position.y + player.height > buildingCOYOTE.position.y  // player bottom ABOVE plat top 
+        ) {
+            glowCOYOTE = true
+        } else {
+            glowCOYOTE = false
+        }
+    })
+    //buildingPRIME
+    buildingPRIME.forEach(buildingPRIME => {
+        if (
+            player.position.x < buildingPRIME.position.x + buildingPRIME.width // player left plat right
+            && player.position.x + player.width > buildingPRIME.position.x   // player right plat left 
+            && player.position.y < buildingPRIME.position.y + buildingPRIME.height // player top UNDER plat bottom
+            && player.position.y + player.height > buildingPRIME.position.y  // player bottom ABOVE plat top 
+        ) {
+            glowPRIME = true
+        } else {
+            glowPRIME= false
+        }
+    })
+    //buildingHGA
+    buildingHGA.forEach(buildingHGA => {
+        if (
+            player.position.x < buildingHGA.position.x + buildingHGA.width // player left plat right
+            && player.position.x + player.width > buildingHGA.position.x   // player right plat left 
+            && player.position.y < buildingHGA.position.y + buildingHGA.height // player top UNDER plat bottom
+            && player.position.y + player.height > buildingHGA.position.y  // player bottom ABOVE plat top 
+        ) {
+            glowHGA = true
+        } else {
+            glowHGA = false
+        }
+    })
         // if (//player bottom is HIGHER than platform top
         //     player.position.y + player.height <= platformTwo.position.y
         //     // player bottom overlap with platform top side. (Player lands on platform)
@@ -527,13 +676,17 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
             break
         case 87:        // W
             // console.log('Jump/W');
-            player.velocity.y += - jump // subtract jump level
-            keys.jump.pressed = true
-            break
+            if ( player.velocity.y == 0 ) {
+                player.velocity.y += - jump // subtract jump level
+                keys.jump.pressed = true           
+            }
+            break 
         case 32:        // Space
             // console.log('Jump/Space');
-            player.velocity.y += - jump // subtract jump level
-            keys.jump.pressed = true
+            if (player.velocity.y == 0 ){
+                player.velocity.y += - jump // subtract jump level
+                keys.jump.pressed = true
+            } 
             break
     }
     // console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed, 'jump pressed:', keys.jump.pressed);
