@@ -157,7 +157,7 @@ backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, i
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
     new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
     new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
-    new Platform({x: (platformWidth * 2), y: canvas.height - groundPosition-200, image: platformImage}), // Ground 3
+    new Platform({x: (platformWidth * 2), y: canvas.height - groundPosition, image: platformImage}), // Ground 3
     new Platform({x: (platformWidth* 3), y: canvas.height - groundPosition, image: platformImage}), // Ground 4
     new Platform({x: (platformWidth * 4), y: canvas.height - groundPosition, image: platformImage}), // Ground 5
     new Platform({x: (platformWidth * 5), y: canvas.height - groundPosition, image: platformImage}), // Ground 6
@@ -599,13 +599,17 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
             break
         case 87:        // W
             // console.log('Jump/W');
-            player.velocity.y += - jump // subtract jump level
-            keys.jump.pressed = true
-            break
+            if ( player.velocity.y == 0 ) {
+                player.velocity.y += - jump // subtract jump level
+                keys.jump.pressed = true           
+            }
+            break 
         case 32:        // Space
             // console.log('Jump/Space');
-            player.velocity.y += - jump // subtract jump level
-            keys.jump.pressed = true
+            if (player.velocity.y == 0 ){
+                player.velocity.y += - jump // subtract jump level
+                keys.jump.pressed = true
+            } 
             break
     }
     // console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed, 'jump pressed:', keys.jump.pressed);
