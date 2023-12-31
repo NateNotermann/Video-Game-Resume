@@ -157,7 +157,7 @@ backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, i
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
     new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
     new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
-    new Platform({x: (platformWidth * 2), y: canvas.height - groundPosition-500, image: platformImage}), // Ground 3
+    new Platform({x: (platformWidth * 2), y: canvas.height - groundPosition-200, image: platformImage}), // Ground 3
     new Platform({x: (platformWidth* 3), y: canvas.height - groundPosition, image: platformImage}), // Ground 4
     new Platform({x: (platformWidth * 4), y: canvas.height - groundPosition, image: platformImage}), // Ground 5
     new Platform({x: (platformWidth * 5), y: canvas.height - groundPosition, image: platformImage}), // Ground 6
@@ -404,20 +404,88 @@ function animate() {
     
     // ------ PLATFORM COLLISION DETECTION ------
     platforms.forEach(platform => { 
-        if (//player bottom is LESS than platform top
+        if (//player bottom is <= than platform top
             player.position.y + player.height <= platform.position.y
-            // player bottom overlap with platform top side. (Player lands on platform)
+            // player bottom + player Velocity >= with platform top side. (Player lands on platform)
             && player.position.y + player.height + player.velocity.y >= platform.position.y
             //  // players left side overlap with platform right side
             && player.position.x <= platform.position.x + platform.width 
             //  // players right side overlap with platform left side
             && player.position.x + player.width >= platform.position.x 
-
+            // // players top overlap with platform bottom (Players head is under but still colliding with platform bottom)
             && player.position.y + player.velocity.y <= platform.position.y + platform.height
             ) 
-            {player.velocity.y = 0 
-                console.log("don't fall");
+            {   
+                player.velocity.y = 0   // player does not fall
+                // if (
+                   
+                //     player.position.y + player.height <= platform.position.y //player bottom is <= than platform top
+                //     && keys.right.pressed
+                //     //  // players left side overlap with platform right side
+                //     && player.position.x <= platform.position.x + platform.width 
+                //     //  // players right side overlap with platform left side
+                //     && player.position.x + player.width >= platform.position.x 
+                //     ) {
+                //     player.velocity.x = 0 
+                //     console.log("stop1");
+                // } 
         }
+
+        if (
+            player.position.x < platform.position.x + platform.width // player left plat right
+            && player.position.x + player.width > platform.position.x   // player right plat left 
+            && player.position.y < platform.position.y + platform.height // player top UNDER plat bottom
+            && player.position.y + player.height > platform.position.y  // player bottom ABOVE plat top 
+            // && keys.right.pressed
+        ) {
+            
+            if (keys.right.pressed && keys.left.pressed ) {
+                player.velocity.x = 0
+                console.log( "test moving out of collision");
+            } else if (keys.right.pressed  
+                && player.position.x + player.width > platform.position.x // player right > plat left 
+                ) { 
+                player.velocity.x = -15
+                // player.position.x = player.position.x -15
+                console.log("Collide Right");
+            } else if (keys.left.pressed 
+                && player.position.x < platform.position.x + platform.width // player left < plat right
+                ) { 
+
+                    player.velocity.x = +15
+                // player.position.x = player.position.x +15
+                console.log("collide left");
+            }  
+                
+            }
+        // player overlaps left and right sides with the sides of a platform
+        // if ( 
+        //     // player RIGHT side overlap with platform LEFT side 
+        //     player.position.x + playerWidth.width + player.velocity.x >= platform.position.x 
+        //     // player LEFT side overlap with platform RIGHT side 
+        //     && player.position.x + player.velocity.x <= platform.position.x + platform.width 
+        // ) 
+
+        // player RIGHT >= platform left  AND   player LEFT Less than platform left
+        // if (player.position.x + player.width >= platform.position.x 
+        //     // player LEFT < 
+        //     // && player.position < platform.position.x
+        //     // Right key is pressed
+        //     && keys.right.pressed
+        //     && player.velocity.y <= 0
+
+        //     ) 
+        //     {
+        //     player.velocity.x = 0
+        //     console.log("stop");
+        // } 
+        // // else if (player.position.x < platform.position.x + platform.width && player.position.x + player.width > platform.position.x + platform.width) {
+        //     player.velocity.x = 0
+        // }
+        // {
+        //     player.velocity.x = 0
+        //     console.log('STOP!');
+        // }
     })
 
     
