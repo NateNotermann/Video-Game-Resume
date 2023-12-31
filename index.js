@@ -176,9 +176,9 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
     new Platform({x: platformWidth* 13, y: canvas.height - 125, image: platformImage}), // Platform 14
     new Platform({x: platformWidth* 14, y: canvas.height - 125, image: platformImage}), // Platform 14
     new Platform({x: platformWidth* 15, y: canvas.height - 125*2, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 16, y: canvas.height - 125, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 17, y: canvas.height - 125, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 18, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 16.5, y: canvas.height - 125*2, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 18, y: canvas.height - 125*3, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 19.5, y: canvas.height - 125, image: platformImage}), // Platform 14
 ];
 
 buildingMCTC = [ new BuildingMCTC(525, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))

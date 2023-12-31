@@ -101,8 +101,8 @@ Custom Player Sprites -- **In Progress**
     B. Sprite Standing Left - Done
     C. Sprite Running Right - Done
     D. Sprite Running Left - Done
-    E. Sprite Jumping Right <-------------------------- in progress   
-    F. Sprite Jumping Left  <-------------------------- in progress   
+    E. Sprite Jumping Right <-------------------------- maybe  
+    F. Sprite Jumping Left  <-------------------------- maybe  
 
 
 Custom Building Background Art      
@@ -111,11 +111,12 @@ Custom Building Background Art
     C. Custom Close Building Animations   <-------------------------- in progress  
         1. MCTC - Done  
         <!-- 2. Restaurants - maybe..   -->
-        2. Coyote   
+        2. Coyote - Done
         3. CBRE - Done  
-        4. Prime  
-        5. HGA  
-    D. Add collision descriptions and highlights to Main buildings.   
+        4. Prime - Done
+        5. HGA - Done
+    D. Add collision descriptions Main buildings.   <-------------------------- in progress  
+    D. Add collision glow effect to Main buildings. - Done
     E. Add light up arrow pointing where to go.   
 
 Custom Element Art   
