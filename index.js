@@ -430,35 +430,35 @@ function animate() {
                 //     console.log("stop1");
                 // } 
         }
-        
-        // ---- SIDE COLLISION ---- //
-        if (
-            player.position.x < platform.position.x + platform.width // player left plat right
-            && player.position.x + player.width > platform.position.x   // player right plat left 
-            && player.position.y < platform.position.y + platform.height // player top UNDER plat bottom
-            && player.position.y + player.height > platform.position.y  // player bottom ABOVE plat top 
-            // && keys.right.pressed
-        ) {
-            
-            if (keys.right.pressed && keys.left.pressed ) {
-                player.velocity.x = 0
-                console.log( "test moving out of collision");
-            } else if (keys.right.pressed  
-                && player.position.x + player.width > platform.position.x // player right > plat left 
-                ) { 
-                player.velocity.x = -15
-                // player.position.x = player.position.x -15
-                console.log("Collide Right");
-            } else if (keys.left.pressed 
-                && player.position.x < platform.position.x + platform.width // player left < plat right
-                ) { 
 
-                    player.velocity.x = +15
-                // player.position.x = player.position.x +15
-                console.log("collide left");
-            }  
+        // ---- SIDE COLLISION ---- //
+        // if (
+        //     player.position.x < platform.position.x + platform.width // player left plat right
+        //     && player.position.x + player.width > platform.position.x   // player right plat left 
+        //     && player.position.y < platform.position.y + platform.height // player top UNDER plat bottom
+        //     && player.position.y + player.height > platform.position.y  // player bottom ABOVE plat top 
+        //     // && keys.right.pressed
+        // ) {
+            
+        //     if (keys.right.pressed && keys.left.pressed ) {
+        //         player.velocity.x = 0
+        //         console.log( "test moving out of collision");
+        //     } else if (keys.right.pressed  
+        //         && player.position.x + player.width > platform.position.x // player right > plat left 
+        //         ) { 
+        //         player.velocity.x = -15
+        //         // player.position.x = player.position.x -15
+        //         console.log("Collide Right");
+        //     } else if (keys.left.pressed 
+        //         && player.position.x < platform.position.x + platform.width // player left < plat right
+        //         ) { 
+
+        //             player.velocity.x = +15
+        //         // player.position.x = player.position.x +15
+        //         console.log("collide left");
+        //     }  
                 
-            }
+        //     }
         // ---- SIDE COLLISION ---- //
 
 
