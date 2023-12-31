@@ -88,36 +88,36 @@ Moved Player 2 movement into player one. -- Done
 
 
 #### Platforms
-Add Platform collision functionality -- Done
-Add scroll animation to the background - Done
-Add Parallax Scroll to all elements - Done
-Scrolling Win scenario - Rework code
-Add Death Pits - Done
+Add Platform collision functionality -- Done  
+Add scroll animation to the background - Done  
+Add Parallax Scroll to all elements - Done  
+Scrolling Win scenario - Rework code  
+Add Death Pits - Done  
 
 
 #### Custom Pixel Art
-Custom Player Sprites -- **In Progress**
-    A. Sprite Standing Right - Done
-    B. Sprite Standing Left - Done
-    C. Sprite Running Right - Done
-    D. Sprite Running Left - Done
-    E. Sprite Jumping Right <-------------------------- maybe  
-    F. Sprite Jumping Left  <-------------------------- maybe  
+Custom Player Sprites - Done 
+    A. Sprite Standing Right - Done   
+    B. Sprite Standing Left - Done   
+    C. Sprite Running Right - Done   
+    D. Sprite Running Left - Done   
+    E. Sprite Jumping Right <-------------------------- maybe    
+    F. Sprite Jumping Left  <-------------------------- maybe    
 
 
 Custom Building Background Art      
     A. Custom Sky Background   Redo with 1080p Height <-------------------------- in progress  
     B. Custom Far Buildings    <-------------------------- in progress  
-    C. Custom Close Building Animations   <-------------------------- in progress  
-        1. MCTC - Done  
+    C. Custom main Buildings Animations - Done   
+        1. MCTC - Done    
         <!-- 2. Restaurants - maybe..   -->
-        2. Coyote - Done
-        3. CBRE - Done  
-        4. Prime - Done
-        5. HGA - Done
-    D. Add collision descriptions Main buildings.   <-------------------------- in progress  
-    D. Add collision glow effect to Main buildings. - Done
-    E. Add light up arrow pointing where to go.   
+        2. Coyote - Done  
+        3. CBRE - Done    
+        4. Prime - Done  
+        5. HGA - Done  
+    D. Add collision descriptions Main buildings. - Done  
+    D. Add collision glow effect to Main buildings. - Done  
+    E. Add light up arrow pointing where to go. <-------------------------- in progress  
 
 Custom Element Art   
 Custom Platform Art - Done  
