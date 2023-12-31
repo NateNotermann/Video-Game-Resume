@@ -163,6 +163,15 @@ class BuildingMCTC {
     draw() { 
         // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
         // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+
+        // Apply a glowing effect using shadow
+        if (glowMCTC) {
+            c.shadowColor = 'white'; // Set the color of the glow
+            c.shadowBlur = 50; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+        }
+
         c.drawImage( // player sprite image
             // this.image,
             this.currentSprite, 
@@ -173,7 +182,13 @@ class BuildingMCTC {
             this.position.x, 
             this.position.y,
             this.width,
-            this.height ) 
+            this.height 
+            )     
+            // this turns off glow for any/all other canvas element
+            c.shadowColor = 'transparent';
+            c.shadowBlur = 0;
+            c.shadowOffsetX = 0;
+            c.shadowOffsetY = 0;
     }
 
     update() {
@@ -186,7 +201,59 @@ class BuildingMCTC {
 } // End of Building2 Sprite
 
 
-// -------- BUILDING COYOTE -------- //
+// -------- BUILDING COYOTE CLASS -------- //
+class BuildingCOYOTE  {
+    constructor(x, y, w, h, image) { //  passing in x & y positions
+        this.position = {
+            x: x, //1500,
+            y: y
+        }
+        this.width =  1550 //w*buildingSize3 //650 //default width
+        this.height = 495 //h*buildingSize3 //468 //default height
+        this.currentCropWidth = 1550 //*buildingSize3
+
+        this.image = image
+        this.frames = 0
+        this.currentSprite = COYOTE 
+    }
+    draw() { 
+        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+                
+        // Apply a glowing effect using shadow
+            if (glowCOYOTE) {
+                c.shadowColor = 'white'; // Set the color of the glow
+                c.shadowBlur = 50; // Set the blur radius
+                c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+                c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+            }
+
+        c.drawImage( // player sprite image
+            // this.image,
+            this.currentSprite, 
+            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+            0,                  // crop image Y
+            this.currentCropWidth,                // crop image Y
+            this.height, // 650,                // crop image X
+            this.position.x, 
+            this.position.y,
+            this.width,
+            this.height ) 
+            // Turn off glow effect 
+            c.shadowColor = 'transparent'; // Set the color of the glow
+            c.shadowBlur = 0; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+    }
+
+    update() {
+            this.frames++;
+        if (this.frames > 0 ) {
+            this.frames = 0;
+        } 
+        this.draw()
+    } 
+} // End of Building1 Sprite
 
 // -------- BUILDING CLASS -------- //
 class BuildingCBRE {
@@ -206,6 +273,14 @@ class BuildingCBRE {
     draw() { 
         // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
         // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+
+        // Apply a glowing effect using shadow
+        if (glowCBRE) {
+            c.shadowColor = 'white'; // Set the color of the glow
+            c.shadowBlur = 50; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+        }
         c.drawImage( // player sprite image
             // this.image,
             this.currentSprite, 
@@ -217,6 +292,13 @@ class BuildingCBRE {
             this.position.y,
             this.width,
             this.height ) 
+        // Turn off glow effect 
+        if (glowCBRE) {
+            c.shadowColor = 'transparent'; // Set the color of the glow
+            c.shadowBlur = 0; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+        }
     }
 
     update() {
@@ -248,6 +330,14 @@ class BuildingPRIME {
     draw() { 
         // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
         // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+
+         // Apply a glowing effect using shadow
+         if (glowPRIME) {
+            c.shadowColor = 'white'; // Set the color of the glow
+            c.shadowBlur = 50; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+        }
         c.drawImage( // player sprite image
             // this.image,
             this.currentSprite, 
@@ -258,7 +348,12 @@ class BuildingPRIME {
             this.position.x, 
             this.position.y,
             this.width,
-            this.height ) 
+            this.height )
+            // Turn off glow
+            c.shadowColor = 'transparent'; // Set the color of the glow
+            c.shadowBlur = 0; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
     }
 
     update() {
@@ -289,6 +384,14 @@ class BuildingHGA {
     draw() { 
         // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
         // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+
+        // Apply a glowing effect using shadow
+        if (glowHGA) {
+            c.shadowColor = 'white'; // Set the color of the glow
+            c.shadowBlur = 50; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+                }
         c.drawImage( // player sprite image
             // this.image,
             this.currentSprite, 
@@ -300,6 +403,11 @@ class BuildingHGA {
             this.position.y,
             this.width,
             this.height ) 
+            //Turn off glow            
+            c.shadowColor = 'transparent'; // Set the color of the glow
+            c.shadowBlur = 0; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
     }
 
     update() {
@@ -312,45 +420,7 @@ class BuildingHGA {
 } // End of Building1 Sprite
 
 
-// -------- BUILDING CLASS -------- //
-class BuildingCOYOTE  {
-    constructor(x, y, w, h, image) { //  passing in x & y positions
-        this.position = {
-            x: x, //1500,
-            y: y
-        }
-        this.width =  1550 //w*buildingSize3 //650 //default width
-        this.height = 495 //h*buildingSize3 //468 //default height
-        this.currentCropWidth = 1550 //*buildingSize3
 
-        this.image = image
-        this.frames = 0
-        this.currentSprite = COYOTE 
-    }
-    draw() { 
-        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
-        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
-        c.drawImage( // player sprite image
-            // this.image,
-            this.currentSprite, 
-            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
-            0,                  // crop image Y
-            this.currentCropWidth,                // crop image Y
-            this.height, // 650,                // crop image X
-            this.position.x, 
-            this.position.y,
-            this.width,
-            this.height ) 
-    }
-
-    update() {
-            this.frames++;
-        if (this.frames > 0 ) {
-            this.frames = 0;
-        } 
-        this.draw()
-    } 
-} // End of Building1 Sprite
 
 class Hill {    // ------ Hill Class used for Hills ------
     constructor({ x, y, image }) {
