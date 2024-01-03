@@ -48,6 +48,7 @@ const buildingSize = 2
 const buildingSize2 = 1.5
 const buildingSize3 = 2
 const backgroundWidth = 2560
+const skyWidth = 2559
 let lastKey
 let playerWidth = 66
 let playerHeight = 150
@@ -72,8 +73,11 @@ tallPlatform.src = './img/platformSmallTall.png'
 // const hillImage = new Image()   // Hill Image - Dimensions
 // hillImage.src = './img/hills.png'
 
+const skyImage = new Image()   // Hill Image - Dimensions
+skyImage.src = './img/Sky.jpg'
+
 const backgroundImage = new Image()   // Hill Image - Dimensions
-backgroundImage.src = './img/background.jpg'
+backgroundImage.src = './img/background.png'
 
 const midgroundImage = new Image()   // Hill Image - Dimensions
 midgroundImage.src = './img/midground.png'
@@ -141,6 +145,7 @@ let platformTwo = new PlatformTwo()// version 2 of platforms
 let platformTwos
 let platforms = []     // Array of Platforms
 let hills = []  //new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
+let sky = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let midgrounds = []    
 let foregrounds = []    
@@ -171,6 +176,13 @@ function init() {
 player = new Player() //  calling the "Player" class
 // platformTwos = [platformTwo] // -------Turning off 12/30/23
 // hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
+sky = [
+    new Sky({x:-skyWidth, y: 0, image: skyImage}),
+    new Sky({x:0, y: 0, image: skyImage}),
+    new Sky({x:skyWidth, y: 0, image: skyImage}),
+    new Sky({x:skyWidth*2, y: 0, image: skyImage}),
+]
+
 backgrounds = [
     new Background({x:0, y: 0, image: backgroundImage}),
     new Background({x:backgroundWidth, y: 0, image: backgroundImage}),
@@ -231,7 +243,9 @@ buildingHGA = [ new BuildingHGA(12500, canvas.height - HGA.height - platformHeig
 arrowArray = [ new ARROW({x: 800, y: canvas.height - ArrowPic.height - 110, image: ArrowPic})] // PRIME (x,y,w,h,image,)
 // building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
 
-clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
+clouds = [
+    // new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})
+];  
 }
 // -------- ELEMENT VARIABLES -------- //
 
@@ -263,6 +277,10 @@ function animate() {
     // c.fillStyle = 'blue'
     // c.fillRect(0, 0, canvas.width, canvas.height)
 
+    sky.forEach(sky => { // loop through array of Backgrounds
+        sky.position.x += (0.2 * time)
+        sky.draw() // ------ DRAW BACKGROUND
+    })
     backgrounds.forEach(background => { // loop through array of Backgrounds
         background.draw() // ------ DRAW BACKGROUND
     })
@@ -396,6 +414,9 @@ function animate() {
             hills.forEach(hill => { // ---- HILL SCROLL ----
                 hill.position.x -= (playerMovement/3)
             });
+            sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
+                sky.position.x -= (playerMovement/30)
+            });
             backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
                 background.position.x -= (playerMovement/8)
             });
@@ -436,6 +457,9 @@ function animate() {
             });
             hills.forEach(hill => { // // ---- HILL SCROLL ----
                 hill.position.x += (playerMovement/3)
+            });
+            sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
+                sky.position.x += (playerMovement/30)
             });
             backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
                 background.position.x += (playerMovement/8)

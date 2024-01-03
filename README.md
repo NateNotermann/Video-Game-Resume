@@ -107,8 +107,9 @@ Custom Player Sprites - Done
 
 Custom Building Background Art      
     A. Custom Sky Background, Redo with 1080p Height - Done  
-    B. Custom Far Buildings - Done 
-    C. Custom Middle Buildings <-------------------------- in progress  
+    B. Custom Background Buildings <-------------------------- in progress  
+    B. Custom Fore Buildings - Done 
+    C. Custom Middle Buildings - Done
     D. Custom main Buildings Animations - Done   
         1. MCTC - Done    
         <!-- 2. Restaurants - maybe..   -->
