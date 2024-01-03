@@ -40,7 +40,7 @@ tests();
 const gravity = 2
 const floor = 0 //50 // pixel from the bottom player stops at
 const jump = 35 // amount player should jump
-const playerMovement = 10 //  amount player moves left and right
+const playerMovement = 20 //  amount player moves left and right
 const platformWidth = 579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
 const playerSize = 2 // used when referencing height in player class
@@ -104,6 +104,9 @@ HGA.src = './img/HGA Long.png'
 const PRIME = new Image()   
 PRIME.src = './img/PRIME Long.png'
 
+const ArrowPic = new Image()   
+ArrowPic.src = './img/arrow.png'
+
 // -------- IMAGE VARIABLES -------- //
 
 // -------- GAMEPAD VARIABLES -------- //
@@ -138,6 +141,7 @@ let buildingCOYOTE  = []
 let buildingCBRE = []
 let buildingPRIME = []
 let buildingHGA = []
+let arrowArray = []
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
@@ -162,8 +166,8 @@ backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, i
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
     new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
     new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
-    new Platform({x: platformWidth * 2, y: canvas.height - groundPosition*3, image: platformImage}), // Ground 3
-    new Platform({x: platformWidth* 3, y: canvas.height - groundPosition*2, image: platformImage}), // Ground 4
+    new Platform({x: platformWidth * 2, y: canvas.height - groundPosition, image: platformImage}), // Ground 3
+    new Platform({x: platformWidth* 3, y: canvas.height - groundPosition, image: platformImage}), // Ground 4
     new Platform({x: platformWidth * 4, y: canvas.height - groundPosition, image: platformImage}), // Ground 5
     new Platform({x: platformWidth * 5, y: canvas.height - groundPosition, image: platformImage}), // Ground 6
     new Platform({x: platformWidth* 6, y: canvas.height - 125, image: platformImage}), // Platform 7
@@ -175,17 +179,24 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580�
     new Platform({x: platformWidth* 12, y: canvas.height - 125, image: platformImage}), // Platform 13
     new Platform({x: platformWidth* 13, y: canvas.height - 125, image: platformImage}), // Platform 14
     new Platform({x: platformWidth* 14, y: canvas.height - 125, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 15, y: canvas.height - 125*2, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 16.5, y: canvas.height - 125*2, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 18, y: canvas.height - 125*3, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 15, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 16, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 17, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 18, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 19, y: canvas.height - 125, image: platformImage}), // Platform 14
     new Platform({x: platformWidth* 19.5, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 21, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 22, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 23, y: canvas.height - 125, image: platformImage}), // Platform 14
 ];
 
-buildingMCTC = [ new BuildingMCTC(525, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
-buildingCOYOTE = [ new BuildingCOYOTE (2000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
-buildingCBRE = [ new BuildingCBRE(4000, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
-buildingPRIME = [ new BuildingPRIME(5000, canvas.height - PRIME.height - platformHeight, 250, 422, PRIME)] // HGA (x,y,w,h,image,)
-buildingHGA = [ new BuildingHGA(6000, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
+buildingMCTC = [ new BuildingMCTC(2500, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingCOYOTE = [ new BuildingCOYOTE (5000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
+buildingCBRE = [ new BuildingCBRE(7500, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
+buildingPRIME = [ new BuildingPRIME(10000, canvas.height - PRIME.height - platformHeight, 250, 422, PRIME)] // HGA (x,y,w,h,image,)
+buildingHGA = [ new BuildingHGA(12500, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
+
+arrowArray = [ new ARROW({x: 800, y: canvas.height - ArrowPic.height - 110, image: ArrowPic})] // PRIME (x,y,w,h,image,)
 // building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
 
 clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
@@ -247,6 +258,9 @@ function animate() {
         building.draw()     // ------ DRAW buildingHGA
         building.update()
     }) 
+    arrowArray.forEach(arrowArray => { // loop through array of Platforms
+        arrowArray.draw() // ------ DRAW PLATFORM
+    })
     hills.forEach(hill => { // loop through array of Hills
         hill.draw()     // ------ DRAW HILL
     }) 
@@ -338,6 +352,9 @@ function animate() {
             buildingHGA.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
+            arrowArray.forEach(arrowArray => { // ---- building SCROLL ----
+                arrowArray.position.x -= (playerMovement)
+            });
             hills.forEach(hill => { // ---- HILL SCROLL ----
                 hill.position.x -= (playerMovement/3)
             });
@@ -369,6 +386,9 @@ function animate() {
             });
             buildingHGA.forEach(building => { // ---- Building SCROLL ----
                 building.position.x += (playerMovement)
+            });
+            arrowArray.forEach(arrowArray => { // ---- Building SCROLL ----
+                arrowArray.position.x += (playerMovement)
             });
             hills.forEach(hill => { // // ---- HILL SCROLL ----
                 hill.position.x += (playerMovement/3)
