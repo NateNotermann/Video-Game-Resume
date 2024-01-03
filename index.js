@@ -64,7 +64,7 @@ let glowHGA = false
 
 // -------- IMAGE VARIABLES --------
 const platformImage = new Image()   // image = platform image - Dimensions
-platformImage.src = './img/platform.png'
+platformImage.src = './img/platform.jpg'
 
 const tallPlatform = new Image()   // image = platform image - Dimensions
 tallPlatform.src = './img/platformSmallTall.png'
