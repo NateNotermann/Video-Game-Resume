@@ -41,7 +41,7 @@ const gravity = 2
 const floor = 0 //50 // pixel from the bottom player stops at
 const jump = 35 // amount player should jump
 const playerMovement = 40 //  amount player moves left and right
-const platformWidth = 579 // actually 580 but leaves 1px gap if 580
+const platformWidth = 2500 //579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
 const playerSize = 2 // used when referencing height in player class
 const buildingSize = 2
@@ -74,6 +74,9 @@ tallPlatform.src = './img/platformSmallTall.png'
 
 const backgroundImage = new Image()   // Hill Image - Dimensions
 backgroundImage.src = './img/background.jpg'
+
+const midgroundImage = new Image()   // Hill Image - Dimensions
+midgroundImage.src = './img/midground.png'
 
 const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
 cloudImage.src = './img/cloud.png'
@@ -136,6 +139,7 @@ let platformTwos
 let platforms = []     // Array of Platforms
 let hills = []  //new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
 let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
+let midgrounds = []    
 let clouds = [] //new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
 let buildingMCTC = []
 let buildingCOYOTE  = []
@@ -167,8 +171,15 @@ backgrounds = [
     new Background({x:0, y: 0, image: backgroundImage}),
     new Background({x:backgroundWidth, y: 0, image: backgroundImage}),
     new Background({x:backgroundWidth*2, y: 0, image: backgroundImage})
-
 ] // Array of Backgrounds
+
+midgrounds = [ 
+    new Midground({x:0 , y: 1080-650-125, image: midgroundImage}),
+    new Midground({x:7500 , y: 1080-650-125, image: midgroundImage})
+    // {x:100 , y: 0, image: backgroundImage},
+    
+]
+
 
 // backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, image: backgroundImage})] // Array of Backgrounds
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
@@ -241,6 +252,9 @@ function animate() {
 
     backgrounds.forEach(background => { // loop through array of Backgrounds
         background.draw() // ------ DRAW BACKGROUND
+    })
+    midgrounds.forEach(midground => { // loop through array of midgrounds
+        midground.draw() // ------ DRAW BACKGROUND
     })
     clouds.forEach(cloud => { // loop through array of clouds
         cloud.position.x += (0.2 * time)
@@ -369,6 +383,9 @@ function animate() {
             backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
                 background.position.x -= (playerMovement/8)
             });
+            midgrounds.forEach(midground => { // ---- BACKGROUND SCROLL ----
+                midground.position.x -= (playerMovement/8)
+            });
             console.log('move = 0, but SCROLLING----R----');
             player.currentSprite = player.sprites.run.right
             player.currentCropWidth = player.sprites.run.cropWidth
@@ -403,6 +420,9 @@ function animate() {
             });
             backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
                 background.position.x += (playerMovement/8)
+            });
+            midgrounds.forEach(midground => { // ---- BACKGROUND SCROLL ----
+                midground.position.x += (playerMovement/8)
             });
             console.log('move = 0, but SCROLLING----L----');
         } else {
