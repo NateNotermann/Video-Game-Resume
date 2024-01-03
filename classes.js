@@ -524,3 +524,22 @@ class Midground {    // ---- Background Class used for Background Image ------
     }
     
 }
+
+// -------- FOREGROUND CLASS -------- //
+class Foreground {    // ---- Background Class used for Background Image ------
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width  //200
+        this.height = image.height //20
+    }
+    draw() {   
+        c.drawImage(this.image,  
+            this.position.x, 
+            this.position.y ) 
+    }
+    
+}
