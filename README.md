@@ -106,18 +106,19 @@ Custom Player Sprites - Done
 
 
 Custom Building Background Art      
-    A. Custom Sky Background   Redo with 1080p Height <-------------------------- in progress  
-    B. Custom Far Buildings    <-------------------------- in progress  
-    C. Custom main Buildings Animations - Done   
+    A. Custom Sky Background, Redo with 1080p Height - Done  
+    B. Custom Far Buildings - Done 
+    C. Custom Middle Buildings <-------------------------- in progress  
+    D. Custom main Buildings Animations - Done   
         1. MCTC - Done    
         <!-- 2. Restaurants - maybe..   -->
         2. Coyote - Done  
         3. CBRE - Done    
         4. Prime - Done  
         5. HGA - Done  
-    D. Add collision descriptions Main buildings. - Done  
-    D. Add collision glow effect to Main buildings. - Done  
-    E. Add light up arrow pointing where to go. <-------------------------- in progress  
+    E. Add collision descriptions Main buildings. - Done  
+    F. Add collision glow effect to Main buildings. - Done  
+    G. Add light up arrow pointing where to go. <-------------------------- in progress  
 
 Custom Element Art   
 Custom Platform Art - Done  
