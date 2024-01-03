@@ -179,13 +179,17 @@ backgrounds = [
 
 midgrounds = [ 
     new Midground({x:0 , y: 1080-650-125, image: midgroundImage}),
-    new Midground({x:7500 , y: 1080-650-125, image: midgroundImage})
+    new Midground({x:7500 , y: 1080-650-125, image: midgroundImage}),
+    new Midground({x:7500*2 , y: 1080-650-125, image: midgroundImage})
     // {x:100 , y: 0, image: backgroundImage},
 ]
 
 foregrounds = [ 
     new Foreground({x:0 , y: 1080-400-125, image: foregroundImage}),
-    new Foreground({x:4250 , y: 1080-400-125, image: foregroundImage})
+    new Foreground({x:4250 , y: 1080-400-125, image: foregroundImage}),
+    new Foreground({x:4250*2 , y: 1080-400-125, image: foregroundImage}),
+    new Foreground({x:4250*3 , y: 1080-400-125, image: foregroundImage}),
+    new Foreground({x:4250*4 , y: 1080-400-125, image: foregroundImage})
     // {x:100 , y: 0, image: backgroundImage},
 ]
 
@@ -396,7 +400,7 @@ function animate() {
                 background.position.x -= (playerMovement/8)
             });
             midgrounds.forEach(midground => { // ---- BACKGROUND SCROLL ----
-                midground.position.x -= (playerMovement/5)
+                midground.position.x -= (playerMovement/6)
             });
             foregrounds.forEach(foreground => { // ---- BACKGROUND SCROLL ----
                 foreground.position.x -= (playerMovement/2)
@@ -440,7 +444,7 @@ function animate() {
                 midground.position.x += (playerMovement/6)
             });
             foregrounds.forEach(foreground => { // ---- BACKGROUND SCROLL ----
-                foreground.position.x += (playerMovement/4)
+                foreground.position.x += (playerMovement/2)
             });
             console.log('move = 0, but SCROLLING----L----');
         } else {
