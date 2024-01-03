@@ -505,3 +505,4 @@ class ARROW {    // ------ Platform Class used for ground and all platforms. ---
         this.draw
     }
 }
+

@@ -40,13 +40,14 @@ tests();
 const gravity = 2
 const floor = 0 //50 // pixel from the bottom player stops at
 const jump = 35 // amount player should jump
-const playerMovement = 20 //  amount player moves left and right
+const playerMovement = 40 //  amount player moves left and right
 const platformWidth = 579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
 const playerSize = 2 // used when referencing height in player class
 const buildingSize = 2
 const buildingSize2 = 1.5
 const buildingSize3 = 2
+const backgroundWidth = 2560
 let lastKey
 let playerWidth = 66
 let playerHeight = 150
@@ -162,7 +163,14 @@ function init() {
 player = new Player() //  calling the "Player" class
 // platformTwos = [platformTwo] // -------Turning off 12/30/23
 // hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
-backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, image: backgroundImage})] // Array of Backgrounds
+backgrounds = [
+    new Background({x:0, y: 0, image: backgroundImage}),
+    new Background({x:backgroundWidth, y: 0, image: backgroundImage}),
+    new Background({x:backgroundWidth*2, y: 0, image: backgroundImage})
+
+] // Array of Backgrounds
+
+// backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, image: backgroundImage})] // Array of Backgrounds
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
     new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
     new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
