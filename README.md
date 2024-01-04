@@ -102,7 +102,7 @@ Custom Player Sprites - Done
 Custom Building Background Art      
     A. Custom Sky Background, Redo with 1080p Height - Done  
     B. Custom Background Buildings - Done   
-    C. Custom Middle Buildings - Done   <---------------------------- Make Fore ground taller   
+    C. Custom Middle Buildings - Done  
     D. Custom Fore Buildings - Done 
     E. Custom main Buildings Animations - Done   
         1. MCTC - Done    
@@ -119,7 +119,7 @@ Custom Platform Art- Done
 Moving Clouds Custom Art - Done  
 make scroll with player - Done  
 
-Add side collision OR add fall pits in there place <-------------------------- in progress  
+<!-- Add side collision OR add fall pits in there place <-------------------------- in progress   -->
 
 Job Descriptions <-------------------------- in progress  
 
