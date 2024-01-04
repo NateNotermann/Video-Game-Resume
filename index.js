@@ -67,6 +67,9 @@ let glowHGA = false
 const platformImage = new Image()   // image = platform image - Dimensions
 platformImage.src = './img/platform.jpg'
 
+const platformTwoImage = new Image()   // image = platform image - Dimensions
+platformTwoImage.src = './img/platformTwo.jpg'
+
 const tallPlatform = new Image()   // image = platform image - Dimensions
 tallPlatform.src = './img/platformSmallTall.png'
 
@@ -141,8 +144,7 @@ let animateLoop = false
 let player = new Player() //  calling the "Player" class
 player.draw()
 player.update()
-let platformTwo = new PlatformTwo()// version 2 of platforms
-let platformTwos
+let platformTwos = []
 let platforms = []     // Array of Platforms
 let hills = []  //new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
 let sky = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
@@ -174,7 +176,13 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 function init() {
 // -------- ELEMENT VARIABLES --------
 player = new Player() //  calling the "Player" class
-// platformTwos = [platformTwo] // -------Turning off 12/30/23
+platformTwos = [
+    new PlatformTwo({x:1000, y: 1080-250, image: platformTwoImage }),
+    new PlatformTwo({x:1000 + platformTwoImage.width , y: 1080-375, image: platformTwoImage }),
+    new PlatformTwo({x:1000 + (platformTwoImage.width * 2), y: 1080-500, image: platformTwoImage }),
+    new PlatformTwo({x:1000 + (platformTwoImage.width * 3), y: 1080-375, image: platformTwoImage }),
+    new PlatformTwo({x:1000 + (platformTwoImage.width * 4), y: 1080-250, image: platformTwoImage }),
+] 
 // hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
@@ -187,28 +195,26 @@ backgrounds = [
     new Background({x:0, y: 0, image: backgroundImage}),
     new Background({x:backgroundWidth, y: 0, image: backgroundImage}),
     new Background({x:backgroundWidth*2, y: 0, image: backgroundImage})
-] // Array of Backgrounds
+]
 
 midgrounds = [ 
-    new Midground({x:0 , y: 1080-650-125, image: midgroundImage}),
-    new Midground({x:7500 , y: 1080-650-125, image: midgroundImage}),
-    new Midground({x:7500*2 , y: 1080-650-125, image: midgroundImage})
-    // {x:100 , y: 0, image: backgroundImage},
+    new Midground({x:0 , y: 1080-650, image: midgroundImage}),
+    new Midground({x:7500 , y: 1080-650, image: midgroundImage}),
+    new Midground({x:7500*2 , y: 1080-650, image: midgroundImage})
 ]
 
 foregrounds = [ 
-    new Foreground({x:0 , y: 1080-400-125, image: foregroundImage}),
-    new Foreground({x:4250 , y: 1080-400-125, image: foregroundImage}),
-    new Foreground({x:4250*2 , y: 1080-400-125, image: foregroundImage}),
-    new Foreground({x:4250*3 , y: 1080-400-125, image: foregroundImage}),
-    new Foreground({x:4250*4 , y: 1080-400-125, image: foregroundImage})
-    // {x:100 , y: 0, image: backgroundImage},
+    new Foreground({x:0 , y: 1080-400, image: foregroundImage}),
+    new Foreground({x:4250 , y: 1080-400, image: foregroundImage}),
+    new Foreground({x:4250*2 , y: 1080-400, image: foregroundImage}),
+    new Foreground({x:4250*3 , y: 1080-400, image: foregroundImage}),
+    new Foreground({x:4250*4 , y: 1080-400, image: foregroundImage})
 ]
 
 
 // backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, image: backgroundImage})] // Array of Backgrounds
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
-    new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
+    new Platform({x: -1500, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
     new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
     new Platform({x: platformWidth * 2, y: canvas.height - groundPosition, image: platformImage}), // Ground 3
     new Platform({x: platformWidth* 3, y: canvas.height - groundPosition, image: platformImage}), // Ground 4
@@ -323,9 +329,9 @@ function animate() {
     platforms.forEach(platform => { // loop through array of Platforms
         platform.draw() // ------ DRAW PLATFORM
     })
-    // platformTwos.forEach(plate => {
-    //     plate.draw()
-    // })
+    platformTwos.forEach(plate => {
+        plate.draw()
+    })
 
     player.update() // ------ PLAYER UPDATE. Call this last, to render in front
     // ------------ PLAYER MOVEMENT ------------
@@ -388,7 +394,10 @@ function animate() {
         // ------------ PLATFORM SCROLL LEFT/RIGHT ------------
         if (keys.right.pressed || rightPressed) { // if right key is pressed, move platform to the left by playMovement
             scrollOffset +=playerMovement // record how much platforms are offsetting
-            // platformTwo.position.x -= playerMovement
+
+            platformTwos.forEach(platformTwo => { // loop through array of platforms
+                platformTwo.position.x -= playerMovement
+            });
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x -= playerMovement
@@ -432,7 +441,9 @@ function animate() {
             player.width = player.sprites.run.width
         } else if((keys.left.pressed && player.position.x > 0) || ( leftPressed && player.position.x > 0)) {  // if left key pressed & player.X GREATER than 0, move platform to the right by playMovement
             scrollOffset -=playerMovement // record how much platforms are offsetting
-            // platformTwo.position.x += playerMovement
+            platformTwos.forEach(platformTwo => { // loop through array of platforms
+                platformTwo.position.x += playerMovement
+            });
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x += playerMovement
@@ -534,36 +545,71 @@ function animate() {
                 //     console.log("stop1");
                 // } 
         }
-
+    })
+    let leftCollision = false
+    let RightCollision = false
+    // ------ PLATFORMTWO COLLISION DETECTION ------
+    platformTwos.forEach(platformTwo => { 
+        if (//player bottom is <= than platform top
+            player.position.y + player.height <= platformTwo.position.y
+            // player bottom + player Velocity >= with platform top side. (Player lands on platform)
+            && player.position.y + player.height + player.velocity.y >= platformTwo.position.y
+            //  // players left side overlap with platform right side
+            && player.position.x <= platformTwo.position.x + platformTwo.width 
+            //  // players right side overlap with platform left side
+            && player.position.x + player.width >= platformTwo.position.x 
+            // // players top overlap with platform bottom (Players head is under but still colliding with platform bottom)
+            && player.position.y + player.velocity.y <= platformTwo.position.y + platformTwo.height
+            ) 
+            {   
+                player.velocity.y = 0   // player does not fall
+        }
         // ---- SIDE COLLISION ---- //
         // if (
-        //     player.position.x < platform.position.x + platform.width // player left plat right
-        //     && player.position.x + player.width > platform.position.x   // player right plat left 
-        //     && player.position.y < platform.position.y + platform.height // player top UNDER plat bottom
-        //     && player.position.y + player.height > platform.position.y  // player bottom ABOVE plat top 
+        //     // player.position.x < platformTwo.position.x + platformTwo.width // player left plat right
+        //     // player LEFT plat right 
+        //     player.position.x + player.width > platformTwo.position.x   // player right plat left 
+        //     && player.position.y < platformTwo.position.y + platformTwo.height // player top UNDER plat bottom
+        //     && player.position.y + player.height > platformTwo.position.y  // player bottom ABOVE plat top 
+        //     && player.currentSprite != player.sprites.stand.left
+        //     && player.currentSprite != player.sprites.run.left
         //     // && keys.right.pressed
         // ) {
             
-        //     if (keys.right.pressed && keys.left.pressed ) {
-        //         player.velocity.x = 0
-        //         console.log( "test moving out of collision");
-        //     } else if (keys.right.pressed  
-        //         && player.position.x + player.width > platform.position.x // player right > plat left 
-        //         ) { 
-        //         player.velocity.x = -15
-        //         // player.position.x = player.position.x -15
-        //         console.log("Collide Right");
-        //     } else if (keys.left.pressed 
-        //         && player.position.x < platform.position.x + platform.width // player left < plat right
-        //         ) { 
+        //     // if (keys.right.pressed && keys.left.pressed ) {
+        //     //     player.velocity.x = 0
+        //     //     console.log( "test moving out of collision");
+        //     // } else if (keys.right.pressed  
+        //     //     && player.position.x + player.width > platformTwo.position.x // player right > plat left 
+        //     //     ) { 
+        //     //     player.velocity.x = -15
+        //     //     // player.position.x = player.position.x -15
+        //     //     console.log("Collide Right");
+        //     // } else if (keys.left.pressed 
+        //     //     && player.position.x < platformTwo.position.x + platformTwo.width // player left < plat right
+        //     //     ) { 
 
-        //             player.velocity.x = +15
+        //     //         player.velocity.x = +15
         //         // player.position.x = player.position.x +15
+        //         // player.position.x = player.position.x + 15
+        //         player.velocity.x = 0
         //         console.log("collide left");
-        //     }  
+        //     // }  
                 
         //     }
+        //     else if (// player RIGHT - plat Left 
+        //         player.position.x > platformTwo.position.x + platformTwo.width  // player left - plat right 
+        //         && player.position.y < platformTwo.position.y + platformTwo.height // player top UNDER plat bottom
+        //         && player.position.y + player.height > platformTwo.position.y  // player bottom ABOVE plat top 
+        //         && player.currentSprite != player.sprites.stand.right
+        //         && player.currentSprite != player.sprites.run.right
+        //     ){
+        //         // player.position.x = player.position.x -15
+        //         player.velocity.x = 0
+        //         console.log("collide right");
+        //     }
         // ---- SIDE COLLISION ---- //
+    }) // ------ PLATFORMTWO COLLISION DETECTION END ------ //
 
 
         
@@ -596,7 +642,7 @@ function animate() {
         //     player.velocity.x = 0
         //     console.log('STOP!');
         // }
-    })
+    
 
     
     // building MCTC
