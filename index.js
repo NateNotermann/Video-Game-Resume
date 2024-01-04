@@ -67,6 +67,9 @@ let glowHGA = false
 const platformImage = new Image()   // image = platform image - Dimensions
 platformImage.src = './img/platform.jpg'
 
+const platformTwoImage = new Image()   // image = platform image - Dimensions
+platformTwoImage.src = './img/platformTwo.jpg'
+
 const tallPlatform = new Image()   // image = platform image - Dimensions
 tallPlatform.src = './img/platformSmallTall.png'
 
@@ -141,8 +144,7 @@ let animateLoop = false
 let player = new Player() //  calling the "Player" class
 player.draw()
 player.update()
-let platformTwo = new PlatformTwo()// version 2 of platforms
-let platformTwos
+let platformTwos = []
 let platforms = []     // Array of Platforms
 let hills = []  //new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
 let sky = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
@@ -174,7 +176,9 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 function init() {
 // -------- ELEMENT VARIABLES --------
 player = new Player() //  calling the "Player" class
-// platformTwos = [platformTwo] // -------Turning off 12/30/23
+platformTwos = [
+    new PlatformTwo({x:900, y: 800, image: platformTwoImage })
+] // -------Turning off 12/30/23
 // hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
@@ -323,9 +327,9 @@ function animate() {
     platforms.forEach(platform => { // loop through array of Platforms
         platform.draw() // ------ DRAW PLATFORM
     })
-    // platformTwos.forEach(plate => {
-    //     plate.draw()
-    // })
+    platformTwos.forEach(plate => {
+        plate.draw()
+    })
 
     player.update() // ------ PLAYER UPDATE. Call this last, to render in front
     // ------------ PLAYER MOVEMENT ------------
@@ -388,7 +392,10 @@ function animate() {
         // ------------ PLATFORM SCROLL LEFT/RIGHT ------------
         if (keys.right.pressed || rightPressed) { // if right key is pressed, move platform to the left by playMovement
             scrollOffset +=playerMovement // record how much platforms are offsetting
-            // platformTwo.position.x -= playerMovement
+
+            platformTwos.forEach(platformTwo => { // loop through array of platforms
+                platformTwo.position.x -= playerMovement
+            });
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x -= playerMovement
@@ -432,7 +439,9 @@ function animate() {
             player.width = player.sprites.run.width
         } else if((keys.left.pressed && player.position.x > 0) || ( leftPressed && player.position.x > 0)) {  // if left key pressed & player.X GREATER than 0, move platform to the right by playMovement
             scrollOffset -=playerMovement // record how much platforms are offsetting
-            // platformTwo.position.x += playerMovement
+            platformTwos.forEach(platformTwo => { // loop through array of platforms
+                platformTwo.position.x += playerMovement
+            });
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x += playerMovement

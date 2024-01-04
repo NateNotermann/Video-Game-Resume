@@ -128,6 +128,8 @@ Make controller & keyboard buttons react when pressed.    <---------------------
 
 Place More/All Platforms <-------------------------- in progress    
 
+Job Descriptions <-------------------------- in progress   
+
 #### Final Steps      
 Add javascript sound effects from other repo   
 Deploy to Netlify   

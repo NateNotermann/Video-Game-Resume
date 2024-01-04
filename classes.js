@@ -102,46 +102,29 @@ class Platform {    // ------ Platform Class used for ground and all platforms. 
 
 // -------- PLATFORMTWO CLASS -------- //
 class PlatformTwo {
-    constructor() { //  passing in x & y positions
+    constructor({ x, y, image }) {
         this.position = {
-            x: 100,
-            y: canvas.height - 200
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
         }
-        this.width = 580 //default width
-        this.height = 125 //default height
-
-        this.image = platformImage
-        this.frames = 0
-
-        this.currentSprite = platformImage
-        // this.currentCropWidth = 580
+        this.image = image
+        this.width = image.width  //580
+        this.height = image.height //125
     }
-    draw() { 
-        c.fillStyle = 'purple' // draw a rectangle that matches the size and position of the Player Sprite
-        c.fillRect(this.position.x,  this.position.y, this.width, this.height)
-
-        c.drawImage( // player sprite image
-            // this.image,
-            this.currentSprite, 
-            // this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
-            // 0,                  // crop image Y
-            // this.currentCropWidth,                // crop image Y
-            // 400,                // crop image X
+    draw() {   
+        // platform's rectangle
+        // c.fillStyle = 'red'
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        c.drawImage(
+            this.image,  
             this.position.x, 
-            this.position.y,
-            this.width,
-            this.height ) 
+            this.position.y)
+            // this.width, 
+            // this.height ) 
     }
-
     update() {
-        // this.frames++
-        // if (this.frames > 59 && 
-        //     (this.currentSprite === this.sprites.stand.right 
-        //     || this.currentSprite === this.sprites.stand.left)) { // loop every 28 frames. 
-        //     this.frames = 0 
-        // } 
-        this.draw()
-    } 
+        this.draw
+    }
 } // End of player Sprite
 
 
