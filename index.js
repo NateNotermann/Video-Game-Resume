@@ -177,8 +177,10 @@ function init() {
 // -------- ELEMENT VARIABLES --------
 player = new Player() //  calling the "Player" class
 platformTwos = [
-    new PlatformTwo({x:900, y: 800, image: platformTwoImage })
-] // -------Turning off 12/30/23
+    new PlatformTwo({x:1000, y: 1080-250, image: platformTwoImage }),
+    new PlatformTwo({x:1000 + platformTwoImage.width , y: 1080-375, image: platformTwoImage }),
+    new PlatformTwo({x:1000 + (platformTwoImage.width * 2), y: 1080-500, image: platformTwoImage }),
+] 
 // hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
@@ -191,13 +193,12 @@ backgrounds = [
     new Background({x:0, y: 0, image: backgroundImage}),
     new Background({x:backgroundWidth, y: 0, image: backgroundImage}),
     new Background({x:backgroundWidth*2, y: 0, image: backgroundImage})
-] // Array of Backgrounds
+]
 
 midgrounds = [ 
     new Midground({x:0 , y: 1080-650-125, image: midgroundImage}),
     new Midground({x:7500 , y: 1080-650-125, image: midgroundImage}),
     new Midground({x:7500*2 , y: 1080-650-125, image: midgroundImage})
-    // {x:100 , y: 0, image: backgroundImage},
 ]
 
 foregrounds = [ 
@@ -206,7 +207,6 @@ foregrounds = [
     new Foreground({x:4250*2 , y: 1080-400-125, image: foregroundImage}),
     new Foreground({x:4250*3 , y: 1080-400-125, image: foregroundImage}),
     new Foreground({x:4250*4 , y: 1080-400-125, image: foregroundImage})
-    // {x:100 , y: 0, image: backgroundImage},
 ]
 
 
@@ -544,7 +544,8 @@ function animate() {
                 // } 
         }
     })
-
+    let leftCollision = false
+    let RightCollision = false
     // ------ PLATFORMTWO COLLISION DETECTION ------
     platformTwos.forEach(platformTwo => { 
         if (//player bottom is <= than platform top
