@@ -109,7 +109,7 @@ Custom Building Background Art
         <!-- 2. Restaurants - maybe..   -->
         2. Coyote - Done  
         3. CBRE - Done    
-        4. Prime - Done  
+        4. Prime - Done  <---------------------------- Make Prime bigger 
         5. HGA - Done  
     F. Add collision descriptions Main buildings. - Done  
     G. Add collision glow effect to Main buildings. - Done  
