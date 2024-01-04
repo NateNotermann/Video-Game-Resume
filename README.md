@@ -102,8 +102,8 @@ Custom Player Sprites - Done
 Custom Building Background Art      
     A. Custom Sky Background, Redo with 1080p Height - Done  
     B. Custom Background Buildings - Done   
-    C. Custom Fore Buildings - Done 
-    D. Custom Middle Buildings - Done  
+    C. Custom Middle Buildings - Done   <---------------------------- Make Fore ground taller 
+    D. Custom Fore Buildings - Done 
     E. Custom main Buildings Animations - Done   
         1. MCTC - Done    
         <!-- 2. Restaurants - maybe..   -->
@@ -116,19 +116,19 @@ Custom Building Background Art
     H. Arrow pointing where to go. - Done   
 
 Custom Platform Art- Done     
-Custom Wall Art with collision - Done  
 Moving Clouds Custom Art - Done  
 make scroll with player - Done  
 
+Add side collision OR add fall pits in there place <-------------------------- in progress  
+
+Job Descriptions <-------------------------- in progress  
+
+Place More/All Platforms <-------------------------- in progress    
 
 ## Game Boy Frame & Buttons  <---- in progress  
 Add controller & keyboard buttons to the Game Boy frame.  <-------------------------- in progress  
 Make controller & keyboard buttons react when pressed.    <-------------------------- in progress  
 
-
-Place More/All Platforms <-------------------------- in progress    
-
-Job Descriptions <-------------------------- in progress   
 
 #### Final Steps      
 Add javascript sound effects from other repo   
