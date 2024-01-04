@@ -543,7 +543,37 @@ function animate() {
                 //     console.log("stop1");
                 // } 
         }
+    })
 
+    // ------ PLATFORMTWO COLLISION DETECTION ------
+    platformTwos.forEach(platformTwo => { 
+        if (//player bottom is <= than platform top
+            player.position.y + player.height <= platformTwo.position.y
+            // player bottom + player Velocity >= with platform top side. (Player lands on platform)
+            && player.position.y + player.height + player.velocity.y >= platformTwo.position.y
+            //  // players left side overlap with platform right side
+            && player.position.x <= platformTwo.position.x + platformTwo.width 
+            //  // players right side overlap with platform left side
+            && player.position.x + player.width >= platformTwo.position.x 
+            // // players top overlap with platform bottom (Players head is under but still colliding with platform bottom)
+            && player.position.y + player.velocity.y <= platformTwo.position.y + platformTwo.height
+            ) 
+            {   
+                player.velocity.y = 0   // player does not fall
+                // if (
+                   
+                //     player.position.y + player.height <= platform.position.y //player bottom is <= than platform top
+                //     && keys.right.pressed
+                //     //  // players left side overlap with platform right side
+                //     && player.position.x <= platform.position.x + platform.width 
+                //     //  // players right side overlap with platform left side
+                //     && player.position.x + player.width >= platform.position.x 
+                //     ) {
+                //     player.velocity.x = 0 
+                //     console.log("stop1");
+                // } 
+        }
+    })
         // ---- SIDE COLLISION ---- //
         // if (
         //     player.position.x < platform.position.x + platform.width // player left plat right
@@ -605,7 +635,7 @@ function animate() {
         //     player.velocity.x = 0
         //     console.log('STOP!');
         // }
-    })
+    
 
     
     // building MCTC
