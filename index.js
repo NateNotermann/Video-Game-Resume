@@ -40,13 +40,15 @@ tests();
 const gravity = 2
 const floor = 0 //50 // pixel from the bottom player stops at
 const jump = 35 // amount player should jump
-const playerMovement = 10 //  amount player moves left and right
-const platformWidth = 579 // actually 580 but leaves 1px gap if 580
+const playerMovement = 20 //  amount player moves left and right
+const platformWidth = 2500 //579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
 const playerSize = 2 // used when referencing height in player class
 const buildingSize = 2
 const buildingSize2 = 1.5
 const buildingSize3 = 2
+const backgroundWidth = 2560
+const skyWidth = 2559
 let lastKey
 let playerWidth = 66
 let playerHeight = 150
@@ -63,7 +65,7 @@ let glowHGA = false
 
 // -------- IMAGE VARIABLES --------
 const platformImage = new Image()   // image = platform image - Dimensions
-platformImage.src = './img/platform.png'
+platformImage.src = './img/platform.jpg'
 
 const tallPlatform = new Image()   // image = platform image - Dimensions
 tallPlatform.src = './img/platformSmallTall.png'
@@ -71,8 +73,17 @@ tallPlatform.src = './img/platformSmallTall.png'
 // const hillImage = new Image()   // Hill Image - Dimensions
 // hillImage.src = './img/hills.png'
 
+const skyImage = new Image()   // Hill Image - Dimensions
+skyImage.src = './img/Sky.jpg'
+
 const backgroundImage = new Image()   // Hill Image - Dimensions
-backgroundImage.src = './img/background.jpg'
+backgroundImage.src = './img/background.png'
+
+const midgroundImage = new Image()   // Hill Image - Dimensions
+midgroundImage.src = './img/midground.png'
+
+const foregroundImage = new Image()   // Hill Image - Dimensions
+foregroundImage.src = './img/foreground.png'
 
 const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
 cloudImage.src = './img/cloud.png'
@@ -104,6 +115,9 @@ HGA.src = './img/HGA Long.png'
 const PRIME = new Image()   
 PRIME.src = './img/PRIME Long.png'
 
+const ArrowPic = new Image()   
+ArrowPic.src = './img/arrow.png'
+
 // -------- IMAGE VARIABLES -------- //
 
 // -------- GAMEPAD VARIABLES -------- //
@@ -131,13 +145,17 @@ let platformTwo = new PlatformTwo()// version 2 of platforms
 let platformTwos
 let platforms = []     // Array of Platforms
 let hills = []  //new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
+let sky = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
+let midgrounds = []    
+let foregrounds = []    
 let clouds = [] //new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
 let buildingMCTC = []
 let buildingCOYOTE  = []
 let buildingCBRE = []
 let buildingPRIME = []
 let buildingHGA = []
+let arrowArray = []
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
@@ -158,12 +176,42 @@ function init() {
 player = new Player() //  calling the "Player" class
 // platformTwos = [platformTwo] // -------Turning off 12/30/23
 // hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
-backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, image: backgroundImage})] // Array of Backgrounds
+sky = [
+    new Sky({x:-skyWidth, y: 0, image: skyImage}),
+    new Sky({x:0, y: 0, image: skyImage}),
+    new Sky({x:skyWidth, y: 0, image: skyImage}),
+    new Sky({x:skyWidth*2, y: 0, image: skyImage}),
+]
+
+backgrounds = [
+    new Background({x:0, y: 0, image: backgroundImage}),
+    new Background({x:backgroundWidth, y: 0, image: backgroundImage}),
+    new Background({x:backgroundWidth*2, y: 0, image: backgroundImage})
+] // Array of Backgrounds
+
+midgrounds = [ 
+    new Midground({x:0 , y: 1080-650-125, image: midgroundImage}),
+    new Midground({x:7500 , y: 1080-650-125, image: midgroundImage}),
+    new Midground({x:7500*2 , y: 1080-650-125, image: midgroundImage})
+    // {x:100 , y: 0, image: backgroundImage},
+]
+
+foregrounds = [ 
+    new Foreground({x:0 , y: 1080-400-125, image: foregroundImage}),
+    new Foreground({x:4250 , y: 1080-400-125, image: foregroundImage}),
+    new Foreground({x:4250*2 , y: 1080-400-125, image: foregroundImage}),
+    new Foreground({x:4250*3 , y: 1080-400-125, image: foregroundImage}),
+    new Foreground({x:4250*4 , y: 1080-400-125, image: foregroundImage})
+    // {x:100 , y: 0, image: backgroundImage},
+]
+
+
+// backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, image: backgroundImage})] // Array of Backgrounds
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
     new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
     new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
-    new Platform({x: platformWidth * 2, y: canvas.height - groundPosition*3, image: platformImage}), // Ground 3
-    new Platform({x: platformWidth* 3, y: canvas.height - groundPosition*2, image: platformImage}), // Ground 4
+    new Platform({x: platformWidth * 2, y: canvas.height - groundPosition, image: platformImage}), // Ground 3
+    new Platform({x: platformWidth* 3, y: canvas.height - groundPosition, image: platformImage}), // Ground 4
     new Platform({x: platformWidth * 4, y: canvas.height - groundPosition, image: platformImage}), // Ground 5
     new Platform({x: platformWidth * 5, y: canvas.height - groundPosition, image: platformImage}), // Ground 6
     new Platform({x: platformWidth* 6, y: canvas.height - 125, image: platformImage}), // Platform 7
@@ -175,20 +223,29 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580�
     new Platform({x: platformWidth* 12, y: canvas.height - 125, image: platformImage}), // Platform 13
     new Platform({x: platformWidth* 13, y: canvas.height - 125, image: platformImage}), // Platform 14
     new Platform({x: platformWidth* 14, y: canvas.height - 125, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 15, y: canvas.height - 125*2, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 16.5, y: canvas.height - 125*2, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 18, y: canvas.height - 125*3, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 15, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 16, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 17, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 18, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 19, y: canvas.height - 125, image: platformImage}), // Platform 14
     new Platform({x: platformWidth* 19.5, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 21, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 22, y: canvas.height - 125, image: platformImage}), // Platform 14
+    new Platform({x: platformWidth* 23, y: canvas.height - 125, image: platformImage}), // Platform 14
 ];
 
-buildingMCTC = [ new BuildingMCTC(525, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
-buildingCOYOTE = [ new BuildingCOYOTE (2000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
-buildingCBRE = [ new BuildingCBRE(4000, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
-buildingPRIME = [ new BuildingPRIME(5000, canvas.height - PRIME.height - platformHeight, 250, 422, PRIME)] // HGA (x,y,w,h,image,)
-buildingHGA = [ new BuildingHGA(6000, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
+buildingMCTC = [ new BuildingMCTC(2500, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingCOYOTE = [ new BuildingCOYOTE (5000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
+buildingCBRE = [ new BuildingCBRE(7500, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
+buildingPRIME = [ new BuildingPRIME(10000, canvas.height - PRIME.height - platformHeight, 250, 422, PRIME)] // HGA (x,y,w,h,image,)
+buildingHGA = [ new BuildingHGA(12500, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
+
+arrowArray = [ new ARROW({x: 800, y: canvas.height - ArrowPic.height - 110, image: ArrowPic})] // PRIME (x,y,w,h,image,)
 // building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
 
-clouds = [new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
+clouds = [
+    // new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})
+];  
 }
 // -------- ELEMENT VARIABLES -------- //
 
@@ -220,8 +277,18 @@ function animate() {
     // c.fillStyle = 'blue'
     // c.fillRect(0, 0, canvas.width, canvas.height)
 
+    sky.forEach(sky => { // loop through array of Backgrounds
+        sky.position.x += (0.2 * time)
+        sky.draw() // ------ DRAW BACKGROUND
+    })
     backgrounds.forEach(background => { // loop through array of Backgrounds
         background.draw() // ------ DRAW BACKGROUND
+    })
+    midgrounds.forEach(midground => { // loop through array of midgrounds
+        midground.draw() // ------ DRAW BACKGROUND
+    })
+    foregrounds.forEach(foreground => { // loop through array of midgrounds
+        foreground.draw() // ------ DRAW BACKGROUND
     })
     clouds.forEach(cloud => { // loop through array of clouds
         cloud.position.x += (0.2 * time)
@@ -247,6 +314,9 @@ function animate() {
         building.draw()     // ------ DRAW buildingHGA
         building.update()
     }) 
+    arrowArray.forEach(arrowArray => { // loop through array of Platforms
+        arrowArray.draw() // ------ DRAW PLATFORM
+    })
     hills.forEach(hill => { // loop through array of Hills
         hill.draw()     // ------ DRAW HILL
     }) 
@@ -338,11 +408,23 @@ function animate() {
             buildingHGA.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
+            arrowArray.forEach(arrowArray => { // ---- building SCROLL ----
+                arrowArray.position.x -= (playerMovement)
+            });
             hills.forEach(hill => { // ---- HILL SCROLL ----
                 hill.position.x -= (playerMovement/3)
             });
+            sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
+                sky.position.x -= (playerMovement/30)
+            });
             backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
                 background.position.x -= (playerMovement/8)
+            });
+            midgrounds.forEach(midground => { // ---- BACKGROUND SCROLL ----
+                midground.position.x -= (playerMovement/6)
+            });
+            foregrounds.forEach(foreground => { // ---- BACKGROUND SCROLL ----
+                foreground.position.x -= (playerMovement/2)
             });
             console.log('move = 0, but SCROLLING----R----');
             player.currentSprite = player.sprites.run.right
@@ -370,11 +452,23 @@ function animate() {
             buildingHGA.forEach(building => { // ---- Building SCROLL ----
                 building.position.x += (playerMovement)
             });
+            arrowArray.forEach(arrowArray => { // ---- Building SCROLL ----
+                arrowArray.position.x += (playerMovement)
+            });
             hills.forEach(hill => { // // ---- HILL SCROLL ----
                 hill.position.x += (playerMovement/3)
             });
+            sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
+                sky.position.x += (playerMovement/30)
+            });
             backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
                 background.position.x += (playerMovement/8)
+            });
+            midgrounds.forEach(midground => { // ---- BACKGROUND SCROLL ----
+                midground.position.x += (playerMovement/6)
+            });
+            foregrounds.forEach(foreground => { // ---- BACKGROUND SCROLL ----
+                foreground.position.x += (playerMovement/2)
             });
             console.log('move = 0, but SCROLLING----L----');
         } else {

@@ -441,8 +441,8 @@ class Hill {    // ------ Hill Class used for Hills ------
 }
 
 
-// -------- BACKGROUND CLASS -------- //
-class Background {    // ---- Background Class used for Background Image ------
+// -------- COULD CLASS -------- //
+class Cloud {    // ---- Background Class used for Cloud Image ------
     constructor({ x, y, image }) {
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
@@ -460,8 +460,36 @@ class Background {    // ---- Background Class used for Background Image ------
 }
 
 
-// -------- COULD CLASS -------- //
-class Cloud {    // ---- Background Class used for Cloud Image ------
+// -------- ARROW CLASS -------- //
+class ARROW {    // ------ Platform Class used for ground and all platforms. ------
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width  //580
+        this.height = image.height //125
+    }
+    draw() {   
+        // platform's rectangle
+        // c.fillStyle = 'red'
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        c.drawImage(
+            this.image,  
+            this.position.x, 
+            this.position.y)
+            // this.width, 
+            // this.height ) 
+    }
+    update() {
+        this.draw
+    }
+}
+
+
+// -------- SKY CLASS -------- //
+class Sky {    
     constructor({ x, y, image }) {
         this.position = {
             x: x, // x is now equal to the passed in x.  // x: 600,
@@ -476,4 +504,61 @@ class Cloud {    // ---- Background Class used for Cloud Image ------
             this.position.x, 
             this.position.y ) 
     }
+    
+}
+
+// -------- BACKGROUND CLASS -------- //
+class Background {    
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width  //200
+        this.height = image.height //20
+    }
+    draw() {   
+        c.drawImage(this.image,  
+            this.position.x, 
+            this.position.y ) 
+    }
+}
+
+// -------- MIDGROUND CLASS -------- //
+class Midground {    
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width  //200
+        this.height = image.height //20
+    }
+    draw() {   
+        c.drawImage(this.image,  
+            this.position.x, 
+            this.position.y ) 
+    }
+    
+}
+
+// -------- FOREGROUND CLASS -------- //
+class Foreground {    
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width  //200
+        this.height = image.height //20
+    }
+    draw() {   
+        c.drawImage(this.image,  
+            this.position.x, 
+            this.position.y ) 
+    }
+    
 }
