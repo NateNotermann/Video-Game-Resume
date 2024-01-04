@@ -204,11 +204,11 @@ midgrounds = [
 ]
 
 foregrounds = [ 
-    new Foreground({x:0 , y: 1080-400, image: foregroundImage}),
-    new Foreground({x:4250 , y: 1080-400, image: foregroundImage}),
-    new Foreground({x:4250*2 , y: 1080-400, image: foregroundImage}),
-    new Foreground({x:4250*3 , y: 1080-400, image: foregroundImage}),
-    new Foreground({x:4250*4 , y: 1080-400, image: foregroundImage})
+    new Foreground({x:0 , y: 1080-525, image: foregroundImage}),
+    new Foreground({x:4250 , y: 1080-525, image: foregroundImage}),
+    new Foreground({x:4250*2 , y: 1080-525, image: foregroundImage}),
+    new Foreground({x:4250*3 , y: 1080-525, image: foregroundImage}),
+    new Foreground({x:4250*4 , y: 1080-525, image: foregroundImage})
 ]
 
 
