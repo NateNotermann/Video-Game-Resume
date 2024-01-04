@@ -1,5 +1,5 @@
 # Video Game Resume!
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7c00f1c0-b166-41c5-b1ba-5f3c45001266/deploy-status)](https://app.netlify.com/sites/aquamarine-bubblegum-1105d2/deploys)
 I am turning my resume into a playable video game! This is very much a **work in progress**. 
 It will be a platformer, possibly with some fighting mechanics. It works with a **Xbox/PS5 controller** using the **gamepad API**. It will have custom pixel art for the player & player animations, background and animated Gif foreground building elements. (you'll see what I mean when it's done.)    
 <br>
