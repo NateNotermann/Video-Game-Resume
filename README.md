@@ -1,5 +1,5 @@
 # Video Game Resume!
-[![Netlify Status](https://api.netlify.com/api/v1/badges/7c00f1c0-b166-41c5-b1ba-5f3c45001266/deploy-status)](https://app.netlify.com/sites/aquamarine-bubblegum-1105d2/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7c00f1c0-b166-41c5-b1ba-5f3c45001266/deploy-status)](https://app.netlify.com/sites/aquamarine-bubblegum-1105d2/deploys)    
 I am turning my resume into a playable video game! This is very much a **work in progress**. 
 It will be a platformer, possibly with some fighting mechanics. It works with a **Xbox/PS5 controller** using the **gamepad API**. It will have custom pixel art for the player & player animations, background and animated Gif foreground building elements. (you'll see what I mean when it's done.)    
 <br>
@@ -78,7 +78,7 @@ Interface Design and animation - DONE
 Limit requestAnimationFrame to 60 fps - DONE
 Pushing Live - DONE
 
-### Phase 2. (Platformer Functionality & Custom Pixel Art) **CURRENT PHASE**
+### Phase 2. Platformer Functionality & Custom Pixel Art
 #### Adding Platformer Game Functionality
 Add a frame around the video game canvas to look like a Game Boy. Or BMO from Adventure Time. -- DONE    
 Make Game Boy frame responsive/resize when window changes size. -- DONE
@@ -102,14 +102,14 @@ Custom Player Sprites - Done
 Custom Building Background Art      
     A. Custom Sky Background, Redo with 1080p Height - Done  
     B. Custom Background Buildings - Done   
-    C. Custom Middle Buildings - Done   <---------------------------- Make Fore ground taller 
+    C. Custom Middle Buildings - Done   <---------------------------- Make Fore ground taller   
     D. Custom Fore Buildings - Done 
     E. Custom main Buildings Animations - Done   
         1. MCTC - Done    
         <!-- 2. Restaurants - maybe..   -->
         2. Coyote - Done  
         3. CBRE - Done    
-        4. Prime - Done  <---------------------------- Make Prime bigger 
+        4. Prime - Done  <---------------------------- Make Prime bigger    
         5. HGA - Done  
     F. Add collision descriptions Main buildings. - Done  
     G. Add collision glow effect to Main buildings. - Done  
