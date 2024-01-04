@@ -78,14 +78,12 @@ Interface Design and animation - DONE
 Limit requestAnimationFrame to 60 fps - DONE
 Pushing Live - DONE
 
-
 ### Phase 2. (Platformer Functionality & Custom Pixel Art) **CURRENT PHASE**
 #### Adding Platformer Game Functionality
 Add a frame around the video game canvas to look like a Game Boy. Or BMO from Adventure Time. -- DONE    
 Make Game Boy frame responsive/resize when window changes size. -- DONE
 Remove Health bar 2 player win/loose scenarios -- Done 
 Moved Player 2 movement into player one. -- Done     
-
 
 #### Platforms
 Add Platform collision functionality -- Done  
@@ -94,37 +92,33 @@ Add Parallax Scroll to all elements - Done
 Scrolling Win scenario - Rework code  
 Add Death Pits - Done  
 
-
 #### Custom Pixel Art
-Custom Player Sprites - Done 
+Custom Player Sprites - Done  
     A. Sprite Standing Right - Done   
     B. Sprite Standing Left - Done   
     C. Sprite Running Right - Done   
     D. Sprite Running Left - Done   
-    E. Sprite Jumping Right <-------------------------- maybe    
-    F. Sprite Jumping Left  <-------------------------- maybe    
-
-
+     
 Custom Building Background Art      
     A. Custom Sky Background, Redo with 1080p Height - Done  
-    B. Custom Background Buildings <-------------------------- in progress  
-    B. Custom Fore Buildings - Done 
-    C. Custom Middle Buildings - Done
-    D. Custom main Buildings Animations - Done   
+    B. Custom Background Buildings - Done   
+    C. Custom Fore Buildings - Done 
+    D. Custom Middle Buildings - Done  
+    E. Custom main Buildings Animations - Done   
         1. MCTC - Done    
         <!-- 2. Restaurants - maybe..   -->
         2. Coyote - Done  
         3. CBRE - Done    
         4. Prime - Done  
         5. HGA - Done  
-    E. Add collision descriptions Main buildings. - Done  
-    F. Add collision glow effect to Main buildings. - Done  
-    G. Add light up arrow pointing where to go. <-------------------------- in progress  
+    F. Add collision descriptions Main buildings. - Done  
+    G. Add collision glow effect to Main buildings. - Done  
+    H. Arrow pointing where to go. - Done   
 
-Custom Element Art   
-Custom Platform Art - Done  
+Custom Platform Art- Done     
+Custom Wall Art with collision - Done  
 Moving Clouds Custom Art - Done  
-    Add more clouds & make scroll with player <-------------------------- in progress  
+make scroll with player - Done  
 
 
 ## Game Boy Frame & Buttons  <---- in progress  
@@ -140,6 +134,9 @@ Deploy to Netlify
 Celebratory Dance    
 
 ### Stretch Goals:    
+Sprite Jumping Right
+Sprite Jumping Left   
+Make direction arrow light up
 Add Music    
 Add sliders to change jump & damage amount & time   
 Use Spotify API for music    
