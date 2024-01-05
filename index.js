@@ -28,17 +28,9 @@ window.onload = function () {
 // canvas.width = windowInnerWidth //window.innerWidth    // canvas.width 1920
 // canvas.height = windowInnerHeight //  aspectRatio  //window.innerHeight  // canvas.height 687
 
-function tests() {
-    console.log('CanvasHeight:', canvasHeight );
-    console.log('windowInnerHeight:', windowInnerHeight);
-    console.log('canvasWidth:', canvasWidth);
-    console.log('windowInnerWidth:', windowInnerWidth);
-}
-tests();
-
 // global variables. 
 const gravity = 2
-const floor = 0 //50 // pixel from the bottom player stops at
+const floor = 125 // or platformImage.height. pixel from the bottom player stops at
 const jump = 35 // amount player should jump
 const playerMovement = 20 //  amount player moves left and right
 const platformWidth = 2500 //579 // actually 580 but leaves 1px gap if 580
@@ -64,29 +56,26 @@ let glowPRIME = false
 let glowHGA = false
 
 // -------- IMAGE VARIABLES --------
-const platformImage = new Image()   // image = platform image - Dimensions
+const platformImage = new Image()   
 platformImage.src = './img/platform.jpg'
 
-const platformTwoImage = new Image()   // image = platform image - Dimensions
+const platformTwoImage = new Image()   
 platformTwoImage.src = './img/platformTwo.jpg'
 
-const tallPlatform = new Image()   // image = platform image - Dimensions
+const tallPlatform = new Image()   
 tallPlatform.src = './img/platformSmallTall.png'
 
-// const hillImage = new Image()   // Hill Image - Dimensions
-// hillImage.src = './img/hills.png'
-
 // -------- Background Images -------- //
-const skyImage = new Image()   // Hill Image - Dimensions
+const skyImage = new Image()   
 skyImage.src = './img/Sky.jpg'
 
-const backgroundImage = new Image()   // Hill Image - Dimensions
+const backgroundImage = new Image()   
 backgroundImage.src = './img/background.png'
 
-const midgroundImage = new Image()   // Hill Image - Dimensions
+const midgroundImage = new Image()   
 midgroundImage.src = './img/midground.png'
 
-const foregroundImage = new Image()   // Hill Image - Dimensions
+const foregroundImage = new Image()   
 foregroundImage.src = './img/foreground.png'
 
 const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
@@ -150,7 +139,6 @@ player.draw()
 player.update()
 let platformTwos = []
 let platforms = []     // Array of Platforms
-let hills = []  //new Hill({x: 20, y: 200, image: hillImage})];   // Array of Hills
 let sky = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let midgrounds = []    
@@ -188,7 +176,7 @@ platformTwos = [
     new PlatformTwo({x:1000 + (platformTwoImage.width * 3), y: 1080-375, image: platformTwoImage }),
     new PlatformTwo({x:1000 + (platformTwoImage.width * 4), y: 1080-250, image: platformTwoImage }),
 ] 
-// hills = [new Hill({x: 20, y: canvas.height - 592, image: hillImage})];   // Array of Hills
+
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
     new Sky({x:0, y: 0, image: skyImage}),
@@ -333,9 +321,6 @@ function animate() {
     arrowArray.forEach(arrowArray => { // loop through array of Platforms
         arrowArray.draw() // ------ DRAW PLATFORM
     })
-    hills.forEach(hill => { // loop through array of Hills
-        hill.draw()     // ------ DRAW HILL
-    }) 
     platforms.forEach(platform => { // loop through array of Platforms
         platform.draw() // ------ DRAW PLATFORM
     })
@@ -348,7 +333,7 @@ function animate() {
     // ------ LEFT & RIGHT ------
     if (keys.left.pressed == true && keys.right.pressed == true ) { // if BOTH Left & Right pressed
         player.velocity.x = 0       
-        console.log('both L/R Pressed')
+        // console.log('both L/R Pressed')
         // If BOTH L&R pressed, don't move, but do pick a L/R standing sprite
         if (lastKey === 'right') {
             player.currentSprite = player.sprites.stand.left
@@ -362,7 +347,7 @@ function animate() {
     // ------ RIGHT ------
     } else if ((keys.right.pressed && player.position.x < 400) || (rightPressed && player.position.x < 400)) {  // allow player to move right unless at 400px
         player.velocity.x = playerMovement
-        console.log('right');
+        // console.log('right');
         // player.frames = 1 // restart any animation back to frame 1.
         player.currentSprite = player.sprites.run.right // set it to run right
         player.currentCropWidth = player.sprites.run.cropWidth
@@ -373,7 +358,7 @@ function animate() {
         || ((leftPressed && player.position.x > 100) // if CONTROLLER left pressed, and not touching left wall
         || (leftPressed && scrollOffset === 0 && player.position.x > 0) )) {  // if CONTROLLER left pressed, AND ScrollOffset is at 0, BUT player not at left wall yet
         player.velocity.x = -playerMovement 
-        console.log('left');
+        // console.log('left');
             // player.frames = 1 // restart any animation back to frame 1.
             player.currentSprite = player.sprites.run.left
             player.currentCropWidth = player.sprites.run.cropWidth
@@ -433,9 +418,6 @@ function animate() {
             arrowArray.forEach(arrowArray => { // ---- building SCROLL ----
                 arrowArray.position.x -= (playerMovement)
             });
-            hills.forEach(hill => { // ---- HILL SCROLL ----
-                hill.position.x -= (playerMovement/3)
-            });
             sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
                 sky.position.x -= (playerMovement/30)
             });
@@ -448,7 +430,7 @@ function animate() {
             foregrounds.forEach(foreground => { // ---- BACKGROUND SCROLL ----
                 foreground.position.x -= (playerMovement/2)
             });
-            console.log('move = 0, but SCROLLING----R----');
+            // console.log('move = 0, but SCROLLING----R----');
             player.currentSprite = player.sprites.run.right
             player.currentCropWidth = player.sprites.run.cropWidth
             player.width = player.sprites.run.width
@@ -482,9 +464,6 @@ function animate() {
             arrowArray.forEach(arrowArray => { // ---- Building SCROLL ----
                 arrowArray.position.x += (playerMovement)
             });
-            hills.forEach(hill => { // // ---- HILL SCROLL ----
-                hill.position.x += (playerMovement/3)
-            });
             sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
                 sky.position.x += (playerMovement/30)
             });
@@ -497,7 +476,7 @@ function animate() {
             foregrounds.forEach(foreground => { // ---- BACKGROUND SCROLL ----
                 foreground.position.x += (playerMovement/2)
             });
-            console.log('move = 0, but SCROLLING----L----');
+            // console.log('move = 0, but SCROLLING----L----');
         } else {
                 if (lastKey === 'right') { // if last pressed = right AND  R/L are NOT pressed then..
                 player.currentSprite = player.sprites.stand.right
@@ -980,17 +959,17 @@ function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS On
 
         if(buttons[0].pressed) {        // [0]
             player.velocity.y = -jump   // subtract jump level
-            console.log('GREEN');
+            // console.log('GREEN');
         } 
         if(buttons[1].pressed) {        // [1]
-            console.log('RED');      
+            // console.log('RED');      
         } 
         if(buttons[2].pressed) {        // [2]
             // player1.attack()
-            console.log('BLUE');      
+            // console.log('BLUE');      
         } 
         if(buttons[3].pressed) {        // [3]
-            console.log('YELLOW');   
+            // console.log('YELLOW');   
         }
     }
 }
@@ -1002,6 +981,6 @@ function test() {
     // console.log('canvas W: ' + canvas.width, 'canvas H: ' + canvas.height ); // check Canvas W & H
     // console.log('Window W: ' + window.innerWidth, 'Window H: ' + window.innerHeight ); // check Window W & H
     // console.log('gamepad Connected Status: ', connected);
-    console.log('scrolloffset', scrollOffset);
+    // console.log('scrolloffset', scrollOffset);
 }
 test()

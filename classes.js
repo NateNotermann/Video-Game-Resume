@@ -456,27 +456,6 @@ class BuildingHGA {
 } // End of Building1 Sprite
 
 
-
-
-class Hill {    // ------ Hill Class used for Hills ------
-    constructor({ x, y, image }) {
-        this.position = {
-            x: x, // x is now equal to the passed in x.  // x: 600,
-            y: y // y is now equal to the passed in y.  // y: 300
-        }       // Hills image: 7545 × 592
-        this.image = image
-        this.width = image.width  //200
-        this.height = image.height //20
-    }
-    draw() {   
-        c.drawImage(
-            this.image,  
-            this.position.x, 
-            this.position.y ) 
-    }
-}
-
-
 // -------- COULD CLASS -------- //
 class Cloud {    // ---- Background Class used for Cloud Image ------
     constructor({ x, y, image }) {
