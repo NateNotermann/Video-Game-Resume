@@ -132,7 +132,7 @@ const PrimeElements = new Image()
 PrimeElements.src = './img/PrimeFlag2.png'
 
 const ArrowPic = new Image()   
-ArrowPic.src = './img/arrow.png'
+ArrowPic.src = './img/arrow3.png'
 
 
 // -------- ELEMENT VARIABLES --------
@@ -241,7 +241,7 @@ buildingPRIME = [ new BuildingPRIME(10000, canvas.height - PRIME.height - platfo
 elementsPRIME = [ new ElementsPRIME(10000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
 buildingHGA = [ new BuildingHGA(12500, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
 
-arrowArray = [ new ARROW({x: 800, y: canvas.height - ArrowPic.height - 110, image: ArrowPic})] // PRIME (x,y,w,h,image,)
+arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic)] 
 // building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
 
 clouds = [
@@ -319,8 +319,9 @@ function animate() {
         building.draw()     // ------ DRAW buildingHGA
         building.update()
     }) 
-    arrowArray.forEach(arrowArray => { // loop through array of Platforms
-        arrowArray.draw() // ------ DRAW PLATFORM
+    arrowArray.forEach(arrowArray1 => { // loop through array of Platforms
+        arrowArray1.draw() // ------ DRAW PLATFORM
+        arrowArray1.update()
     })
     platforms.forEach(platform => { // loop through array of Platforms
         platform.draw() // ------ DRAW PLATFORM
