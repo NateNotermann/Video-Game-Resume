@@ -303,9 +303,9 @@ class BuildingPRIME {
             y: y //canvas.height - 468
         }
         // -- ACTUAL Building size is relative to the actual image file size/dimensions. -- //
-        this.width = 483 //*buildingSize2 //w //650 //default width // Added *2 on 12/27/23
-        this.height = 500 //*buildingSize2 //h //468 //default height // Added *2 on 12/27/23
-        this.currentCropWidth = 483 //*buildingSize2
+        this.width = PRIME.width //*buildingSize2 //w //650 //default width // Added *2 on 12/27/23
+        this.height = PRIME.height //*buildingSize2 //h //468 //default height // Added *2 on 12/27/23
+        this.currentCropWidth = PRIME.width //*buildingSize2
         // this.image = MCTC
         this.frames = 0
         this.currentSprite = PRIME
@@ -340,8 +340,61 @@ class BuildingPRIME {
     }
 
     update() {
+        //     this.frames++;
+        // if (this.frames > 59 ) {
+        //     this.frames = 0;
+        // } 
+        this.draw()
+    } 
+} // End of Building2 Sprite
+
+// -------- Elements PRIME -------- //
+class ElementsPRIME {
+    constructor(x, y, w, h, image) { //  passing in x & y positions
+        this.position = {
+            x: x, //1500,
+            y: y //canvas.height - 468
+        }
+        // -- ACTUAL Building size is relative to the actual image file size/dimensions. -- //
+        this.width = 900 //PrimeElements.width //*buildingSize2 //w //650 //default width // Added *2 on 12/27/23
+        this.height = 900 // PrimeElements.height //*buildingSize2 //h //468 //default height // Added *2 on 12/27/23
+        this.currentCropWidth = 966 //PrimeElements.width //*buildingSize2
+        // this.image = MCTC
+        this.frames = 0
+        this.currentSprite = PrimeElements
+    }
+    draw() { 
+        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+
+         // Apply a glowing effect using shadow
+         if (glowPRIME) {
+            c.shadowColor = 'white'; // Set the color of the glow
+            c.shadowBlur = 50; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+        }
+        c.drawImage( // player sprite image
+            // this.image,
+            this.currentSprite, 
+            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+            0,                  // crop image Y
+            this.currentCropWidth,                // crop image Y
+            this.height, // 650,                // crop image X
+            this.position.x, 
+            this.position.y,
+            this.width,
+            this.height )
+            // Turn off glow
+            c.shadowColor = 'transparent'; // Set the color of the glow
+            c.shadowBlur = 0; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+    }
+
+    update() {
             this.frames++;
-        if (this.frames > 59 ) {
+        if (this.frames > 29 ) {
             this.frames = 0;
         } 
         this.draw()

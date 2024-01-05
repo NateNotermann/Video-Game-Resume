@@ -76,6 +76,7 @@ tallPlatform.src = './img/platformSmallTall.png'
 // const hillImage = new Image()   // Hill Image - Dimensions
 // hillImage.src = './img/hills.png'
 
+// -------- Background Images -------- //
 const skyImage = new Image()   // Hill Image - Dimensions
 skyImage.src = './img/Sky.jpg'
 
@@ -91,6 +92,7 @@ foregroundImage.src = './img/foreground.png'
 const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
 cloudImage.src = './img/cloud.png'
 
+// -------- Player Images -------- //
 const spriteRunLeft = new Image()   // spriteRunLeft Image - Dimensions
 spriteRunLeft.src = './img/spriteRunLeft.png'
 
@@ -103,6 +105,7 @@ spriteStandLeft.src = './img/spriteStandLeft.png'
 const spriteStandRight = new Image()   // spriteStandRight Image - Dimensions
 spriteStandRight.src = './img/spriteStandRight.png'
 
+// -------- Building Images -------- //
 const MCTC = new Image()   
 MCTC.src = './img/MCTC LONG.png'
 
@@ -116,12 +119,13 @@ const HGA = new Image()
 HGA.src = './img/HGA Long.png'
 
 const PRIME = new Image()   
-PRIME.src = './img/PRIME Long.png'
+PRIME.src = './img/Prime.png'
+
+const PrimeElements = new Image()   
+PrimeElements.src = './img/PrimeFlag2.png'
 
 const ArrowPic = new Image()   
 ArrowPic.src = './img/arrow.png'
-
-// -------- IMAGE VARIABLES -------- //
 
 // -------- GAMEPAD VARIABLES -------- //
 let controllerIndex = null;
@@ -156,6 +160,7 @@ let buildingMCTC = []
 let buildingCOYOTE  = []
 let buildingCBRE = []
 let buildingPRIME = []
+let elementsPRIME = []
 let buildingHGA = []
 let arrowArray = []
 // -------- ELEMENT VARIABLES --------
@@ -243,7 +248,8 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580�
 buildingMCTC = [ new BuildingMCTC(2500, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
 buildingCOYOTE = [ new BuildingCOYOTE (5000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 buildingCBRE = [ new BuildingCBRE(7500, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
-buildingPRIME = [ new BuildingPRIME(10000, canvas.height - PRIME.height - platformHeight, 250, 422, PRIME)] // HGA (x,y,w,h,image,)
+buildingPRIME = [ new BuildingPRIME(10000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
+elementsPRIME = [ new ElementsPRIME(10000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
 buildingHGA = [ new BuildingHGA(12500, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
 
 arrowArray = [ new ARROW({x: 800, y: canvas.height - ArrowPic.height - 110, image: ArrowPic})] // PRIME (x,y,w,h,image,)
@@ -311,6 +317,10 @@ function animate() {
     buildingCBRE.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingCBRE
         building.update()
+    }) 
+    elementsPRIME.forEach(element => { // loop through array of buildingCBRE
+        element.draw()     // ------ DRAW buildingCBRE
+        element.update()
     }) 
     buildingPRIME.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingCBRE
@@ -411,6 +421,9 @@ function animate() {
             buildingCBRE.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
+            elementsPRIME.forEach(element => { // ---- building SCROLL ----
+                element.position.x -= (playerMovement)
+            });
             buildingPRIME.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
@@ -456,6 +469,9 @@ function animate() {
             });
             buildingCBRE.forEach(building => { // ---- Building SCROLL ----
                 building.position.x += (playerMovement)
+            });
+            elementsPRIME.forEach(element => { // ---- Building SCROLL ----
+                element.position.x += (playerMovement)
             });
             buildingPRIME.forEach(building => { // ---- Building SCROLL ----
                 building.position.x += (playerMovement)
