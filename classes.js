@@ -1,6 +1,5 @@
 // classes are a blueprint for creating objects that share the same properties and methods.
 
-
 // -------- PLAYER CLASS -------- //
 class Player {
     constructor() { //  passing in x & y positions
@@ -50,7 +49,6 @@ class Player {
             this.width,
             this.height ) 
     }
-
     update() {
         this.frames++
         if (this.frames > 59 && 
@@ -173,7 +171,6 @@ class BuildingMCTC {
             c.shadowOffsetX = 0;
             c.shadowOffsetY = 0;
     }
-
     update() {
             this.frames++;
         if (this.frames > 29 ) {
@@ -191,9 +188,9 @@ class BuildingCOYOTE  {
             x: x, //1500,
             y: y
         }
-        this.width =  1550 //w*buildingSize3 //650 //default width
-        this.height = 495 //h*buildingSize3 //468 //default height
-        this.currentCropWidth = 1550 //*buildingSize3
+        this.width =  1550 //w* //650 //default width
+        this.height = 495 //h* //468 //default height
+        this.currentCropWidth = 1550 //*
 
         this.image = image
         this.frames = 0
@@ -228,7 +225,6 @@ class BuildingCOYOTE  {
             c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
             c.shadowOffsetY = 0; // Set the vertical offset of the shadow
     }
-
     update() {
             this.frames++;
         if (this.frames > 0 ) {
@@ -283,7 +279,6 @@ class BuildingCBRE {
             c.shadowOffsetY = 0; // Set the vertical offset of the shadow
         }
     }
-
     update() {
             this.frames++;
         if (this.frames > 29 ) {
@@ -303,9 +298,9 @@ class BuildingPRIME {
             y: y //canvas.height - 468
         }
         // -- ACTUAL Building size is relative to the actual image file size/dimensions. -- //
-        this.width = PRIME.width //*buildingSize2 //w //650 //default width // Added *2 on 12/27/23
-        this.height = PRIME.height //*buildingSize2 //h //468 //default height // Added *2 on 12/27/23
-        this.currentCropWidth = PRIME.width //*buildingSize2
+        this.width = PRIME.width //* //w //650 //default width // Added *2 on 12/27/23
+        this.height = PRIME.height //* //h //468 //default height // Added *2 on 12/27/23
+        this.currentCropWidth = PRIME.width //*
         // this.image = MCTC
         this.frames = 0
         this.currentSprite = PRIME
@@ -356,9 +351,9 @@ class ElementsPRIME {
             y: y //canvas.height - 468
         }
         // -- ACTUAL Building size is relative to the actual image file size/dimensions. -- //
-        this.width = 900 //PrimeElements.width //*buildingSize2 //w //650 //default width // Added *2 on 12/27/23
-        this.height = 900 // PrimeElements.height //*buildingSize2 //h //468 //default height // Added *2 on 12/27/23
-        this.currentCropWidth = 966 //PrimeElements.width //*buildingSize2
+        this.width = 900 //PrimeElements.width //* //w //650 //default width // Added *2 on 12/27/23
+        this.height = 900 // PrimeElements.height //* //h //468 //default height // Added *2 on 12/27/23
+        this.currentCropWidth = 966 //PrimeElements.width //*
         // this.image = MCTC
         this.frames = 0
         this.currentSprite = PrimeElements
@@ -409,9 +404,9 @@ class BuildingHGA {
             x: x, //1500,
             y: y
         }
-        this.width =  1000 //w*buildingSize3 //650 //default width
-        this.height = 820 //h*buildingSize3 //468 //default height
-        this.currentCropWidth = 966 //*buildingSize3
+        this.width =  1000 //w* //650 //default width
+        this.height = 820 //h* //468 //default height
+        this.currentCropWidth = 966 //*
 
         this.image = image
         this.frames = 0
@@ -519,7 +514,6 @@ class Sky {
             this.position.x, 
             this.position.y ) 
     }
-    
 }
 
 // -------- BACKGROUND CLASS -------- //
@@ -556,7 +550,6 @@ class Midground {
             this.position.x, 
             this.position.y ) 
     }
-    
 }
 
 // -------- FOREGROUND CLASS -------- //
@@ -575,5 +568,4 @@ class Foreground {
             this.position.x, 
             this.position.y ) 
     }
-    
 }

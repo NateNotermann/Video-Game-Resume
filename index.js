@@ -38,10 +38,8 @@ const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
 const playerSize = 2 // used when referencing height in player class
 const buildingSize = 2
 const buildingSize2 = 1.5
-const buildingSize3 = 2
 const backgroundWidth = 2560
 const skyWidth = 2559
-let lastKey
 let playerWidth = 66
 let playerHeight = 150
 let groundPosition = 125 //canvas.height - platformHeight
@@ -49,11 +47,31 @@ let scrollOffset = 0
 let scrollOffsetUp = 0
 let time = 1
 let animateRunning = false
+
+// -- Building Glow --
 let glowMCTC = false
 let glowCOYOTE = false
 let glowCBRE = false
 let glowPRIME = false
 let glowHGA = false
+
+// -------- GAMEPAD VARIABLES -------- //
+let lastKey
+let controllerIndex = null;
+let leftPressed = false;
+let rightPressed = false;
+let upPressed = false;
+let downPressed = false;
+
+let greenPressed0 = false;
+let redPressed1 = false;
+let bluePressed2 = false;
+let yellowPressed3 = false;
+
+let connected = false
+let animateLoop = false
+// -------- GAMEPAD VARIABLES -------- //
+
 
 // -------- IMAGE VARIABLES --------
 const platformImage = new Image()   
@@ -115,22 +133,6 @@ PrimeElements.src = './img/PrimeFlag2.png'
 
 const ArrowPic = new Image()   
 ArrowPic.src = './img/arrow.png'
-
-// -------- GAMEPAD VARIABLES -------- //
-let controllerIndex = null;
-let leftPressed = false;
-let rightPressed = false;
-let upPressed = false;
-let downPressed = false;
-
-let bluePressed = false;
-let yellowPressed = false;
-let redPressed = false;
-let greenPressed = false;
-
-let connected = false
-let animateLoop = false
-// -------- GAMEPAD VARIABLES -------- //
 
 
 // -------- ELEMENT VARIABLES --------
@@ -943,10 +945,10 @@ function controllerInput() {
         else if (upDownValue <= -stickDeadZone) { // if gamepad up/down axes is <= than deadZone, move down
             upPressed = true;
         }
-        greenPressed = buttons[0].pressed;
-        redPressed = buttons[1].pressed;
-        bluePressed = buttons[2].pressed;
-        yellowPressed = buttons[3].pressed;
+        greenPressed0 = buttons[0].pressed;
+        redPressed1 = buttons[1].pressed;
+        bluePressed2 = buttons[2].pressed;
+        yellowPressed3 = buttons[3].pressed;
 
     }
 };
