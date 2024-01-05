@@ -135,13 +135,11 @@ Make controller & keyboard buttons react when pressed.    <---------------------
 
 #### Final Steps      
 Add javascript sound effects from other repo   
-Deploy to Netlify   
+Deploy to Netlify   - Done
 Celebratory Dance    
 
 ### Stretch Goals:    
 Sprite Jumping Right
 Sprite Jumping Left   
-Make direction arrow light up
 Add Music    
 Add sliders to change jump & damage amount & time   
-Use Spotify API for music    
