@@ -107,13 +107,14 @@ Custom Building Background Art
     E. Custom main Buildings Animations - Done   
         1. MCTC - Done    
         <!-- 2. Restaurants - maybe..   -->
-        2. Coyote - Done  
+        2. Coyote - Done  <-------------------------- Add truck animation..     
         3. CBRE - Done    
-        4. Prime - Done  <---------------------------- Make Prime bigger    
+        4. Prime - Done   
         5. HGA - Done  
     F. Add collision descriptions Main buildings. - Done  
     G. Add collision glow effect to Main buildings. - Done  
     H. Arrow pointing where to go. - Done   
+    I. Add Arrow lights. - Done   
 
 Custom Platform Art- Done     
 Moving Clouds Custom Art - Done  
