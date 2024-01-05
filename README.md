@@ -125,6 +125,8 @@ Job Descriptions <-------------------------- in progress
 
 Place More/All Platforms <-------------------------- in progress    
 
+Fix Onload render bug <-------------------------- in progress 
+
 ## Game Boy Frame & Buttons  <---- in progress  
 Add controller & keyboard buttons to the Game Boy frame.  <-------------------------- in progress  
 Make controller & keyboard buttons react when pressed.    <-------------------------- in progress  
