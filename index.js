@@ -171,13 +171,6 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 function init() {
 // -------- ELEMENT VARIABLES --------
 player = new Player() //  calling the "Player" class
-platformTwos = [
-    new PlatformTwo({x:1000, y: 1080-250, image: platformTwoImage }),
-    new PlatformTwo({x:1000 + platformTwoImage.width , y: 1080-375, image: platformTwoImage }),
-    new PlatformTwo({x:1000 + (platformTwoImage.width * 2), y: 1080-500, image: platformTwoImage }),
-    new PlatformTwo({x:1000 + (platformTwoImage.width * 3), y: 1080-375, image: platformTwoImage }),
-    new PlatformTwo({x:1000 + (platformTwoImage.width * 4), y: 1080-250, image: platformTwoImage }),
-] 
 
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
@@ -206,10 +199,16 @@ foregrounds = [
     new Foreground({x:4250*4 , y: 1080-525, image: foregroundImage})
 ]
 
+platformTwos = [
+    new PlatformTwo({x:1000 + (platformTwoImage.width), y: 1080-250, image: platformTwoImage }),
+    new PlatformTwo({x:1000 + (platformTwoImage.width * 2) , y: 1080-375, image: platformTwoImage }),
+    new PlatformTwo({x:1000 + (platformTwoImage.width * 3), y: 1080-500, image: platformTwoImage }),
+    new PlatformTwo({x:1000 + (platformTwoImage.width * 4), y: 1080-375, image: platformTwoImage }),
+    new PlatformTwo({x:1000 + (platformTwoImage.width * 5), y: 1080-250, image: platformTwoImage }),
+] 
 
-// backgrounds = [new Background({x:0, y: canvas.height - backgroundImage.height, image: backgroundImage})] // Array of Backgrounds
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
-    new Platform({x: -1500, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
+    new Platform({x: -900, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
     new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
     new Platform({x: platformWidth * 2, y: canvas.height - groundPosition, image: platformImage}), // Ground 3
     new Platform({x: platformWidth* 3, y: canvas.height - groundPosition, image: platformImage}), // Ground 4
