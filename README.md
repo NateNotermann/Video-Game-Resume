@@ -81,9 +81,9 @@ Pushing Live - DONE
 ### Phase 2. Platformer Functionality & Custom Pixel Art
 #### Adding Platformer Game Functionality
 Add a frame around the video game canvas to look like a Game Boy. Or BMO from Adventure Time. -- DONE    
-Make Game Boy frame responsive/resize when window changes size. -- DONE
-Remove Health bar 2 player win/loose scenarios -- Done 
-Moved Player 2 movement into player one. -- Done     
+Make Game Boy frame responsive/resize when window changes size. -- DONE   
+Remove Health bar 2 player win/loose scenarios -- Done   
+Moved Player 2 movement into player one. -- Done       
 
 #### Platforms
 Add Platform collision functionality -- Done  
@@ -107,7 +107,7 @@ Custom Building Background Art
     E. Custom main Buildings Animations - Done   
         1. MCTC - Done    
         <!-- 2. Restaurants - maybe..   -->
-        2. Coyote - Done  <-------------------------- Add truck animation..     
+        2. Coyote - Done    
         3. CBRE - Done    
         4. Prime - Done   
         5. HGA - Done  
