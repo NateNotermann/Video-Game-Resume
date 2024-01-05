@@ -1,6 +1,5 @@
 // classes are a blueprint for creating objects that share the same properties and methods.
 
-
 // -------- PLAYER CLASS -------- //
 class Player {
     constructor() { //  passing in x & y positions
@@ -35,8 +34,8 @@ class Player {
         this.currentCropWidth = 177
     }
     draw() { 
-        c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
-        c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
 
         c.drawImage( // player sprite image
             // this.image,
@@ -50,7 +49,6 @@ class Player {
             this.width,
             this.height ) 
     }
-
     update() {
         this.frames++
         if (this.frames > 59 && 
@@ -173,7 +171,6 @@ class BuildingMCTC {
             c.shadowOffsetX = 0;
             c.shadowOffsetY = 0;
     }
-
     update() {
             this.frames++;
         if (this.frames > 29 ) {
@@ -191,9 +188,9 @@ class BuildingCOYOTE  {
             x: x, //1500,
             y: y
         }
-        this.width =  1550 //w*buildingSize3 //650 //default width
-        this.height = 495 //h*buildingSize3 //468 //default height
-        this.currentCropWidth = 1550 //*buildingSize3
+        this.width =  1550 //w* //650 //default width
+        this.height = 495 //h* //468 //default height
+        this.currentCropWidth = 1550 //*
 
         this.image = image
         this.frames = 0
@@ -228,7 +225,6 @@ class BuildingCOYOTE  {
             c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
             c.shadowOffsetY = 0; // Set the vertical offset of the shadow
     }
-
     update() {
             this.frames++;
         if (this.frames > 0 ) {
@@ -283,7 +279,6 @@ class BuildingCBRE {
             c.shadowOffsetY = 0; // Set the vertical offset of the shadow
         }
     }
-
     update() {
             this.frames++;
         if (this.frames > 29 ) {
@@ -303,9 +298,9 @@ class BuildingPRIME {
             y: y //canvas.height - 468
         }
         // -- ACTUAL Building size is relative to the actual image file size/dimensions. -- //
-        this.width = 483 //*buildingSize2 //w //650 //default width // Added *2 on 12/27/23
-        this.height = 500 //*buildingSize2 //h //468 //default height // Added *2 on 12/27/23
-        this.currentCropWidth = 483 //*buildingSize2
+        this.width = PRIME.width //* //w //650 //default width // Added *2 on 12/27/23
+        this.height = PRIME.height //* //h //468 //default height // Added *2 on 12/27/23
+        this.currentCropWidth = PRIME.width //*
         // this.image = MCTC
         this.frames = 0
         this.currentSprite = PRIME
@@ -340,8 +335,61 @@ class BuildingPRIME {
     }
 
     update() {
+        //     this.frames++;
+        // if (this.frames > 59 ) {
+        //     this.frames = 0;
+        // } 
+        this.draw()
+    } 
+} // End of Building2 Sprite
+
+// -------- Elements PRIME -------- //
+class ElementsPRIME {
+    constructor(x, y, w, h, image) { //  passing in x & y positions
+        this.position = {
+            x: x, //1500,
+            y: y //canvas.height - 468
+        }
+        // -- ACTUAL Building size is relative to the actual image file size/dimensions. -- //
+        this.width = 900 //PrimeElements.width //* //w //650 //default width // Added *2 on 12/27/23
+        this.height = 900 // PrimeElements.height //* //h //468 //default height // Added *2 on 12/27/23
+        this.currentCropWidth = 966 //PrimeElements.width //*
+        // this.image = MCTC
+        this.frames = 0
+        this.currentSprite = PrimeElements
+    }
+    draw() { 
+        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+
+         // Apply a glowing effect using shadow
+         if (glowPRIME) {
+            c.shadowColor = 'white'; // Set the color of the glow
+            c.shadowBlur = 50; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+        }
+        c.drawImage( // player sprite image
+            // this.image,
+            this.currentSprite, 
+            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+            0,                  // crop image Y
+            this.currentCropWidth,                // crop image Y
+            this.height, // 650,                // crop image X
+            this.position.x, 
+            this.position.y,
+            this.width,
+            this.height )
+            // Turn off glow
+            c.shadowColor = 'transparent'; // Set the color of the glow
+            c.shadowBlur = 0; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+    }
+
+    update() {
             this.frames++;
-        if (this.frames > 59 ) {
+        if (this.frames > 29 ) {
             this.frames = 0;
         } 
         this.draw()
@@ -356,9 +404,9 @@ class BuildingHGA {
             x: x, //1500,
             y: y
         }
-        this.width =  1000 //w*buildingSize3 //650 //default width
-        this.height = 820 //h*buildingSize3 //468 //default height
-        this.currentCropWidth = 966 //*buildingSize3
+        this.width =  1000 //w* //650 //default width
+        this.height = 820 //h* //468 //default height
+        this.currentCropWidth = 966 //*
 
         this.image = image
         this.frames = 0
@@ -404,24 +452,56 @@ class BuildingHGA {
 
 
 
-
-class Hill {    // ------ Hill Class used for Hills ------
-    constructor({ x, y, image }) {
+// -------- BUILDING CLASS -------- //
+class ARROW {
+    constructor(x, y, w, h, image) { //  passing in x & y positions
         this.position = {
-            x: x, // x is now equal to the passed in x.  // x: 600,
-            y: y // y is now equal to the passed in y.  // y: 300
-        }       // Hills image: 7545 × 592
-        this.image = image
-        this.width = image.width  //200
-        this.height = image.height //20
+            x: x, //1500,
+            y: y //canvas.height - 468
+        }
+        // -- ACTUAL Building size is relative to the actual image file size/dimensions. -- //
+        this.width = 616 //w //650 //default width // Added *2 on 12/27/23
+        this.height = 300 //h //468 //default height // Added *2 on 12/27/23
+        this.currentCropWidth = 616
+        // this.image = MCTC
+        this.frames = 0
+        this.currentSprite = ArrowPic
     }
-    draw() {   
-        c.drawImage(
-            this.image,  
+    draw() { 
+
+        if (glowMCTC) {
+            c.shadowColor = 'white'; // Set the color of the glow
+            c.shadowBlur = 50; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+        }
+
+        c.drawImage( // player sprite image
+            // this.image,
+            this.currentSprite, 
+            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+            0,                  // crop image Y
+            this.currentCropWidth,                // crop image Y
+            this.height, // 650,                // crop image X
             this.position.x, 
-            this.position.y ) 
+            this.position.y,
+            this.width,
+            this.height 
+            )     
+            // this turns off glow for any/all other canvas element
+            c.shadowColor = 'transparent';
+            c.shadowBlur = 0;
+            c.shadowOffsetX = 0;
+            c.shadowOffsetY = 0;
     }
-}
+    update() {
+            this.frames++;
+        if (this.frames > 29 ) {
+            this.frames = 0;
+        } 
+        this.draw()
+    } 
+} // End of Building1 Sprite
 
 
 // -------- COULD CLASS -------- //
@@ -443,32 +523,32 @@ class Cloud {    // ---- Background Class used for Cloud Image ------
 }
 
 
-// -------- ARROW CLASS -------- //
-class ARROW {    // ------ Platform Class used for ground and all platforms. ------
-    constructor({ x, y, image }) {
-        this.position = {
-            x: x, // x is now equal to the passed in x.  // x: 600,
-            y: y // y is now equal to the passed in y.  // y: 300
-        }
-        this.image = image
-        this.width = image.width  //580
-        this.height = image.height //125
-    }
-    draw() {   
-        // platform's rectangle
-        // c.fillStyle = 'red'
-        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
-        c.drawImage(
-            this.image,  
-            this.position.x, 
-            this.position.y)
-            // this.width, 
-            // this.height ) 
-    }
-    update() {
-        this.draw
-    }
-}
+// // -------- ARROW CLASS -------- //
+// class ARROW {    // ------ Platform Class used for ground and all platforms. ------
+//     constructor({ x, y, image }) {
+//         this.position = {
+//             x: x, // x is now equal to the passed in x.  // x: 600,
+//             y: y // y is now equal to the passed in y.  // y: 300
+//         }
+//         this.image = image
+//         this.width = image.width  //580
+//         this.height = image.height //125
+//     }
+//     draw() {   
+//         // platform's rectangle
+//         // c.fillStyle = 'red'
+//         // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+//         c.drawImage(
+//             this.image,  
+//             this.position.x, 
+//             this.position.y)
+//             // this.width, 
+//             // this.height ) 
+//     }
+//     update() {
+//         this.draw
+//     }
+// }
 
 
 // -------- SKY CLASS -------- //
@@ -487,7 +567,6 @@ class Sky {
             this.position.x, 
             this.position.y ) 
     }
-    
 }
 
 // -------- BACKGROUND CLASS -------- //
@@ -524,7 +603,6 @@ class Midground {
             this.position.x, 
             this.position.y ) 
     }
-    
 }
 
 // -------- FOREGROUND CLASS -------- //
@@ -543,5 +621,4 @@ class Foreground {
             this.position.x, 
             this.position.y ) 
     }
-    
 }
