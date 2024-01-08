@@ -122,7 +122,8 @@ make scroll with player - Done
 
 <!-- Add side collision OR add fall pits in there place <-------------------------- in progress   -->
 
-Job Descriptions <-------------------------- in progress  
+Job Description Modals <-------------------------- in progress  
+Maybe reverse job order <-------------------------- in progress  
 
 Place More/All Platforms <-------------------------- in progress    
 
