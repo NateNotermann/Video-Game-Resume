@@ -154,7 +154,7 @@ html {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: auto;
+    width: 65%;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -166,7 +166,7 @@ html {
   }
   .message {
     font-size:1.1rem;
-    margin-bottom: 1.6rem;
+    margin-bottom: 1rem;
     margin-top: 0;
   }
   .btn {
@@ -195,9 +195,26 @@ html {
     transform: translate(0, 0);
   }
   
-  .options {
+  .buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  h3 {
+    margin: 0px;
+  } 
+  p {
+    margin: 0px;
+  }
+  ul {
+    list-style-type: circle;
+  }
+
+  li {
+    margin-top: 1em; 
+    margin-bottom: 1em; 
+    margin-left: 0em;
+    margin-right: 0em;
   }
   

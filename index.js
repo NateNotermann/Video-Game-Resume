@@ -2,7 +2,7 @@
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
-const modal = document.getElementById('modal')
+const modalHGA = document.getElementById('modalHGA')
 const modalTextElement = document.getElementById('modalText');
 const closeButton = document.getElementById('btnClose');
 const modalHelp = document.getElementById('modalHelp');
@@ -61,7 +61,7 @@ let glowHGA = false
 
 // -- Building Modals --
 let helpModal = true 
-let mainModal = false
+let HGAModal = false
 
 // -------- GAMEPAD VARIABLES -------- //
 let lastKey
@@ -180,7 +180,7 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 }
 
 function init() {
-    // mainModalOff()
+    // modalHGAOff()
     // helpModalOn()
 // -------- ELEMENT VARIABLES --------
 player = new Player() //  calling the "Player" class
@@ -247,12 +247,12 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580‚
     new Platform({x: platformWidth* 23, y: canvas.height - 125, image: platformImage}), // Platform 14
 ];
 
-buildingMCTC = [ new BuildingMCTC(2500, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingHGA = [ new BuildingHGA(800, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
+buildingMCTC = [ new BuildingMCTC(12500, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
 buildingCOYOTE = [ new BuildingCOYOTE (5000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 buildingCBRE = [ new BuildingCBRE(7500, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
 buildingPRIME = [ new BuildingPRIME(10000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
 elementsPRIME = [ new ElementsPRIME(10000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
-buildingHGA = [ new BuildingHGA(12500, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
 
 arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic)] 
 // building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
@@ -556,27 +556,27 @@ function animate() {
     let TextPRIME = 'Prime text'
     let TextHGA = '‚óè Developed user-friendly full-stack web applications using ASP.NET and Visual Basic, leveraging the .NET framework, resulting in a 20% increase in overall application performance. '
 
-    function mainModalText() { // -- change modal text dynamically
-        if (mainModal){ // if modal on. Check which building is glowing
-            if (glowMCTC) {
-                modalTextElement.textContent = newMCTC;
-            } else if(glowCOYOTE) {
-                modalTextElement.textContent = TextCOYOTE;
-            } else if(glowCBRE) {
-                modalTextElement.textContent = TextCBRE;
-            } else if(glowPRIME) {
-                modalTextElement.textContent = TextPRIME;
-            } else if(glowHGA) {
-                modalTextElement.textContent = TextHGA;
-            }
-        }
-    }
+    // function mainModalText() { // -- change modalHGA text dynamically
+    //     if (HGAModal){ // if modalHGA on. Check which building is glowing
+    //         if (glowMCTC) {
+    //             modalTextElement.textContent = newMCTC;
+    //         } else if(glowCOYOTE) {
+    //             modalTextElement.textContent = TextCOYOTE;
+    //         } else if(glowCBRE) {
+    //             modalTextElement.textContent = TextCBRE;
+    //         } else if(glowPRIME) {
+    //             modalTextElement.textContent = TextPRIME;
+    //         } else if(glowHGA) {
+    //             modalTextElement.textContent = TextHGA;
+    //         }
+    //     }
+    // }
 
     // ---- Check if x is pressed ----
     function xPressed(){ // check if x is pressed
         if (keys.x.pressed){
-            mainModal = true
-            mainModalOn()
+            HGAModal = true
+            modalHGAOn()
             console.log('glow and X');
         }
     }
@@ -669,7 +669,7 @@ function animate() {
     //     init();
     // }
     ifNoGlow()
-    mainModalText()
+    // mainModalText()
     controllerInput()
     checkButtonPressed()
     requestAnimationFrame(animate) 
@@ -881,19 +881,19 @@ function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS On
 
 function ifNoGlow(){
     if( !glowMCTC && !glowCOYOTE && !glowCBRE && !glowPRIME && !glowHGA){
-        mainModalOff()
+        modalHGAOff()
     } 
 }
 
- // ---- Modal ON ----
- function mainModalOn(){
-    mainModal = true
-    modal.style.display = 'block'
+ // ---- modalHGA ON ----
+ function modalHGAOn(){
+    HGAModal = true
+    modalHGA.style.display = 'block'
 }
-  // ---- Modal OFF ----
-function mainModalOff(){
-    mainModal = false
-    modal.style.display = 'none'
+  // ---- modalHGA OFF ----
+function modalHGAOff(){
+    HGAModal = false
+    modalHGA.style.display = 'none'
 }
 
  // ---- modalHelp ON ----
@@ -908,15 +908,15 @@ function helpModalOff(){
 }
 
 
-// ---- Click listener for Close button -- closed modal
+// ---- Click listener for Close button -- closed HGAModal
 closeButton.addEventListener('click', function() {
-    setTimeout(mainModalOff, 300); 
+    setTimeout(modalHGAOff, 100); 
     console.log('btnclose clicked');
 })
 
-// ---- Click listener for Help Close button -- closed modal
+// ---- Click listener for Help Close button -- closed HGAModal
 closeButtonHelp.addEventListener('click', function() {
-    setTimeout(helpModalOff, 300); 
+    setTimeout(helpModalOff, 100); 
     console.log('btncloseHelp clicked');
 })
 
