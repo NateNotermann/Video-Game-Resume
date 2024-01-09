@@ -5,6 +5,8 @@ const c = canvas.getContext('2d');
 const modal = document.getElementById('modal')
 const modalTextElement = document.getElementById('modalText');
 const closeButton = document.getElementById('btnClose');
+const modalHelp = document.getElementById('modalHelp');
+const closeButtonHelp = document.getElementById('btnCloseHelp');
 // canvas.width = window.innerWidth
 // canvas.height = window.innerHeight
 canvas.width =  1920  //visualViewport.width - 10
@@ -57,14 +59,9 @@ let glowCBRE = false
 let glowPRIME = false
 let glowHGA = false
 
-// -- Building Modals -- 
+// -- Building Modals --
+let helpModal = true 
 let mainModal = false
-
-let modalMCTC = false
-let modalCOYOTE = false
-let modalCBRE = false
-let modalPRIME = false
-let modalHGA = false
 
 // -------- GAMEPAD VARIABLES -------- //
 let lastKey
@@ -183,8 +180,8 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 }
 
 function init() {
-
-mainModalOn()
+    // mainModalOff()
+    // helpModalOn()
 // -------- ELEMENT VARIABLES --------
 player = new Player() //  calling the "Player" class
 
@@ -661,10 +658,9 @@ function animate() {
     let TextCBRE = 'CBRE text'
     let TextPRIME = 'Prime text'
     let TextHGA = 'HGA text'
-    let TextDefault = 'default text'
 
-    function mainModalText() {
-        if (mainModal){ // if modal on
+    function mainModalText() { // -- change modal text dynamically
+        if (mainModal){ // if modal on. Check which building is glowing
             if (glowMCTC) {
                 modalTextElement.textContent = newMCTC;
             } else if(glowCOYOTE) {
@@ -675,21 +671,20 @@ function animate() {
                 modalTextElement.textContent = TextPRIME;
             } else if(glowHGA) {
                 modalTextElement.textContent = TextHGA;
-            } else {
-                modalTextElement.textContent = TextDefault;
             }
         }
     }
 
-
-        // ---- Check if x is pressed ----
+    // ---- Check if x is pressed ----
     function xPressed(){ // check if x is pressed
         if (keys.x.pressed){
             mainModal = true
+            mainModalOn()
             console.log('glow and X');
         }
     }
     
+
     // building MCTC
     buildingMCTC.forEach(buildingMCTC => {
         if (
@@ -701,7 +696,7 @@ function animate() {
             glowMCTC = true
             xPressed()
         } else {
-            glowMCTC = false  
+            glowMCTC = false
         }
     })
     //building CBRE
@@ -869,6 +864,7 @@ function animate() {
     //     console.log('false start!!');
     //     init();
     // }
+    ifNoGlow()
     mainModalText()
     controllerInput()
     checkButtonPressed()
@@ -1077,6 +1073,12 @@ function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS On
     }
 }
 
+function ifNoGlow(){
+    if( !glowMCTC && !glowCOYOTE && !glowCBRE && !glowPRIME && !glowHGA){
+        mainModalOff()
+    } 
+}
+
  // ---- Modal ON ----
  function mainModalOn(){
     mainModal = true
@@ -1088,11 +1090,28 @@ function mainModalOff(){
     modal.style.display = 'none'
 }
 
+ // ---- modalHelp ON ----
+ function helpModalOn(){
+    helpModal = true
+    modalHelp.style.display = 'block'
+}
+  // ---- modalHelp OFF ----
+function helpModalOff(){
+    helpModal = false
+    modalHelp.style.display = 'none'
+}
+
 
 // ---- Click listener for Close button -- closed modal
 closeButton.addEventListener('click', function() {
-    mainModalOff()
+    setTimeout(mainModalOff, 800); 
     console.log('btnclose clicked');
+})
+
+// ---- Click listener for Help Close button -- closed modal
+closeButtonHelp.addEventListener('click', function() {
+    setTimeout(helpModalOff, 800); 
+    console.log('btncloseHelp clicked');
 })
 
 
