@@ -382,22 +382,6 @@ function animate() {
     // ------------ IF VELOCITY IS 0, then.. ------------
     } else { // If player is NOT moving left/right then..
         player.velocity.x = 0
-        // console.log('velocity = O');
-            // player.frames = 1 // restart any animation back to frame 1.
-            // if (!keys.right.pressed) {
-            //     player.currentSprite = player.sprites.stand.right
-            //     player.currentCropWidth = player.sprites.stand.cropWidth
-            //     player.width = player.sprites.stand.width
-            // }
-            // if (lastKey === 'right' && !keys.right.pressed || lastKey === 'right' && !keys.left.pressed ) { // if last pressed = right AND  R/L are NOT pressed then..
-            //     player.currentSprite = player.sprites.stand.right
-            //     player.currentCropWidth = player.sprites.stand.cropWidth
-            //     player.width = player.sprites.stand.width
-            // } else if (lastKey === 'left' && (!keys.right.pressed && !keys.left.pressed)) { // if last pressed = left AND  R/L are NOT pressed then..
-            //     player.currentSprite = player.sprites.stand.left
-            //     player.currentCropWidth = player.sprites.stand.cropWidth
-            //     player.width = player.sprites.stand.width
-            // }
     // ------ PLAYER MOVEMENT END ------
 
     // ------ IF VELOCITY IS STILL 0, AND  L/R PRESSED ------ 
@@ -542,18 +526,6 @@ function animate() {
             ) 
             {   
                 player.velocity.y = 0   // player does not fall
-                // if (
-                   
-                //     player.position.y + player.height <= platform.position.y //player bottom is <= than platform top
-                //     && keys.right.pressed
-                //     //  // players left side overlap with platform right side
-                //     && player.position.x <= platform.position.x + platform.width 
-                //     //  // players right side overlap with platform left side
-                //     && player.position.x + player.width >= platform.position.x 
-                //     ) {
-                //     player.velocity.x = 0 
-                //     console.log("stop1");
-                // } 
         }
     })
 
@@ -573,84 +545,10 @@ function animate() {
             {   
                 player.velocity.y = 0   // player does not fall
         }
-        // ---- SIDE COLLISION ---- //
-        // if (
-        //     // player.position.x < platformTwo.position.x + platformTwo.width // player left plat right
-        //     // player LEFT plat right 
-        //     player.position.x + player.width > platformTwo.position.x   // player right plat left 
-        //     && player.position.y < platformTwo.position.y + platformTwo.height // player top UNDER plat bottom
-        //     && player.position.y + player.height > platformTwo.position.y  // player bottom ABOVE plat top 
-        //     && player.currentSprite != player.sprites.stand.left
-        //     && player.currentSprite != player.sprites.run.left
-        //     // && keys.right.pressed
-        // ) {
-            
-        //     // if (keys.right.pressed && keys.left.pressed ) {
-        //     //     player.velocity.x = 0
-        //     //     console.log( "test moving out of collision");
-        //     // } else if (keys.right.pressed  
-        //     //     && player.position.x + player.width > platformTwo.position.x // player right > plat left 
-        //     //     ) { 
-        //     //     player.velocity.x = -15
-        //     //     // player.position.x = player.position.x -15
-        //     //     console.log("Collide Right");
-        //     // } else if (keys.left.pressed 
-        //     //     && player.position.x < platformTwo.position.x + platformTwo.width // player left < plat right
-        //     //     ) { 
-
-        //     //         player.velocity.x = +15
-        //         // player.position.x = player.position.x +15
-        //         // player.position.x = player.position.x + 15
-        //         player.velocity.x = 0
-        //         console.log("collide left");
-        //     // }  
-                
-        //     }
-        //     else if (// player RIGHT - plat Left 
-        //         player.position.x > platformTwo.position.x + platformTwo.width  // player left - plat right 
-        //         && player.position.y < platformTwo.position.y + platformTwo.height // player top UNDER plat bottom
-        //         && player.position.y + player.height > platformTwo.position.y  // player bottom ABOVE plat top 
-        //         && player.currentSprite != player.sprites.stand.right
-        //         && player.currentSprite != player.sprites.run.right
-        //     ){
-        //         // player.position.x = player.position.x -15
-        //         player.velocity.x = 0
-        //         console.log("collide right");
-        //     }
-        // ---- SIDE COLLISION ---- //
+    
     }) // ------ PLATFORMTWO COLLISION DETECTION END ------ //
 
 
-        
-
-        // player overlaps left and right sides with the sides of a platform
-        // if ( 
-        //     // player RIGHT side overlap with platform LEFT side 
-        //     player.position.x + playerWidth.width + player.velocity.x >= platform.position.x 
-        //     // player LEFT side overlap with platform RIGHT side 
-        //     && player.position.x + player.velocity.x <= platform.position.x + platform.width 
-        // ) 
-
-        // player RIGHT >= platform left  AND   player LEFT Less than platform left
-        // if (player.position.x + player.width >= platform.position.x 
-        //     // player LEFT < 
-        //     // && player.position < platform.position.x
-        //     // Right key is pressed
-        //     && keys.right.pressed
-        //     && player.velocity.y <= 0
-
-        //     ) 
-        //     {
-        //     player.velocity.x = 0
-        //     console.log("stop");
-        // } 
-        // // else if (player.position.x < platform.position.x + platform.width && player.position.x + player.width > platform.position.x + platform.width) {
-        //     player.velocity.x = 0
-        // }
-        // {
-        //     player.velocity.x = 0
-        //     console.log('STOP!');
-        // }
 
     let newMCTC = 'MCTC Text'
     let TextCOYOTE = 'coyote Text'
@@ -755,99 +653,6 @@ function animate() {
         }
     })
 
-    // if (glowMCTC || glowCOYOTE || glowCBRE || glowPRIME || glowHGA ) { // if overlap with building, 
-    //     console.log('glow');
-    //     if (keys.x.pressed){ // check x
-    //         // console.log('x IS pressed');
-    //         if (keys.x.pressed && glowMCTC) {
-    //             modalMCTC = true
-    //             console.log('mctc & x');
-    //         } else if (keys.x.pressed && glowCOYOTE) {
-    //             modalCOYOTE = true
-    //             console.log('Coyote & x');
-    //         } else if (keys.x.pressed && glowCBRE) {
-    //             modalCBRE = true
-    //             console.log('cbre & x');
-    //         } else if (keys.x.pressed && glowPRIME) {
-    //             modalPRIME = true
-    //             console.log('prime & x');
-    //         } else if (keys.x.pressed && glowHGA) {
-    //             console.log('hga & x');
-    //         } 
-    //     } 
-    // } else {
-    //     modalMCTC = false
-    //     modalCOYOTE = false
-    //     modalCBRE = false
-    //     modalPRIME = false 
-    //     modalHGA = false 
-    //     // console.log('modals off');
-    // }
-
-
-    // {
-    //     keys.x.pressed = false
-    //     console.log('x UNpressed');
-    // }
-    // ---- X key & button & building collision ---- //
-
-
-        // if (//player bottom is HIGHER than platform top
-        //     player.position.y + player.height <= platformTwo.position.y
-        //     // player bottom overlap with platform top side. (Player lands on platform)
-        //     && player.position.y + player.height + player.velocity.y >= platformTwo.position.y
-        //     //  // players left side overlap with platform right side
-        //     && player.position.x <= platformTwo.position.x + platformTwo.width 
-        //     //  // players right side overlap with platform left side
-        //     && player.position.x + player.width >= platformTwo.position.x 
-        //     ) 
-        //     {player.velocity.y = 0 
-        // }
-
-    // ------ SPRITE SWITCHING ------ Moved this to the player movement section
-    // if (
-    //     keys.right.pressed &&
-    //     lastKey === 'right' && 
-    //     player.currentSprite !== player.sprites.run.right) { // if sprite is not run right, then 
-    //         // player.frames = 1 // restart any animation back to frame 1.
-    //         // player.currentSprite = player.sprites.run.right // set it to run right
-    //         // player.currentCropWidth = player.sprites.run.cropWidth
-    //         // player.width = player.sprites.run.width
-    // } else if (
-    //     keys.left.pressed &&
-    //     lastKey === 'left' && 
-    //     player.currentSprite != player.sprites.run.left) {
-    //         player.frames = 1 // restart any animation back to frame 1.
-    //         player.currentSprite = player.sprites.run.left
-    //         player.currentCropWidth = player.sprites.run.cropWidth
-    //         player.width = player.sprites.run.width
-    // }  else if (
-    //     !keys.left.pressed &&
-    //     lastKey === 'left' && 
-    //     player.currentSprite != player.sprites.stand.left) {
-    //         player.frames = 1 // restart any animation back to frame 1.
-    //         player.currentSprite = player.sprites.stand.left
-    //         player.currentCropWidth = player.sprites.stand.cropWidth
-    //         player.width = player.sprites.stand.width
-    // }  else if (
-    //     !keys.right.pressed &&
-    //     lastKey === 'right' && 
-    //     player.currentSprite != player.sprites.stand.right) {
-    //         player.frames = 1 // restart any animation back to frame 1.
-    //         player.currentSprite = player.sprites.stand.right
-    //         player.currentCropWidth = player.sprites.stand.cropWidth
-    //         player.width = player.sprites.stand.width
-    // }  else if (
-    //     !keys.right.pressed &&
-    //     lastKey === 'right' && 
-    //     player.currentSprite != player.sprites.stand.right) {
-    //         player.frames = 1 // restart any animation back to frame 1.
-    //         player.currentSprite = player.sprites.stand.right
-    //         player.currentCropWidth = player.sprites.stand.cropWidth
-    //         player.width = player.sprites.stand.width
-    // }
-
-
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
     if (scrollOffset > platformImage.width * 6) {
@@ -876,6 +681,7 @@ animate()
 // ---- LISTEN FOR A KEY PRESSED ----
 addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode, key is event.key. ONLY works if they're listed in the EventListener
     // console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
+    if(!helpModal){
     switch (keyCode) {
         case 68:        // D
             // console.log('right/D');
@@ -917,6 +723,7 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
                 keys.x.pressed = true   
             break
     }
+}
     // console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed, 'jump pressed:', keys.jump.pressed);
 })
 
