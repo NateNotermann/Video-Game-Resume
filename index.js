@@ -2,7 +2,9 @@
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
-
+const modal = document.getElementById('modal')
+const modalTextElement = document.getElementById('modalText');
+const closeButton = document.getElementById('btnClose');
 // canvas.width = window.innerWidth
 // canvas.height = window.innerHeight
 canvas.width =  1920  //visualViewport.width - 10
@@ -54,6 +56,15 @@ let glowCOYOTE = false
 let glowCBRE = false
 let glowPRIME = false
 let glowHGA = false
+
+// -- Building Modals -- 
+let mainModal = false
+
+let modalMCTC = false
+let modalCOYOTE = false
+let modalCBRE = false
+let modalPRIME = false
+let modalHGA = false
 
 // -------- GAMEPAD VARIABLES -------- //
 let lastKey
@@ -165,10 +176,15 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
     },
     jump: {
         pressed: false
+    },
+    x: {
+        pressed: false
     }
 }
 
 function init() {
+
+mainModalOn()
 // -------- ELEMENT VARIABLES --------
 player = new Player() //  calling the "Player" class
 
@@ -639,8 +655,40 @@ function animate() {
         //     player.velocity.x = 0
         //     console.log('STOP!');
         // }
-    
 
+    let newMCTC = 'MCTC Text'
+    let TextCOYOTE = 'coyote Text'
+    let TextCBRE = 'CBRE text'
+    let TextPRIME = 'Prime text'
+    let TextHGA = 'HGA text'
+    let TextDefault = 'default text'
+
+    function mainModalText() {
+        if (mainModal){ // if modal on
+            if (glowMCTC) {
+                modalTextElement.textContent = newMCTC;
+            } else if(glowCOYOTE) {
+                modalTextElement.textContent = TextCOYOTE;
+            } else if(glowCBRE) {
+                modalTextElement.textContent = TextCBRE;
+            } else if(glowPRIME) {
+                modalTextElement.textContent = TextPRIME;
+            } else if(glowHGA) {
+                modalTextElement.textContent = TextHGA;
+            } else {
+                modalTextElement.textContent = TextDefault;
+            }
+        }
+    }
+
+
+        // ---- Check if x is pressed ----
+    function xPressed(){ // check if x is pressed
+        if (keys.x.pressed){
+            mainModal = true
+            console.log('glow and X');
+        }
+    }
     
     // building MCTC
     buildingMCTC.forEach(buildingMCTC => {
@@ -651,8 +699,9 @@ function animate() {
             && player.position.y + player.height > buildingMCTC.position.y  // player bottom ABOVE plat top 
         ) {
             glowMCTC = true
+            xPressed()
         } else {
-            glowMCTC = false
+            glowMCTC = false  
         }
     })
     //building CBRE
@@ -664,6 +713,7 @@ function animate() {
             && player.position.y + player.height > buildingCBRE.position.y  // player bottom ABOVE plat top 
         ) {
             glowCBRE = true
+            xPressed()
         } else {
             glowCBRE = false
         }
@@ -677,6 +727,7 @@ function animate() {
             && player.position.y + player.height > buildingCOYOTE.position.y  // player bottom ABOVE plat top 
         ) {
             glowCOYOTE = true
+            xPressed()
         } else {
             glowCOYOTE = false
         }
@@ -690,6 +741,7 @@ function animate() {
             && player.position.y + player.height > buildingPRIME.position.y  // player bottom ABOVE plat top 
         ) {
             glowPRIME = true
+            xPressed()
         } else {
             glowPRIME= false
         }
@@ -703,10 +755,49 @@ function animate() {
             && player.position.y + player.height > buildingHGA.position.y  // player bottom ABOVE plat top 
         ) {
             glowHGA = true
+            xPressed()
         } else {
-            glowHGA = false
+            glowHGA= false
         }
     })
+
+    // if (glowMCTC || glowCOYOTE || glowCBRE || glowPRIME || glowHGA ) { // if overlap with building, 
+    //     console.log('glow');
+    //     if (keys.x.pressed){ // check x
+    //         // console.log('x IS pressed');
+    //         if (keys.x.pressed && glowMCTC) {
+    //             modalMCTC = true
+    //             console.log('mctc & x');
+    //         } else if (keys.x.pressed && glowCOYOTE) {
+    //             modalCOYOTE = true
+    //             console.log('Coyote & x');
+    //         } else if (keys.x.pressed && glowCBRE) {
+    //             modalCBRE = true
+    //             console.log('cbre & x');
+    //         } else if (keys.x.pressed && glowPRIME) {
+    //             modalPRIME = true
+    //             console.log('prime & x');
+    //         } else if (keys.x.pressed && glowHGA) {
+    //             console.log('hga & x');
+    //         } 
+    //     } 
+    // } else {
+    //     modalMCTC = false
+    //     modalCOYOTE = false
+    //     modalCBRE = false
+    //     modalPRIME = false 
+    //     modalHGA = false 
+    //     // console.log('modals off');
+    // }
+
+
+    // {
+    //     keys.x.pressed = false
+    //     console.log('x UNpressed');
+    // }
+    // ---- X key & button & building collision ---- //
+
+
         // if (//player bottom is HIGHER than platform top
         //     player.position.y + player.height <= platformTwo.position.y
         //     // player bottom overlap with platform top side. (Player lands on platform)
@@ -778,6 +869,7 @@ function animate() {
     //     console.log('false start!!');
     //     init();
     // }
+    mainModalText()
     controllerInput()
     checkButtonPressed()
     requestAnimationFrame(animate) 
@@ -825,6 +917,10 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
                 keys.jump.pressed = true
             } 
             break
+        case 88:        // X
+            // console.log('X');
+                keys.x.pressed = true   
+            break
     }
     // console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed, 'jump pressed:', keys.jump.pressed);
 })
@@ -864,6 +960,10 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
             // console.log('left/A');
             keys.left.pressed = false
             // lastKey = 'left'
+            break
+        case 88:        // X
+            // console.log('X');
+                keys.x.pressed = false   
             break
             // ---- KEYUP JUMP - Don't really need any key up stuff for jump.
 
@@ -967,6 +1067,7 @@ function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS On
             // console.log('RED');      
         } 
         if(buttons[2].pressed) {        // [2]
+            keys.x.pressed = true
             // player1.attack()
             // console.log('BLUE');      
         } 
@@ -975,6 +1076,24 @@ function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS On
         }
     }
 }
+
+ // ---- Modal ON ----
+ function mainModalOn(){
+    mainModal = true
+    modal.style.display = 'block'
+}
+  // ---- Modal OFF ----
+function mainModalOff(){
+    mainModal = false
+    modal.style.display = 'none'
+}
+
+
+// ---- Click listener for Close button -- closed modal
+closeButton.addEventListener('click', function() {
+    mainModalOff()
+    console.log('btnclose clicked');
+})
 
 
 function test() {
