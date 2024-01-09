@@ -1104,13 +1104,13 @@ function helpModalOff(){
 
 // ---- Click listener for Close button -- closed modal
 closeButton.addEventListener('click', function() {
-    setTimeout(mainModalOff, 800); 
+    setTimeout(mainModalOff, 300); 
     console.log('btnclose clicked');
 })
 
 // ---- Click listener for Help Close button -- closed modal
 closeButtonHelp.addEventListener('click', function() {
-    setTimeout(helpModalOff, 800); 
+    setTimeout(helpModalOff, 300); 
     console.log('btncloseHelp clicked');
 })
 
