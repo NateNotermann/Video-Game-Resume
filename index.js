@@ -556,8 +556,7 @@ function animate() {
                 // } 
         }
     })
-    let leftCollision = false
-    let RightCollision = false
+
     // ------ PLATFORMTWO COLLISION DETECTION ------
     platformTwos.forEach(platformTwo => { 
         if (//player bottom is <= than platform top
@@ -657,7 +656,7 @@ function animate() {
     let TextCOYOTE = 'coyote Text'
     let TextCBRE = 'CBRE text'
     let TextPRIME = 'Prime text'
-    let TextHGA = 'HGA text'
+    let TextHGA = '● Developed user-friendly full-stack web applications using ASP.NET and Visual Basic, leveraging the .NET framework, resulting in a 20% increase in overall application performance. '
 
     function mainModalText() { // -- change modal text dynamically
         if (mainModal){ // if modal on. Check which building is glowing
