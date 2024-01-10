@@ -127,6 +127,7 @@ Job Description Modals <-------------------------- in progress
 Maybe reverse job order <-------------------------- in progress  
 Move player sprite left or right this.width when player sprite changes to run <--------------------------- testing
 Fix Onload render bug <-------------------------- in progress 
+Add mobile alert message <--------------------------- testing
 
 Place More/All Platforms <-------------------------- in progress    
 
