@@ -148,7 +148,7 @@ html {
       background-position: -120px 60px;
     }
   } */
-  
+
   .modal {
     position: absolute;
     left: 50%;
@@ -163,6 +163,10 @@ html {
     border-radius: 5px;
     background: white;
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+    margin-top: 0em; 
+    font-family: aldrich;
+    /* font-family: "DotGothic16"; */
+    /* font-family: 'Pixelify Sans', sans-serif; */
   }
   .message {
     font-size:1.1rem;
@@ -203,17 +207,24 @@ html {
 
   h3 {
     margin: 0px;
+    text-decoration: underline;
   } 
+  h4 {
+    text-decoration: underline;
+    margin-top: .2em; 
+    margin-bottom: 0em; 
+    margin-left: 0em;
+    margin-right: 0em;
+  }
+  
   p {
     margin: 0px;
   }
-  ul {
-    list-style-type: circle;
-  }
 
-  li {
-    margin-top: 1em; 
-    margin-bottom: 1em; 
+  ul, li {
+    list-style-type: circle;
+    margin-top: 0em; 
+    margin-bottom: 0em; 
     margin-left: 0em;
     margin-right: 0em;
   }
@@ -221,3 +232,9 @@ html {
   .tech {
     font-weight: bold;
   }
+
+  
+  #modalHelp {
+    font-family: 'Press Start 2P';
+  }
+  
