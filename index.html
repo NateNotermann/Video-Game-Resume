@@ -13,7 +13,10 @@
 
 
 <body>
-  <div class="screenDiv">
+  <div id="loader" class="loader"></div>
+
+  
+  <div id="content" class="screenDiv" style="display:none">
     <!--MAIN MENU/HELP MODAL -->
     <div id="modalHelp" class="modal">
       <p id="modalTextHelp" class="message">Welcome to my javascript video-game resume!</p>
@@ -158,41 +161,43 @@
 
     <canvas></canvas>
 
+    <div class="buttonsDiv">
+      <div class="flex">
+        <div class="rect1 border"></div>
+        <label>up/down</label>
+        <div class="rect2 border"></div>
+        <label>left/right</label>
+      </div>
+  
+      <div class="flex">
+        <div class="oval1"></div>
+        <label>select</label>
+        <div class="oval2"></div>
+        <label>start</label>
+      </div>
+  
+      <div class="flex">
+        <div class="circle1"></div>
+        <label>green</label>
+        <div class="circle2"></div>
+        <label>red</label>
+        <button class="pushable">
+          <span class="front">
+            Push me
+          </span>
+        </button>
+      </div>
+    </div>
+
+
   </div>
-  <div class="buttonsDiv">
-    <div class="flex">
-      <div class="rect1 border"></div>
-      <label>up/down</label>
-      <div class="rect2 border"></div>
-      <label>left/right</label>
-    </div>
 
-    <div class="flex">
-      <div class="oval1"></div>
-      <label>select</label>
-      <div class="oval2"></div>
-      <label>start</label>
-    </div>
-
-    <div class="flex">
-      <div class="circle1"></div>
-      <label>green</label>
-      <div class="circle2"></div>
-      <label>red</label>
-      <button class="pushable">
-        <span class="front">
-          Push me
-        </span>
-      </button>
-    </div>
-  </div>
-
+  <!-- <script src="index.js" type="module"></ script> -->
+  <!-- <script src="./js/canvas.js" type="module"></script> -->
+  <!-- <script src="./js/canvas.js" type="module"></script> -->
+  <script src="classes.js" async defer></script>
+  <script src="index.js" async defer></script>
 </body>
 
-<!-- <script src="index.js" type="module"></ script> -->
-<!-- <script src="./js/canvas.js" type="module"></script> -->
-<!-- <script src="./js/canvas.js" type="module"></script> -->
-<script src="classes.js" async defer></script>
-<script src="index.js" async defer></script>
 
 </html>
