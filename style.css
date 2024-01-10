@@ -218,13 +218,19 @@ html {
   }
   
   p {
-    margin: 0px;
+    margin: 0.5em;
   }
 
-  ul, li {
+  ul {
     list-style-type: circle;
-    margin-top: 0em; 
-    margin-bottom: 0em; 
+   margin-top: .3em; 
+   margin-bottom: 0em; 
+      /* margin-left: 0em;
+    margin-right: 0em; */
+  }
+  li {
+    margin-top: 0.1em; 
+    margin-bottom: 0.1em; 
     margin-left: 0em;
     margin-right: 0em;
   }
@@ -237,4 +243,3 @@ html {
   #modalHelp {
     font-family: 'Press Start 2P';
   }
-  

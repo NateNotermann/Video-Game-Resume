@@ -2,9 +2,23 @@
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
+
 const modalHGA = document.getElementById('modalHGA')
-const modalTextElement = document.getElementById('modalText');
+const modalPrime = document.getElementById('modalPrime')
+const modalCBRE = document.getElementById('modalCBRE')
+const modalCoyote = document.getElementById('modalCoyote')
+const modalMCTC = document.getElementById('modalMCTC')
+
+// const modalTextElement = document.getElementById('modalText'); // Was used with one modal that text changed dynamically
+
 const closeButton = document.getElementById('btnClose');
+const closeButtonHGA = document.getElementById('btnCloseHGA');
+const closeButtonPrime = document.getElementById('btnClosePrime');
+const closeButtonCBRE = document.getElementById('btnCloseCBRE');
+const closeButtonCoyote = document.getElementById('btnCloseCoyote');
+const closeButtonMCTC = document.getElementById('btnCloseMCTC');
+
+
 const modalHelp = document.getElementById('modalHelp');
 const closeButtonHelp = document.getElementById('btnCloseHelp');
 // canvas.width = window.innerWidth
@@ -62,6 +76,10 @@ let glowHGA = false
 // -- Building Modals --
 let helpModal = true 
 let HGAModal = false
+let PrimeModal = false
+let CBREModal = false
+let CoyoteModal = false
+let MCTCModal = false
 
 // -------- GAMEPAD VARIABLES -------- //
 let lastKey
@@ -575,9 +593,30 @@ function animate() {
     // ---- Check if x is pressed ----
     function xPressed(){ // check if x is pressed
         if (keys.x.pressed){
-            HGAModal = true
-            modalHGAOn()
-            console.log('glow and X');
+            if (glowMCTC) {
+                MCTCModal = true
+                modalHGAOn()
+                console.log('MCTC Modal On');
+            } else if (glowCOYOTE) {
+                CoyoteModal = true
+                modalCoyoteOn()
+                console.log('Coyote Modal On');
+            } else if (glowCBRE) {
+                CBREModal = true
+                modalCBREOn()
+                console.log('CBRE Modal On');
+            } else if (glowPRIME) {
+                PrimeModal = true
+                modalPrimeOn()
+                console.log('Prime Modal On');
+            } else if (glowHGA) {
+                HGAModal = true
+                modalHGAOn()
+                console.log('HGA Modal On');
+            }
+
+
+          
         }
     }
     
@@ -885,7 +924,7 @@ function ifNoGlow(){
     } 
 }
 
- // ---- modalHGA ON ----
+ // -------------------- modalHGA ON --------------------
  function modalHGAOn(){
     HGAModal = true
     modalHGA.style.display = 'block'
@@ -896,7 +935,56 @@ function modalHGAOff(){
     modalHGA.style.display = 'none'
 }
 
- // ---- modalHelp ON ----
+
+ // -------------------- modalPrime ON --------------------
+ function modalPrimeOn(){
+    PrimeModal = true
+    modalPrime.style.display = 'block'
+}
+  // ---- modalHGA OFF ----
+function modalPrimeOff(){
+    PrimeModal = false
+    modalPrime.style.display = 'none'
+}
+
+
+// -------------------- modalCBRE ON --------------------
+ function modalCBREOn(){
+    CBREModal = true
+    modalCBRE.style.display = 'block'
+}
+  // ---- modalHGA OFF ----
+function modalCBREOff(){
+    CBREModal = false
+    modalCBRE.style.display = 'none'
+}
+
+
+// -------------------- modalCoyote ON --------------------
+ function modalCoyoteOn(){
+    CoyoteModal = true
+    modalCoyote.style.display = 'block'
+}
+  // ---- modalHGA OFF ----
+function modalCoyoteOff(){
+    CoyoteModal = false
+    modalCoyote.style.display = 'none'
+}
+
+
+// -------------------- modalMCTC ON --------------------
+ function modalMCTCOn(){
+    MCTCModal = true
+    modalMCTC.style.display = 'block'
+}
+  // ---- modalHGA OFF ----
+function modalMCTCOff(){
+    MCTCModal = false
+    modalMCTC.style.display = 'none'
+}
+
+
+ // -------------------- modalHelp ON --------------------
  function helpModalOn(){
     helpModal = true
     modalHelp.style.display = 'block'
@@ -908,18 +996,48 @@ function helpModalOff(){
 }
 
 
-// ---- Click listener for Close button -- closed HGAModal
-closeButton.addEventListener('click', function() {
+// ---- Click listener for HGA Close button -- 
+closeButtonHGA.addEventListener('click', function() {
     setTimeout(modalHGAOff, 100); 
-    console.log('btnclose clicked');
+    console.log('btncloseHGA clicked');
 })
 
-// ---- Click listener for Help Close button -- closed HGAModal
+// ---- Click listener for Prime Close button -- 
+closeButtonPrime.addEventListener('click', function() {
+    setTimeout(modalPrimeOff, 100); 
+    console.log('btnclosePrime clicked');
+})
+
+
+// ---- Click listener for CBRE Close button -- 
+closeButtonCBRE.addEventListener('click', function() {
+    setTimeout(modalCBREOff, 100); 
+    console.log('btncloseCBRE clicked');
+})
+
+
+// ---- Click listener for Coyote Close button -- 
+closeButtonCoyote.addEventListener('click', function() {
+    setTimeout(modalCoyoteOff, 100); 
+    console.log('btncloseCoyote clicked');
+})
+
+
+// ---- Click listener for MCTC Close button -- 
+closeButtonMCTC.addEventListener('click', function() {
+    setTimeout(modalMCTCOff, 100); 
+    console.log('btncloseMCTC clicked');
+})
+
+
+
+
+
+// ---- Click listener for Help Close button -- closed CBREModal
 closeButtonHelp.addEventListener('click', function() {
     setTimeout(helpModalOff, 100); 
     console.log('btncloseHelp clicked');
 })
-
 
 function test() {
     // if (animateRunning) { console.log('animate function running: ' + animateRunning);  }
