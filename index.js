@@ -5,7 +5,7 @@ function onPageload() {
         document.getElementById("loader").style.display = "none";
         // document.getElementById("content").style.display = "block";
         document.getElementById("content").style.display = "inline-block";
-    }, 1000 );
+    }, 2000 );
 }
 // window.onload = onPageload();
 
@@ -240,7 +240,7 @@ function init() {
     // modalHGAOff()
     // helpModalOn()
 // -------- ELEMENT VARIABLES --------
-player = new Player() //  calling the "Player" class
+// player = new Player() //  calling the "Player" class
 
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
