@@ -122,12 +122,14 @@ make scroll with player - Done
 
 <!-- Add side collision OR add fall pits in there place <-------------------------- in progress   -->
 
-Job Description Modals <-------------------------- in progress  
+Job Description Modals <-------------------------- in progress
+
 Maybe reverse job order <-------------------------- in progress  
+Move player sprite left or right this.width when player sprite changes to run <--------------------------- testing
+Fix Onload render bug <-------------------------- in progress 
 
 Place More/All Platforms <-------------------------- in progress    
 
-Fix Onload render bug <-------------------------- in progress 
 
 ## Game Boy Frame & Buttons  <---- in progress  
 Add controller & keyboard buttons to the Game Boy frame.  <-------------------------- in progress  
