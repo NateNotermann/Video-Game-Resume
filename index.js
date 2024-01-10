@@ -1,8 +1,61 @@
 // import platform from '../img/platform.png';
+function onPageload() {
+    setTimeout( function () {
+        console.log("Inside Timeout function.");
+        document.getElementById("loader").style.display = "none";
+        // document.getElementById("content").style.display = "block";
+        document.getElementById("content").style.display = "inline-block";
+    }, 2000 );
+}
+// window.onload = onPageload();
+
+// window.onload = function(){ document.getElementById("loading").style.display = "none" }
+
+document.onreadystatechange = function() {
+    if (document.readyState !== "complete"){
+        console.log('page load NOT Complete'); 
+    } else {
+        console.log('page load complete!');
+        onPageload()
+    }
+}
+
+
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     console.log("DOMContentLoaded event fired.");
+//     setTimeout( function () {
+//         console.log("Timeout function executed.");
+//         document.getElementById("loader").style.display = "none";
+
+//         document.getElementById("content").style.display = "block";
+
+//     }, 3000 );
+// });
+
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
+const modalHGA = document.getElementById('modalHGA')
+const modalPrime = document.getElementById('modalPrime')
+const modalCBRE = document.getElementById('modalCBRE')
+const modalCoyote = document.getElementById('modalCoyote')
+const modalMCTC = document.getElementById('modalMCTC')
+
+// const modalTextElement = document.getElementById('modalText'); // Was used with one modal that text changed dynamically
+
+const closeButton = document.getElementById('btnClose');
+const closeButtonHGA = document.getElementById('btnCloseHGA');
+const closeButtonPrime = document.getElementById('btnClosePrime');
+const closeButtonCBRE = document.getElementById('btnCloseCBRE');
+const closeButtonCoyote = document.getElementById('btnCloseCoyote');
+const closeButtonMCTC = document.getElementById('btnCloseMCTC');
+
+
+const modalHelp = document.getElementById('modalHelp');
+const closeButtonHelp = document.getElementById('btnCloseHelp');
 // canvas.width = window.innerWidth
 // canvas.height = window.innerHeight
 canvas.width =  1920  //visualViewport.width - 10
@@ -54,6 +107,14 @@ let glowCOYOTE = false
 let glowCBRE = false
 let glowPRIME = false
 let glowHGA = false
+
+// -- Building Modals --
+let helpModal = true 
+let HGAModal = false
+let PrimeModal = false
+let CBREModal = false
+let CoyoteModal = false
+let MCTCModal = false
 
 // -------- GAMEPAD VARIABLES -------- //
 let lastKey
@@ -165,12 +226,21 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
     },
     jump: {
         pressed: false
+    },
+    x: {
+        pressed: false
+    },
+    QuestionMark: {
+        pressed: false
     }
 }
 
 function init() {
+    
+    // modalHGAOff()
+    // helpModalOn()
 // -------- ELEMENT VARIABLES --------
-player = new Player() //  calling the "Player" class
+// player = new Player() //  calling the "Player" class
 
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
@@ -234,12 +304,12 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
     new Platform({x: platformWidth* 23, y: canvas.height - 125, image: platformImage}), // Platform 14
 ];
 
-buildingMCTC = [ new BuildingMCTC(2500, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingHGA = [ new BuildingHGA(800, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
+buildingMCTC = [ new BuildingMCTC(12500, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
 buildingCOYOTE = [ new BuildingCOYOTE (5000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 buildingCBRE = [ new BuildingCBRE(7500, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
 buildingPRIME = [ new BuildingPRIME(10000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
 elementsPRIME = [ new ElementsPRIME(10000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
-buildingHGA = [ new BuildingHGA(12500, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
 
 arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic)] 
 // building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
@@ -369,22 +439,6 @@ function animate() {
     // ------------ IF VELOCITY IS 0, then.. ------------
     } else { // If player is NOT moving left/right then..
         player.velocity.x = 0
-        // console.log('velocity = O');
-            // player.frames = 1 // restart any animation back to frame 1.
-            // if (!keys.right.pressed) {
-            //     player.currentSprite = player.sprites.stand.right
-            //     player.currentCropWidth = player.sprites.stand.cropWidth
-            //     player.width = player.sprites.stand.width
-            // }
-            // if (lastKey === 'right' && !keys.right.pressed || lastKey === 'right' && !keys.left.pressed ) { // if last pressed = right AND  R/L are NOT pressed then..
-            //     player.currentSprite = player.sprites.stand.right
-            //     player.currentCropWidth = player.sprites.stand.cropWidth
-            //     player.width = player.sprites.stand.width
-            // } else if (lastKey === 'left' && (!keys.right.pressed && !keys.left.pressed)) { // if last pressed = left AND  R/L are NOT pressed then..
-            //     player.currentSprite = player.sprites.stand.left
-            //     player.currentCropWidth = player.sprites.stand.cropWidth
-            //     player.width = player.sprites.stand.width
-            // }
     // ------ PLAYER MOVEMENT END ------
 
     // ------ IF VELOCITY IS STILL 0, AND  L/R PRESSED ------ 
@@ -529,22 +583,9 @@ function animate() {
             ) 
             {   
                 player.velocity.y = 0   // player does not fall
-                // if (
-                   
-                //     player.position.y + player.height <= platform.position.y //player bottom is <= than platform top
-                //     && keys.right.pressed
-                //     //  // players left side overlap with platform right side
-                //     && player.position.x <= platform.position.x + platform.width 
-                //     //  // players right side overlap with platform left side
-                //     && player.position.x + player.width >= platform.position.x 
-                //     ) {
-                //     player.velocity.x = 0 
-                //     console.log("stop1");
-                // } 
         }
     })
-    let leftCollision = false
-    let RightCollision = false
+
     // ------ PLATFORMTWO COLLISION DETECTION ------
     platformTwos.forEach(platformTwo => { 
         if (//player bottom is <= than platform top
@@ -561,87 +602,64 @@ function animate() {
             {   
                 player.velocity.y = 0   // player does not fall
         }
-        // ---- SIDE COLLISION ---- //
-        // if (
-        //     // player.position.x < platformTwo.position.x + platformTwo.width // player left plat right
-        //     // player LEFT plat right 
-        //     player.position.x + player.width > platformTwo.position.x   // player right plat left 
-        //     && player.position.y < platformTwo.position.y + platformTwo.height // player top UNDER plat bottom
-        //     && player.position.y + player.height > platformTwo.position.y  // player bottom ABOVE plat top 
-        //     && player.currentSprite != player.sprites.stand.left
-        //     && player.currentSprite != player.sprites.run.left
-        //     // && keys.right.pressed
-        // ) {
-            
-        //     // if (keys.right.pressed && keys.left.pressed ) {
-        //     //     player.velocity.x = 0
-        //     //     console.log( "test moving out of collision");
-        //     // } else if (keys.right.pressed  
-        //     //     && player.position.x + player.width > platformTwo.position.x // player right > plat left 
-        //     //     ) { 
-        //     //     player.velocity.x = -15
-        //     //     // player.position.x = player.position.x -15
-        //     //     console.log("Collide Right");
-        //     // } else if (keys.left.pressed 
-        //     //     && player.position.x < platformTwo.position.x + platformTwo.width // player left < plat right
-        //     //     ) { 
-
-        //     //         player.velocity.x = +15
-        //         // player.position.x = player.position.x +15
-        //         // player.position.x = player.position.x + 15
-        //         player.velocity.x = 0
-        //         console.log("collide left");
-        //     // }  
-                
-        //     }
-        //     else if (// player RIGHT - plat Left 
-        //         player.position.x > platformTwo.position.x + platformTwo.width  // player left - plat right 
-        //         && player.position.y < platformTwo.position.y + platformTwo.height // player top UNDER plat bottom
-        //         && player.position.y + player.height > platformTwo.position.y  // player bottom ABOVE plat top 
-        //         && player.currentSprite != player.sprites.stand.right
-        //         && player.currentSprite != player.sprites.run.right
-        //     ){
-        //         // player.position.x = player.position.x -15
-        //         player.velocity.x = 0
-        //         console.log("collide right");
-        //     }
-        // ---- SIDE COLLISION ---- //
+    
     }) // ------ PLATFORMTWO COLLISION DETECTION END ------ //
 
 
-        
 
-        // player overlaps left and right sides with the sides of a platform
-        // if ( 
-        //     // player RIGHT side overlap with platform LEFT side 
-        //     player.position.x + playerWidth.width + player.velocity.x >= platform.position.x 
-        //     // player LEFT side overlap with platform RIGHT side 
-        //     && player.position.x + player.velocity.x <= platform.position.x + platform.width 
-        // ) 
+    let newMCTC = 'MCTC Text'
+    let TextCOYOTE = 'coyote Text'
+    let TextCBRE = 'CBRE text'
+    let TextPRIME = 'Prime text'
+    let TextHGA = 'â— Developed user-friendly full-stack web applications using ASP.NET and Visual Basic, leveraging the .NET framework, resulting in a 20% increase in overall application performance. '
 
-        // player RIGHT >= platform left  AND   player LEFT Less than platform left
-        // if (player.position.x + player.width >= platform.position.x 
-        //     // player LEFT < 
-        //     // && player.position < platform.position.x
-        //     // Right key is pressed
-        //     && keys.right.pressed
-        //     && player.velocity.y <= 0
+    // function mainModalText() { // -- change modalHGA text dynamically
+    //     if (HGAModal){ // if modalHGA on. Check which building is glowing
+    //         if (glowMCTC) {
+    //             modalTextElement.textContent = newMCTC;
+    //         } else if(glowCOYOTE) {
+    //             modalTextElement.textContent = TextCOYOTE;
+    //         } else if(glowCBRE) {
+    //             modalTextElement.textContent = TextCBRE;
+    //         } else if(glowPRIME) {
+    //             modalTextElement.textContent = TextPRIME;
+    //         } else if(glowHGA) {
+    //             modalTextElement.textContent = TextHGA;
+    //         }
+    //     }
+    // }
 
-        //     ) 
-        //     {
-        //     player.velocity.x = 0
-        //     console.log("stop");
-        // } 
-        // // else if (player.position.x < platform.position.x + platform.width && player.position.x + player.width > platform.position.x + platform.width) {
-        //     player.velocity.x = 0
-        // }
-        // {
-        //     player.velocity.x = 0
-        //     console.log('STOP!');
-        // }
+    // ---- Check if x is pressed ----
+    function xPressed(){ // check if x is pressed
+        if (keys.x.pressed){
+            if (glowMCTC) {
+                MCTCModal = true
+                modalMCTCOn()
+                console.log('MCTC Modal On');
+            } else if (glowCOYOTE) {
+                CoyoteModal = true
+                modalCoyoteOn()
+                console.log('Coyote Modal On');
+            } else if (glowCBRE) {
+                CBREModal = true
+                modalCBREOn()
+                console.log('CBRE Modal On');
+            } else if (glowPRIME) {
+                PrimeModal = true
+                modalPrimeOn()
+                console.log('Prime Modal On');
+            } else if (glowHGA) {
+                HGAModal = true
+                modalHGAOn()
+                console.log('HGA Modal On');
+            }
+
+
+          
+        }
+    }
     
 
-    
     // building MCTC
     buildingMCTC.forEach(buildingMCTC => {
         if (
@@ -651,6 +669,7 @@ function animate() {
             && player.position.y + player.height > buildingMCTC.position.y  // player bottom ABOVE plat top 
         ) {
             glowMCTC = true
+            xPressed()
         } else {
             glowMCTC = false
         }
@@ -664,6 +683,7 @@ function animate() {
             && player.position.y + player.height > buildingCBRE.position.y  // player bottom ABOVE plat top 
         ) {
             glowCBRE = true
+            xPressed()
         } else {
             glowCBRE = false
         }
@@ -677,6 +697,7 @@ function animate() {
             && player.position.y + player.height > buildingCOYOTE.position.y  // player bottom ABOVE plat top 
         ) {
             glowCOYOTE = true
+            xPressed()
         } else {
             glowCOYOTE = false
         }
@@ -690,6 +711,7 @@ function animate() {
             && player.position.y + player.height > buildingPRIME.position.y  // player bottom ABOVE plat top 
         ) {
             glowPRIME = true
+            xPressed()
         } else {
             glowPRIME= false
         }
@@ -703,65 +725,11 @@ function animate() {
             && player.position.y + player.height > buildingHGA.position.y  // player bottom ABOVE plat top 
         ) {
             glowHGA = true
+            xPressed()
         } else {
-            glowHGA = false
+            glowHGA= false
         }
     })
-        // if (//player bottom is HIGHER than platform top
-        //     player.position.y + player.height <= platformTwo.position.y
-        //     // player bottom overlap with platform top side. (Player lands on platform)
-        //     && player.position.y + player.height + player.velocity.y >= platformTwo.position.y
-        //     //  // players left side overlap with platform right side
-        //     && player.position.x <= platformTwo.position.x + platformTwo.width 
-        //     //  // players right side overlap with platform left side
-        //     && player.position.x + player.width >= platformTwo.position.x 
-        //     ) 
-        //     {player.velocity.y = 0 
-        // }
-
-    // ------ SPRITE SWITCHING ------ Moved this to the player movement section
-    // if (
-    //     keys.right.pressed &&
-    //     lastKey === 'right' && 
-    //     player.currentSprite !== player.sprites.run.right) { // if sprite is not run right, then 
-    //         // player.frames = 1 // restart any animation back to frame 1.
-    //         // player.currentSprite = player.sprites.run.right // set it to run right
-    //         // player.currentCropWidth = player.sprites.run.cropWidth
-    //         // player.width = player.sprites.run.width
-    // } else if (
-    //     keys.left.pressed &&
-    //     lastKey === 'left' && 
-    //     player.currentSprite != player.sprites.run.left) {
-    //         player.frames = 1 // restart any animation back to frame 1.
-    //         player.currentSprite = player.sprites.run.left
-    //         player.currentCropWidth = player.sprites.run.cropWidth
-    //         player.width = player.sprites.run.width
-    // }  else if (
-    //     !keys.left.pressed &&
-    //     lastKey === 'left' && 
-    //     player.currentSprite != player.sprites.stand.left) {
-    //         player.frames = 1 // restart any animation back to frame 1.
-    //         player.currentSprite = player.sprites.stand.left
-    //         player.currentCropWidth = player.sprites.stand.cropWidth
-    //         player.width = player.sprites.stand.width
-    // }  else if (
-    //     !keys.right.pressed &&
-    //     lastKey === 'right' && 
-    //     player.currentSprite != player.sprites.stand.right) {
-    //         player.frames = 1 // restart any animation back to frame 1.
-    //         player.currentSprite = player.sprites.stand.right
-    //         player.currentCropWidth = player.sprites.stand.cropWidth
-    //         player.width = player.sprites.stand.width
-    // }  else if (
-    //     !keys.right.pressed &&
-    //     lastKey === 'right' && 
-    //     player.currentSprite != player.sprites.stand.right) {
-    //         player.frames = 1 // restart any animation back to frame 1.
-    //         player.currentSprite = player.sprites.stand.right
-    //         player.currentCropWidth = player.sprites.stand.cropWidth
-    //         player.width = player.sprites.stand.width
-    // }
-
 
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
@@ -778,6 +746,8 @@ function animate() {
     //     console.log('false start!!');
     //     init();
     // }
+    ifNoGlow()
+    // mainModalText()
     controllerInput()
     checkButtonPressed()
     requestAnimationFrame(animate) 
@@ -789,6 +759,7 @@ animate()
 // ---- LISTEN FOR A KEY PRESSED ----
 addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode, key is event.key. ONLY works if they're listed in the EventListener
     // console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
+    if(!helpModal && !MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal){
     switch (keyCode) {
         case 68:        // D
             // console.log('right/D');
@@ -825,7 +796,20 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
                 keys.jump.pressed = true
             } 
             break
+        case 88:        // X
+            // console.log('X');
+                keys.x.pressed = true   
+            break
+        case 191:        // X
+            // console.log('QuestionMark');
+            if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal){          
+                    console.log('TRUUUUUUU');
+                    keys.QuestionMark.pressed = true   
+                    helpModalOn()
+                }
+            break
     }
+}
     // console.log('right/D pressed:', keys.right.pressed, 'left/A pressed:', keys.left.pressed, 'jump pressed:', keys.jump.pressed);
 })
 
@@ -864,6 +848,14 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
             // console.log('left/A');
             keys.left.pressed = false
             // lastKey = 'left'
+            break
+        case 88:        // X
+            // console.log('X');
+                keys.x.pressed = false   
+            break
+        case 191:        // X
+            // console.log('QuestionMark');
+                keys.QuestionMark.pressed = false   
             break
             // ---- KEYUP JUMP - Don't really need any key up stuff for jump.
 
@@ -967,6 +959,7 @@ function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS On
             // console.log('RED');      
         } 
         if(buttons[2].pressed) {        // [2]
+            keys.x.pressed = true
             // player1.attack()
             // console.log('BLUE');      
         } 
@@ -976,6 +969,128 @@ function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS On
     }
 }
 
+function ifNoGlow(){
+    if( !glowMCTC && !glowCOYOTE && !glowCBRE && !glowPRIME && !glowHGA){
+        modalHGAOff()
+        modalPrimeOff()
+        modalCBREOff()
+        modalCoyoteOff()
+        modalMCTCOff()
+    } 
+}
+
+ // -------------------- modalHGA ON --------------------
+ function modalHGAOn(){
+    HGAModal = true
+    modalHGA.style.display = 'block'
+}
+  // ---- modalHGA OFF ----
+function modalHGAOff(){
+    HGAModal = false
+    modalHGA.style.display = 'none'
+}
+
+
+ // -------------------- modalPrime ON --------------------
+ function modalPrimeOn(){
+    PrimeModal = true
+    modalPrime.style.display = 'block'
+}
+  // ---- modalHGA OFF ----
+function modalPrimeOff(){
+    PrimeModal = false
+    modalPrime.style.display = 'none'
+}
+
+
+// -------------------- modalCBRE ON --------------------
+ function modalCBREOn(){
+    CBREModal = true
+    modalCBRE.style.display = 'block'
+}
+  // ---- modalHGA OFF ----
+function modalCBREOff(){
+    CBREModal = false
+    modalCBRE.style.display = 'none'
+}
+
+
+// -------------------- modalCoyote ON --------------------
+ function modalCoyoteOn(){
+    CoyoteModal = true
+    modalCoyote.style.display = 'block'
+}
+  // ---- modalHGA OFF ----
+function modalCoyoteOff(){
+    CoyoteModal = false
+    modalCoyote.style.display = 'none'
+}
+
+
+// -------------------- modalMCTC ON --------------------
+ function modalMCTCOn(){
+    MCTCModal = true
+    modalMCTC.style.display = 'block'
+}
+  // ---- modalHGA OFF ----
+function modalMCTCOff(){
+    MCTCModal = false
+    modalMCTC.style.display = 'none'
+}
+
+
+ // -------------------- modalHelp ON --------------------
+ function helpModalOn(){
+    helpModal = true
+    modalHelp.style.display = 'block'
+}
+  // ---- modalHelp OFF ----
+function helpModalOff(){
+    helpModal = false
+    modalHelp.style.display = 'none'
+}
+
+
+// ---- Click listener for HGA Close button -- 
+closeButtonHGA.addEventListener('click', function() {
+    setTimeout(modalHGAOff, 100); 
+    console.log('btncloseHGA clicked');
+})
+
+// ---- Click listener for Prime Close button -- 
+closeButtonPrime.addEventListener('click', function() {
+    setTimeout(modalPrimeOff, 100); 
+    console.log('btnclosePrime clicked');
+})
+
+
+// ---- Click listener for CBRE Close button -- 
+closeButtonCBRE.addEventListener('click', function() {
+    setTimeout(modalCBREOff, 100); 
+    console.log('btncloseCBRE clicked');
+})
+
+
+// ---- Click listener for Coyote Close button -- 
+closeButtonCoyote.addEventListener('click', function() {
+    setTimeout(modalCoyoteOff, 100); 
+    console.log('btncloseCoyote clicked');
+})
+
+
+// ---- Click listener for MCTC Close button -- 
+closeButtonMCTC.addEventListener('click', function() {
+    setTimeout(modalMCTCOff, 100); 
+    console.log('btncloseMCTC clicked');
+})
+
+
+
+// ---- Click listener for Help Close button -- closed CBREModal
+closeButtonHelp.addEventListener('click', function() {
+    setTimeout(helpModalOff, 100); 
+    console.log('btncloseHelp clicked');
+})
 
 function test() {
     // if (animateRunning) { console.log('animate function running: ' + animateRunning);  }

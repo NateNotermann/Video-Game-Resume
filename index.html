@@ -1,165 +1,203 @@
-
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <style> 
-        body {
-            margin: 0;
-            background-color: lightgreen;
-            /* display: flex;
-            align-items: center;
-            justify-content: center; */
-            height: 100vh
-        }
 
-        .screenDiv {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .buttonsDiv {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-around;
-        }
-
-        canvas {
-				box-sizing: border-box;
-				background-color: blue;
-				width:calc(100%);
-				min-width: 300px;
-                max-width: 1000px;
-                /* min-width:(ABOVE) - is just in case window gets really small */
-				border-radius: 30px;
-				border: 5px solid black;
-                margin-left: 10%;
-                margin-right: 10%;
-                margin-top: 1%;
-                margin-bottom: 1%;
-			} 
- 
-        .circle1 {
-            width: 100px;
-            height: 100px;
-            background-color: green;
-            border-radius: 50%;
-        }
-
-        .circle2 {
-            width: 100px;
-            height: 100px;
-            background-color: red;
-            border-radius: 50%;
-        }
-
-        .oval1 {
-            width: 100px;
-            height: 25px;
-            background-color: orange;
-            border-radius: 50%;
-        }
-
-        .oval2 {
-            width: 100px;
-            height: 25px;
-            background-color: blue;
-            border-radius: 50%;
-        }
-
-        .rect1 {
-            width: 50px;
-            height: 150px;
-            background-color: gray;
-        }
-
-        .rect2 {
-            width: 150px;
-            height: 50px;
-            background-color: gray;
-        }
-
-        .border {
-            border-radius: 2px;
-            border-style: solid;
-            border-color: black;
-        }
-
-        .flex {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .pushable {
-            background: hsl(340deg 100% 32%);
-            border-radius: 12px;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            outline-offset: 4px;
-        }
-        .front {
-            display: block;
-            padding: 12px 42px;
-            border-radius: 12px;
-            font-size: 1.25rem;
-            background: hsl(345deg 100% 47%);
-            color: white;
-            transform: translateY(-6px);
-        }
-
-        .pushable:active .front {
-            transform: translateY(-2px);
-        }
-        </style>
-        <title>mario-game</title>
-    </head>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Aldrich&display=swap"
+    rel="stylesheet">
+  <title>Video-game Resume</title>
+</head>
 
 
-    <body>
-        <div class="screenDiv">
+<body>
+  <div id="loader" class="loader"></div>
 
-            <canvas></canvas>
+  
+  <div id="content" class="screenDiv" style="display:none">
+    <!--MAIN MENU/HELP MODAL -->
+    <div id="modalHelp" class="modal">
+      <p id="modalTextHelp" class="message">Welcome to my javascript video-game resume!</p>
+      <div class="buttons">
+        <!-- <button id="btnOpen" class="btn">Open</button> -->
+        <button id="btnCloseHelp" class="btn">Close</button>
+      </div>
+    </div>
 
+    <!--HGA MODAL -->
+    <div id="modalHGA" class="modal">
+      <h3 class="title">Software Engineer</h3>
+      <p class="company">HGA (Hammel Green and Abrahamson), 2022 - 2023</p>
+      <!-- <p class="year">2022 - 2023</p> -->
+      <div class="message">
+        <ul>
+          <li>Developed user-friendly full-stack web applications using ASP.NET and Visual Basic(VB.NET)</li>
+          <li>Designed database architecture for new web applications.</li>
+          <li>Assisted with server maintenance, database backups, and migration in SSMS.</li>
+          <li>Utilized Agile methodology with Jira for SCRUM planning.</li>
+        </ul>
+        <br>
+
+        <h4>Project 1 - Company Document Archive</h4>
+        <ul>
+          <li>Developed a full-stack web application of company’s physical document archive.</li>
+          <li>Migrated the Microsoft Access database of 84,000 documents to a new server with SSMS.</li>
+          <li>The app allowed employees to request documents, print labels and track request</li>
+          <li>Integrated an automated confirmation email system</li>
+          <p class="tech">Tech used: ASP.NET, VB.NET, Javascript, SSRS, T-SQL, Bootstrap CSS, </p>
+        </ul>
+        <br>
+
+        <h4>Project 2 - Quality Control Checklist</h4>
+        <ul>
+          <li>Developed web app for QA task tracking & project planing</li>
+          <li>Collaborated with Principal Architects on user stories and UI/UX design in Miro and Figma.</li>
+          <li>Engineered a centralized and efficient tool that enhanced productivity, and accuracy.</li>
+          <p class="tech">Tech used: ASP.NET, VB.NET, Javascript, T-SQL, Bootstrap CSS, </p>
+        </ul>
+      </div>
+      <div class="buttons">
+        <!-- <button id="btnOpen" class="btn">Open</button> -->
+        <button id="btnCloseHGA" class="btn">Close</button>
+      </div>
+    </div>
+
+
+    <!--PRIME MODAL -->
+    <div id="modalPrime" class="modal">
+      <h3 class="title">Full-Stack Software Engineering Student</h3>
+      <p class="company">Prime Digital Academy, May 2022 - Sep 2023</p>
+      <div class="message">
+        <p>Received a certificate in Full Stack Software Engineering.</p>
+        <p>Prime Digital Academy is an accelerated 5-month program with a holistic approach to software development.</p>
+        <p>Additional training included public speaking and presentation practice, professional skill development,
+          diversity, equity, &
+          inclusion, and development spikes with real-world client work.</p>
+        <br>
+
+        <h4>Client/Group Project - Rochester Community Initiative React Web Application</h4>
+        <ul>
+          <li>Designed a scalable platform connecting high school staff, teens, and local mental health practitioners in
+            Rochester.</li>
+          <li>Led the database development by writing 600 plus lines of the 750 total lines of SQL code in Postico.</li>
+          <li>Configured a single SQL Query for team members to update their local databases without having to recode
+            changes.</li>
+          <p class="tech">Tech used: React.js, JavaScript, HTML, CSS, Redux/Saga, Material UI, Node.js, Express.js,
+            PostgreSQL, Email.js API </p>
+        </ul>
+        <br>
+
+        <h4>Solo Project - ‘Wiki-HeHe-Pedia’ React Web Application</h4>
+        <ul>
+          <li>Developed a comedian index web application where users can browse and search for comedians based on their
+            location, genre and names.</li>
+          <li>Users can look up the location of comedians, social media link, websites, and comedian details</li>
+          <li>Engineered a centralized and efficient tool that enhanced productivity, and accuracy.</li>
+          <p class="tech">Tech used: React.js, JavaScript, HTML, CSS, Redux/Saga, Material UI, Node.js, Express.js,
+            PostgreSQL.</p>
+        </ul>
+      </div>
+      <div class="buttons">
+        <!-- <button id="btnOpen" class="btn">Open</button> -->
+        <button id="btnClosePrime" class="btn">Close</button>
+      </div>
+    </div>
+
+    <!--CBRE MODAL -->
+    <div id="modalCBRE" class="modal">
+      <h3 class="title">Real Estate Services Coordinator</h3>
+      <p class="company">CBRE Inc,  Jan 2019 - May 2022</p>
+      <div class="message">
+        <ul>
+          <li>Led team updates and documentation of new compliance procedures for internal software.</li>
+          <li>Monitored & documented updates to tenant and vendor property files in the global database.</li>
+          <li>Collaborated with a team to manage over 2 million sq ft of retail, office, and industrial properties in MN, ND & MI.</li>
+          <li>Coded invoices to ensure their accurate assignment to the appropriate service categories & budget allocations.</li>
+          <li>Drafted over 200 contracts with vendors for many varying maintenance services & capital improvement plans.</li>
+          <li>Cultivated and sustained robust connections with clients, tenants, and vendors, fostering positive relationships.</li>
+        </ul>        
+      </div>
+      <div class="buttons">
+        <!-- <button id="btnOpen" class="btn">Open</button> -->
+        <button id="btnCloseCBRE" class="btn">Close</button>
+      </div>
+    </div>
+
+    <!--COYOTE MODAL -->
+    <div id="modalCoyote" class="modal">
+      <h3 class="title">National Account Manager</h3>
+      <p class="company">Coyote Logistics, Aug 2017 - Jan 2019</p>
+      <div class="message">
+        <ul>
+          <li>Sourced new transportation client accounts to grow the network of assets, negotiating 1172 full semi-truck loads</li>
+          <li>Analyzed market data to optimize contract negotiation, increase final sale profitability & improve KPIs.</li>
+          <li>Spearheaded a $115,000 contract to relocate 200 semi-trailers for UPS earning $20,000 net revenue.</li>
+        </ul>        
+      </div>
+      <div class="buttons">
+        <!-- <button id="btnOpen" class="btn">Open</button> -->
+        <button id="btnCloseCoyote" class="btn">Close</button>
+      </div>
+    </div>
+
+        <!--MCTC MODAL -->
+        <div id="modalMCTC" class="modal">
+          <h3 class="title">Associate of Applied Science, Digital Editing & Post-Production in Cinema</h3>
+          <p class="company">Minneapolis Community & Technical College, Sep 2008 - May 2011</p>
+          <p class="company">Immersive training in cinema production pipeline including Cinematography, Directing, Screenwriting, Editing & sound.</p>
+          <div class="message">
+            <ul>
+              <!-- <li>Immersive training in cinema production pipeline including Cinematography, Directing, Screenwriting, Editing & sound.</li> -->
+            </ul>        
+          </div>
+          <div class="buttons">
+            <!-- <button id="btnOpen" class="btn">Open</button> -->
+            <button id="btnCloseMCTC" class="btn">Close</button>
+          </div>
         </div>
-        <div class="buttonsDiv">
-            <div class="flex">
-                <div class="rect1 border"></div>
-                <label>up/down</label>
-                <div class="rect2 border"></div>
-                <label>left/right</label>
-            </div>
-            
-            <div class="flex">
-                <div class="oval1"></div>
-                <label>select</label>
-                <div class="oval2"></div>
-                <label>start</label>
-            </div>
 
-            <div class="flex">
-                <div class="circle1"></div>
-                <label>green</label>
-                <div class="circle2"></div>
-                <label>red</label>
-                <button class="pushable">
-                    <span class="front">
-                      Push me
-                    </span>
-                  </button>
-            </div>
-        </div>
 
-    </body>
+    <canvas></canvas>
 
-<!-- <script src="index.js" type="module"></ script> -->
-<!-- <script src="./js/canvas.js" type="module"></script> -->
-<!-- <script src="./js/canvas.js" type="module"></script> -->
+    <div class="buttonsDiv">
+      <div class="flex">
+        <div class="rect1 border"></div>
+        <label>up/down</label>
+        <div class="rect2 border"></div>
+        <label>left/right</label>
+      </div>
+  
+      <div class="flex">
+        <div class="oval1"></div>
+        <label>select</label>
+        <div class="oval2"></div>
+        <label>start</label>
+      </div>
+  
+      <div class="flex">
+        <div class="circle1"></div>
+        <label>green</label>
+        <div class="circle2"></div>
+        <label>red</label>
+        <button class="pushable">
+          <span class="front">
+            Push me
+          </span>
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- <script src="index.js" type="module"></ script> -->
+  <!-- <script src="./js/canvas.js" type="module"></script> -->
+  <!-- <script src="./js/canvas.js" type="module"></script> -->
+</body>
 <script src="classes.js" async defer></script>
 <script src="index.js" async defer></script>
+
 
 </html>

@@ -81,9 +81,9 @@ Pushing Live - DONE
 ### Phase 2. Platformer Functionality & Custom Pixel Art
 #### Adding Platformer Game Functionality
 Add a frame around the video game canvas to look like a Game Boy. Or BMO from Adventure Time. -- DONE    
-Make Game Boy frame responsive/resize when window changes size. -- DONE
-Remove Health bar 2 player win/loose scenarios -- Done 
-Moved Player 2 movement into player one. -- Done     
+Make Game Boy frame responsive/resize when window changes size. -- DONE   
+Remove Health bar 2 player win/loose scenarios -- Done   
+Moved Player 2 movement into player one. -- Done       
 
 #### Platforms
 Add Platform collision functionality -- Done  
@@ -107,7 +107,7 @@ Custom Building Background Art
     E. Custom main Buildings Animations - Done   
         1. MCTC - Done    
         <!-- 2. Restaurants - maybe..   -->
-        2. Coyote - Done  <-------------------------- Add truck animation..     
+        2. Coyote - Done    
         3. CBRE - Done    
         4. Prime - Done   
         5. HGA - Done  
@@ -122,7 +122,8 @@ make scroll with player - Done
 
 <!-- Add side collision OR add fall pits in there place <-------------------------- in progress   -->
 
-Job Descriptions <-------------------------- in progress  
+Job Description Modals <-------------------------- in progress  
+Maybe reverse job order <-------------------------- in progress  
 
 Place More/All Platforms <-------------------------- in progress    
 
@@ -135,13 +136,11 @@ Make controller & keyboard buttons react when pressed.    <---------------------
 
 #### Final Steps      
 Add javascript sound effects from other repo   
-Deploy to Netlify   
+Deploy to Netlify   - Done
 Celebratory Dance    
 
 ### Stretch Goals:    
 Sprite Jumping Right
 Sprite Jumping Left   
-Make direction arrow light up
 Add Music    
 Add sliders to change jump & damage amount & time   
-Use Spotify API for music    
