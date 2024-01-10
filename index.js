@@ -194,10 +194,14 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
     },
     x: {
         pressed: false
+    },
+    QuestionMark: {
+        pressed: false
     }
 }
 
 function init() {
+    
     // modalHGAOff()
     // helpModalOn()
 // -------- ELEMENT VARIABLES --------
@@ -595,7 +599,7 @@ function animate() {
         if (keys.x.pressed){
             if (glowMCTC) {
                 MCTCModal = true
-                modalHGAOn()
+                modalMCTCOn()
                 console.log('MCTC Modal On');
             } else if (glowCOYOTE) {
                 CoyoteModal = true
@@ -720,7 +724,7 @@ animate()
 // ---- LISTEN FOR A KEY PRESSED ----
 addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode, key is event.key. ONLY works if they're listed in the EventListener
     // console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
-    if(!helpModal){
+    if(!helpModal && !MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal){
     switch (keyCode) {
         case 68:        // D
             // console.log('right/D');
@@ -760,6 +764,14 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
         case 88:        // X
             // console.log('X');
                 keys.x.pressed = true   
+            break
+        case 191:        // X
+            // console.log('QuestionMark');
+            if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal){          
+                    console.log('TRUUUUUUU');
+                    keys.QuestionMark.pressed = true   
+                    helpModalOn()
+                }
             break
     }
 }
@@ -805,6 +817,10 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
         case 88:        // X
             // console.log('X');
                 keys.x.pressed = false   
+            break
+        case 191:        // X
+            // console.log('QuestionMark');
+                keys.QuestionMark.pressed = false   
             break
             // ---- KEYUP JUMP - Don't really need any key up stuff for jump.
 
@@ -921,6 +937,10 @@ function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS On
 function ifNoGlow(){
     if( !glowMCTC && !glowCOYOTE && !glowCBRE && !glowPRIME && !glowHGA){
         modalHGAOff()
+        modalPrimeOff()
+        modalCBREOff()
+        modalCoyoteOff()
+        modalMCTCOff()
     } 
 }
 
@@ -1028,8 +1048,6 @@ closeButtonMCTC.addEventListener('click', function() {
     setTimeout(modalMCTCOff, 100); 
     console.log('btncloseMCTC clicked');
 })
-
-
 
 
 
