@@ -1,4 +1,39 @@
 // import platform from '../img/platform.png';
+function onPageload() {
+    setTimeout( function () {
+        console.log("Inside Timeout function.");
+        document.getElementById("loader").style.display = "none";
+        // document.getElementById("content").style.display = "block";
+        document.getElementById("content").style.display = "inline-block";
+    }, 2000 );
+}
+// window.onload = onPageload();
+
+// window.onload = function(){ document.getElementById("loading").style.display = "none" }
+
+document.onreadystatechange = function() {
+    if (document.readyState !== "complete"){
+        console.log('page load NOT Complete'); 
+    } else {
+        console.log('page load complete!');
+        onPageload()
+    }
+}
+
+
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     console.log("DOMContentLoaded event fired.");
+//     setTimeout( function () {
+//         console.log("Timeout function executed.");
+//         document.getElementById("loader").style.display = "none";
+
+//         document.getElementById("content").style.display = "block";
+
+//     }, 3000 );
+// });
+
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
