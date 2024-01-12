@@ -37,15 +37,14 @@ body {
     align-items: center;
 }
 
-/* .screenDiv {
+.screenDiv {
     display: flex;
     align-items: center;
     justify-content: center;
-} */
+}
 
 .buttonsDiv {
-  display: none;
-    /* display: flex; */
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
