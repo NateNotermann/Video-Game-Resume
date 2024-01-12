@@ -37,6 +37,7 @@ document.onreadystatechange = function() {
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
+const loaderDiv = document.getElementById("loader")
 
 const modalHGA = document.getElementById('modalHGA')
 const modalPrime = document.getElementById('modalPrime')
@@ -66,15 +67,49 @@ let canvasWidth = canvas.width
 let windowInnerHeight = window.innerHeight  
 let windowInnerWidth = window.innerWidth
 
+// document.onreadystatechange = function() {
+//     console.log('document.onreadystatechange function');
+//     if (document.readyState !== "complete"){
+//         console.log('page load NOT Complete------'); 
+//     } else {
+//         console.log('page load complete!-----');
+//         // onPageload()
+//     }
+// }
+
+document.addEventListener("DOMContentLoaded", function() {
+    console.log('DOMContentLoaded');
+    setTimeout( function () {
+        console.log("Inside Timeout function.");
+        document.getElementById("loader").style.display = "none";
+
+        let loaderDisplay = window.getComputedStyle(loaderDiv)
+        if(loaderDisplay.display === "none") {
+            console.log('loader = HIDDEN');
+            document.getElementById("content").style.display = "flex";
+        } else {
+            console.log('loader VISIBLE');
+        }
+        // document.getElementById("content").style.display = "block";
+        // document.getElementById("content").style.display = "flex";
+    }, 1000 );
+});
+
 // ---- window.onload fixed the rendering issues ----
 window.onload = function () {
-    // initial canvas dimensions options 1
+    console.log('window.onload function');
+    
     canvasHeight = canvas.height
     canvasWidth = canvas.width
-    
+    if (document.readyState !== "complete"){
+        console.log('page load NOT Complete'); 
+    } else {
+        console.log('page load complete!');
+        // onPageload()
+    }
     // initial canvas dimensions options 2
-    windowInnerHeight = window.innerHeight  
-    windowInnerWidth = window.innerWidth
+    // windowInnerHeight = window.innerHeight  
+    // windowInnerWidth = window.innerWidth
     init();
   };
 // - Trying to "RESIZE" Canvas live causes child elements size issues. Makes them not relative to canvas.
@@ -236,7 +271,7 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 }
 
 function init() {
-    
+    // console.log('init function');
     // modalHGAOff()
     // helpModalOn()
 // -------- ELEMENT VARIABLES --------

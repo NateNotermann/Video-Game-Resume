@@ -1,19 +1,22 @@
+
+#content {
+  display: flex;
+  flex-direction: column;
+}
+
 .loader {
+
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #3498db; /* Blue */
   border-radius: 50%;
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
-  position: relative;
-  /* top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
-  /* margin: auto; */
-  margin-top: 20%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: auto;
 }
 
 @keyframes spin {
@@ -21,19 +24,7 @@
   100% { transform: rotate(360deg); }
 }
 
-/* #content {
-  margin: auto;
-  background-color: blue;
-  border-radius: 30px;
-  border: 5px solid black;
-  width:calc(100%); */
-  /* min-width:(ABOVE) - is just in case window gets really small */
-  /* margin: auto; */
-  /* margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 1%;
-  margin-bottom: 1%; */
-/* } */
+
 
 body {
     margin: 0;
@@ -41,7 +32,10 @@ body {
     /* display: flex;
     align-items: center;
     justify-content: center; */
-    height: 100vh
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* .screenDiv {
