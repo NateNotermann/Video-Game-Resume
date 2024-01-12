@@ -9,7 +9,7 @@ function isMobileDevice() {
     console.log("User is using a mobile device");
   } else {
     console.log("User is using a computer browser");
-    window.alert("It looks like you are using a mobile device. This app works best on a computer browser.")
+    window.alert("This app works best on a computer browser.")
   }
 
 
