@@ -1,6 +1,6 @@
 // import platform from '../img/platform.png';
 const modalMobile = document.getElementById('modalMobile');
-let mobileModal = true
+let mobileModal = false
  // -------------------- modalmobileON --------------------
 function mobileModalOn(){
     mobileModal = true
@@ -11,19 +11,21 @@ function mobileModalOff(){
     mobileModal = false
     modalMobile.style.display = 'none'
 }
-
+// ------ CHECK IF USING MOBILE ------
 function isMobileDevice() {
     // Check if the user agent contains keywords indicative of mobile devices
+    // console.log(navigator.userAgent);
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
-  // Example usage
+
+
   if (isMobileDevice()) {
     console.log("User is using a mobile device");
     mobileModal = true
     // mobileModalOn()
     // window.alert("This app works best on a computer browser.")
 } else {
-      mobileModal = true
+      mobileModal = false
     //   mobileModalOn()
     //   mobileModalOff()
     console.log("User is using a computer browser");
