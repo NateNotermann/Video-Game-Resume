@@ -283,9 +283,9 @@ function init() {
 
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
-    new Sky({x:0, y: 0, image: skyImage}),
-    new Sky({x:skyWidth, y: 0, image: skyImage}),
-    new Sky({x:skyWidth*2, y: 0, image: skyImage}),
+    new Sky({x:0, y: 0, image: skyImage})
+    // new Sky({x:skyWidth, y: 0, image: skyImage}),
+    // new Sky({x:skyWidth*2, y: 0, image: skyImage}),
 ]
 
 backgrounds = [
@@ -389,7 +389,10 @@ function animate() {
     // c.fillRect(0, 0, canvas.width, canvas.height)
 
     sky.forEach(sky => { // loop through array of Backgrounds
-        sky.position.x += (0.2 * time)
+        sky.position.x += (0.3 * time)
+        if (sky.position.x > canvas.width) {
+            sky.position.x = -skyWidth;
+          }
         sky.draw() // ------ DRAW BACKGROUND
     })
     backgrounds.forEach(background => { // loop through array of Backgrounds
@@ -836,6 +839,14 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
                 keys.jump.pressed = true
             } 
             break
+        case 38:        // Space
+            // console.log('Jump/Space');
+            if (player.velocity.y == 0 ){
+                player.velocity.y += - jump // subtract jump level
+                keys.jump.pressed = true
+            } 
+            break
+
         case 88:        // X
             // console.log('X');
                 keys.x.pressed = true   
@@ -874,6 +885,11 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
             // player.velocity.y += - jump // subtract jump level
             break
         case 32:        // Space
+            // console.log('KEYUP - Jump/up/Space');
+            keys.jump.pressed = false
+            // player.velocity.y += - jump // subtract jump leveld
+            break
+        case 38:        // Space
             // console.log('KEYUP - Jump/up/Space');
             keys.jump.pressed = false
             // player.velocity.y += - jump // subtract jump leveld

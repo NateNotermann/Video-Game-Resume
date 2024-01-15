@@ -40,12 +40,11 @@ Move right: D key
 Move left: A key  
 Jump: W  
 Attack: Space Bar  
-
-**Player 2**  
+<!-- **Player 2**  
 Move right: Right Arrow  
  Move left: Left Arrow  
 Jump: Up Arrow  
-Attack: (left)Option button  
+Attack: (left)Option button   -->
 
 
 
