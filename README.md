@@ -124,12 +124,10 @@ make scroll with player - Done
 
 #### Final Stage & Clean Up
 Add page loader - Done  
-Job Description Modals <-------------------------- in progress  
+Job Description Modals - Done  
 Add Help/? icon/button
-Maybe reverse job order <-------------------------- in progress  
 
 Place More/All Platforms <-------------------------- in progress    
-
 
 
 ## Game Boy Frame & Buttons  <---- in progress  
