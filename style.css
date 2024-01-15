@@ -242,6 +242,7 @@ html {
   } */
 
   .modal {
+    z-index: 500;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -278,6 +279,7 @@ html {
     margin-right: 2.6rem;
     box-shadow: 0 0 0 black;
     transition: all 0.2s;
+    font-family: 'Press Start 2P';
   }
   
   .btn:last-child {
@@ -336,6 +338,7 @@ html {
 
   
   #modalHelp {
+    z-index: 500;
     font-family: 'Press Start 2P';
     display: inline-flex; 
     text-align: center; 
@@ -345,6 +348,9 @@ html {
   #controls {
     margin: auto;
     outline-style: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     /* line-height: 5; */
   }
   .controlsItem {
@@ -357,4 +363,18 @@ html {
   
 .underline {
   text-decoration: underline;
+}
+#helpButton {
+  z-index: 100;
+
+}
+#btnHelp {
+  /* position: absolute;
+  top: 750px;
+  left: 100px; */
+  
+  /* z-index: 100; */
+  margin: 0em;
+  size: 100%;
+  padding: 0.3rem .4rem;
 }

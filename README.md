@@ -125,8 +125,7 @@ make scroll with player - Done
 #### Final Stage & Clean Up
 Add page loader - Done  
 Job Description Modals - Done  
-Add Help/? icon/button
-
+Add Help Button - Done  
 Place More/All Platforms <-------------------------- in progress    
 
 

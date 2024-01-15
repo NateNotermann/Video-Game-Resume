@@ -37,6 +37,7 @@ const c = canvas.getContext('2d');
 const loaderDiv = document.getElementById("loader")
 
 
+const buttonHelp = document.getElementById('btnHelp');
 const closeButtonMobile = document.getElementById('btnCloseMobile');
 const modalHelp = document.getElementById('modalHelp');
 const closeButtonHelp = document.getElementById('btnCloseHelp');
@@ -342,12 +343,12 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
     new Platform({x: platformWidth* 23, y: canvas.height - 125, image: platformImage}), // Platform 14
 ];
 
-buildingHGA = [ new BuildingHGA(800, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
+buildingHGA = [ new BuildingHGA(2500, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
 buildingPRIME = [ new BuildingPRIME(5000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
 elementsPRIME = [ new ElementsPRIME(5000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
 buildingCBRE = [ new BuildingCBRE(7500, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
 buildingCOYOTE = [ new BuildingCOYOTE (10000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
-buildingMCTC = [ new BuildingMCTC(500, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingMCTC = [ new BuildingMCTC(12500, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
 
 arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic)] 
 // building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
@@ -369,6 +370,7 @@ let delta;
 
 // ------ MAIN ANIMATION FUNCTION ------ //
 function animate() { 
+    console.log(mobileModal);
     // requestAnimationFrame(animate) 
     // window.requestAnimationFrame(animate)
         // ------ frame/refresh rate limiting code: start ------ //
@@ -1134,6 +1136,17 @@ closeButtonHelp.addEventListener('click', function() {
 closeButtonMobile.addEventListener('click', function() {
     setTimeout(mobileModalOff, 100); 
     console.log('btncloseMobile clicked');
+})
+
+buttonHelp.addEventListener('click', function() {
+    helpModal = !helpModal
+    if(helpModal) {
+        setTimeout(helpModalOn, 100); 
+        console.log('help model opening');
+    } else {
+        setTimeout(helpModalOff, 100); 
+        console.log('help model closing');
+    }
 })
 
 function test() {
