@@ -20,7 +20,7 @@
   margin-top: 5%;
   margin-bottom: 5%; */
   width: 85%;
-  height: 50%; 
+  height: 85%; 
   border-radius: 4px;
   border-style: dotted;
 }
@@ -49,6 +49,15 @@
 }
 
 
+.title{
+  text-decoration: underline;
+  margin-right: 10px;
+}
+.company {
+  font-size: 22px;
+  display: inline-block;
+}
+
 body {
     margin: 0;
     background-color: lightgreen;
@@ -72,6 +81,35 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+}
+
+.button-link {
+  display: inline-block;
+
+  /* color:inherit;
+  font-family:inherit;
+  font-size: inherit;
+  background: white;
+  padding: 0.3rem 3.4rem;
+  border: 3px solid black;
+  margin-right: 2.6rem;
+  box-shadow: 0 0 0 black;
+  transition: all 0.2s; */
+  
+  /* padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #007BFF;
+  color: #fff;
+  border: 1px solid #007BFF;
+  border-radius: 5px;
+  transition: background-color 0.3s ease; */
+}
+
+.button-link:hover {
+  background-color: #6de7ff;
+  border-color: #000000;
+  border-style: dotted;
 }
 
 canvas {
@@ -204,11 +242,13 @@ html {
   } */
 
   .modal {
+    z-index: 500;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 65%;
+    /* max-width: calc(100% - 40px); */
+    width: 80%;
     /* display: inline-flex; */ 
     display: none;
     flex-direction: column;
@@ -227,10 +267,11 @@ html {
     font-size:1.1rem;
     margin-bottom: 1rem;
     margin-top: 0;
+    line-height: 1;
   }
   .btn {
     color:inherit;
-      font-family:inherit;
+    font-family:inherit;
     font-size: inherit;
     background: white;
     padding: 0.3rem 3.4rem;
@@ -238,6 +279,7 @@ html {
     margin-right: 2.6rem;
     box-shadow: 0 0 0 black;
     transition: all 0.2s;
+    font-family: 'Press Start 2P';
   }
   
   .btn:last-child {
@@ -257,12 +299,12 @@ html {
   .buttons {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   h3 {
     margin: 0px;
-    text-decoration: underline;
+    /* text-decoration: underline; */
   } 
   h4 {
     text-decoration: underline;
@@ -296,6 +338,43 @@ html {
 
   
   #modalHelp {
+    z-index: 500;
     font-family: 'Press Start 2P';
     display: inline-flex; 
+    text-align: center; 
+    line-height: 1.4;
   }
+
+  #controls {
+    margin: auto;
+    outline-style: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* line-height: 5; */
+  }
+  .controlsItem {
+    line-height: 2;
+  }
+  
+  #intro {
+    line-height: 2;
+  }
+  
+.underline {
+  text-decoration: underline;
+}
+#helpButton {
+  z-index: 100;
+
+}
+#btnHelp {
+  /* position: absolute;
+  top: 750px;
+  left: 100px; */
+  
+  /* z-index: 100; */
+  margin: 0em;
+  size: 100%;
+  padding: 0.3rem .4rem;
+}
