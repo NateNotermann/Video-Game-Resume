@@ -370,7 +370,7 @@ let delta;
 
 // ------ MAIN ANIMATION FUNCTION ------ //
 function animate() { 
-    console.log(mobileModal);
+    // console.log(mobileModal); // constantly checks if mobileModal is T/F
     // requestAnimationFrame(animate) 
     // window.requestAnimationFrame(animate)
         // ------ frame/refresh rate limiting code: start ------ //
@@ -678,23 +678,23 @@ function animate() {
             if (glowMCTC) {
                 MCTCModal = true
                 modalMCTCOn()
-                console.log('MCTC Modal On');
+                // console.log('MCTC Modal On');
             } else if (glowCOYOTE) {
                 CoyoteModal = true
                 modalCoyoteOn()
-                console.log('Coyote Modal On');
+                // console.log('Coyote Modal On');
             } else if (glowCBRE) {
                 CBREModal = true
                 modalCBREOn()
-                console.log('CBRE Modal On');
+                // console.log('CBRE Modal On');
             } else if (glowPRIME) {
                 PrimeModal = true
                 modalPrimeOn()
-                console.log('Prime Modal On');
+                // console.log('Prime Modal On');
             } else if (glowHGA) {
                 HGAModal = true
                 modalHGAOn()
-                console.log('HGA Modal On');
+                // console.log('HGA Modal On');
             }
 
 
@@ -854,7 +854,7 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
         case 191:        // X
             // console.log('QuestionMark');
             if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !mobileModal){          
-                    console.log('TRUUUUUUU');
+                    // console.log('No building modals are open');
                     keys.QuestionMark.pressed = true   
                     helpModalOn()
                 }
@@ -942,7 +942,9 @@ const connectedControllers = [];
 
 function checkPlayerAttributes (){
     console.log('gamepad Connected Status: ', connected);
-    if (animateLoop) { console.log('animateLoop running');}
+    if (animateLoop) { 
+        console.log('animateLoop running');
+    }
 }
 
 function updateConnectedControllers() {
@@ -1111,57 +1113,57 @@ function helpModalOff(){
 // ---- Click listener for HGA Close button -- 
 closeButtonHGA.addEventListener('click', function() {
     setTimeout(modalHGAOff, 100); 
-    console.log('btncloseHGA clicked');
+    // console.log('btncloseHGA clicked');
 })
 
 // ---- Click listener for Prime Close button -- 
 closeButtonPrime.addEventListener('click', function() {
     setTimeout(modalPrimeOff, 100); 
-    console.log('btnclosePrime clicked');
+    // console.log('btnclosePrime clicked');
 })
 
 
 // ---- Click listener for CBRE Close button -- 
 closeButtonCBRE.addEventListener('click', function() {
     setTimeout(modalCBREOff, 100); 
-    console.log('btncloseCBRE clicked');
+    // console.log('btncloseCBRE clicked');
 })
 
 
 // ---- Click listener for Coyote Close button -- 
 closeButtonCoyote.addEventListener('click', function() {
     setTimeout(modalCoyoteOff, 100); 
-    console.log('btncloseCoyote clicked');
+    // console.log('btncloseCoyote clicked');
 })
 
 
 // ---- Click listener for MCTC Close button -- 
 closeButtonMCTC.addEventListener('click', function() {
     setTimeout(modalMCTCOff, 100); 
-    console.log('btncloseMCTC clicked');
+    // console.log('btncloseMCTC clicked');
 })
 
 
 // ---- Click listener for Help Close button -- closed CBREModal
 closeButtonHelp.addEventListener('click', function() {
     setTimeout(helpModalOff, 100); 
-    console.log('btncloseHelp clicked');
+    // console.log('btncloseHelp clicked');
 })
 
 // ---- Click listener for Mobile Close button -- closed CBREModal
 closeButtonMobile.addEventListener('click', function() {
     setTimeout(mobileModalOff, 100); 
-    console.log('btncloseMobile clicked');
+    // console.log('btncloseMobile clicked');
 })
 
 buttonHelp.addEventListener('click', function() {
     helpModal = !helpModal
     if(helpModal) {
         setTimeout(helpModalOn, 100); 
-        console.log('help model opening');
+        // console.log('help model opening');
     } else {
         setTimeout(helpModalOff, 100); 
-        console.log('help model closing');
+        // console.log('help model closing');
     }
 })
 
