@@ -6,6 +6,11 @@
 #modalMobile {
   z-index: 1000;
   position: absolute;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  text-align: center;
   /* top: 40%;
   bottom: 40%;
   right: 5%;
@@ -20,14 +25,9 @@
   border-style: dotted;
 }
 
-#modalMobile, #modalTextMobile, #modalMobileButtons, .mobile {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 60px;
-  text-align: center;
-}
+ /* #modalTextMobile, #modalMobileButtons, .mobile {
+  display: none ;
+} */
 
 .loader {
   /* position: absolute;
