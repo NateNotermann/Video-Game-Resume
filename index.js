@@ -1,4 +1,16 @@
 // import platform from '../img/platform.png';
+const modalMobile = document.getElementById('modalMobile');
+let mobileModal = true
+ // -------------------- modalmobileON --------------------
+function mobileModalOn(){
+    mobileModal = true
+    modalMobile.style.display = 'flex'
+}
+  // ---- modalMobile OFF ----
+function mobileModalOff(){
+    mobileModal = false
+    modalMobile.style.display = 'none'
+}
 
 function isMobileDevice() {
     // Check if the user agent contains keywords indicative of mobile devices
@@ -7,8 +19,13 @@ function isMobileDevice() {
   // Example usage
   if (isMobileDevice()) {
     console.log("User is using a mobile device");
+    mobileModal = true
+    // mobileModalOn()
     // window.alert("This app works best on a computer browser.")
-  } else {
+} else {
+      mobileModal = true
+    //   mobileModalOn()
+    //   mobileModalOff()
     console.log("User is using a computer browser");
   }
 
@@ -17,6 +34,10 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 const loaderDiv = document.getElementById("loader")
 
+
+const closeButtonMobile = document.getElementById('btnCloseMobile');
+const modalHelp = document.getElementById('modalHelp');
+const closeButtonHelp = document.getElementById('btnCloseHelp');
 const modalHGA = document.getElementById('modalHGA')
 const modalPrime = document.getElementById('modalPrime')
 const modalCBRE = document.getElementById('modalCBRE')
@@ -33,8 +54,6 @@ const closeButtonCoyote = document.getElementById('btnCloseCoyote');
 const closeButtonMCTC = document.getElementById('btnCloseMCTC');
 
 
-const modalHelp = document.getElementById('modalHelp');
-const closeButtonHelp = document.getElementById('btnCloseHelp');
 // canvas.width = window.innerWidth
 // canvas.height = window.innerHeight
 canvas.width =  1920  //visualViewport.width - 10
@@ -65,9 +84,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if(loaderDisplay.display === "none") {
             console.log('loader = HIDDEN');
             document.getElementById("content").style.display = "flex";
+            
         } else {
             console.log('loader VISIBLE');
         }
+        if(mobileModal) {
+            mobileModalOn()
+        } 
         // document.getElementById("content").style.display = "block";
         // document.getElementById("content").style.display = "flex";
     }, 1000 );
@@ -815,7 +838,7 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
             break
         case 191:        // X
             // console.log('QuestionMark');
-            if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal){          
+            if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !mobileModal){          
                     console.log('TRUUUUUUU');
                     keys.QuestionMark.pressed = true   
                     helpModalOn()
@@ -1064,6 +1087,7 @@ function helpModalOff(){
 }
 
 
+
 // ---- Click listener for HGA Close button -- 
 closeButtonHGA.addEventListener('click', function() {
     setTimeout(modalHGAOff, 100); 
@@ -1098,11 +1122,16 @@ closeButtonMCTC.addEventListener('click', function() {
 })
 
 
-
 // ---- Click listener for Help Close button -- closed CBREModal
 closeButtonHelp.addEventListener('click', function() {
     setTimeout(helpModalOff, 100); 
     console.log('btncloseHelp clicked');
+})
+
+// ---- Click listener for Mobile Close button -- closed CBREModal
+closeButtonMobile.addEventListener('click', function() {
+    setTimeout(mobileModalOff, 100); 
+    console.log('btncloseMobile clicked');
 })
 
 function test() {
