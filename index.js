@@ -343,11 +343,11 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
 ];
 
 buildingHGA = [ new BuildingHGA(800, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
-buildingMCTC = [ new BuildingMCTC(12500, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
-buildingCOYOTE = [ new BuildingCOYOTE (5000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
+buildingPRIME = [ new BuildingPRIME(5000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
+elementsPRIME = [ new ElementsPRIME(5000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
 buildingCBRE = [ new BuildingCBRE(7500, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
-buildingPRIME = [ new BuildingPRIME(10000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
-elementsPRIME = [ new ElementsPRIME(10000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
+buildingCOYOTE = [ new BuildingCOYOTE (10000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
+buildingMCTC = [ new BuildingMCTC(500, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
 
 arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic)] 
 // building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
