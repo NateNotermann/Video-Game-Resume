@@ -1,6 +1,19 @@
 // import platform from '../img/platform.png';
 const modalMobile = document.getElementById('modalMobile');
 let mobileModal = false
+
+
+function checkOrientation() {
+    if (window.matchMedia("(orientation: portrait)").matches){
+        console.log('Portrait orientation');
+    } else if (window.matchMedia("(orientation: landscape)").matches){
+        console.log("landscape orientation");
+    }
+}
+
+window.addEventListener('load', checkOrientation);
+window.addEventListener('resize', checkOrientation);
+
  // -------------------- modalmobileON --------------------
 function mobileModalOn(){
     mobileModal = true
@@ -213,8 +226,8 @@ platformImage.src = './img/platform.jpg'
 const platformTwoImage = new Image()   
 platformTwoImage.src = './img/platformTwo.jpg'
 
-const tallPlatform = new Image()   
-tallPlatform.src = './img/platformSmallTall.png'
+// const tallPlatform = new Image()   
+// tallPlatform.src = './img/platformSmallTall.png'
 
 // -------- Background Images -------- //
 const skyImage = new Image()   
@@ -229,8 +242,8 @@ midgroundImage.src = './img/midground.png'
 const foregroundImage = new Image()   
 foregroundImage.src = './img/foreground.png'
 
-const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
-cloudImage.src = './img/cloud.png'
+// const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
+// cloudImage.src = './img/cloud.png'
 
 // -------- Player Images -------- //
 const spriteRunLeft = new Image()   // spriteRunLeft Image - Dimensions
@@ -280,7 +293,7 @@ let sky = []    //new Background({x:0, y:0, image: backgroundImage})] // Array o
 let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let midgrounds = []    
 let foregrounds = []    
-let clouds = [] //new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
+// let clouds = [] //new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
 let buildingMCTC = []
 let buildingCOYOTE  = []
 let buildingCBRE = []
@@ -416,6 +429,54 @@ let interval = 1000/fps;
 let delta;
 // ------ frame/refresh rate limiting code: variables: end ------ //
 
+
+// let number = 0
+// function animateTitle() {
+//     setTimeout( function () {
+//         let strNumber = number.toString()
+//         number++
+//         document.title = 'test' + strNumber
+//         animateTitle()
+
+//     }, 500 );
+    
+// }
+
+// animateTitle()
+
+function animateTitle(array) {
+    // let xIndex = array.indexOf('X');
+    if(array.length > 0) {
+        setTimeout( function () {
+        let lastItem = array.pop();
+        array.unshift(lastItem)
+        // console.log(array.join(', '));
+        document.title = 'VGR ' + array
+        animateTitle(array);
+        }, 250 );
+    } else {
+        console.log('array is empty');
+    }
+
+    // if (xIndex !==-1) {
+    //     setTimeout( function () {
+    //     array.splice(xIndex, 1)
+    //     array.push('X')
+    //     console.log(array.join(', '));
+        
+    //     array.pop();
+    //     array.unshift('X');
+    //     console.log(array.join(', '));
+    //     moveX(myArray);
+    //     }, 500 );
+    // } else {
+    //     console.log("'X' not found in array");
+    // }
+}
+let array = ['🏃‍♂️', ' ', ' ', ' ', ' ', ' ',];
+
+animateTitle(array);
+
 // ------ MAIN ANIMATION FUNCTION ------ //
 function animate() { 
     // console.log(mobileModal); // constantly checks if mobileModal is T/F
@@ -499,7 +560,7 @@ function animate() {
             if (movingPlatform.position.x <= currentNullPosition+1700 || movingPlatform.position.x >= currentNullPosition+2280 ){
                 direction *= -1; // ---- reverse platform move direction
             }
-        console.log('currentNullPosition', currentNullPosition, 'movingPlatform.position.x', movingPlatform.position.x);
+        // console.log('currentNullPosition', currentNullPosition, 'movingPlatform.position.x', movingPlatform.position.x);
         movingPlatform.draw() // ------ DRAW PLATFORMd
     })
 
