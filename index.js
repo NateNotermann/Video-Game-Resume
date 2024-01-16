@@ -391,6 +391,54 @@ let interval = 1000/fps;
 let delta;
 // ------ frame/refresh rate limiting code: variables: end ------ //
 
+
+// let number = 0
+// function animateTitle() {
+//     setTimeout( function () {
+//         let strNumber = number.toString()
+//         number++
+//         document.title = 'test' + strNumber
+//         animateTitle()
+
+//     }, 500 );
+    
+// }
+
+// animateTitle()
+
+function animateTitle(array) {
+    // let xIndex = array.indexOf('X');
+    if(array.length > 0) {
+        setTimeout( function () {
+        let lastItem = array.pop();
+        array.unshift(lastItem)
+        // console.log(array.join(', '));
+        document.title = 'VGR ' + array
+        animateTitle(array);
+        }, 250 );
+    } else {
+        console.log('array is empty');
+    }
+
+    // if (xIndex !==-1) {
+    //     setTimeout( function () {
+    //     array.splice(xIndex, 1)
+    //     array.push('X')
+    //     console.log(array.join(', '));
+        
+    //     array.pop();
+    //     array.unshift('X');
+    //     console.log(array.join(', '));
+    //     moveX(myArray);
+    //     }, 500 );
+    // } else {
+    //     console.log("'X' not found in array");
+    // }
+}
+let array = ['🏃‍♂️', ' ', ' ', ' ', ' ', ' ',];
+
+animateTitle(array);
+
 // ------ MAIN ANIMATION FUNCTION ------ //
 function animate() { 
     // console.log(mobileModal); // constantly checks if mobileModal is T/F
@@ -474,7 +522,7 @@ function animate() {
             if (movingPlatform.position.x <= currentNullPosition+1700 || movingPlatform.position.x >= currentNullPosition+2280 ){
                 direction *= -1; // ---- reverse platform move direction
             }
-        console.log('currentNullPosition', currentNullPosition, 'movingPlatform.position.x', movingPlatform.position.x);
+        // console.log('currentNullPosition', currentNullPosition, 'movingPlatform.position.x', movingPlatform.position.x);
         movingPlatform.draw() // ------ DRAW PLATFORMd
     })
 
