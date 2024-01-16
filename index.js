@@ -257,14 +257,10 @@ let buildingHGA = []
 let arrowArray = []
 // -------- ELEMENT VARIABLES --------
 
-let originalNullPosition = 500; // Initial x-coordinate of the rectangle
-let originalMovePosition = 500
-
+// let originalNullPosition = 500; // Initial x-coordinate of the rectangle
+// let currentMovePosition = 0
 let currentNullPosition = 0
-let currentMovePosition = 0
 let direction = 1; // 1 represents moving to the right, -1 represents moving to the left
-const rectWidth = platformImage.width;
-const rectHeight = platformImage.height;
 
 // ---- Key pressed variables ----
 let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
@@ -356,11 +352,11 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
 
 
 platformNull = [
-    new Platform({x: originalNullPosition, y: 550, image: platformTwoImage})
+    new Platform({x: 200, y: 550, image: platformTwoImage})
 ];
 
 movingPlatform1 = [
-    new Platform({x: originalMovePosition, y: 700, image: platformTwoImage})
+    new Platform({x: 500, y: 700, image: platformTwoImage})
 ];
 
 buildingHGA = [ new BuildingHGA(2500, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
