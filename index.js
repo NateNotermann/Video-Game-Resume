@@ -679,7 +679,7 @@ function animate() {
         }
     })
 
-    // ------ PLATFORMTWO COLLISION DETECTION ------
+    // ------ PLATFORM TWO COLLISION DETECTION ------
     platformTwos.forEach(platformTwo => { 
         if (//player bottom is <= than platform top
             player.position.y + player.height <= platformTwo.position.y
@@ -695,8 +695,25 @@ function animate() {
             {   
                 player.velocity.y = 0   // player does not fall
         }
-    
-    }) // ------ PLATFORMTWO COLLISION DETECTION END ------ //
+    })
+
+    // ------ MOVING PLATFORM COLLISION DETECTION ------ // 
+    movingPlatform1.forEach(platform => { 
+        if (//player bottom is <= than platform top
+            player.position.y + player.height <= platform.position.y
+            // player bottom + player Velocity >= with platform top side. (Player lands on platform)
+            && player.position.y + player.height + player.velocity.y >= platform.position.y
+            //  // players left side overlap with platform right side
+            && player.position.x <= platform.position.x + platform.width 
+            //  // players right side overlap with platform left side
+            && player.position.x + player.width >= platform.position.x 
+            // // players top overlap with platform bottom (Players head is under but still colliding with platform bottom)
+            && player.position.y + player.velocity.y <= platform.position.y + platform.height
+            ) 
+            {   
+                player.velocity.y = 0   // player does not fall
+        }
+    })
 
 
 
