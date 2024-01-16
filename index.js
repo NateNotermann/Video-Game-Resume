@@ -127,11 +127,19 @@ const jump = 35 // amount player should jump
 const playerMovement = 20 //  amount player moves left and right
 const platformWidth = 2500 //579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
+
+const platformTwoWidth = 580
+const platformTwoHeight = 125 //  
+
 const playerSize = 2 // used when referencing height in player class
 const buildingSize = 2
 const buildingSize2 = 1.5
 const backgroundWidth = 2560
 const skyWidth = 2559
+
+let currentNullPosition = 0 // Anchor Point for all moving platforms
+let direction = 1; // 1 represents moving to the right, -1 represents moving to the left
+
 let playerWidth = 66
 let playerHeight = 150
 let groundPosition = 125 //canvas.height - platformHeight
@@ -257,11 +265,6 @@ let buildingHGA = []
 let arrowArray = []
 // -------- ELEMENT VARIABLES --------
 
-// let originalNullPosition = 500; // Initial x-coordinate of the rectangle
-// let currentMovePosition = 0
-let currentNullPosition = 0
-let direction = 1; // 1 represents moving to the right, -1 represents moving to the left
-
 // ---- Key pressed variables ----
 let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
     right: {
@@ -287,6 +290,10 @@ function init() {
     // helpModalOn()
 // -------- ELEMENT VARIABLES --------
 // player = new Player() //  calling the "Player" class
+
+// ---- RESET NULL --
+currentNullPosition = 0 // Anchor Point for all moving platforms
+direction = 1; // 1 represents moving to the right, -1 represents moving to the left
 
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
@@ -352,7 +359,7 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
 
 
 platformNull = [
-    new Platform({x: 200, y: 550, image: platformTwoImage})
+    new Platform({x: 500, y: 800, image: platformTwoImage})
 ];
 
 movingPlatform1 = [
