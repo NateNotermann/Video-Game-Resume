@@ -289,7 +289,7 @@ function init() {
     // modalHGAOff()
     // helpModalOn()
 // -------- ELEMENT VARIABLES --------
-// player = new Player() //  calling the "Player" class
+player = new Player() //  ---- NEED THIS. Resets the player. ----
 
 // ---- RESET NULL --
 currentNullPosition = 0 // Anchor Point for all moving platforms
