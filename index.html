@@ -6,8 +6,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Aldrich&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=DotGothic16&family=Press+Start+2P&family=Silkscreen&family=Sniglet:wght@400;800&display=swap" rel="stylesheet">
   <title>Video-game Resume</title>
 </head>
 
@@ -17,10 +16,10 @@
 
   <div id="content" class="screenDiv" style="display:none">
     
-    <!--MAIN MENU/HELP MODAL -->
+    <!--MOBILE MODAL -->
     <div id="modalMobile" class="modal">
       <p id="modalTextMobile" class="mobile">Hello! Using a mobile device? </p>
-      <p class="mobile">Unfortunately this app is not yet optimized for mobile use. For full functionality please switch to a computer.</p>
+      <p class="mobile">Unfortunately, this app is not yet optimized for mobile use. For full functionality, please switch to a computer.</p>
       <br>
       <div id="modalMobileButtons" class="buttons">
         <!-- <button id="btnOpen" class="btn">Open</button> -->
@@ -31,8 +30,22 @@
 
     <!--MAIN MENU/HELP MODAL -->
     <div id="modalHelp" class="modal">
-      <p id="modalTextHelp" class="message">Welcome to my javascript video-game resume!</p>
-      <div class="buttons">
+      <!-- <p class="message">Hello! My name is Nate Notermann.</p> -->
+      <!-- <p class="message">Welcome to my javascript video-game resume!</p> -->
+      <p class="messageHelp underline">Welcome to Nate Notermann's Javascript Video-Game Resume!</p>
+      <!-- <p class="message underline">Javascript Video-Game Resume!</p> -->
+      <p id="intro">Embark on an interactive journey through my career and education using vanilla javascript. Experience a unique blend of gameplay and professional history.</p>
+      <p>It is also playable with a gamepad/controller!</p>
+      <h2>Keyboard Controls</h2>
+      <div id="controls" >
+        <p class="controlsItem">HELP: "?" Key or click "Need Help?"</p>
+        <p class="controlsItem">Jump: Up Arrow or Space Bar or "W" Key</p>
+        <p class="controlsItem">Right:  Right Arrow or "D" key</p>
+        <p class="controlsItem">Left:  Left Arrow or "A" key</p>
+        <p class="controlsItem">Interact:  "X" key</p>
+      </div>
+      <br>
+      <div id="buttons" class="buttons">
         <!-- <button id="btnOpen" class="btn">Open</button> -->
         <button id="btnCloseHelp" class="btn">Close</button>
       </div>
@@ -41,33 +54,32 @@
     <!--HGA MODAL -->
     <div id="modalHGA" class="modal">
       <h3 class="title">Software Engineer</h3>
-      <p class="company">HGA (Hammel Green and Abrahamson), 2022 - 2023</p>
-      <!-- <p class="year">2022 - 2023</p> -->
+      <p class="company">HGA (Hammel Green and Abrahamson), 2022-2023</p>
+      <!-- <br> -->
       <div class="message">
         <ul>
-          <li>Developed user-friendly full-stack web applications using ASP.NET and Visual Basic(VB.NET)</li>
+          <li>Developed user-friendly full-stack web applications using ASP.NET and Visual Basic (VB.NET).</li>
           <li>Designed database architecture for new web applications.</li>
-          <li>Assisted with server maintenance, database backups, and migration in SSMS.</li>
-          <li>Utilized Agile methodology with Jira for SCRUM planning.</li>
+          <!-- <li>Assisted with server maintenance, database backups, and migration in SSMS.</li> -->
+          <li>Utilized Agile methodology and SCRUM planning.</li>
         </ul>
         <br>
 
         <h4>Project 1 - Company Document Archive</h4>
         <ul>
-          <li>Developed a full-stack web application of company’s physical document archive.</li>
+          <li>Developed a full-stack web application for the company’s physical document archive.</li>
           <li>Migrated the Microsoft Access database of 84,000 documents to a new server with SSMS.</li>
-          <li>The app allowed employees to request documents, print labels and track request</li>
-          <li>Integrated an automated confirmation email system</li>
-          <p class="tech">Tech used: ASP.NET, VB.NET, Javascript, SSRS, T-SQL, Bootstrap CSS, </p>
+          <li>The app allowed employees to request documents, print labels, track requests, send and receive automated emails.</li>
+          <p class="tech">Tech used: ASP.NET, VB.NET, Javascript, SSRS, T-SQL, Bootstrap CSS. </p>
         </ul>
         <br>
 
         <h4>Project 2 - Quality Control Checklist</h4>
         <ul>
-          <li>Developed web app for QA task tracking & project planing</li>
-          <li>Collaborated with Principal Architects on user stories and UI/UX design in Miro and Figma.</li>
-          <li>Engineered a centralized and efficient tool that enhanced productivity, and accuracy.</li>
-          <p class="tech">Tech used: ASP.NET, VB.NET, Javascript, T-SQL, Bootstrap CSS, </p>
+          <li>Developed a web app for QA task tracking and project planning.</li>
+          <li>Collaborated with principal architects on user stories and UI/UX design in Miro and Figma.</li>
+          <li>Engineered a centralized app to enhance productivity and accuracy.</li>
+          <p class="tech">Tech used: ASP.NET, VB.NET, Javascript, T-SQL, Bootstrap CSS.</p>
         </ul>
       </div>
       <div class="buttons">
@@ -81,32 +93,31 @@
     <div id="modalPrime" class="modal">
       <h3 class="title">Full-Stack Software Engineering Student</h3>
       <p class="company">Prime Digital Academy, May 2022 - Sep 2023</p>
+      <br>
       <div class="message">
-        <p>Received a certificate in Full Stack Software Engineering.</p>
+        <p>Received a certificate in full-stack software engineering.</p>
         <p>Prime Digital Academy is an accelerated 5-month program with a holistic approach to software development.</p>
-        <p>Additional training included public speaking and presentation practice, professional skill development,
-          diversity, equity, &
-          inclusion, and development spikes with real-world client work.</p>
+        <p>Additional training included public speaking and presentation practice, professional skill development, 
+          diversity, equity, and inclusion, and development spikes with real-world client work.</p>
         <br>
 
-        <h4>Client/Group Project - Rochester Community Initiative React Web Application</h4>
+        <h4>Client/Group Project - Rochester Community Initiative Web Portal</h4>
         <ul>
           <li>Designed a scalable platform connecting high school staff, teens, and local mental health practitioners in
             Rochester.</li>
-          <li>Led the database development by writing 600 plus lines of the 750 total lines of SQL code in Postico.</li>
-          <li>Configured a single SQL Query for team members to update their local databases without having to recode
+          <li>Led the database development by writing 600 plus lines of the 750 total lines of SQL code.</li>
+          <li>Configured a single SQL query for team members to update their local databases without having to recode
             changes.</li>
           <p class="tech">Tech used: React.js, JavaScript, HTML, CSS, Redux/Saga, Material UI, Node.js, Express.js,
-            PostgreSQL, Email.js API </p>
+            PostgreSQL, Email.js API</p>
         </ul>
         <br>
 
         <h4>Solo Project - ‘Wiki-HeHe-Pedia’ React Web Application</h4>
         <ul>
-          <li>Developed a comedian index web application where users can browse and search for comedians based on their
-            location, genre and names.</li>
-          <li>Users can look up the location of comedians, social media link, websites, and comedian details</li>
-          <li>Engineered a centralized and efficient tool that enhanced productivity, and accuracy.</li>
+          <li>Developed a comedian index web application where users can browse and search 
+            for comedians based on their location, genre, and names.</li>
+          <li>Users can look up the location of comedians, social media links, websites, and comedian details.</li>
           <p class="tech">Tech used: React.js, JavaScript, HTML, CSS, Redux/Saga, Material UI, Node.js, Express.js,
             PostgreSQL.</p>
         </ul>
@@ -114,6 +125,8 @@
       <div class="buttons">
         <!-- <button id="btnOpen" class="btn">Open</button> -->
         <button id="btnClosePrime" class="btn">Close</button>
+        <a href="https://wiki-hehe-pedia2-c36340d55df4.herokuapp.com/#/home" class="button-link btn" target="_blank">Solo Project Demo</a>
+
       </div>
     </div>
 
@@ -121,11 +134,12 @@
     <div id="modalCBRE" class="modal">
       <h3 class="title">Real Estate Services Coordinator</h3>
       <p class="company">CBRE Inc,  Jan 2019 - May 2022</p>
+      <br>
       <div class="message">
         <ul>
           <li>Led team updates and documentation of new compliance procedures for internal software.</li>
-          <li>Monitored & documented updates to tenant and vendor property files in the global database.</li>
-          <li>Collaborated with a team to manage over 2 million sq ft of retail, office, and industrial properties in MN, ND & MI.</li>
+          <li>Monitored and documented updates to tenant and vendor property files in the global database.</li>
+          <li>Collaborated with a team to manage over 2 million sq ft of retail, office, and industrial properties in Minnesota, North Dakota, and Michigan.</li>
           <li>Coded invoices to ensure their accurate assignment to the appropriate service categories & budget allocations.</li>
           <li>Drafted over 200 contracts with vendors for many varying maintenance services & capital improvement plans.</li>
           <li>Cultivated and sustained robust connections with clients, tenants, and vendors, fostering positive relationships.</li>
@@ -143,9 +157,9 @@
       <p class="company">Coyote Logistics, Aug 2017 - Jan 2019</p>
       <div class="message">
         <ul>
-          <li>Sourced new transportation client accounts to grow the network of assets, negotiating 1172 full semi-truck loads</li>
-          <li>Analyzed market data to optimize contract negotiation, increase final sale profitability & improve KPIs.</li>
-          <li>Spearheaded a $115,000 contract to relocate 200 semi-trailers for UPS earning $20,000 net revenue.</li>
+          <li>Sourced new transportation client accounts to grow the network of assets, negotiating 1172 full semi-truck loads.</li>
+          <li>Analyzed market data to optimize contract negotiation, increase final sale profitability, and improve KPIs.</li>
+          <li>Spearheaded a $115,000 contract to relocate 200 semi-trailers for UPS, earning $20,000 in net revenue.</li>
         </ul>        
       </div>
       <div class="buttons">
@@ -154,25 +168,33 @@
       </div>
     </div>
 
-        <!--MCTC MODAL -->
-        <div id="modalMCTC" class="modal">
-          <h3 class="title">Associate of Applied Science, Digital Editing & Post-Production in Cinema</h3>
-          <p class="company">Minneapolis Community & Technical College, Sep 2008 - May 2011</p>
-          <p class="company">Immersive training in cinema production pipeline including Cinematography, Directing, Screenwriting, Editing & sound.</p>
-          <div class="message">
-            <ul>
-              <!-- <li>Immersive training in cinema production pipeline including Cinematography, Directing, Screenwriting, Editing & sound.</li> -->
-            </ul>        
-          </div>
-          <div class="buttons">
-            <!-- <button id="btnOpen" class="btn">Open</button> -->
-            <button id="btnCloseMCTC" class="btn">Close</button>
-          </div>
-        </div>
+    <!--MCTC MODAL -->
+    <div id="modalMCTC" class="modal">
+      <h3 class="title">Associate of Applied Science, Digital Editing and Post-Production in Cinema</h3>
+      <p class="company">Minneapolis Community & Technical College, Sep 2008 - May 2011</p>
+      <p class="company">Received immersive training in the cinema production pipeline, encompassing cinematography, directing, screenwriting, editing, and sound.</p>
+      <div class="message">
+        <ul>
+          <!-- <li>Immersive training in cinema production pipeline including Cinematography, Directing, Screenwriting, Editing & sound.</li> -->
+        </ul>        
+      </div>
+      <div class="buttons">
+        <!-- <button id="btnOpen" class="btn">Open</button> -->
+        <button id="btnCloseMCTC" class="btn">Close</button>
+      </div>
+    </div>
 
 
+    
     <canvas></canvas>
+    
+    <!-- help button -->
+    <div id="helpButton">
+      <button id="btnHelp" class="btn">Need help?</button>
+    </div>
 
+
+    
     <div class="buttonsDiv">
       <div class="flex">
         <div class="rect1 border"></div>

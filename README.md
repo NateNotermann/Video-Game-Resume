@@ -40,12 +40,11 @@ Move right: D key
 Move left: A key  
 Jump: W  
 Attack: Space Bar  
-
-**Player 2**  
+<!-- **Player 2**  
 Move right: Right Arrow  
  Move left: Left Arrow  
 Jump: Up Arrow  
-Attack: (left)Option button  
+Attack: (left)Option button   -->
 
 
 
@@ -122,24 +121,25 @@ make scroll with player - Done
 
 <!-- Add side collision OR add fall pits in there place <-------------------------- in progress   -->
 
-Job Description Modals <-------------------------- in progress  
-Maybe reverse job order <-------------------------- in progress  
+#### Final Stage & Clean Up
+Add page loader - Done  
+Job Description Modals - Done  
+Add Help Button - Done  
+Moving platforms <-------------------------- in progress    
 
 Place More/All Platforms <-------------------------- in progress    
 
-Fix Onload render bug <-------------------------- in progress 
 
 ## Game Boy Frame & Buttons  <---- in progress  
 Add controller & keyboard buttons to the Game Boy frame.  <-------------------------- in progress  
 Make controller & keyboard buttons react when pressed.    <-------------------------- in progress  
 
-
 #### Final Steps      
-Add javascript sound effects from other repo   
 Deploy to Netlify   - Done
 Celebratory Dance    
 
 ### Stretch Goals:    
+Add Sound Effects
 Sprite Jumping Right
 Sprite Jumping Left   
 Add Music    
