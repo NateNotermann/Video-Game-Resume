@@ -152,11 +152,19 @@ const jump = 35 // amount player should jump
 const playerMovement = 20 //  amount player moves left and right
 const platformWidth = 2500 //579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
+
+const platformTwoWidth = 580
+const platformTwoHeight = 125 //  
+
 const playerSize = 2 // used when referencing height in player class
 const buildingSize = 2
 const buildingSize2 = 1.5
 const backgroundWidth = 2560
 const skyWidth = 2559
+
+let currentNullPosition = 0 // Anchor Point for all moving platforms
+let direction = 1; // 1 represents moving to the right, -1 represents moving to the left
+
 let playerWidth = 66
 let playerHeight = 150
 let groundPosition = 125 //canvas.height - platformHeight
@@ -264,8 +272,10 @@ ArrowPic.src = './img/arrow3.png'
 let player = new Player() //  calling the "Player" class
 player.draw()
 player.update()
+let movingPlatform1 = []
 let platformTwos = []
 let platforms = []     // Array of Platforms
+let platformNull = []     // Array of Platforms
 let sky = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let midgrounds = []    
@@ -304,13 +314,17 @@ function init() {
     // modalHGAOff()
     // helpModalOn()
 // -------- ELEMENT VARIABLES --------
-// player = new Player() //  calling the "Player" class
+player = new Player() //  ---- NEED THIS. Resets the player. ----
+
+// ---- RESET NULL --
+currentNullPosition = 0 // Anchor Point for all moving platforms
+direction = 1; // 1 represents moving to the right, -1 represents moving to the left
 
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
-    new Sky({x:0, y: 0, image: skyImage}),
-    new Sky({x:skyWidth, y: 0, image: skyImage}),
-    new Sky({x:skyWidth*2, y: 0, image: skyImage}),
+    new Sky({x:0, y: 0, image: skyImage})
+    // new Sky({x:skyWidth, y: 0, image: skyImage}),
+    // new Sky({x:skyWidth*2, y: 0, image: skyImage}),
 ]
 
 backgrounds = [
@@ -368,6 +382,15 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
     new Platform({x: platformWidth* 23, y: canvas.height - 125, image: platformImage}), // Platform 14
 ];
 
+
+platformNull = [
+    new Platform({x: -platformTwoWidth*2, y: canvas.height/2, image: platformTwoImage}) // -- Hidden off screen.
+];
+
+movingPlatform1 = [
+    new Platform({x: 1700, y: canvas.height - 125, image: platformTwoImage})
+];
+
 buildingHGA = [ new BuildingHGA(2500, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
 buildingPRIME = [ new BuildingPRIME(5000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
 elementsPRIME = [ new ElementsPRIME(5000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
@@ -395,7 +418,7 @@ let delta;
 
 // ------ MAIN ANIMATION FUNCTION ------ //
 function animate() { 
-    console.log(mobileModal);
+    // console.log(mobileModal); // constantly checks if mobileModal is T/F
     // requestAnimationFrame(animate) 
     // window.requestAnimationFrame(animate)
         // ------ frame/refresh rate limiting code: start ------ //
@@ -414,7 +437,10 @@ function animate() {
     // c.fillRect(0, 0, canvas.width, canvas.height)
 
     sky.forEach(sky => { // loop through array of Backgrounds
-        sky.position.x += (0.2 * time)
+        sky.position.x += (0.3 * time)
+        if (sky.position.x > canvas.width) {
+            sky.position.x = -skyWidth;
+          }
         sky.draw() // ------ DRAW BACKGROUND
     })
     backgrounds.forEach(background => { // loop through array of Backgrounds
@@ -454,13 +480,29 @@ function animate() {
         building.draw()     // ------ DRAW buildingHGA
         building.update()
     }) 
-    arrowArray.forEach(arrowArray1 => { // loop through array of Platforms
-        arrowArray1.draw() // ------ DRAW PLATFORM
+    arrowArray.forEach(arrowArray1 => { // loop arrow sign frames
+        arrowArray1.draw() 
         arrowArray1.update()
     })
     platforms.forEach(platform => { // loop through array of Platforms
         platform.draw() // ------ DRAW PLATFORM
     })
+    
+    platformNull.forEach(platform => { // loop through array of Platforms
+        platform.draw() // ------ DRAW PLATFORM
+    })
+
+    movingPlatform1.forEach(movingPlatform => { // loop through array of Platforms
+        // if (movingPlatform.position.x + movingPlatform.width > 0 && movingPlatform.position.x < canvas.width ) { // if on screen logic
+        // }
+            movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
+            if (movingPlatform.position.x <= currentNullPosition+1700 || movingPlatform.position.x >= currentNullPosition+2280 ){
+                direction *= -1; // ---- reverse platform move direction
+            }
+        console.log('currentNullPosition', currentNullPosition, 'movingPlatform.position.x', movingPlatform.position.x);
+        movingPlatform.draw() // ------ DRAW PLATFORMd
+    })
+
     platformTwos.forEach(plate => {
         plate.draw()
     })
@@ -511,11 +553,21 @@ function animate() {
         if (keys.right.pressed || rightPressed) { // if right key is pressed, move platform to the left by playMovement
             scrollOffset +=playerMovement // record how much platforms are offsetting
 
+            
             platformTwos.forEach(platformTwo => { // loop through array of platforms
                 platformTwo.position.x -= playerMovement
             });
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
+                platform.position.x -= playerMovement
+            });
+            platformNull.forEach(platform => { // loop through array of platforms
+                // platform.draw() // ------ PLATFORM INITIAL DRAW 
+                platform.position.x -= playerMovement
+                currentNullPosition -= playerMovement
+            });
+            movingPlatform1.forEach(platform => { // loop through array of platforms
+                // console.log('platformNull', platformNull.position.x);
                 platform.position.x -= playerMovement
             });
             buildingMCTC.forEach(building => { // ---- building SCROLL ----
@@ -562,6 +614,14 @@ function animate() {
             });
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
+                platform.position.x += playerMovement
+            });
+            platformNull.forEach(platform => { // loop through array of platforms
+                platform.position.x += playerMovement
+                currentNullPosition += playerMovement
+            });
+            movingPlatform1.forEach(platform => { // loop through array of platforms
+     
                 platform.position.x += playerMovement
             });
             buildingMCTC.forEach(building => { // ---- Building SCROLL ----
@@ -651,7 +711,7 @@ function animate() {
         }
     })
 
-    // ------ PLATFORMTWO COLLISION DETECTION ------
+    // ------ PLATFORM TWO COLLISION DETECTION ------
     platformTwos.forEach(platformTwo => { 
         if (//player bottom is <= than platform top
             player.position.y + player.height <= platformTwo.position.y
@@ -667,8 +727,25 @@ function animate() {
             {   
                 player.velocity.y = 0   // player does not fall
         }
-    
-    }) // ------ PLATFORMTWO COLLISION DETECTION END ------ //
+    })
+
+    // ------ MOVING PLATFORM COLLISION DETECTION ------ // 
+    movingPlatform1.forEach(platform => { 
+        if (//player bottom is <= than platform top
+            player.position.y + player.height <= platform.position.y
+            // player bottom + player Velocity >= with platform top side. (Player lands on platform)
+            && player.position.y + player.height + player.velocity.y >= platform.position.y
+            //  // players left side overlap with platform right side
+            && player.position.x <= platform.position.x + platform.width 
+            //  // players right side overlap with platform left side
+            && player.position.x + player.width >= platform.position.x 
+            // // players top overlap with platform bottom (Players head is under but still colliding with platform bottom)
+            && player.position.y + player.velocity.y <= platform.position.y + platform.height
+            ) 
+            {   
+                player.velocity.y = 0   // player does not fall
+        }
+    })
 
 
 
@@ -700,23 +777,23 @@ function animate() {
             if (glowMCTC) {
                 MCTCModal = true
                 modalMCTCOn()
-                console.log('MCTC Modal On');
+                // console.log('MCTC Modal On');
             } else if (glowCOYOTE) {
                 CoyoteModal = true
                 modalCoyoteOn()
-                console.log('Coyote Modal On');
+                // console.log('Coyote Modal On');
             } else if (glowCBRE) {
                 CBREModal = true
                 modalCBREOn()
-                console.log('CBRE Modal On');
+                // console.log('CBRE Modal On');
             } else if (glowPRIME) {
                 PrimeModal = true
                 modalPrimeOn()
-                console.log('Prime Modal On');
+                // console.log('Prime Modal On');
             } else if (glowHGA) {
                 HGAModal = true
                 modalHGAOn()
-                console.log('HGA Modal On');
+                // console.log('HGA Modal On');
             }
 
 
@@ -861,6 +938,14 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
                 keys.jump.pressed = true
             } 
             break
+        case 38:        // Space
+            // console.log('Jump/Space');
+            if (player.velocity.y == 0 ){
+                player.velocity.y += - jump // subtract jump level
+                keys.jump.pressed = true
+            } 
+            break
+
         case 88:        // X
             // console.log('X');
                 keys.x.pressed = true   
@@ -868,7 +953,7 @@ addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode,
         case 191:        // X
             // console.log('QuestionMark');
             if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !mobileModal){          
-                    console.log('TRUUUUUUU');
+                    // console.log('No building modals are open');
                     keys.QuestionMark.pressed = true   
                     helpModalOn()
                 }
@@ -899,6 +984,11 @@ addEventListener('keyup', ({keyCode, key}, ) => { // keyCode is event.keyCode, k
             // player.velocity.y += - jump // subtract jump level
             break
         case 32:        // Space
+            // console.log('KEYUP - Jump/up/Space');
+            keys.jump.pressed = false
+            // player.velocity.y += - jump // subtract jump leveld
+            break
+        case 38:        // Space
             // console.log('KEYUP - Jump/up/Space');
             keys.jump.pressed = false
             // player.velocity.y += - jump // subtract jump leveld
@@ -951,7 +1041,9 @@ const connectedControllers = [];
 
 function checkPlayerAttributes (){
     console.log('gamepad Connected Status: ', connected);
-    if (animateLoop) { console.log('animateLoop running');}
+    if (animateLoop) { 
+        console.log('animateLoop running');
+    }
 }
 
 function updateConnectedControllers() {
@@ -1120,57 +1212,57 @@ function helpModalOff(){
 // ---- Click listener for HGA Close button -- 
 closeButtonHGA.addEventListener('click', function() {
     setTimeout(modalHGAOff, 100); 
-    console.log('btncloseHGA clicked');
+    // console.log('btncloseHGA clicked');
 })
 
 // ---- Click listener for Prime Close button -- 
 closeButtonPrime.addEventListener('click', function() {
     setTimeout(modalPrimeOff, 100); 
-    console.log('btnclosePrime clicked');
+    // console.log('btnclosePrime clicked');
 })
 
 
 // ---- Click listener for CBRE Close button -- 
 closeButtonCBRE.addEventListener('click', function() {
     setTimeout(modalCBREOff, 100); 
-    console.log('btncloseCBRE clicked');
+    // console.log('btncloseCBRE clicked');
 })
 
 
 // ---- Click listener for Coyote Close button -- 
 closeButtonCoyote.addEventListener('click', function() {
     setTimeout(modalCoyoteOff, 100); 
-    console.log('btncloseCoyote clicked');
+    // console.log('btncloseCoyote clicked');
 })
 
 
 // ---- Click listener for MCTC Close button -- 
 closeButtonMCTC.addEventListener('click', function() {
     setTimeout(modalMCTCOff, 100); 
-    console.log('btncloseMCTC clicked');
+    // console.log('btncloseMCTC clicked');
 })
 
 
 // ---- Click listener for Help Close button -- closed CBREModal
 closeButtonHelp.addEventListener('click', function() {
     setTimeout(helpModalOff, 100); 
-    console.log('btncloseHelp clicked');
+    // console.log('btncloseHelp clicked');
 })
 
 // ---- Click listener for Mobile Close button -- closed CBREModal
 closeButtonMobile.addEventListener('click', function() {
     setTimeout(mobileModalOff, 100); 
-    console.log('btncloseMobile clicked');
+    // console.log('btncloseMobile clicked');
 })
 
 buttonHelp.addEventListener('click', function() {
     helpModal = !helpModal
     if(helpModal) {
         setTimeout(helpModalOn, 100); 
-        console.log('help model opening');
+        // console.log('help model opening');
     } else {
         setTimeout(helpModalOff, 100); 
-        console.log('help model closing');
+        // console.log('help model closing');
     }
 })
 
