@@ -260,6 +260,7 @@ let arrowArray = []
 let originalNullPosition = 500; // Initial x-coordinate of the rectangle
 let originalMovePosition = 500
 
+let currentNullPosition = 0
 let currentMovePosition = 0
 let direction = 1; // 1 represents moving to the right, -1 represents moving to the left
 const rectWidth = platformImage.width;
@@ -467,10 +468,10 @@ function animate() {
         // if (movingPlatform.position.x + movingPlatform.width > 0 && movingPlatform.position.x < canvas.width ) { // if on screen logic
         // }
             movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
-            if (movingPlatform.position.x <= currentMovePosition+500 || movingPlatform.position.x >= currentMovePosition+800 ){
+            if (movingPlatform.position.x <= currentNullPosition+500 || movingPlatform.position.x >= currentNullPosition+800 ){
                 direction *= -1; // ---- reverse platform move direction
             }
-        console.log('currentMovePosition', currentMovePosition, 'movingPlatform.position.x', movingPlatform.position.x);
+        console.log('currentNullPosition', currentNullPosition, 'movingPlatform.position.x', movingPlatform.position.x);
         movingPlatform.draw() // ------ DRAW PLATFORMd
     })
 
@@ -535,7 +536,7 @@ function animate() {
             platformNull.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
                 platform.position.x -= playerMovement
-                currentMovePosition -= playerMovement
+                currentNullPosition -= playerMovement
             });
             movingPlatform1.forEach(platform => { // loop through array of platforms
                 // console.log('platformNull', platformNull.position.x);
@@ -589,7 +590,7 @@ function animate() {
             });
             platformNull.forEach(platform => { // loop through array of platforms
                 platform.position.x += playerMovement
-                currentMovePosition += playerMovement
+                currentNullPosition += playerMovement
             });
             movingPlatform1.forEach(platform => { // loop through array of platforms
      
