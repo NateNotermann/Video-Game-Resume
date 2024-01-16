@@ -239,8 +239,10 @@ ArrowPic.src = './img/arrow3.png'
 let player = new Player() //  calling the "Player" class
 player.draw()
 player.update()
+let movingPlatform1 = []
 let platformTwos = []
 let platforms = []     // Array of Platforms
+let platformNull = []     // Array of Platforms
 let sky = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let midgrounds = []    
@@ -254,6 +256,14 @@ let elementsPRIME = []
 let buildingHGA = []
 let arrowArray = []
 // -------- ELEMENT VARIABLES --------
+
+let originalNullPosition = 500; // Initial x-coordinate of the rectangle
+let originalMovePosition = 500
+
+let currentMovePosition = 0
+let direction = 1; // 1 represents moving to the right, -1 represents moving to the left
+const rectWidth = platformImage.width;
+const rectHeight = platformImage.height;
 
 // ---- Key pressed variables ----
 let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. Default = false.
@@ -341,6 +351,15 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
     new Platform({x: platformWidth* 21, y: canvas.height - 125, image: platformImage}), // Platform 14
     new Platform({x: platformWidth* 22, y: canvas.height - 125, image: platformImage}), // Platform 14
     new Platform({x: platformWidth* 23, y: canvas.height - 125, image: platformImage}), // Platform 14
+];
+
+
+platformNull = [
+    new Platform({x: originalNullPosition, y: 550, image: platformTwoImage})
+];
+
+movingPlatform1 = [
+    new Platform({x: originalMovePosition, y: 700, image: platformTwoImage})
 ];
 
 buildingHGA = [ new BuildingHGA(2500, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
@@ -432,13 +451,29 @@ function animate() {
         building.draw()     // ------ DRAW buildingHGA
         building.update()
     }) 
-    arrowArray.forEach(arrowArray1 => { // loop through array of Platforms
-        arrowArray1.draw() // ------ DRAW PLATFORM
+    arrowArray.forEach(arrowArray1 => { // loop arrow sign frames
+        arrowArray1.draw() 
         arrowArray1.update()
     })
     platforms.forEach(platform => { // loop through array of Platforms
         platform.draw() // ------ DRAW PLATFORM
     })
+    
+    platformNull.forEach(platform => { // loop through array of Platforms
+        platform.draw() // ------ DRAW PLATFORM
+    })
+
+    movingPlatform1.forEach(movingPlatform => { // loop through array of Platforms
+        // if (movingPlatform.position.x + movingPlatform.width > 0 && movingPlatform.position.x < canvas.width ) { // if on screen logic
+        // }
+            movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
+            if (movingPlatform.position.x <= currentMovePosition+500 || movingPlatform.position.x >= currentMovePosition+800 ){
+                direction *= -1; // ---- reverse platform move direction
+            }
+        console.log('currentMovePosition', currentMovePosition, 'movingPlatform.position.x', movingPlatform.position.x);
+        movingPlatform.draw() // ------ DRAW PLATFORMd
+    })
+
     platformTwos.forEach(plate => {
         plate.draw()
     })
@@ -489,11 +524,21 @@ function animate() {
         if (keys.right.pressed || rightPressed) { // if right key is pressed, move platform to the left by playMovement
             scrollOffset +=playerMovement // record how much platforms are offsetting
 
+            
             platformTwos.forEach(platformTwo => { // loop through array of platforms
                 platformTwo.position.x -= playerMovement
             });
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
+                platform.position.x -= playerMovement
+            });
+            platformNull.forEach(platform => { // loop through array of platforms
+                // platform.draw() // ------ PLATFORM INITIAL DRAW 
+                platform.position.x -= playerMovement
+                currentMovePosition -= playerMovement
+            });
+            movingPlatform1.forEach(platform => { // loop through array of platforms
+                // console.log('platformNull', platformNull.position.x);
                 platform.position.x -= playerMovement
             });
             buildingMCTC.forEach(building => { // ---- building SCROLL ----
@@ -540,6 +585,14 @@ function animate() {
             });
             platforms.forEach(platform => { // loop through array of platforms
                 // platform.draw() // ------ PLATFORM INITIAL DRAW 
+                platform.position.x += playerMovement
+            });
+            platformNull.forEach(platform => { // loop through array of platforms
+                platform.position.x += playerMovement
+                currentMovePosition += playerMovement
+            });
+            movingPlatform1.forEach(platform => { // loop through array of platforms
+     
                 platform.position.x += playerMovement
             });
             buildingMCTC.forEach(building => { // ---- Building SCROLL ----

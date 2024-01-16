@@ -125,6 +125,8 @@ make scroll with player - Done
 Add page loader - Done  
 Job Description Modals - Done  
 Add Help Button - Done  
+Moving platforms <-------------------------- in progress    
+
 Place More/All Platforms <-------------------------- in progress    
 
 
@@ -132,13 +134,12 @@ Place More/All Platforms <-------------------------- in progress
 Add controller & keyboard buttons to the Game Boy frame.  <-------------------------- in progress  
 Make controller & keyboard buttons react when pressed.    <-------------------------- in progress  
 
-
 #### Final Steps      
-Add javascript sound effects from other repo   
 Deploy to Netlify   - Done
 Celebratory Dance    
 
 ### Stretch Goals:    
+Add Sound Effects
 Sprite Jumping Right
 Sprite Jumping Left   
 Add Music    
