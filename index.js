@@ -201,8 +201,8 @@ platformImage.src = './img/platform.jpg'
 const platformTwoImage = new Image()   
 platformTwoImage.src = './img/platformTwo.jpg'
 
-const tallPlatform = new Image()   
-tallPlatform.src = './img/platformSmallTall.png'
+// const tallPlatform = new Image()   
+// tallPlatform.src = './img/platformSmallTall.png'
 
 // -------- Background Images -------- //
 const skyImage = new Image()   
@@ -217,8 +217,8 @@ midgroundImage.src = './img/midground.png'
 const foregroundImage = new Image()   
 foregroundImage.src = './img/foreground.png'
 
-const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
-cloudImage.src = './img/cloud.png'
+// const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
+// cloudImage.src = './img/cloud.png'
 
 // -------- Player Images -------- //
 const spriteRunLeft = new Image()   // spriteRunLeft Image - Dimensions
@@ -268,7 +268,7 @@ let sky = []    //new Background({x:0, y:0, image: backgroundImage})] // Array o
 let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] // Array of Backgrounds
 let midgrounds = []    
 let foregrounds = []    
-let clouds = [] //new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
+// let clouds = [] //new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})];  
 let buildingMCTC = []
 let buildingCOYOTE  = []
 let buildingCBRE = []
