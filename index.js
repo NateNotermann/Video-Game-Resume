@@ -1,6 +1,19 @@
 // import platform from '../img/platform.png';
 const modalMobile = document.getElementById('modalMobile');
 let mobileModal = false
+
+
+function checkOrientation() {
+    if (window.matchMedia("(orientation: portrait)").matches){
+        console.log('Portrait orientation');
+    } else if (window.matchMedia("(orientation: landscape)").matches){
+        console.log("landscape orientation");
+    }
+}
+
+window.addEventListener('load', checkOrientation);
+window.addEventListener('resize', checkOrientation);
+
  // -------------------- modalmobileON --------------------
 function mobileModalOn(){
     mobileModal = true

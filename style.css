@@ -390,3 +390,150 @@ html {
   size: 100%;
   padding: 0.3rem .4rem;
 }
+
+@font-face {
+  font-family: 'Press Start 2p';
+}
+.buttonsDiv {
+  /* background-color: black; */
+  font-size: 30pt;
+  font-family: 'Press Start 2p';
+}
+.video-game-buttonA {
+	text-shadow: 1px 1px #90EE90, -1px -1px maroon;
+
+	line-height: 1.5em;
+	text-align: center;
+	display: inline-block;
+	width: 1.5em;
+	-webkit-border-radius: .75em;
+	-moz-border-radius: .75em;
+	-o-border-radius: .75em;
+		border-radius: .75em;
+	background-color: red;
+	-webkit-box-shadow:  0 .2em #023020;
+	-moz-box-shadow:  0 .2em #023020;
+	-o-box-shadow:  0 .2em maroon;
+	box-shadow:  0 .2em #023020;
+	color: #90EE90;
+	margin: 5px;
+	background-color: red;
+	background-image: -o-linear-gradient(left top, #90EE90 3%, green 22%, 	#006400 99%);
+	background-image: -moz-linear-gradient(left top, #90EE90 3%, green 22%, 	#006400 99%);
+	background-image: -webkit-linear-gradient(left top, #90EE90 3%, green 22%, 	#006400 99%);
+	background-image:           linear-gradient(left top, #90EE90 3%, green 22%, 	#006400 99%);
+	cursor: pointer;
+  padding-left: 5px;
+}
+
+
+
+.video-game-buttonX {
+	text-shadow: 1px 1px #90EE90, -1px -1px maroon;
+	line-height: 1.5em;
+	text-align: center;
+	display: inline-block;
+	width: 1.5em;
+	-webkit-border-radius: .75em;
+	-moz-border-radius: .75em;
+	-o-border-radius: .75em;
+		border-radius: .75em;
+	background-color: red;
+	-webkit-box-shadow:  0 .2em #023020;
+	-moz-box-shadow:  0 .2em #023020;
+	-o-box-shadow:  0 .2em maroon;
+	box-shadow:  0 .2em #023020;
+	color: #90EE90;
+	margin: 5px;
+	background-color: red;
+	background-image: -o-linear-gradient(left top, #ADD8E6 3%, Blue 22%, 	#00008B 99%);
+	background-image: -moz-linear-gradient(left top, #ADD8E6 3%, Blue 22%, 	#00008B 99%);
+	background-image: -webkit-linear-gradient(left top, #ADD8E6 3%, Blue 22%, 	#00008B 99%);
+	background-image:           linear-gradient(left top, #ADD8E6 3%, Blue 22%, 	#00008B 99%);
+	cursor: pointer;
+  padding-left: 5px;
+}
+.start-btn{
+    text-align: center;
+    display: inline-block;
+    margin:5px;
+    font-weight: bold;
+    padding: 10px 0 10px 10px ;
+    background-color: lightgray;
+    text-shadow: -1px -1px black, 1px 1px white;
+    color: gray;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -o-border-radius: 7px;
+    border-radius: 7px;
+    box-shadow: 0 .2em gray; 
+    cursor: pointer;
+    font-weight: bold;
+} 
+.video-game-buttonA:active, .video-game-buttonX:active, .start-btn:active {
+	box-shadow: none;
+	position: relative;
+	top: .2em;
+}
+
+.arrowsMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#arrowsLeftRight {
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  justify-content: center;
+}
+
+#arrowsRight {
+  width: 80px;
+  height: 50px;
+  margin-left: 15%;
+}
+
+#arrowsLeft {
+  width: 80px;
+  height: 50px;
+  margin-right: 15%;
+  transform: scaleX(-1);
+}
+
+#arrowsUp, #arrowsDown {
+  width: 90px;
+  /* min-width: 80px; */
+}
+
+#buttonHelp {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.buttonsMain{
+  /* border-style: solid; */
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.video-game-buttonX {
+  border-style: solid;
+  margin-right: 10%;
+  margin-left: 250px;
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.video-game-buttonA {
+  border-style: solid;
+  margin-left: 10%;
+  margin-right: 250px;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
