@@ -359,11 +359,11 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
 
 
 platformNull = [
-    new Platform({x: 500, y: 800, image: platformTwoImage})
+    new Platform({x: -platformTwoWidth*2, y: canvas.height/2, image: platformTwoImage}) // -- Hidden off screen.
 ];
 
 movingPlatform1 = [
-    new Platform({x: 500, y: 700, image: platformTwoImage})
+    new Platform({x: 1700, y: canvas.height - 125, image: platformTwoImage})
 ];
 
 buildingHGA = [ new BuildingHGA(2500, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
@@ -471,7 +471,7 @@ function animate() {
         // if (movingPlatform.position.x + movingPlatform.width > 0 && movingPlatform.position.x < canvas.width ) { // if on screen logic
         // }
             movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
-            if (movingPlatform.position.x <= currentNullPosition+500 || movingPlatform.position.x >= currentNullPosition+800 ){
+            if (movingPlatform.position.x <= currentNullPosition+1700 || movingPlatform.position.x >= currentNullPosition+2280 ){
                 direction *= -1; // ---- reverse platform move direction
             }
         console.log('currentNullPosition', currentNullPosition, 'movingPlatform.position.x', movingPlatform.position.x);
