@@ -9,12 +9,11 @@ const buttonHelp2 = document.getElementById('buttonHelp');
 
 let mobileModal = false
 
-
 function checkOrientation() {
-    if (window.matchMedia("(orientation: portrait)").matches){
+    if (window.matchMedia("(orientation: portrait)").matches && mobileModal){
         console.log('Portrait orientation');
-    } else if (window.matchMedia("(orientation: landscape)").matches){
-
+    } else if (window.matchMedia("(orientation: landscape)").matches && mobileModal){
+        alert('Please make sure device is Vertical.')
         console.log("landscape orientation");
     }
 }
@@ -792,29 +791,6 @@ function animate() {
     })
 
 
-
-    let newMCTC = 'MCTC Text'
-    let TextCOYOTE = 'coyote Text'
-    let TextCBRE = 'CBRE text'
-    let TextPRIME = 'Prime text'
-    let TextHGA = '● Developed user-friendly full-stack web applications using ASP.NET and Visual Basic, leveraging the .NET framework, resulting in a 20% increase in overall application performance. '
-
-    // function mainModalText() { // -- change modalHGA text dynamically
-    //     if (HGAModal){ // if modalHGA on. Check which building is glowing
-    //         if (glowMCTC) {
-    //             modalTextElement.textContent = newMCTC;
-    //         } else if(glowCOYOTE) {
-    //             modalTextElement.textContent = TextCOYOTE;
-    //         } else if(glowCBRE) {
-    //             modalTextElement.textContent = TextCBRE;
-    //         } else if(glowPRIME) {
-    //             modalTextElement.textContent = TextPRIME;
-    //         } else if(glowHGA) {
-    //             modalTextElement.textContent = TextHGA;
-    //         }
-    //     }
-    // }
-
     // ---- Check if x is pressed ----
     function xPressed(){ // check if x is pressed
         if (keys.x.pressed){
@@ -1314,19 +1290,20 @@ closeButtonMobile.addEventListener('click', function() {
 //  var arrowRight = document.getElementById('touchArea');
 
  // Add touchstart event listener
- arrowRight.addEventListener('touchstart', handleTouchStart, false);
- arrowLeft.addEventListener('touchstart', handleTouchStart, false);
- arrowUp.addEventListener('touchstart', handleTouchStart, false);
- buttonA.addEventListener('touchstart', handleTouchStart, false);
- buttonX.addEventListener('touchstart', handleTouchStart, false);
+//  arrowRight.addEventListener('touchstart', handleTouchStart, false);
+ arrowRight.addEventListener('touchstart', handleTouchStart, { passive: true });
+ arrowLeft.addEventListener('touchstart', handleTouchStart, { passive: true });
+ arrowUp.addEventListener('touchstart', handleTouchStart, { passive: true });
+ buttonA.addEventListener('touchstart', handleTouchStart, { passive: true });
+ buttonX.addEventListener('touchstart', handleTouchStart, { passive: true });
 //  buttonHelp2.addEventListener('touchstart', handleTouchStart, false);
 
  // Add touchend event listener
- arrowRight.addEventListener('touchend', handleTouchEnd, false);
- arrowLeft.addEventListener('touchend', handleTouchEnd, false);
- arrowUp.addEventListener('touchend', handleTouchEnd, false);
- buttonA.addEventListener('touchend', handleTouchEnd, false);
- buttonX.addEventListener('touchend', handleTouchEnd, false);
+ arrowRight.addEventListener('touchend', handleTouchEnd, { passive: true });
+ arrowLeft.addEventListener('touchend', handleTouchEnd, { passive: true });
+ arrowUp.addEventListener('touchend', handleTouchEnd, { passive: true });
+ buttonA.addEventListener('touchend', handleTouchEnd, { passive: true });
+ buttonX.addEventListener('touchend', handleTouchEnd, { passive: true });
 //  buttonHelp2.addEventListener('touchend', handleTouchEnd, false);
 
  // Add click event listener
