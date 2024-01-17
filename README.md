@@ -31,9 +31,6 @@ A.-><img src="img/ReadMe/screenvid3.gif" style="width: 350px;"> -> B.<img src="i
 <img src="img/ReadMe/foregroundBuildingspreview.gif" style="width: 1000px;">   
 
 
-
-
-
 ### Controls: 
 **Player 1**  
 Move right: D key  
@@ -45,7 +42,6 @@ Move right: Right Arrow
  Move left: Left Arrow  
 Jump: Up Arrow  
 Attack: (left)Option button   -->
-
 
 
 ## To Do List:
@@ -115,32 +111,27 @@ Custom Building Background Art
     H. Arrow pointing where to go. - Done   
     I. Add Arrow lights. - Done   
 
-Custom Platform Art- Done     
-Moving Clouds Custom Art - Done  
-make scroll with player - Done  
-
-<!-- Add side collision OR add fall pits in there place <-------------------------- in progress   -->
+Custom Platform Art- Done       
+Moving Clouds Custom Art - Done    
+make scroll with player - Done    
 
 #### Final Stage & Clean Up
-Add page loader - Done  
-Job Description Modals - Done  
-Add Help Button - Done  
-Moving platforms  - Done 
-Moving platform collision - Done 
+Add page loader - Done    
+Job Description Modals - Done    
+Add Help Button - Done    
+Moving platforms  - Done   
+Moving platform collision - Done   
 
 
 ## Game Boy Frame & Buttons  
-Add controller & keyboard buttons to the Game Boy frame.  <-------------------------- in progress  
-Make controller & keyboard buttons react when pressed.    <-------------------------- in progress  
+Add controller & keyboard buttons to the Game Boy frame.  - Done    
+Make controller & keyboard buttons react when pressed. - Done      
 
 #### Final Steps      
 Place More/All Platforms <-------------------------- in progress    
-Deploy to Netlify   - Done
+Deploy to Netlify - Done  
 Celebratory Dance    
 
 ### Stretch Goals:    
 Add Sound Effects
-Sprite Jumping Right
-Sprite Jumping Left   
 Add Music    
-Add sliders to change jump & damage amount & time   
