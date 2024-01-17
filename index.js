@@ -5,6 +5,7 @@ const arrowLeft = document.getElementById('arrowsLeft');
 const arrowUp = document.getElementById('arrowsUp');
 const buttonA = document.getElementById('video-game-buttonA');
 const buttonX = document.getElementById('video-game-buttonX');
+const buttonHelp2 = document.getElementById('buttonHelp');
 
 let mobileModal = false
 
@@ -13,6 +14,7 @@ function checkOrientation() {
     if (window.matchMedia("(orientation: portrait)").matches){
         console.log('Portrait orientation');
     } else if (window.matchMedia("(orientation: landscape)").matches){
+
         console.log("landscape orientation");
     }
 }
@@ -81,7 +83,7 @@ const c = canvas.getContext('2d');
 const loaderDiv = document.getElementById("loader")
 
 
-const buttonHelp = document.getElementById('btnHelp');
+// const buttonHelp = document.getElementById('btnHelp');
 const closeButtonMobile = document.getElementById('btnCloseMobile');
 const modalHelp = document.getElementById('modalHelp');
 const closeButtonHelp = document.getElementById('btnCloseHelp');
@@ -1322,16 +1324,16 @@ closeButtonMobile.addEventListener('click', function() {
     // console.log('btncloseMobile clicked');
 })
 
-buttonHelp.addEventListener('click', function() {
-    helpModal = !helpModal
-    if(helpModal) {
-        setTimeout(helpModalOn, 100); 
-        // console.log('help model opening');
-    } else {
-        setTimeout(helpModalOff, 100); 
-        // console.log('help model closing');
-    }
-})
+// buttonHelp.addEventListener('click', function() {
+//     helpModal = !helpModal
+//     if(helpModal) {
+//         setTimeout(helpModalOn, 100); 
+//         // console.log('help model opening');
+//     } else {
+//         setTimeout(helpModalOff, 100); 
+//         // console.log('help model closing');
+//     }
+// })
 
  // Get the touch area element
 //  var arrowRight = document.getElementById('touchArea');
@@ -1342,6 +1344,7 @@ buttonHelp.addEventListener('click', function() {
  arrowUp.addEventListener('touchstart', handleTouchStart, false);
  buttonA.addEventListener('touchstart', handleTouchStart, false);
  buttonX.addEventListener('touchstart', handleTouchStart, false);
+//  buttonHelp2.addEventListener('touchstart', handleTouchStart, false);
 
  // Add touchend event listener
  arrowRight.addEventListener('touchend', handleTouchEnd, false);
@@ -1349,9 +1352,10 @@ buttonHelp.addEventListener('click', function() {
  arrowUp.addEventListener('touchend', handleTouchEnd, false);
  buttonA.addEventListener('touchend', handleTouchEnd, false);
  buttonX.addEventListener('touchend', handleTouchEnd, false);
+//  buttonHelp2.addEventListener('touchend', handleTouchEnd, false);
 
  // Add click event listener
-//  arrowRight.addEventListener('click', handleClick, false);
+ buttonHelp2.addEventListener('click', handleClick, false);
 
  // Variables to store touch start coordinates
  var startX, startY;
@@ -1385,45 +1389,23 @@ buttonHelp.addEventListener('click', function() {
                 }
             break
         }
-        console.log(id);
+        // console.log(id);
 }
    // Prevent default behavior
-   event.preventDefault();
+//    event.preventDefault();
 
    // Get the touch coordinates
    startX = event.touches[0].clientX;
    startY = event.touches[0].clientY;
     
 //    console.log('start touch');
-
    // Add visual feedback if needed
 //    touchArea.style.backgroundColor = '#aaa';
  }
 
  function handleTouchEnd(event) {
-    // if (event.target.id != null || event.target.id != undefined ){
-    //     let id = event.target.id
-    //     switch (id) {
-    //         case 'arrowsRight':
-    //             rightPressed = false
-    //         break
-    //         case 'arrowsLeft':
-    //             leftPressed = false
-    //         break
-    //         case 'video-game-buttonX':
-    //             keys.x.pressed = false  
-    //         break
-    //         case 'video-game-buttonA':
-    //             keys.jump.pressed = false 
-    //         break
-    //         case 'arrowsUp':
-    //             keys.jump.pressed = false
-    //         break
-    //     }
-    //     console.log(id, 'off');
-    // }
    // Prevent default behavior
-   event.preventDefault();
+//    event.preventDefault();
 
    // Get the touch coordinates
    var endX = event.changedTouches[0].clientX;
@@ -1452,10 +1434,11 @@ buttonHelp.addEventListener('click', function() {
             case 'arrowsUp':
                 keys.jump.pressed = false
             break
+
         }
-        console.log(id, 'off');
+        // console.log(id, 'off');
     }
-    console.log('end touch');
+    // console.log('end touch');
    } else {
      // It's a swipe gesture
     //  alert('Swipe!');
@@ -1465,7 +1448,19 @@ buttonHelp.addEventListener('click', function() {
 //    touchArea.style.backgroundColor = '#ccc';
  }
 
-// function handleClick() {
+function handleClick() {
+    if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !mobileModal){          
+        // console.log('No building modals are open');
+        helpModal = !helpModal
+        // console.log(keys.QuestionMark.pressed);
+        if (helpModal) {
+            helpModalOn()
+        } else {
+            helpModalOff()
+        }
+
+    }
+}
 //    // Handle click event for devices that don't support touch events
 // //    alert('Click!');
 // rightPressed = true
