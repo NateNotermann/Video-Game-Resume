@@ -1,5 +1,11 @@
 // import platform from '../img/platform.png';
 const modalMobile = document.getElementById('modalMobile');
+const arrowRight = document.getElementById('arrowsRight');
+const arrowLeft = document.getElementById('arrowsLeft');
+const arrowUp = document.getElementById('arrowsUp');
+const buttonA = document.getElementById('video-game-buttonA');
+const buttonX = document.getElementById('video-game-buttonX');
+
 let mobileModal = false
 
 
@@ -1326,6 +1332,134 @@ buttonHelp.addEventListener('click', function() {
         // console.log('help model closing');
     }
 })
+
+ // Get the touch area element
+//  var arrowRight = document.getElementById('touchArea');
+
+ // Add touchstart event listener
+ arrowRight.addEventListener('touchstart', handleTouchStart, false);
+ arrowLeft.addEventListener('touchstart', handleTouchStart, false);
+ arrowUp.addEventListener('touchstart', handleTouchStart, false);
+ buttonA.addEventListener('touchstart', handleTouchStart, false);
+ buttonX.addEventListener('touchstart', handleTouchStart, false);
+
+ // Add touchend event listener
+ arrowRight.addEventListener('touchend', handleTouchEnd, false);
+ arrowLeft.addEventListener('touchend', handleTouchEnd, false);
+ arrowUp.addEventListener('touchend', handleTouchEnd, false);
+ buttonA.addEventListener('touchend', handleTouchEnd, false);
+ buttonX.addEventListener('touchend', handleTouchEnd, false);
+
+ // Add click event listener
+//  arrowRight.addEventListener('click', handleClick, false);
+
+ // Variables to store touch start coordinates
+ var startX, startY;
+
+ function handleTouchStart(event) {
+    if (event.target.id != null || event.target.id != undefined ){
+        let id = event.target.id
+        switch (id) {
+            case 'arrowsRight':
+                rightPressed = true
+            break
+
+            case 'arrowsLeft':
+                leftPressed = true
+            break
+            case 'video-game-buttonX':
+                keys.x.pressed = true   
+            break
+            case 'video-game-buttonA':
+                keys.jump.pressed = true 
+                if ( player.velocity.y == 0 ) {
+                    player.velocity.y += - jump // subtract jump level
+                    keys.jump.pressed = true           
+                }
+            break
+            case 'arrowsUp':
+                keys.jump.pressed = true
+                if ( player.velocity.y == 0 ) {
+                    player.velocity.y += - jump // subtract jump level
+                    keys.jump.pressed = true           
+                }
+            break
+        }
+        console.log(id);
+}
+   // Prevent default behavior
+//    event.preventDefault();
+
+   // Get the touch coordinates
+   startX = event.touches[0].clientX;
+   startY = event.touches[0].clientY;
+    
+//    console.log('start touch');
+
+   // Add visual feedback if needed
+//    touchArea.style.backgroundColor = '#aaa';
+ }
+
+ function handleTouchEnd(event) {
+    if (event.target.id != null || event.target.id != undefined ){
+        let id = event.target.id
+        switch (id) {
+            case 'arrowsRight':
+                rightPressed = false
+            break
+            case 'arrowsLeft':
+                leftPressed = false
+            break
+            case 'video-game-buttonX':
+                keys.x.pressed = false  
+            break
+            case 'video-game-buttonA':
+                keys.jump.pressed = false 
+            break
+            case 'arrowsUp':
+                keys.jump.pressed = false
+            break
+        }
+        console.log(id, 'off');
+    }
+   // Prevent default behavior
+//    event.preventDefault();
+
+   // Get the touch coordinates
+   var endX = event.changedTouches[0].clientX;
+   var endY = event.changedTouches[0].clientY;
+
+   // Check for a swipe or tap gesture based on start and end coordinates
+   if (Math.abs(endX - startX) < 10 && Math.abs(endY - startY) < 10) {
+     // It's a tap gesture
+    //  alert('Tap!');
+    // rightPressed = false
+    console.log('end touch');
+   } else {
+     // It's a swipe gesture
+    //  alert('Swipe!');
+   }
+
+   // Reset visual feedback if needed
+//    touchArea.style.backgroundColor = '#ccc';
+ }
+
+// function handleClick() {
+//    // Handle click event for devices that don't support touch events
+// //    alert('Click!');
+// rightPressed = true
+// console.log('right pressed true');
+
+// setTimeout(function() {
+//     rightPressed = false
+//     console.log('right pressed false');
+//   }, 100);
+// }
+
+//  arrowRight.addEventListener('click', function() {
+//     rightPressed = true
+//     console.log('arrowRight clicked');
+// })
 
 function test() {
     // if (animateRunning) { console.log('animate function running: ' + animateRunning);  }
