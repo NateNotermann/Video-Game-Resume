@@ -1426,9 +1426,9 @@ closeButtonMobile.addEventListener('click', function() {
 function handleClick() {
     if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !mobileModal){          
         // console.log('No building modals are open');
-        keys.QuestionMark.pressed = !keys.QuestionMark.pressed 
+        helpModal = !helpModal
         // console.log(keys.QuestionMark.pressed);
-        if (keys.QuestionMark.pressed) {
+        if (helpModal) {
             helpModalOn()
         } else {
             helpModalOff()
