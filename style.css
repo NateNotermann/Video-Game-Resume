@@ -494,11 +494,27 @@ html {
 
 #buttonHelp {
   width: 150px;
-    position: relative;
+  position: relative;
   top: -65px;
   left: -20px;
 }
 
 #btnSpace {
   min-width: 150px;
+}
+
+#pressX {
+  z-index: 200;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+  top: -600px;
+  left: 355px;
+  border-style: solid;
+  border-color: #000000;
+  background-color: #f3f3f3;
+  font-family: 'Concert One';
+  /* font-family: 'Silkscreen'; */
 }

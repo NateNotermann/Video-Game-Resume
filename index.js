@@ -6,6 +6,8 @@ const arrowUp = document.getElementById('arrowsUp');
 const buttonA = document.getElementById('video-game-buttonA');
 const buttonX = document.getElementById('video-game-buttonX');
 const buttonHelp2 = document.getElementById('buttonHelp');
+const buttonsDiv = document.getElementById('buttonsDiv');
+const PressXDiv = document.getElementById('pressX');
 
 let mobileModal = false
 
@@ -42,10 +44,12 @@ function isMobileDevice() {
   if (isMobileDevice()) {
     console.log("User is using a mobile device");
     mobileModal = true
+    buttonsDiv.style.display = 'flex';
     // mobileModalOn()
     // window.alert("This app works best on a computer browser.")
 } else {
       mobileModal = false
+      buttonsDiv.style.display = 'none';
     //   mobileModalOn()
     //   mobileModalOff()
     console.log("User is using a computer browser");
@@ -174,6 +178,7 @@ let glowCOYOTE = false
 let glowCBRE = false
 let glowPRIME = false
 let glowHGA = false
+let PressX = false
 
 // -- Building Modals --
 let helpModal = true 
@@ -893,6 +898,18 @@ function animate() {
         }
     })
 
+    function pressX() {
+        if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC){
+            pressX = true
+            PressXDiv.style.opacity = 1;
+            console.log('glowing');
+        } else {
+            pressX = false
+            PressXDiv.style.opacity = 0;
+            console.log('NOT glowing');
+        }
+    }
+    pressX() 
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
     if (scrollOffset > platformImage.width * 6) {
