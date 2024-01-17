@@ -1376,6 +1376,39 @@ buttonHelp.addEventListener('click', function() {
  }
 
  function handleTouchEnd(event) {
+    // if (event.target.id != null || event.target.id != undefined ){
+    //     let id = event.target.id
+    //     switch (id) {
+    //         case 'arrowsRight':
+    //             rightPressed = false
+    //         break
+    //         case 'arrowsLeft':
+    //             leftPressed = false
+    //         break
+    //         case 'video-game-buttonX':
+    //             keys.x.pressed = false  
+    //         break
+    //         case 'video-game-buttonA':
+    //             keys.jump.pressed = false 
+    //         break
+    //         case 'arrowsUp':
+    //             keys.jump.pressed = false
+    //         break
+    //     }
+    //     console.log(id, 'off');
+    // }
+   // Prevent default behavior
+   event.preventDefault();
+
+   // Get the touch coordinates
+   var endX = event.changedTouches[0].clientX;
+   var endY = event.changedTouches[0].clientY;
+
+   // Check for a swipe or tap gesture based on start and end coordinates
+   if (Math.abs(endX - startX) < 10 && Math.abs(endY - startY) < 10) {
+     // It's a tap gesture
+    //  alert('Tap!');
+    // rightPressed = false
     if (event.target.id != null || event.target.id != undefined ){
         let id = event.target.id
         switch (id) {
@@ -1397,18 +1430,6 @@ buttonHelp.addEventListener('click', function() {
         }
         console.log(id, 'off');
     }
-   // Prevent default behavior
-   event.preventDefault();
-
-   // Get the touch coordinates
-   var endX = event.changedTouches[0].clientX;
-   var endY = event.changedTouches[0].clientY;
-
-   // Check for a swipe or tap gesture based on start and end coordinates
-   if (Math.abs(endX - startX) < 10 && Math.abs(endY - startY) < 10) {
-     // It's a tap gesture
-    //  alert('Tap!');
-    // rightPressed = false
     console.log('end touch');
    } else {
      // It's a swipe gesture
