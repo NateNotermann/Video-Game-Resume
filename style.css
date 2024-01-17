@@ -59,15 +59,20 @@
 }
 
 body {
-    margin: 0;
-    background-color: lightgreen;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  /* disable text select on mobile! */
+  -webkit-user-select: none;
+  user-select: none;
+  /* disable text select on mobile! */
+
+  margin: 0;
+  background-color: lightgreen;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .screenDiv {
