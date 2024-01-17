@@ -391,9 +391,9 @@ html {
   padding: 0.3rem .4rem;
 }
 
-@font-face {
+/* @font-face {
   font-family: 'Press Start 2p';
-}
+} */
 .buttonsDiv {
   /* background-color: black; */
   font-size: 30pt;
