@@ -341,8 +341,8 @@ direction = 1; // 1 represents moving to the right, -1 represents moving to the 
 
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
-    new Sky({x:0, y: 0, image: skyImage})
-    // new Sky({x:skyWidth, y: 0, image: skyImage}),
+    new Sky({x:0, y: 0, image: skyImage}),
+    new Sky({x:skyWidth, y: 0, image: skyImage}),
     // new Sky({x:skyWidth*2, y: 0, image: skyImage}),
 ]
 
@@ -1388,7 +1388,7 @@ buttonHelp.addEventListener('click', function() {
         console.log(id);
 }
    // Prevent default behavior
-//    event.preventDefault();
+   event.preventDefault();
 
    // Get the touch coordinates
    startX = event.touches[0].clientX;
@@ -1423,7 +1423,7 @@ buttonHelp.addEventListener('click', function() {
         console.log(id, 'off');
     }
    // Prevent default behavior
-//    event.preventDefault();
+   event.preventDefault();
 
    // Get the touch coordinates
    var endX = event.changedTouches[0].clientX;
