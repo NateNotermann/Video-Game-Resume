@@ -932,15 +932,13 @@ function animate() {
         loseReason = 'fall'
         loseModalOn()
         init();
-        // console.log('Player fell off. You LOOSE!!');
-        // init(); // Restarts Game
+
     }
     // if (player.position.y < 50 ){
     //     console.log('false start!!');
     //     init();
     // }
     ifNoGlow()
-    // mainModalText()
     controllerInput()
     checkButtonPressed()
     requestAnimationFrame(animate) 
@@ -1263,13 +1261,13 @@ function helpModalOff(){
     if (loseReason == 'bug') {
         loseParagraph.textContent = 'Your code has a bug, you lose!';   
     } else if (loseReason == 'fall') {
-        loseParagraph.textContent = 'Player fell off. You lose';   
+        loseParagraph.textContent = 'Player fell off. You lose :(';   
     } 
         console.log('lose Reason:',loseReason);
         modalLose.style.display = 'flex'
         setInterval(function() {
             modalLose.style.display = 'none'
-        }, 5000);     
+        }, 4000);     
     }
 
     
