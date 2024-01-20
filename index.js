@@ -307,6 +307,8 @@ let buildingHGA = []
 let arrowArray = []
 let bugs = []
 let movePlate1 = 0
+let moveBug1 = 0
+let movingBugs = []
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
@@ -432,6 +434,13 @@ bugs = [
     new Bug({x: 9080+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*7), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    // move Bug 1
+]
+
+moveBug1 = 13000
+movingBugs = [ 
+    new Bug({x: moveBug1, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    // new Bug({x: moveBug1+200, y: canvas.height - BugPic.height - 125, image: BugPic}),
 ]
 
 platformTwos = [
@@ -567,13 +576,11 @@ function animate() {
         platform.draw() // ------ DRAW PLATFORM
     })
     movingPlatform1.forEach(movingPlatform => { // loop through array of Platforms
-        // if (movingPlatform.position.x + movingPlatform.width > 0 && movingPlatform.position.x < canvas.width ) { // if on screen logic
-        // }
             movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
             if (movingPlatform.position.x <= currentNullPosition+movePlate1 || movingPlatform.position.x >= currentNullPosition+(movePlate1+500) ){
                 direction *= -1; // ---- reverse platform move direction
             }
-        console.log('Null', currentNullPosition + 500, 'plateX', movingPlatform.position.x);
+        // console.log('Null', currentNullPosition + 500, 'plateX', movingPlatform.position.x);
         movingPlatform.draw() // ------ DRAW PLATFORMd
     })
 
@@ -583,7 +590,15 @@ function animate() {
     bugs.forEach(bug => { // loop through array of 
         bug.draw() // ------ DRAW 
     })
-
+    movingBugs.forEach(bug => { // loop through array of 
+            bug.position.x += 2 * direction; // ------ Platform Move Loop -------         
+            if (bug.position.x <= currentNullPosition+moveBug1 || bug.position.x >= currentNullPosition+(moveBug1+500) ){
+                direction *= -1; // ---- reverse platform move direction
+            }
+        // console.log('Null', currentNullPosition + moveBug1, 'bug', bug.position.x, 'moveBug1', moveBug1, 'currentNullPosition+(moveBug1+500)', currentNullPosition+(moveBug1+500));
+        // console.log(bug.position.x);
+        bug.draw() // ------ DRAW 
+    })
 
     player.update() // ------ PLAYER UPDATE. Call this last, to render in front
     // ------------ PLAYER MOVEMENT ------------
@@ -672,6 +687,9 @@ function animate() {
             bugs.forEach(bug => { // ---- building SCROLL ----
                 bug.position.x -= (playerMovement)
             });
+            movingBugs.forEach(bug => { // ---- building SCROLL ----
+                bug.position.x -= (playerMovement)
+            });
             sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
                 sky.position.x -= (playerMovement/30)
             });
@@ -702,7 +720,6 @@ function animate() {
                 currentNullPosition += playerMovement
             });
             movingPlatform1.forEach(platform => { // loop through array of platforms
-     
                 platform.position.x += playerMovement
             });
             buildingMCTC.forEach(building => { // ---- Building SCROLL ----
@@ -727,6 +744,9 @@ function animate() {
                 arrowArray.position.x += (playerMovement)
             });
             bugs.forEach(bug => { // ---- Building SCROLL ----
+                bug.position.x += (playerMovement)
+            });
+            movingBugs.forEach(bug => { // ---- Building SCROLL ----
                 bug.position.x += (playerMovement)
             });
             sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
@@ -832,6 +852,21 @@ function animate() {
     })
 
     bugs.forEach(bug => { 
+        let adjust = 30
+        if ( 
+            player.position.y + player.height >= bug.position.y + adjust && // Bug Top
+            player.position.y <= bug.position.y + bug.height - adjust && // Bug Bottom
+            player.position.x + player.width >= bug.position.x + adjust && // Bug Right
+            player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
+            ) 
+            {   
+                loseReason = 'bug'
+                loseModalOn()
+                init();
+            } 
+    }) 
+
+    movingBugs.forEach(bug => { 
         let adjust = 30
         if ( 
             player.position.y + player.height >= bug.position.y + adjust && // Bug Top
