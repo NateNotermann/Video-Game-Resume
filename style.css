@@ -518,3 +518,7 @@ html {
   font-family: 'Concert One';
   /* font-family: 'Silkscreen'; */
 }
+#modalLose {
+  width: 50%;
+  /* display: flex; */
+}

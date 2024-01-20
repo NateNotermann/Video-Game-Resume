@@ -8,14 +8,15 @@ const buttonX = document.getElementById('video-game-buttonX');
 const buttonHelp2 = document.getElementById('buttonHelp');
 const buttonsDiv = document.getElementById('buttonsDiv');
 const PressXDiv = document.getElementById('pressX');
+const modalLose = document.getElementById('modalLose');
 
 let mobileModal = false
 
 function checkOrientation() {
     if (window.matchMedia("(orientation: portrait)").matches && mobileModal){
-        console.log('Portrait orientation');
+        // console.log('Portrait orientation');
     } else if (window.matchMedia("(orientation: landscape)").matches && mobileModal){
-        alert('Please make sure device is Vertical.')
+        // alert('Please make sure device is Vertical.')
         console.log("landscape orientation");
     }
 }
@@ -42,7 +43,7 @@ function isMobileDevice() {
 
 
   if (isMobileDevice()) {
-    console.log("User is using a mobile device");
+    // console.log("User is using a mobile device");
     mobileModal = true
     buttonsDiv.style.display = 'flex';
     // mobileModalOn()
@@ -52,7 +53,7 @@ function isMobileDevice() {
       buttonsDiv.style.display = 'none';
     //   mobileModalOn()
     //   mobileModalOff()
-    console.log("User is using a computer browser");
+    // console.log("User is using a computer browser");
   }
 
 
@@ -203,6 +204,9 @@ let yellowPressed3 = false;
 
 let connected = false
 let animateLoop = false
+
+let loseModal = false
+let loseReason = 'none'
 // -------- GAMEPAD VARIABLES -------- //
 
 
@@ -313,6 +317,8 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 }
 
 function init() {
+    scrollOffset = 0 //  clear scroll offset. Fixes winning bug.
+    loseReason = 'none'
     // console.log('init function');
     // modalHGAOff()
     // helpModalOn()
@@ -420,21 +426,6 @@ let interval = 1000/fps;
 let delta;
 // ------ frame/refresh rate limiting code: variables: end ------ //
 
-
-// let number = 0
-// function animateTitle() {
-//     setTimeout( function () {
-//         let strNumber = number.toString()
-//         number++
-//         document.title = 'test' + strNumber
-//         animateTitle()
-
-//     }, 500 );
-    
-// }
-
-// animateTitle()
-
 function animateTitle(array) {
     // let xIndex = array.indexOf('X');
     if(array.length > 0) {
@@ -442,7 +433,9 @@ function animateTitle(array) {
         let lastItem = array.pop();
         array.unshift(lastItem)
         // console.log(array.join(', '));
-        document.title = 'VGR ' + array
+        // document.title = 'VGR ' + array
+        // array = array.join();
+        document.title = array
         animateTitle(array);
         }, 250 );
     } else {
@@ -464,7 +457,8 @@ function animateTitle(array) {
     //     console.log("'X' not found in array");
     // }
 }
-let array = ['🏃‍♂️', ' ', ' ', ' ', ' ', ' ',];
+// let array = ['🏃‍♂️', ' ', ' ', ' ', ' ', ' ',];
+let array = ['N', 'a', 't', 'e', ' ', 'N ','o', 't', 'e','r','m','a','n','n',];
 
 animateTitle(array);
 
@@ -808,6 +802,22 @@ function animate() {
         }
     })
 
+    bugs.forEach(bug => { 
+        let adjust = 30
+        if ( 
+            player.position.y + player.height >= bug.position.y + adjust && // Bug Top
+            player.position.y <= bug.position.y + bug.height - adjust && // Bug Bottom
+            player.position.x + player.width >= bug.position.x + adjust && // Bug Right
+            player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
+            ) 
+            {   
+                loseReason = 'bug'
+                loseModalOn()
+                init();
+            } 
+    }) 
+
+
 
     // ---- Check if x is pressed ----
     function xPressed(){ // check if x is pressed
@@ -915,11 +925,11 @@ function animate() {
         if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC){
             pressX = true
             PressXDiv.style.opacity = 1;
-            console.log('glowing');
+            // console.log('glowing');
         } else {
             pressX = false
             PressXDiv.style.opacity = 0;
-            console.log('NOT glowing');
+            // console.log('NOT glowing');
         }
     }
     pressX() 
@@ -931,8 +941,11 @@ function animate() {
     }
     // ---- LOOSE SCROLL ----
     if (player.position.y > (canvas.height) ){
-        console.log('Player fell off. You LOOSE!!');
-        init(); // Restarts Game
+        loseReason = 'fall'
+        loseModalOn()
+        init();
+        // console.log('Player fell off. You LOOSE!!');
+        // init(); // Restarts Game
     }
     // if (player.position.y < 50 ){
     //     console.log('false start!!');
@@ -1256,6 +1269,24 @@ function helpModalOff(){
     helpModal = false
     modalHelp.style.display = 'none'
 }
+
+ // -------------------- Lose modal ON --------------------
+ function loseModalOn(){
+    if (loseReason == 'bug') {
+        loseParagraph.textContent = 'Your code has a bug, you lose!';   
+    } else if (loseReason == 'fall') {
+        loseParagraph.textContent = 'Player fell off. You lose';   
+    } 
+        console.log('lose Reason:',loseReason);
+        modalLose.style.display = 'flex'
+        setInterval(function() {
+            modalLose.style.display = 'none'
+        }, 3000);     
+    }
+
+
+
+
 
 
 

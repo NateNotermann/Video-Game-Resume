@@ -35,7 +35,7 @@ class Player {
     }
     draw() { 
         c.fillStyle = 'blue' // draw a rectangle that matches the size and position of the Player Sprite
-        c.fillRect(this.position.x + 20,  this.position.y, this.width * .8, this.height)
+        c.fillRect(this.position.x,  this.position.y, this.width, this.height)
 
         c.drawImage( // player sprite image
             // this.image,
@@ -538,7 +538,8 @@ class Bug {    // ------ Platform Class used for ground and all platforms. -----
     draw() {   
         // platform's rectangle
         c.fillStyle = 'red'
-        c.fillRect(this.position.x + 30, this.position.y + 40, this.width * 0.80, this.height * 0.80)
+        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        
         c.drawImage(
             this.image,  
             this.position.x, 
