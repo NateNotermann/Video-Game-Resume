@@ -427,39 +427,26 @@ let delta;
 // ------ frame/refresh rate limiting code: variables: end ------ //
 
 function animateTitle(array) {
-    // let xIndex = array.indexOf('X');
-    if(array.length > 0) {
-        setTimeout( function () {
-        let lastItem = array.pop();
-        array.unshift(lastItem)
-        // console.log(array.join(', '));
-        // document.title = 'VGR ' + array
-        // array = array.join();
-        document.title = array
-        animateTitle(array);
+    if (array.length > 0 ) {
+        setTimeout( function () {       
+            let firstCharacter = array.shift();
+            array.push(firstCharacter);
+            
+            titleString = array.join(''); 
+            document.title = titleString
+            console.log('titleString', titleString);
+
+            array = titleString.split('');
+            console.log('joined version:', array.join(''));
+            animateTitle(array);
         }, 250 );
-    } else {
-        console.log('array is empty');
     }
-
-    // if (xIndex !==-1) {
-    //     setTimeout( function () {
-    //     array.splice(xIndex, 1)
-    //     array.push('X')
-    //     console.log(array.join(', '));
-        
-    //     array.pop();
-    //     array.unshift('X');
-    //     console.log(array.join(', '));
-    //     moveX(myArray);
-    //     }, 500 );
-    // } else {
-    //     console.log("'X' not found in array");
-    // }
 }
-// let array = ['🏃‍♂️', ' ', ' ', ' ', ' ', ' ',];
-let array = ['N', 'a', 't', 'e', ' ', 'N ','o', 't', 'e','r','m','a','n','n',];
+let originalString = 'Nate Notermanns Video Game Resume🏃‍♂️ '
+let array = originalString.split('')
+// let array = ['N', 'a', 't', 'e', ' ', 'N','o', 't', 'e','r','m','a','n','n','s',' ', 'V','i', 'd', 'e','o','-','g','a','m','e',' ','R','e','s','u','m','e',];
 
+// let string = 'Nate Notermanns Video Game Resume '
 animateTitle(array);
 
 // ------ MAIN ANIMATION FUNCTION ------ //
