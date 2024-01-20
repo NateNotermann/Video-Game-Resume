@@ -306,6 +306,7 @@ let elementsPRIME = []
 let buildingHGA = []
 let arrowArray = []
 let bugs = []
+let movePlate1 = 0
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
@@ -370,14 +371,19 @@ foregrounds = [
 let adjustPlat = 1000
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
     new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
-    new Platform({x: adjustPlat, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
-    new Platform({x: 3900, y: canvas.height - groundPosition, image: platformImage}), // Ground 3
-    new Platform({x: (platformWidth * 2) + adjustPlat, y: canvas.height - groundPosition, image: platformImage}), // Ground 4
-    new Platform({x: (platformWidth * 3) + adjustPlat, y: canvas.height - groundPosition, image: platformImage}), // Ground 5
-    new Platform({x: platformWidth * 5, y: canvas.height - groundPosition, image: platformImage}), // Ground 6
-    new Platform({x: platformWidth* 6, y: canvas.height - 125, image: platformImage}), // Platform 7
-    new Platform({x: platformWidth* 7, y: canvas.height - 125, image: platformImage}), // Platform 8
+    new Platform({x: adjustPlat, y: canvas.height - 125, image: platformImage}), // Ground 2
+    new Platform({x: 3900, y: canvas.height - 125, image: platformImage}), // Ground 3
+    new Platform({x: (platformWidth * 2) + adjustPlat, y: canvas.height - 125, image: platformImage}), // Ground 4
+    new Platform({x: (platformWidth * 3) + adjustPlat, y: canvas.height - 125, image: platformImage}), // Ground 5
+    new Platform({x: platformWidth * 4, y: canvas.height - 125, image: platformImage}), // Ground 6
+    new Platform({x: (platformWidth* 5) - 1000, y: canvas.height - 125, image: platformImage}), // Platform 7
+
+    
+    new Platform({x: (platformWidth* 6) - 1000, y: canvas.height - 125, image: platformImage}), // Platform 8
+    new Platform({x: (platformWidth* 7) - 1000, y: canvas.height - 125, image: platformImage}), // Platform 8
+
     new Platform({x: platformWidth* 8, y: canvas.height - 125, image: platformImage}), // Platform 9
+    
     new Platform({x: platformWidth* 9, y: canvas.height - 125, image: platformImage}), // Platform 10
     new Platform({x: platformWidth* 10, y: canvas.height - 125, image: platformImage}), // Platform 11
     new Platform({x: platformWidth* 11, y: canvas.height - 125, image: platformImage}), // Platform 12
@@ -397,17 +403,18 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580�
 
 
 platformNull = [
-    new Platform({x: -platformTwoWidth*2, y: canvas.height/2, image: platformTwoImage}) // -- Hidden off screen.
+    new Platform({x: -platformTwoWidth*2, y: canvas.height - (platformHeight * 5), image: platformTwoImage}) // -- Hidden off screen.
 ];
 
+movePlate1 = 18280
 movingPlatform1 = [
-    // new Platform({x: 1700, y: canvas.height - 125, image: platformTwoImage})
+    new Platform({x: movePlate1, y: canvas.height - platformHeight*5, image: platformTwoImage})
 ];
 let buildingNull = 3500
 buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
-// buildingPRIME = [ new BuildingPRIME(buildingNull*3, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
-// elementsPRIME = [ new ElementsPRIME(buildingNull*4, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
-// buildingCBRE = [ new BuildingCBRE(buildingNull*5, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
+buildingPRIME = [ new BuildingPRIME(11500, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
+elementsPRIME = [ new ElementsPRIME(11500, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
+buildingCBRE = [ new BuildingCBRE(14500 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
 // buildingCOYOTE = [ new BuildingCOYOTE (buildingNull*6, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 // buildingMCTC = [ new BuildingMCTC(buildingNull*7, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
 
@@ -432,9 +439,17 @@ platformTwos = [
     new PlatformTwo({x:8500+platformTwoWidth, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
     new PlatformTwo({x:8500+platformTwoWidth, y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
     new PlatformTwo({x:8500+(platformTwoWidth*3), y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
+    new PlatformTwo({x:8500+(platformTwoWidth*3), y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
+    
+    new PlatformTwo({x:16000, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
+    new PlatformTwo({x:16000+platformTwoWidth, y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
+    new PlatformTwo({x:16000+(platformTwoWidth*2), y: canvas.height - (platformHeight * 4), image: platformTwoImage }),
+    new PlatformTwo({x:16000+(platformTwoWidth*3), y: canvas.height - (platformHeight * 5), image: platformTwoImage }),
+
+    new PlatformTwo({x:19350, y: canvas.height - (platformHeight * 5), image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 2) , y: 1080-375, image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 3), y: 1080-500, image: platformTwoImage }),
-    // new PlatformTwo({x:1000 + (platfdormTwoImage.width * 4), y: 1080-375, image: platformTwoImage }),
+    // new PlatformTwo({x:1000 + (platformTwoImage.width * 4), y: 1080-375, image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 5), y: 1080-250, image: platformTwoImage }),
 ] 
 
@@ -555,10 +570,10 @@ function animate() {
         // if (movingPlatform.position.x + movingPlatform.width > 0 && movingPlatform.position.x < canvas.width ) { // if on screen logic
         // }
             movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
-            if (movingPlatform.position.x <= currentNullPosition+1700 || movingPlatform.position.x >= currentNullPosition+2280 ){
+            if (movingPlatform.position.x <= currentNullPosition+movePlate1 || movingPlatform.position.x >= currentNullPosition+(movePlate1+500) ){
                 direction *= -1; // ---- reverse platform move direction
             }
-        // console.log('currentNullPosition', currentNullPosition, 'movingPlatform.position.x', movingPlatform.position.x);
+        console.log('Null', currentNullPosition + 500, 'plateX', movingPlatform.position.x);
         movingPlatform.draw() // ------ DRAW PLATFORMd
     })
 

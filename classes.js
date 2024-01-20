@@ -34,8 +34,8 @@ class Player {
         this.currentCropWidth = 177
     }
     draw() { 
-        c.fillStyle = 'blue' // draw a rectangle that matches the size and position of the Player Sprite
-        c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+        // c.fillStyle = 'blue' // draw a rectangle that matches the size and position of the Player Sprite
+        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
 
         c.drawImage( // player sprite image
             // this.image,
@@ -537,8 +537,8 @@ class Bug {    // ------ Platform Class used for ground and all platforms. -----
     }
     draw() {   
         // platform's rectangle
-        c.fillStyle = 'red'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        // c.fillStyle = 'red'
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
         
         c.drawImage(
             this.image,  
