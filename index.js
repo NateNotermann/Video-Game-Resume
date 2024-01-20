@@ -417,8 +417,8 @@ buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (pl
 buildingPRIME = [ new BuildingPRIME(11500, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
 elementsPRIME = [ new ElementsPRIME(11500, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
 buildingCBRE = [ new BuildingCBRE(14500 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
-// buildingCOYOTE = [ new BuildingCOYOTE (buildingNull*6, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
-// buildingMCTC = [ new BuildingMCTC(buildingNull*7, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingCOYOTE = [ new BuildingCOYOTE (21000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
+buildingMCTC = [ new BuildingMCTC(25000, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
 
 arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
             new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
@@ -601,6 +601,7 @@ function animate() {
     })
 
     player.update() // ------ PLAYER UPDATE. Call this last, to render in front
+    console.log('plaayer X:', player.position.x + scrollOffset);
     // ------------ PLAYER MOVEMENT ------------
     // ------ LEFT & RIGHT ------
     if (keys.left.pressed == true && keys.right.pressed == true ) { // if BOTH Left & Right pressed
@@ -994,7 +995,7 @@ function animate() {
     pressX() 
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
-    if (scrollOffset > platformImage.width * 6) {
+    if (scrollOffset > 28000) {
         console.log('You WIN!!!');
         // console.log('You WIN!!!', scrollOffset, '>', platformImage.width * 6); // Confirm winning area location it correct
     }
