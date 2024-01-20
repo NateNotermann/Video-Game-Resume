@@ -34,8 +34,8 @@ class Player {
         this.currentCropWidth = 177
     }
     draw() { 
-        c.fillStyle = 'blue' // draw a rectangle that matches the size and position of the Player Sprite
-        c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+        // c.fillStyle = 'blue' // draw a rectangle that matches the size and position of the Player Sprite
+        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
 
         c.drawImage( // player sprite image
             // this.image,
@@ -537,8 +537,8 @@ class Bug {    // ------ Platform Class used for ground and all platforms. -----
     }
     draw() {   
         // platform's rectangle
-        c.fillStyle = 'red'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        // c.fillStyle = 'red'
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
         
         c.drawImage(
             this.image,  
@@ -552,6 +552,27 @@ class Bug {    // ------ Platform Class used for ground and all platforms. -----
     }
 }
 
+// -------- PLATFORM CLASS -------- //
+class Sign {    // ------ Platform Class used for ground and all platforms. ------
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width  //580
+        this.height = image.height //125
+    }
+    draw() {      
+        c.drawImage(
+            this.image,  
+            this.position.x, 
+            this.position.y)
+    }
+    update() {
+        this.draw
+    }
+}
 // // -------- ARROW CLASS -------- //
 // class ARROW {    // ------ Platform Class used for ground and all platforms. ------
 //     constructor({ x, y, image }) {
