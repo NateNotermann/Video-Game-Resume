@@ -9,6 +9,7 @@ const buttonHelp2 = document.getElementById('buttonHelp');
 const buttonsDiv = document.getElementById('buttonsDiv');
 const PressXDiv = document.getElementById('pressX');
 const modalLose = document.getElementById('modalLose');
+const closeLose = document.getElementById('btnCloseLose');
 
 let mobileModal = false
 
@@ -434,10 +435,10 @@ function animateTitle(array) {
             
             titleString = array.join(''); 
             document.title = titleString
-            console.log('titleString', titleString);
+            // console.log('titleString', titleString);
 
             array = titleString.split('');
-            console.log('joined version:', array.join(''));
+            // console.log('joined version:', array.join(''));
             animateTitle(array);
         }, 250 );
     }
@@ -1268,10 +1269,17 @@ function helpModalOff(){
         modalLose.style.display = 'flex'
         setInterval(function() {
             modalLose.style.display = 'none'
-        }, 3000);     
+        }, 5000);     
     }
 
-
+    
+    // ---- Click listener for Lose Close button -- 
+    closeLose.addEventListener('click', function() {
+        setTimeout(function() {
+            modalLose.style.display = 'none';
+        }, 100); 
+        // console.log('btncloseHGA clicked');
+    })
 
 
 
