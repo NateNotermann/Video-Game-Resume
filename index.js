@@ -150,12 +150,13 @@ window.onload = function () {
 const gravity = 2
 const floor = 125 // or platformImage.height. pixel from the bottom player stops at
 const jump = 35 // amount player should jump
-const playerMovement = 20 //  amount player moves left and right
+const playerMovement = 20 // 20 //  amount player moves left and right
 const platformWidth = 2500 //579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
 
 const platformTwoWidth = 580
 const platformTwoHeight = 125 //  
+const bugWidth = 150
 
 const playerSize = 2 // used when referencing height in player class
 const buildingSize = 2
@@ -275,6 +276,15 @@ ArrowPic.src = './img/arrow3.png'
 const BugPic = new Image()   
 BugPic.src = './img/Bug/bug2.png'
 
+const BugTalkPic = new Image()   
+BugTalkPic.src = './img/Bug/bugTalkSprite.png'
+
+const spacebarPic = new Image()   
+spacebarPic.src = './img/Sign/spacebar.png'
+
+const SightHGAPic = new Image()   
+SightHGAPic.src = './img/Sign/SignHGA.png'
+
 
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
@@ -357,20 +367,13 @@ foregrounds = [
     new Foreground({x:4250*4 , y: 1080-525, image: foregroundImage})
 ]
 
-platformTwos = [
-    new PlatformTwo({x:platformWidth*2+50 + (platformTwoImage.width), y: 1080-125, image: platformTwoImage }),
-    // new PlatformTwo({x:1000 + (platformTwoImage.width * 2) , y: 1080-375, image: platformTwoImage }),
-    // new PlatformTwo({x:1000 + (platformTwoImage.width * 3), y: 1080-500, image: platformTwoImage }),
-    // new PlatformTwo({x:1000 + (platformTwoImage.width * 4), y: 1080-375, image: platformTwoImage }),
-    // new PlatformTwo({x:1000 + (platformTwoImage.width * 5), y: 1080-250, image: platformTwoImage }),
-] 
-
+let adjustPlat = 1000
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
     new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
-    new Platform({x: platformWidth, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
-    // new Platform({x: platformWidth * 2, y: canvas.height - groundPosition, image: platformImage}), // Ground 3
-    new Platform({x: platformWidth* 3, y: canvas.height - groundPosition, image: platformImage}), // Ground 4
-    new Platform({x: platformWidth * 4, y: canvas.height - groundPosition, image: platformImage}), // Ground 5
+    new Platform({x: adjustPlat, y: canvas.height - groundPosition, image: platformImage}), // Ground 2
+    new Platform({x: 3900, y: canvas.height - groundPosition, image: platformImage}), // Ground 3
+    new Platform({x: (platformWidth * 2) + adjustPlat, y: canvas.height - groundPosition, image: platformImage}), // Ground 4
+    new Platform({x: (platformWidth * 3) + adjustPlat, y: canvas.height - groundPosition, image: platformImage}), // Ground 5
     new Platform({x: platformWidth * 5, y: canvas.height - groundPosition, image: platformImage}), // Ground 6
     new Platform({x: platformWidth* 6, y: canvas.height - 125, image: platformImage}), // Platform 7
     new Platform({x: platformWidth* 7, y: canvas.height - 125, image: platformImage}), // Platform 8
@@ -398,19 +401,42 @@ platformNull = [
 ];
 
 movingPlatform1 = [
-    new Platform({x: 1700, y: canvas.height - 125, image: platformTwoImage})
+    // new Platform({x: 1700, y: canvas.height - 125, image: platformTwoImage})
 ];
-// let buildingNull = 2500
-// buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // PRIME (x,y,w,h,image,)
+let buildingNull = 3500
+buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
 // buildingPRIME = [ new BuildingPRIME(buildingNull*3, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
 // elementsPRIME = [ new ElementsPRIME(buildingNull*4, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
 // buildingCBRE = [ new BuildingCBRE(buildingNull*5, canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
 // buildingCOYOTE = [ new BuildingCOYOTE (buildingNull*6, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 // buildingMCTC = [ new BuildingMCTC(buildingNull*7, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
 
-arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic)] 
-// building4 = [ new Building(1200, canvas.height - HGA.height - platformHeight, 250, 422, HGA)] // HGA
-bugs = [ new Bug({x: 2000, y: canvas.height - BugPic.height - 125, image: BugPic}) ]
+arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
+            new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
+            new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
+            new Sign({x: 6450, y: canvas.height - SightHGAPic.height - 100, image: SightHGAPic}),
+] 
+
+bugs = [ 
+    new Bug({x: 5000, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 8950, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 9080+(bugWidth*2), y: canvas.height - BugPic.height - 250, image: BugPic}),
+    new Bug({x: 9080+(bugWidth*4), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 9080+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 9080+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 9080+(bugWidth*7), y: canvas.height - BugPic.height - 125, image: BugPic}),
+]
+
+platformTwos = [
+    new PlatformTwo({x:8500, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
+    new PlatformTwo({x:8500+platformTwoWidth, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
+    new PlatformTwo({x:8500+platformTwoWidth, y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
+    new PlatformTwo({x:8500+(platformTwoWidth*3), y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
+    // new PlatformTwo({x:1000 + (platformTwoImage.width * 2) , y: 1080-375, image: platformTwoImage }),
+    // new PlatformTwo({x:1000 + (platformTwoImage.width * 3), y: 1080-500, image: platformTwoImage }),
+    // new PlatformTwo({x:1000 + (platfdormTwoImage.width * 4), y: 1080-375, image: platformTwoImage }),
+    // new PlatformTwo({x:1000 + (platformTwoImage.width * 5), y: 1080-250, image: platformTwoImage }),
+] 
 
 clouds = [
     // new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})
@@ -455,6 +481,7 @@ function animate() {
     // console.log(mobileModal); // constantly checks if mobileModal is T/F
     // requestAnimationFrame(animate) 
     // window.requestAnimationFrame(animate)
+    
         // ------ frame/refresh rate limiting code: start ------ //
         now = Date.now();
         delta = now - then;
@@ -490,9 +517,6 @@ function animate() {
         cloud.position.x += (0.2 * time)
         cloud.draw() // ------ DRAW 
     })
-    bugs.forEach(bug => { // loop through array of 
-        bug.draw() // ------ DRAW 
-    })
     buildingMCTC.forEach(building => { // loop through array of buildingMCTC
         building.draw()     // ------ DRAW buildingMCTC
         building.update()
@@ -524,11 +548,9 @@ function animate() {
     platforms.forEach(platform => { // loop through array of Platforms
         platform.draw() // ------ DRAW PLATFORM
     })
-    
     platformNull.forEach(platform => { // loop through array of Platforms
         platform.draw() // ------ DRAW PLATFORM
     })
-
     movingPlatform1.forEach(movingPlatform => { // loop through array of Platforms
         // if (movingPlatform.position.x + movingPlatform.width > 0 && movingPlatform.position.x < canvas.width ) { // if on screen logic
         // }
@@ -543,6 +565,10 @@ function animate() {
     platformTwos.forEach(plate => {
         plate.draw()
     })
+    bugs.forEach(bug => { // loop through array of 
+        bug.draw() // ------ DRAW 
+    })
+
 
     player.update() // ------ PLAYER UPDATE. Call this last, to render in front
     // ------------ PLAYER MOVEMENT ------------
@@ -806,7 +832,6 @@ function animate() {
     }) 
 
 
-
     // ---- Check if x is pressed ----
     function xPressed(){ // check if x is pressed
         if (keys.x.pressed){
@@ -831,13 +856,9 @@ function animate() {
                 modalHGAOn()
                 // console.log('HGA Modal On');
             }
-
-
-          
         }
     }
     
-
     // building MCTC
     buildingMCTC.forEach(buildingMCTC => {
         if (
@@ -1329,20 +1350,6 @@ closeButtonMobile.addEventListener('click', function() {
     // console.log('btncloseMobile clicked');
 })
 
-// buttonHelp.addEventListener('click', function() {
-//     helpModal = !helpModal
-//     if(helpModal) {
-//         setTimeout(helpModalOn, 100); 
-//         // console.log('help model opening');
-//     } else {
-//         setTimeout(helpModalOff, 100); 
-//         // console.log('help model closing');
-//     }
-// })
-
- // Get the touch area element
-//  var arrowRight = document.getElementById('touchArea');
-
  // Add touchstart event listener
 //  arrowRight.addEventListener('touchstart', handleTouchStart, false);
  arrowRight.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -1467,21 +1474,6 @@ function handleClick() {
 
     }
 }
-//    // Handle click event for devices that don't support touch events
-// //    alert('Click!');
-// rightPressed = true
-// console.log('right pressed true');
-
-// setTimeout(function() {
-//     rightPressed = false
-//     console.log('right pressed false');
-//   }, 100);
-// }
-
-//  arrowRight.addEventListener('click', function() {
-//     rightPressed = true
-//     console.log('arrowRight clicked');
-// })
 
 function test() {
     // if (animateRunning) { console.log('animate function running: ' + animateRunning);  }

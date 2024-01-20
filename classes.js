@@ -552,6 +552,27 @@ class Bug {    // ------ Platform Class used for ground and all platforms. -----
     }
 }
 
+// -------- PLATFORM CLASS -------- //
+class Sign {    // ------ Platform Class used for ground and all platforms. ------
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width  //580
+        this.height = image.height //125
+    }
+    draw() {      
+        c.drawImage(
+            this.image,  
+            this.position.x, 
+            this.position.y)
+    }
+    update() {
+        this.draw
+    }
+}
 // // -------- ARROW CLASS -------- //
 // class ARROW {    // ------ Platform Class used for ground and all platforms. ------
 //     constructor({ x, y, image }) {
