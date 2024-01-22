@@ -97,6 +97,7 @@ const modalPrime = document.getElementById('modalPrime')
 const modalCBRE = document.getElementById('modalCBRE')
 const modalCoyote = document.getElementById('modalCoyote')
 const modalMCTC = document.getElementById('modalMCTC')
+const modalWin = document.getElementById('modalWin')
 
 // const modalTextElement = document.getElementById('modalText'); // Was used with one modal that text changed dynamically
 
@@ -106,6 +107,7 @@ const closeButtonPrime = document.getElementById('btnClosePrime');
 const closeButtonCBRE = document.getElementById('btnCloseCBRE');
 const closeButtonCoyote = document.getElementById('btnCloseCoyote');
 const closeButtonMCTC = document.getElementById('btnCloseMCTC');
+const closeButtonWin = document.getElementById('btnCloseWin');
 
 
 // canvas.width = window.innerWidth
@@ -191,6 +193,7 @@ const skyWidth = 2559
 
 let currentNullPosition = 0 // Anchor Point for all moving platforms
 let direction = 1; // 1 represents moving to the right, -1 represents moving to the left
+let direction2 = 1
 
 let playerWidth = 66
 let playerHeight = 150
@@ -233,7 +236,13 @@ let connected = false
 let animateLoop = false
 
 let loseModal = false
+let winModal = false
 let loseReason = 'none'
+let lose = false
+let win = false
+let winHandled = false
+let blackStart = false
+let whiteStart = false
 // -------- GAMEPAD VARIABLES -------- //
 
 
@@ -310,6 +319,12 @@ spacebarPic.src = './img/Sign/spacebar.png'
 const SightHGAPic = new Image()   
 SightHGAPic.src = './img/Sign/SignHGA.png'
 
+const WinBar1 = new Image()   
+WinBar1.src = './img/WinBars/winBar1.png'
+const WinBar2 = new Image()   
+WinBar2.src = './img/WinBars/winBar2.png'
+const WinBar3 = new Image()   
+WinBar3.src = './img/WinBars/winBar3.png'
 
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
@@ -334,6 +349,10 @@ let bugs = []
 let movePlate1 = 0
 let moveBug1 = 0
 let movingBugs = []
+let WinBar2Item
+let WinBar3Item
+let blackItem 
+let whiteItem
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
@@ -358,15 +377,26 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 function init() {
     scrollOffset = 0 //  clear scroll offset. Fixes winning bug.
     loseReason = 'none'
-    // console.log('init function');
-    // modalHGAOff()
-    // helpModalOn()
+
+    if(win || lose){
+        setTimeout(()=> {
+            winHandled = false
+            lose = false
+            win = false
+            // blackStart = false
+            // whiteStart = false
+
+        }, 2000)
+    }
+    blackStart = false
+    winModal = false
 // -------- ELEMENT VARIABLES --------
 player = new Player() //  ---- NEED THIS. Resets the player. ----
 
 // ---- RESET NULL --
 currentNullPosition = 0 // Anchor Point for all moving platforms
 direction = 1; // 1 represents moving to the right, -1 represents moving to the left
+direction = 1
 
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
@@ -449,7 +479,13 @@ arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, Ar
             new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
             new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
             new Sign({x: 6450, y: canvas.height - SightHGAPic.height - 100, image: SightHGAPic}),
+            new Sign({x: 30000+500, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
 ] 
+WinBar2Item = [new Sign({x: 30000+600, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
+WinBar3Item = [new Sign({x: 30000+510, y: 700, image: WinBar3})]
+
+blackItem = [new Black({x: -100, y: -100, image: WinBar3, opacity: 0 })]
+whiteItem = [new White({x: -100, y: -100, image: WinBar3, opacity: 0 })]
 
 bugs = [ 
     new Bug({x: 5000, y: canvas.height - BugPic.height - 125, image: BugPic}),
@@ -486,6 +522,8 @@ platformTwos = [
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 4), y: 1080-375, image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 5), y: 1080-250, image: platformTwoImage }),
 ] 
+
+
 
 clouds = [
     // new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})
@@ -594,6 +632,45 @@ function animate() {
         arrowArray1.draw() 
         arrowArray1.update()
     })
+
+    WinBar3Item.forEach(WinBar3 => { // loop through array of Platforms
+            WinBar3.position.y += 2 * direction2;
+        if(WinBar3.position.y <= 550 || WinBar3.position.y >= 900){
+            direction2 *= -1
+        }
+        WinBar3.draw() // ------ DRAW PLATFORMd
+    })
+    
+    whiteItem.forEach(item => { // White rectangle 
+        if (whiteStart ){
+            item.opacity = 1
+            win = false
+            lose = false
+            whiteStart = false
+        } else if (item.opacity > 0.01){
+            item.opacity -= 0.01
+        } else {
+            item.opacity = 0
+        }
+        // console.log(item.opacity);
+        item.draw() 
+    })
+
+    blackItem.forEach(item => { // Black rectangle 
+        if (blackStart){
+            item.opacity += 0.01
+            console.log('black win');
+            win = false
+            lose = false
+        } else {
+            item.opacity = 0
+        }
+        item.draw() 
+    })
+
+    platformTwos.forEach(plate => {
+        plate.draw()
+    })
     platforms.forEach(platform => { // loop through array of Platforms
         platform.draw() // ------ DRAW PLATFORM
     })
@@ -605,28 +682,28 @@ function animate() {
             if (movingPlatform.position.x <= currentNullPosition+movePlate1 || movingPlatform.position.x >= currentNullPosition+(movePlate1+500) ){
                 direction *= -1; // ---- reverse platform move direction
             }
-        // console.log('Null', currentNullPosition + 500, 'plateX', movingPlatform.position.x);
         movingPlatform.draw() // ------ DRAW PLATFORMd
     })
 
-    platformTwos.forEach(plate => {
-        plate.draw()
-    })
     bugs.forEach(bug => { // loop through array of 
         bug.draw() // ------ DRAW 
     })
     movingBugs.forEach(bug => { // loop through array of 
-            bug.position.x += 2 * direction; // ------ Platform Move Loop -------         
-            if (bug.position.x <= currentNullPosition+moveBug1 || bug.position.x >= currentNullPosition+(moveBug1+500) ){
-                direction *= -1; // ---- reverse platform move direction
-            }
+        bug.position.x += 2 * direction; // ------ Platform Move Loop -------         
+        if (bug.position.x <= currentNullPosition+moveBug1 || bug.position.x >= currentNullPosition+(moveBug1+500) ){
+            direction *= -1; // ---- reverse platform move direction
+        }
         // console.log('Null', currentNullPosition + moveBug1, 'bug', bug.position.x, 'moveBug1', moveBug1, 'currentNullPosition+(moveBug1+500)', currentNullPosition+(moveBug1+500));
         // console.log(bug.position.x);
         bug.draw() // ------ DRAW 
     })
 
-    player.update() // ------ PLAYER UPDATE. Call this last, to render in front
-    console.log('plaayer X:', player.position.x + scrollOffset);
+       player.update() // ------ PLAYER UPDATE. Call this last, to render in front
+    WinBar2Item.forEach(WinBar2 => { // loop through array of Platforms
+        WinBar2.draw() // ------ DRAW PLATFORM
+    })
+
+    // console.log('player X:', player.position.x + scrollOffset);
     // ------------ PLAYER MOVEMENT ------------
     // ------ LEFT & RIGHT ------
     if (keys.left.pressed == true && keys.right.pressed == true ) { // if BOTH Left & Right pressed
@@ -710,6 +787,12 @@ function animate() {
             arrowArray.forEach(arrowArray => { // ---- building SCROLL ----
                 arrowArray.position.x -= (playerMovement)
             });
+            WinBar2Item.forEach(WinBar2 => { // ---- building SCROLL ----
+                WinBar2.position.x -= (playerMovement)
+            });
+            WinBar3Item.forEach(WinBar3 => { // ---- building SCROLL ----
+                WinBar3.position.x -= (playerMovement)
+            });
             bugs.forEach(bug => { // ---- building SCROLL ----
                 bug.position.x -= (playerMovement)
             });
@@ -768,6 +851,12 @@ function animate() {
             });
             arrowArray.forEach(arrowArray => { // ---- Building SCROLL ----
                 arrowArray.position.x += (playerMovement)
+            });
+            WinBar3Item.forEach(WinBar3 => { // ---- Building SCROLL ----
+                WinBar3.position.x += (playerMovement)
+            });
+            WinBar2Item.forEach(WinBar2 => { // ---- Building SCROLL ----
+                WinBar2.position.x += (playerMovement)
             });
             bugs.forEach(bug => { // ---- Building SCROLL ----
                 bug.position.x += (playerMovement)
@@ -887,23 +976,27 @@ function animate() {
             ) 
             {   
                 loseReason = 'bug'
+                lose = true
+                whiteStart = true
                 loseModalOn()
                 init();
             } 
-    }) 
-
-    movingBugs.forEach(bug => { 
-        let adjust = 30
-        if ( 
-            player.position.y + player.height >= bug.position.y + adjust && // Bug Top
-            player.position.y <= bug.position.y + bug.height - adjust && // Bug Bottom
-            player.position.x + player.width >= bug.position.x + adjust && // Bug Right
-            player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
-            ) 
-            {   
-                loseReason = 'bug'
-                loseModalOn()
-                init();
+        }) 
+        
+        movingBugs.forEach(bug => { 
+            let adjust = 30
+            if ( 
+                player.position.y + player.height >= bug.position.y + adjust && // Bug Top
+                player.position.y <= bug.position.y + bug.height - adjust && // Bug Bottom
+                player.position.x + player.width >= bug.position.x + adjust && // Bug Right
+                player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
+                ) 
+                {   
+                    loseReason = 'bug'
+                    lose = true
+                    whiteStart = true
+                    loseModalOn()
+                    init();
             } 
     }) 
 
@@ -1020,12 +1113,21 @@ function animate() {
     pressX() 
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
-    if (scrollOffset > 28000) {
+        // console.log('scroll', scrollOffset);
+    if (scrollOffset > 30000) {
         console.log('You WIN!!!');
+        win = true
+        winHandled = true
+        blackStart = true
+        whiteStart  = true
+        winModalOn()
         // console.log('You WIN!!!', scrollOffset, '>', platformImage.width * 6); // Confirm winning area location it correct
     }
     // ---- LOOSE SCROLL ----
     if (player.position.y > (canvas.height) ){
+        lose = true
+        loseStart = true
+        whiteStart  = true
         loseReason = 'fall'
         loseModalOn()
         init();
@@ -1047,7 +1149,7 @@ animate()
 // ---- LISTEN FOR A KEY PRESSED ----
 addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode, key is event.key. ONLY works if they're listed in the EventListener
     // console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
-    if(!helpModal && !MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal){
+    if(!helpModal && !MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !winModal && !loseModal){
     switch (keyCode) {
         case 68:        // D
             // console.log('right/D');
@@ -1345,36 +1447,52 @@ function modalMCTCOff(){
  // -------------------- modalHelp ON --------------------
  function helpModalOn(){
     helpModal = true
-    modalHelp.style.display = 'block'
+    modalHelp.style.display = 'flex'
 }
-  // ---- modalHelp OFF ----
+// ---- modalHelp OFF ----
 function helpModalOff(){
     helpModal = false
     modalHelp.style.display = 'none'
 }
-
- // -------------------- Lose modal ON --------------------
- function loseModalOn(){
+// -------------------- modalWin ON --------------------
+function winModalOn(){
+   winModal = true
+   modalWin.style.display = 'flex'
+}
+// -------------------- Lose modal ON --------------------
+function loseModalOn(){
+    loseModal = true
     if (loseReason == 'bug') {
         loseParagraph.textContent = 'Your code has a bug, you lose!';   
     } else if (loseReason == 'fall') {
         loseParagraph.textContent = 'Player fell off. You lose :(';   
     } 
-        console.log('lose Reason:',loseReason);
-        modalLose.style.display = 'flex'
-        setInterval(function() {
-            modalLose.style.display = 'none'
-        }, 4000);     
-    }
+    console.log('lose Reason:',loseReason);
+    modalLose.style.display = 'flex'
+    setInterval(function() {
+        modalLose.style.display = 'none'
+    }, 4000);     
+}
 
     
-    // ---- Click listener for Lose Close button -- 
-    closeLose.addEventListener('click', function() {
-        setTimeout(function() {
-            modalLose.style.display = 'none';
-        }, 100); 
-        // console.log('btncloseHGA clicked');
-    })
+// ---- Click listener for Lose Close button -- 
+closeLose.addEventListener('click', function() {
+    setTimeout(function() {
+        modalLose.style.display = 'none';
+        loseModal = false
+    }, 100); 
+    // console.log('btncloseHGA clicked');
+})
+
+
+// ---- Click listener for Lose Close button -- 
+closeButtonWin.addEventListener('click', function() {
+    // setTimeout(function() {
+    //     modalWin.style.display = 'none';
+    // }, 100); 
+    init();
+   modalWin.style.display = 'none'
+})
 
 
 
