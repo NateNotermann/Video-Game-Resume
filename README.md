@@ -101,11 +101,12 @@ Custom Building Background Art
     D. Custom Fore Buildings - Done 
     E. Custom main Buildings Animations - Done   
         1. MCTC - Done    
-        <!-- 2. Restaurants - maybe..   -->
-        2. Coyote - Done    
-        3. CBRE - Done    
-        4. Prime - Done   
-        5. HGA - Done  
+        2. Restaurants - Done   
+        3. Coyote - Done   
+        4. Graphic Design - Done  
+        5. CBRE - Done    
+        6. Prime - Done   
+        7. HGA - Done  
     F. Add collision descriptions Main buildings. - Done  
     G. Add collision glow effect to Main buildings. - Done  
     H. Arrow pointing where to go. - Done   
@@ -128,7 +129,7 @@ Add controller & keyboard buttons to the Game Boy frame.  - Done
 Make controller & keyboard buttons react when pressed. - Done      
 
 #### Final Steps      
-Place More/All Platforms <-------------------------- in progress    
+Place More/All Platforms - Done      
 Deploy to Netlify - Done  
 Celebratory Dance    
 

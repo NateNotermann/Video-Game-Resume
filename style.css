@@ -545,7 +545,7 @@ html {
 }
 #modalWin {
   margin: auto;
-  width: 50%;
+  max-width: 80%;
 }
 #winLinks {
   margin: auto;
