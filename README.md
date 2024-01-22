@@ -128,7 +128,7 @@ Add controller & keyboard buttons to the Game Boy frame.  - Done
 Make controller & keyboard buttons react when pressed. - Done      
 
 #### Final Steps      
-Place More/All Platforms <-------------------------- in progress    
+Place More/All Platforms - Done      
 Deploy to Netlify - Done  
 Celebratory Dance    
 
