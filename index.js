@@ -166,6 +166,7 @@ const skyWidth = 2559
 
 let currentNullPosition = 0 // Anchor Point for all moving platforms
 let direction = 1; // 1 represents moving to the right, -1 represents moving to the left
+let direction2 = 1
 
 let playerWidth = 66
 let playerHeight = 150
@@ -209,6 +210,7 @@ let animateLoop = false
 
 let loseModal = false
 let loseReason = 'none'
+let win = false
 // -------- GAMEPAD VARIABLES -------- //
 
 
@@ -285,6 +287,12 @@ spacebarPic.src = './img/Sign/spacebar.png'
 const SightHGAPic = new Image()   
 SightHGAPic.src = './img/Sign/SignHGA.png'
 
+const WinBar1 = new Image()   
+WinBar1.src = './img/WinBars/winBar1.png'
+const WinBar2 = new Image()   
+WinBar2.src = './img/WinBars/winBar2.png'
+const WinBar3 = new Image()   
+WinBar3.src = './img/WinBars/winBar3.png'
 
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
@@ -309,6 +317,8 @@ let bugs = []
 let movePlate1 = 0
 let moveBug1 = 0
 let movingBugs = []
+let WinBar2Item
+let WinBar3Item
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
@@ -333,6 +343,7 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 function init() {
     scrollOffset = 0 //  clear scroll offset. Fixes winning bug.
     loseReason = 'none'
+    win = false
     // console.log('init function');
     // modalHGAOff()
     // helpModalOn()
@@ -342,6 +353,7 @@ player = new Player() //  ---- NEED THIS. Resets the player. ----
 // ---- RESET NULL --
 currentNullPosition = 0 // Anchor Point for all moving platforms
 direction = 1; // 1 represents moving to the right, -1 represents moving to the left
+direction = 1
 
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
@@ -424,7 +436,10 @@ arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, Ar
             new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
             new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
             new Sign({x: 6450, y: canvas.height - SightHGAPic.height - 100, image: SightHGAPic}),
+            new Sign({x: 30000+500, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
 ] 
+WinBar3Item = [new Sign({x: 30000+510, y: 700, image: WinBar3})]
+WinBar2Item = [new Sign({x: 30000+600, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
 
 bugs = [ 
     new Bug({x: 5000, y: canvas.height - BugPic.height - 125, image: BugPic}),
@@ -461,6 +476,8 @@ platformTwos = [
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 4), y: 1080-375, image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 5), y: 1080-250, image: platformTwoImage }),
 ] 
+
+
 
 clouds = [
     // new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})
@@ -569,19 +586,13 @@ function animate() {
         arrowArray1.draw() 
         arrowArray1.update()
     })
-    platforms.forEach(platform => { // loop through array of Platforms
-        platform.draw() // ------ DRAW PLATFORM
-    })
-    platformNull.forEach(platform => { // loop through array of Platforms
-        platform.draw() // ------ DRAW PLATFORM
-    })
-    movingPlatform1.forEach(movingPlatform => { // loop through array of Platforms
-            movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
-            if (movingPlatform.position.x <= currentNullPosition+movePlate1 || movingPlatform.position.x >= currentNullPosition+(movePlate1+500) ){
-                direction *= -1; // ---- reverse platform move direction
-            }
-        // console.log('Null', currentNullPosition + 500, 'plateX', movingPlatform.position.x);
-        movingPlatform.draw() // ------ DRAW PLATFORMd
+
+    WinBar3Item.forEach(WinBar3 => { // loop through array of Platforms
+            WinBar3.position.y += 2 * direction2;
+        if(WinBar3.position.y <= 550 || WinBar3.position.y >= 900){
+            direction2 *= -1
+        }
+        WinBar3.draw() // ------ DRAW PLATFORMd
     })
 
     platformTwos.forEach(plate => {
@@ -600,8 +611,27 @@ function animate() {
         bug.draw() // ------ DRAW 
     })
 
+
+
     player.update() // ------ PLAYER UPDATE. Call this last, to render in front
-    console.log('plaayer X:', player.position.x + scrollOffset);
+    platforms.forEach(platform => { // loop through array of Platforms
+        platform.draw() // ------ DRAW PLATFORM
+    })
+    platformNull.forEach(platform => { // loop through array of Platforms
+        platform.draw() // ------ DRAW PLATFORM
+    })
+    movingPlatform1.forEach(movingPlatform => { // loop through array of Platforms
+            movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
+            if (movingPlatform.position.x <= currentNullPosition+movePlate1 || movingPlatform.position.x >= currentNullPosition+(movePlate1+500) ){
+                direction *= -1; // ---- reverse platform move direction
+            }
+        movingPlatform.draw() // ------ DRAW PLATFORMd
+    })
+    WinBar2Item.forEach(WinBar2 => { // loop through array of Platforms
+        WinBar2.draw() // ------ DRAW PLATFORM
+    })
+
+    console.log('player X:', player.position.x + scrollOffset);
     // ------------ PLAYER MOVEMENT ------------
     // ------ LEFT & RIGHT ------
     if (keys.left.pressed == true && keys.right.pressed == true ) { // if BOTH Left & Right pressed
@@ -685,6 +715,12 @@ function animate() {
             arrowArray.forEach(arrowArray => { // ---- building SCROLL ----
                 arrowArray.position.x -= (playerMovement)
             });
+            WinBar2Item.forEach(WinBar2 => { // ---- building SCROLL ----
+                WinBar2.position.x -= (playerMovement)
+            });
+            WinBar3Item.forEach(WinBar3 => { // ---- building SCROLL ----
+                WinBar3.position.x -= (playerMovement)
+            });
             bugs.forEach(bug => { // ---- building SCROLL ----
                 bug.position.x -= (playerMovement)
             });
@@ -743,6 +779,12 @@ function animate() {
             });
             arrowArray.forEach(arrowArray => { // ---- Building SCROLL ----
                 arrowArray.position.x += (playerMovement)
+            });
+            WinBar3Item.forEach(WinBar3 => { // ---- Building SCROLL ----
+                WinBar3.position.x += (playerMovement)
+            });
+            WinBar2Item.forEach(WinBar2 => { // ---- Building SCROLL ----
+                WinBar2.position.x += (playerMovement)
             });
             bugs.forEach(bug => { // ---- Building SCROLL ----
                 bug.position.x += (playerMovement)
@@ -995,8 +1037,10 @@ function animate() {
     pressX() 
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
-    if (scrollOffset > 28000) {
+        console.log('scroll', scrollOffset);
+    if (scrollOffset > 30000) {
         console.log('You WIN!!!');
+        win = true
         // console.log('You WIN!!!', scrollOffset, '>', platformImage.width * 6); // Confirm winning area location it correct
     }
     // ---- LOOSE SCROLL ----
