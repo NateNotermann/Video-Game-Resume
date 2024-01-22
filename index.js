@@ -1,4 +1,3 @@
-// import platform from '../img/platform.png';
 const modalMobile = document.getElementById('modalMobile');
 const arrowRight = document.getElementById('arrowsRight');
 const arrowLeft = document.getElementById('arrowsLeft');
@@ -97,6 +96,7 @@ const modalPrime = document.getElementById('modalPrime')
 const modalCBRE = document.getElementById('modalCBRE')
 const modalCoyote = document.getElementById('modalCoyote')
 const modalMCTC = document.getElementById('modalMCTC')
+const modalRestaurant = document.getElementById('modalRestaurant')
 const modalWin = document.getElementById('modalWin')
 
 // const modalTextElement = document.getElementById('modalText'); // Was used with one modal that text changed dynamically
@@ -105,8 +105,10 @@ const closeButton = document.getElementById('btnClose');
 const closeButtonHGA = document.getElementById('btnCloseHGA');
 const closeButtonPrime = document.getElementById('btnClosePrime');
 const closeButtonCBRE = document.getElementById('btnCloseCBRE');
+const closeButtonFreelance = document.getElementById('btnCloseFreelance');
 const closeButtonCoyote = document.getElementById('btnCloseCoyote');
 const closeButtonMCTC = document.getElementById('btnCloseMCTC');
+const closeButtonRestaurant= document.getElementById('btnCloseRestaurant');
 const closeButtonWin = document.getElementById('btnCloseWin');
 
 
@@ -131,37 +133,37 @@ let windowInnerWidth = window.innerWidth
 // }
 
 document.addEventListener("DOMContentLoaded", function() {
-    console.log('DOMContentLoaded');
+    // console.log('DOMContentLoaded');
     setTimeout( function () {
-        console.log("Inside Timeout function.");
+        // console.log("Inside Timeout function.");
         document.getElementById("loader").style.display = "none";
 
         let loaderDisplay = window.getComputedStyle(loaderDiv)
         if(loaderDisplay.display === "none") {
-            console.log('loader = HIDDEN');
+            // console.log('loader = HIDDEN');
             document.getElementById("content").style.display = "flex";
             
         } else {
-            console.log('loader VISIBLE');
+            // console.log('loader VISIBLE');
         }
         if(mobileModal) {
             mobileModalOn()
         } 
         // document.getElementById("content").style.display = "block";
         // document.getElementById("content").style.display = "flex";
-    }, 1000 );
+    }, 2000 );
 });
 
 // ---- window.onload fixed the rendering issues ----
 window.onload = function () {
-    console.log('window.onload function');
+    // console.log('window.onload function');
     
     canvasHeight = canvas.height
     canvasWidth = canvas.width
     if (document.readyState !== "complete"){
         console.log('page load NOT Complete'); 
     } else {
-        console.log('page load complete!');
+        // console.log('page load complete!');
         // onPageload()
     }
     // initial canvas dimensions options 2
@@ -204,7 +206,9 @@ let time = 1
 let animateRunning = false
 
 // -- Building Glow --
+let glowRestaurant = false
 let glowMCTC = false
+let glowFreelance = false
 let glowCOYOTE = false
 let glowCBRE = false
 let glowPRIME = false
@@ -218,6 +222,7 @@ let PrimeModal = false
 let CBREModal = false
 let CoyoteModal = false
 let MCTCModal = false
+let RestaurantModal = false
 
 // -------- GAMEPAD VARIABLES -------- //
 let lastKey
@@ -248,58 +253,64 @@ let whiteStart = false
 
 // -------- IMAGE VARIABLES --------
 const platformImage = new Image()   
-platformImage.src = './img/platform.jpg'
+platformImage.src = './img/platform.webp'
 
 const platformTwoImage = new Image()   
-platformTwoImage.src = './img/platformTwo.jpg'
+platformTwoImage.src = './img/platformTwo.webp'
 
 // const tallPlatform = new Image()   
-// tallPlatform.src = './img/platformSmallTall.png'
+// tallPlatform.src = './img/platformSmallTall.webp'
 
 // -------- Background Images -------- //
 const skyImage = new Image()   
-skyImage.src = './img/Sky.jpg'
+skyImage.src = './img/Sky.webp'
 
 const backgroundImage = new Image()   
-backgroundImage.src = './img/background.png'
+backgroundImage.src = './img/background.webp'
 
 const midgroundImage = new Image()   
-midgroundImage.src = './img/midground.png'
+midgroundImage.src = './img/midground.webp'
 
 const foregroundImage = new Image()   
-foregroundImage.src = './img/foreground.png'
+foregroundImage.src = './img/foreground.webp'
 
 // const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
-// cloudImage.src = './img/cloud.png'
+// cloudImage.src = './img/cloud.webp'
 
 // -------- Player Images -------- //
 const spriteRunLeft = new Image()   // spriteRunLeft Image - Dimensions
-spriteRunLeft.src = './img/spriteRunLeft.png'
+spriteRunLeft.src = './img/spriteRunLeft.webp'
 
 const spriteRunRight = new Image()   // spriteRunRight Image - Dimensions
-spriteRunRight.src = './img/spriteRunRight.png'
+spriteRunRight.src = './img/spriteRunRight.webp'
 
 const spriteStandLeft = new Image()   // spriteStandLeft Image - Dimensions
-spriteStandLeft.src = './img/spriteStandLeft.png'
+spriteStandLeft.src = './img/spriteStandLeft.webp'
 
 const spriteStandRight = new Image()   // spriteStandRight Image - Dimensions
-spriteStandRight.src = './img/spriteStandRight.png'
+spriteStandRight.src = './img/spriteStandRight.webp'
 
 // -------- Building Images -------- //
+const Restaurant = new Image()   
+Restaurant.src = './img/RestaurantSprite2.webp'
+
 const MCTC = new Image()   
 MCTC.src = './img/MCTC LONG.png'
 
+const Freelance  = new Image()   
+Freelance .src = './img/FreelanceSprite3.webp'
+
 const COYOTE  = new Image()   
-COYOTE .src = './img/COYOTE.png'
+COYOTE .src = './img/COYOTE.webp'
 
 const CBRE = new Image()   
-CBRE.src = './img/CBRE LONG.png'
+CBRE.src = './img/CBRE LONG.webp'
 
 const HGA = new Image()   
 HGA.src = './img/HGA Long.png'
 
 const PRIME = new Image()   
-PRIME.src = './img/Prime.png'
+PRIME.src = './img/Prime.webp'
 
 const PrimeElements = new Image()   
 PrimeElements.src = './img/PrimeFlag2.png'
@@ -308,23 +319,23 @@ const ArrowPic = new Image()
 ArrowPic.src = './img/arrow3.png'
 
 const BugPic = new Image()   
-BugPic.src = './img/Bug/bug2.png'
+BugPic.src = './img/Bug/bug2.webp'
 
 const BugTalkPic = new Image()   
-BugTalkPic.src = './img/Bug/bugTalkSprite.png'
+BugTalkPic.src = './img/Bug/bugTalkSprite.webp'
 
 const spacebarPic = new Image()   
-spacebarPic.src = './img/Sign/spacebar.png'
+spacebarPic.src = './img/Sign/spacebar.webp'
 
 const SightHGAPic = new Image()   
-SightHGAPic.src = './img/Sign/SignHGA.png'
+SightHGAPic.src = './img/Sign/SignHGA.webp'
 
 const WinBar1 = new Image()   
-WinBar1.src = './img/WinBars/winBar1.png'
+WinBar1.src = './img/WinBars/winBar1.webp'
 const WinBar2 = new Image()   
-WinBar2.src = './img/WinBars/winBar2.png'
+WinBar2.src = './img/WinBars/winBar2.webp'
 const WinBar3 = new Image()   
-WinBar3.src = './img/WinBars/winBar3.png'
+WinBar3.src = './img/WinBars/winBar3.webp'
 
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
@@ -339,6 +350,7 @@ let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] //
 let midgrounds = []    
 let foregrounds = []    
 let buildingMCTC = []
+let freelance = []
 let buildingCOYOTE  = []
 let buildingCBRE = []
 let buildingPRIME = []
@@ -472,8 +484,11 @@ buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (pl
 buildingPRIME = [ new BuildingPRIME(11500, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
 elementsPRIME = [ new ElementsPRIME(11500, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
 buildingCBRE = [ new BuildingCBRE(14500 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
+buildingFreelance = [ new BuildingFreelance(17800, canvas.height - Freelance.height - (platformHeight * 5)+10, Freelance)] // MCTC (x,y,(NOT USED --> w,h,image,))
 buildingCOYOTE = [ new BuildingCOYOTE (21000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
-buildingMCTC = [ new BuildingMCTC(25000, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingMCTC = [ new BuildingMCTC(28000, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingRestaurant = [ new BuildingRestaurant(25000, canvas.height - Restaurant.height - 115, Restaurant)] 
+
 
 arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
             new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
@@ -490,7 +505,7 @@ whiteItem = [new White({x: -100, y: -100, image: WinBar3, opacity: 0 })]
 bugs = [ 
     new Bug({x: 5000, y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 8950, y: canvas.height - BugPic.height - 125, image: BugPic}),
-    new Bug({x: 9080+(bugWidth*2), y: canvas.height - BugPic.height - 250, image: BugPic}),
+    // new Bug({x: 9080+(bugWidth*2), y: canvas.height - BugPic.height - 250, image: BugPic}),
     new Bug({x: 9080+(bugWidth*4), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
@@ -501,7 +516,7 @@ bugs = [
 moveBug1 = 13000
 movingBugs = [ 
     new Bug({x: moveBug1, y: canvas.height - BugPic.height - 125, image: BugPic}),
-    // new Bug({x: moveBug1+200, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: moveBug1+200, y: canvas.height - BugPic.height - 125, image: BugPic}),
 ]
 
 platformTwos = [
@@ -604,7 +619,15 @@ function animate() {
         cloud.position.x += (0.2 * time)
         cloud.draw() // ------ DRAW 
     })
+    buildingRestaurant.forEach(building => { 
+        building.draw()    
+        building.update()
+    }) 
     buildingMCTC.forEach(building => { // loop through array of buildingMCTC
+        building.draw()     // ------ DRAW buildingMCTC
+        building.update()
+    }) 
+    buildingFreelance.forEach(building => { // loop through array of buildingMCTC
         building.draw()     // ------ DRAW buildingMCTC
         building.update()
     }) 
@@ -659,7 +682,7 @@ function animate() {
     blackItem.forEach(item => { // Black rectangle 
         if (blackStart){
             item.opacity += 0.01
-            console.log('black win');
+            // console.log('black win');
             win = false
             lose = false
         } else {
@@ -766,7 +789,13 @@ function animate() {
                 // console.log('platformNull', platformNull.position.x);
                 platform.position.x -= playerMovement
             });
+            buildingRestaurant.forEach(building => { // ---- building SCROLL ----
+                building.position.x -= (playerMovement)
+            });
             buildingMCTC.forEach(building => { // ---- building SCROLL ----
+                building.position.x -= (playerMovement)
+            });
+            buildingFreelance.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
             buildingCOYOTE.forEach(building => { // ---- building SCROLL ----
@@ -831,7 +860,13 @@ function animate() {
             movingPlatform1.forEach(platform => { // loop through array of platforms
                 platform.position.x += playerMovement
             });
+            buildingRestaurant.forEach(building => { // ---- Building SCROLL ----
+                building.position.x += (playerMovement)
+            });
             buildingMCTC.forEach(building => { // ---- Building SCROLL ----
+                building.position.x += (playerMovement)
+            });
+            buildingFreelance.forEach(building => { // ---- Building SCROLL ----
                 building.position.x += (playerMovement)
             });
             buildingCOYOTE.forEach(building => { // ---- Building SCROLL ----
@@ -1024,10 +1059,32 @@ function animate() {
                 HGAModal = true
                 modalHGAOn()
                 // console.log('HGA Modal On');
+            } else if (glowFreelance) {
+                FreelanceModal = true
+                modalFreelanceOn()
+                // console.log('Freelance Modal On');
+            } else if (glowRestaurant) {
+                RestaurantModal = true
+                modalRestaurantOn()
+                // console.log('Freelance Modal On');
             }
         }
     }
     
+    // building Restaurant
+    buildingRestaurant.forEach(buildingRestaurant=> {
+        if (
+            player.position.x < buildingRestaurant.position.x + buildingRestaurant.width // player left plat right
+            && player.position.x + player.width > buildingRestaurant.position.x   // player right plat left 
+            && player.position.y < buildingRestaurant.position.y + buildingRestaurant.height // player top UNDER plat bottom
+            && player.position.y + player.height > buildingRestaurant.position.y  // player bottom ABOVE plat top 
+        ) {
+            glowRestaurant = true
+            xPressed()
+        } else {
+            glowRestaurant = false
+        }
+    })
     // building MCTC
     buildingMCTC.forEach(buildingMCTC => {
         if (
@@ -1054,6 +1111,20 @@ function animate() {
             xPressed()
         } else {
             glowCBRE = false
+        }
+    })
+    //building Freelance
+    buildingFreelance.forEach(freelance => {
+        if (
+            player.position.x < freelance.position.x + freelance.width // player left plat right
+            && player.position.x + player.width > freelance.position.x   // player right plat left 
+            && player.position.y < freelance.position.y + freelance.height // player top UNDER plat bottom
+            && player.position.y + player.height > freelance.position.y  // player bottom ABOVE plat top 
+        ) {
+            glowFreelance = true
+            xPressed()
+        } else {
+            glowFreelance = false
         }
     })
     //buildingCOYOTE
@@ -1100,7 +1171,7 @@ function animate() {
     })
 
     function pressX() {
-        if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC){
+        if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC || glowFreelance || glowRestaurant){
             pressX = true
             PressXDiv.style.opacity = 1;
             // console.log('glowing');
@@ -1115,7 +1186,7 @@ function animate() {
     // if (scrollOffset > 1500) {
         // console.log('scroll', scrollOffset);
     if (scrollOffset > 30000) {
-        console.log('You WIN!!!');
+        // console.log('You WIN!!!');
         win = true
         winHandled = true
         blackStart = true
@@ -1149,7 +1220,7 @@ animate()
 // ---- LISTEN FOR A KEY PRESSED ----
 addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode, key is event.key. ONLY works if they're listed in the EventListener
     // console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
-    if(!helpModal && !MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !winModal && !loseModal){
+    if(!helpModal && !MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !winModal && !loseModal && !RestaurantModal){
     switch (keyCode) {
         case 68:        // D
             // console.log('right/D');
@@ -1375,12 +1446,13 @@ function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS On
 }
 
 function ifNoGlow(){
-    if( !glowMCTC && !glowCOYOTE && !glowCBRE && !glowPRIME && !glowHGA){
+    if( !glowMCTC && !glowCOYOTE && !glowCBRE && !glowPRIME && !glowHGA && !glowFreelance){
         modalHGAOff()
         modalPrimeOff()
         modalCBREOff()
         modalCoyoteOff()
         modalMCTCOff()
+        modalFreelanceOff()
     } 
 }
 
@@ -1411,7 +1483,7 @@ function modalPrimeOff(){
 // -------------------- modalCBRE ON --------------------
  function modalCBREOn(){
     CBREModal = true
-    modalCBRE.style.display = 'block'
+    modalCBRE.style.display = 'flex'
 }
   // ---- modalHGA OFF ----
 function modalCBREOff(){
@@ -1423,7 +1495,7 @@ function modalCBREOff(){
 // -------------------- modalCoyote ON --------------------
  function modalCoyoteOn(){
     CoyoteModal = true
-    modalCoyote.style.display = 'block'
+    modalCoyote.style.display = 'flex'
 }
   // ---- modalHGA OFF ----
 function modalCoyoteOff(){
@@ -1433,14 +1505,34 @@ function modalCoyoteOff(){
 
 
 // -------------------- modalMCTC ON --------------------
+ function modalRestaurantOn(){
+    RestaurantModal = true
+    modalRestaurant.style.display = 'flex'
+}
+// -------------------- modalMCTC ON --------------------
+ function modalRestaurantOff(){
+    RestaurantModal = false
+    modalRestaurant.style.display = 'none'
+}
+// -------------------- modalMCTC ON --------------------
  function modalMCTCOn(){
     MCTCModal = true
-    modalMCTC.style.display = 'block'
+    modalMCTC.style.display = 'flex'
 }
   // ---- modalHGA OFF ----
 function modalMCTCOff(){
     MCTCModal = false
     modalMCTC.style.display = 'none'
+}
+// -------------------- modalFreelance ON --------------------
+ function modalFreelanceOn(){
+    FreelanceModal = true
+    modalFreelance.style.display = 'flex'
+}
+  // ---- modalHGA OFF ----
+function modalFreelanceOff(){
+    FreelanceModal = false
+    modalFreelance.style.display = 'none'
 }
 
 
@@ -1457,7 +1549,9 @@ function helpModalOff(){
 // -------------------- modalWin ON --------------------
 function winModalOn(){
    winModal = true
-   modalWin.style.display = 'flex'
+   setTimeout(()=>{
+       modalWin.style.display = 'flex'
+   }, 1500)
 }
 // -------------------- Lose modal ON --------------------
 function loseModalOn(){
@@ -1467,7 +1561,7 @@ function loseModalOn(){
     } else if (loseReason == 'fall') {
         loseParagraph.textContent = 'Player fell off. You lose :(';   
     } 
-    console.log('lose Reason:',loseReason);
+    // console.log('lose Reason:',loseReason);
     modalLose.style.display = 'flex'
     setInterval(function() {
         modalLose.style.display = 'none'
@@ -1485,7 +1579,7 @@ closeLose.addEventListener('click', function() {
 })
 
 
-// ---- Click listener for Lose Close button -- 
+// ---- Click listener for Win Close button -- 
 closeButtonWin.addEventListener('click', function() {
     // setTimeout(function() {
     //     modalWin.style.display = 'none';
@@ -1516,6 +1610,11 @@ closeButtonCBRE.addEventListener('click', function() {
     setTimeout(modalCBREOff, 100); 
     // console.log('btncloseCBRE clicked');
 })
+// ---- Click listener for CBRE Close button -- 
+closeButtonFreelance.addEventListener('click', function() {
+    setTimeout(modalFreelanceOff, 100); 
+    // console.log('btncloseCBRE clicked');
+})
 
 
 // ---- Click listener for Coyote Close button -- 
@@ -1529,6 +1628,12 @@ closeButtonCoyote.addEventListener('click', function() {
 closeButtonMCTC.addEventListener('click', function() {
     setTimeout(modalMCTCOff, 100); 
     // console.log('btncloseMCTC clicked');
+})
+
+// ---- Click listener for Restaurant Close button -- 
+closeButtonRestaurant.addEventListener('click', function() {
+    setTimeout(modalRestaurantOff, 100); 
+    // console.log('closeButtonRestaurant clicked');
 })
 
 
