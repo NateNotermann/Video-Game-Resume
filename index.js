@@ -627,7 +627,7 @@ function animate() {
         } else {
             item.opacity = 0
         }
-        console.log(item.opacity);
+        // console.log(item.opacity);
         item.draw() 
     })
 
@@ -678,7 +678,7 @@ function animate() {
         WinBar2.draw() // ------ DRAW PLATFORM
     })
 
-    console.log('player X:', player.position.x + scrollOffset);
+    // console.log('player X:', player.position.x + scrollOffset);
     // ------------ PLAYER MOVEMENT ------------
     // ------ LEFT & RIGHT ------
     if (keys.left.pressed == true && keys.right.pressed == true ) { // if BOTH Left & Right pressed
