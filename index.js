@@ -1,4 +1,3 @@
-// import platform from '../img/platform.png';
 const modalMobile = document.getElementById('modalMobile');
 const arrowRight = document.getElementById('arrowsRight');
 const arrowLeft = document.getElementById('arrowsLeft');
@@ -229,64 +228,64 @@ let whiteStart = false
 
 // -------- IMAGE VARIABLES --------
 const platformImage = new Image()   
-platformImage.src = './img/platform.jpg'
+platformImage.src = './img/platform.webp'
 
 const platformTwoImage = new Image()   
-platformTwoImage.src = './img/platformTwo.jpg'
+platformTwoImage.src = './img/platformTwo.webp'
 
 // const tallPlatform = new Image()   
-// tallPlatform.src = './img/platformSmallTall.png'
+// tallPlatform.src = './img/platformSmallTall.webp'
 
 // -------- Background Images -------- //
 const skyImage = new Image()   
-skyImage.src = './img/Sky.jpg'
+skyImage.src = './img/Sky.webp'
 
 const backgroundImage = new Image()   
-backgroundImage.src = './img/background.png'
+backgroundImage.src = './img/background.webp'
 
 const midgroundImage = new Image()   
-midgroundImage.src = './img/midground.png'
+midgroundImage.src = './img/midground.webp'
 
 const foregroundImage = new Image()   
-foregroundImage.src = './img/foreground.png'
+foregroundImage.src = './img/foreground.webp'
 
 // const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
-// cloudImage.src = './img/cloud.png'
+// cloudImage.src = './img/cloud.webp'
 
 // -------- Player Images -------- //
 const spriteRunLeft = new Image()   // spriteRunLeft Image - Dimensions
-spriteRunLeft.src = './img/spriteRunLeft.png'
+spriteRunLeft.src = './img/spriteRunLeft.webp'
 
 const spriteRunRight = new Image()   // spriteRunRight Image - Dimensions
-spriteRunRight.src = './img/spriteRunRight.png'
+spriteRunRight.src = './img/spriteRunRight.webp'
 
 const spriteStandLeft = new Image()   // spriteStandLeft Image - Dimensions
-spriteStandLeft.src = './img/spriteStandLeft.png'
+spriteStandLeft.src = './img/spriteStandLeft.webp'
 
 const spriteStandRight = new Image()   // spriteStandRight Image - Dimensions
-spriteStandRight.src = './img/spriteStandRight.png'
+spriteStandRight.src = './img/spriteStandRight.webp'
 
 // -------- Building Images -------- //
 const Restaurant = new Image()   
-Restaurant.src = './img/RestaurantSprite2.png'
+Restaurant.src = './img/RestaurantSprite2.webp'
 
 const MCTC = new Image()   
 MCTC.src = './img/MCTC LONG.png'
 
 const Freelance  = new Image()   
-Freelance .src = './img/FreelanceSprite3.png'
+Freelance .src = './img/FreelanceSprite3.webp'
 
 const COYOTE  = new Image()   
-COYOTE .src = './img/COYOTE.png'
+COYOTE .src = './img/COYOTE.webp'
 
 const CBRE = new Image()   
-CBRE.src = './img/CBRE LONG.png'
+CBRE.src = './img/CBRE LONG.webp'
 
 const HGA = new Image()   
 HGA.src = './img/HGA Long.png'
 
 const PRIME = new Image()   
-PRIME.src = './img/Prime.png'
+PRIME.src = './img/Prime.webp'
 
 const PrimeElements = new Image()   
 PrimeElements.src = './img/PrimeFlag2.png'
@@ -295,23 +294,23 @@ const ArrowPic = new Image()
 ArrowPic.src = './img/arrow3.png'
 
 const BugPic = new Image()   
-BugPic.src = './img/Bug/bug2.png'
+BugPic.src = './img/Bug/bug2.webp'
 
 const BugTalkPic = new Image()   
-BugTalkPic.src = './img/Bug/bugTalkSprite.png'
+BugTalkPic.src = './img/Bug/bugTalkSprite.webp'
 
 const spacebarPic = new Image()   
-spacebarPic.src = './img/Sign/spacebar.png'
+spacebarPic.src = './img/Sign/spacebar.webp'
 
 const SightHGAPic = new Image()   
-SightHGAPic.src = './img/Sign/SignHGA.png'
+SightHGAPic.src = './img/Sign/SignHGA.webp'
 
 const WinBar1 = new Image()   
-WinBar1.src = './img/WinBars/winBar1.png'
+WinBar1.src = './img/WinBars/winBar1.webp'
 const WinBar2 = new Image()   
-WinBar2.src = './img/WinBars/winBar2.png'
+WinBar2.src = './img/WinBars/winBar2.webp'
 const WinBar3 = new Image()   
-WinBar3.src = './img/WinBars/winBar3.png'
+WinBar3.src = './img/WinBars/winBar3.webp'
 
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
