@@ -80,6 +80,7 @@ const closeButton = document.getElementById('btnClose');
 const closeButtonHGA = document.getElementById('btnCloseHGA');
 const closeButtonPrime = document.getElementById('btnClosePrime');
 const closeButtonCBRE = document.getElementById('btnCloseCBRE');
+const closeButtonFreelance = document.getElementById('btnCloseFreelance');
 const closeButtonCoyote = document.getElementById('btnCloseCoyote');
 const closeButtonMCTC = document.getElementById('btnCloseMCTC');
 const closeButtonWin = document.getElementById('btnCloseWin');
@@ -180,6 +181,7 @@ let animateRunning = false
 
 // -- Building Glow --
 let glowMCTC = false
+let glowFreelance = false
 let glowCOYOTE = false
 let glowCBRE = false
 let glowPRIME = false
@@ -264,6 +266,9 @@ spriteStandRight.src = './img/spriteStandRight.png'
 const MCTC = new Image()   
 MCTC.src = './img/MCTC LONG.png'
 
+const Freelance  = new Image()   
+Freelance .src = './img/FreelanceSprite3.png'
+
 const COYOTE  = new Image()   
 COYOTE .src = './img/COYOTE.png'
 
@@ -314,6 +319,7 @@ let backgrounds = []    //new Background({x:0, y:0, image: backgroundImage})] //
 let midgrounds = []    
 let foregrounds = []    
 let buildingMCTC = []
+let freelance = []
 let buildingCOYOTE  = []
 let buildingCBRE = []
 let buildingPRIME = []
@@ -447,8 +453,10 @@ buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (pl
 buildingPRIME = [ new BuildingPRIME(11500, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
 elementsPRIME = [ new ElementsPRIME(11500, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
 buildingCBRE = [ new BuildingCBRE(14500 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
+buildingFreelance = [ new BuildingFreelance(500, canvas.height - Freelance.height - 125, 250, 422, Freelance)] // MCTC (x,y,(NOT USED --> w,h,image,))
 buildingCOYOTE = [ new BuildingCOYOTE (21000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 buildingMCTC = [ new BuildingMCTC(25000, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+
 
 arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
             new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
@@ -580,6 +588,10 @@ function animate() {
         cloud.draw() // ------ DRAW 
     })
     buildingMCTC.forEach(building => { // loop through array of buildingMCTC
+        building.draw()     // ------ DRAW buildingMCTC
+        building.update()
+    }) 
+    buildingFreelance.forEach(building => { // loop through array of buildingMCTC
         building.draw()     // ------ DRAW buildingMCTC
         building.update()
     }) 
@@ -744,6 +756,9 @@ function animate() {
             buildingMCTC.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
+            buildingFreelance.forEach(building => { // ---- building SCROLL ----
+                building.position.x -= (playerMovement)
+            });
             buildingCOYOTE.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
@@ -807,6 +822,9 @@ function animate() {
                 platform.position.x += playerMovement
             });
             buildingMCTC.forEach(building => { // ---- Building SCROLL ----
+                building.position.x += (playerMovement)
+            });
+            buildingFreelance.forEach(building => { // ---- Building SCROLL ----
                 building.position.x += (playerMovement)
             });
             buildingCOYOTE.forEach(building => { // ---- Building SCROLL ----
@@ -999,6 +1017,10 @@ function animate() {
                 HGAModal = true
                 modalHGAOn()
                 // console.log('HGA Modal On');
+            } else if (glowFreelance) {
+                FreelanceModal = true
+                modalFreelanceOn()
+                // console.log('Freelance Modal On');
             }
         }
     }
@@ -1029,6 +1051,20 @@ function animate() {
             xPressed()
         } else {
             glowCBRE = false
+        }
+    })
+    //building Freelance
+    buildingFreelance.forEach(freelance => {
+        if (
+            player.position.x < freelance.position.x + freelance.width // player left plat right
+            && player.position.x + player.width > freelance.position.x   // player right plat left 
+            && player.position.y < freelance.position.y + freelance.height // player top UNDER plat bottom
+            && player.position.y + player.height > freelance.position.y  // player bottom ABOVE plat top 
+        ) {
+            glowFreelance = true
+            xPressed()
+        } else {
+            glowFreelance = false
         }
     })
     //buildingCOYOTE
@@ -1075,7 +1111,7 @@ function animate() {
     })
 
     function pressX() {
-        if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC){
+        if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC || glowFreelance){
             pressX = true
             PressXDiv.style.opacity = 1;
             // console.log('glowing');
@@ -1350,12 +1386,13 @@ function checkButtonPressed() {   // ---- DIFFERENT than Let & Right. BUTTONS On
 }
 
 function ifNoGlow(){
-    if( !glowMCTC && !glowCOYOTE && !glowCBRE && !glowPRIME && !glowHGA){
+    if( !glowMCTC && !glowCOYOTE && !glowCBRE && !glowPRIME && !glowHGA && !glowFreelance){
         modalHGAOff()
         modalPrimeOff()
         modalCBREOff()
         modalCoyoteOff()
         modalMCTCOff()
+        modalFreelanceOff()
     } 
 }
 
@@ -1386,7 +1423,7 @@ function modalPrimeOff(){
 // -------------------- modalCBRE ON --------------------
  function modalCBREOn(){
     CBREModal = true
-    modalCBRE.style.display = 'block'
+    modalCBRE.style.display = 'flex'
 }
   // ---- modalHGA OFF ----
 function modalCBREOff(){
@@ -1398,7 +1435,7 @@ function modalCBREOff(){
 // -------------------- modalCoyote ON --------------------
  function modalCoyoteOn(){
     CoyoteModal = true
-    modalCoyote.style.display = 'block'
+    modalCoyote.style.display = 'flex'
 }
   // ---- modalHGA OFF ----
 function modalCoyoteOff(){
@@ -1410,12 +1447,22 @@ function modalCoyoteOff(){
 // -------------------- modalMCTC ON --------------------
  function modalMCTCOn(){
     MCTCModal = true
-    modalMCTC.style.display = 'block'
+    modalMCTC.style.display = 'flex'
 }
   // ---- modalHGA OFF ----
 function modalMCTCOff(){
     MCTCModal = false
     modalMCTC.style.display = 'none'
+}
+// -------------------- modalFreelance ON --------------------
+ function modalFreelanceOn(){
+    FreelanceModal = true
+    modalFreelance.style.display = 'flex'
+}
+  // ---- modalHGA OFF ----
+function modalFreelanceOff(){
+    FreelanceModal = false
+    modalFreelance.style.display = 'none'
 }
 
 
@@ -1489,6 +1536,11 @@ closeButtonPrime.addEventListener('click', function() {
 // ---- Click listener for CBRE Close button -- 
 closeButtonCBRE.addEventListener('click', function() {
     setTimeout(modalCBREOff, 100); 
+    // console.log('btncloseCBRE clicked');
+})
+// ---- Click listener for CBRE Close button -- 
+closeButtonFreelance.addEventListener('click', function() {
+    setTimeout(modalFreelanceOff, 100); 
     // console.log('btncloseCBRE clicked');
 })
 

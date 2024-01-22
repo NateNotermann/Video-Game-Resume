@@ -180,6 +180,60 @@ class BuildingMCTC {
     } 
 } // End of Building2 Sprite
 
+// -------- BUILDING 2 CLASS -------- //
+class BuildingFreelance{
+    constructor(x, y, w, h, image) { //  passing in x & y positions
+        this.position = {
+            x: x, //1500,
+            y: y //canvas.height - 468
+        }
+        // -- ACTUAL Building size is relative to the actual image file size/dimensions. -- //
+        this.width = 410//w //650 //default width // Added *2 on 12/27/23
+        this.height = 350 //h //468 //default height // Added *2 on 12/27/23
+        this.currentCropWidth = 410
+        // this.image = MCTC
+        this.frames = 0
+        this.currentSprite = Freelance
+    }
+    draw() { 
+        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+
+        // Apply a glowing effect using shadow
+        if (glowFreelance) {
+            c.shadowColor = 'white'; // Set the color of the glow
+            c.shadowBlur = 50; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+        }
+
+        c.drawImage( // player sprite image
+            // this.image,
+            this.currentSprite, 
+            this.currentCropWidth * this.frames,  // crop image X, starting at 0, then 177 * this.frames. Moves through all frames.
+            0,                  // crop image Y
+            this.currentCropWidth,                // crop image Y
+            this.height, // 650,                // crop image X
+            this.position.x, 
+            this.position.y,
+            this.width,
+            this.height 
+            )     
+            // this turns off glow for any/all other canvas element
+            c.shadowColor = 'transparent';
+            c.shadowBlur = 0;
+            c.shadowOffsetX = 0;
+            c.shadowOffsetY = 0;
+    }
+    update() {
+            this.frames++;
+        if (this.frames > 19 ) {
+            this.frames = 0;
+        } 
+        this.draw()
+    } 
+} // End of Building2 Sprite
+
 
 // -------- BUILDING COYOTE CLASS -------- //
 class BuildingCOYOTE  {
