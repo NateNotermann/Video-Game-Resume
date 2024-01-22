@@ -573,6 +573,60 @@ class Sign {    // ------ Platform Class used for ground and all platforms. ----
         this.draw
     }
 }
+// -------- Black CLASS -------- //
+class Black {    // ------ Platform Class used for ground and all platforms. ------
+    constructor({ x, y, image, opacity }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = canvas.width+100  //580
+        this.height = canvas.height+100  //125
+        this.opacity = opacity || 0  // default to 1
+    }
+    draw() {      
+        c.fillStyle = 'black'
+        
+        c.drawImage(
+            this.image,  
+            this.position.x, 
+            this.position.y)
+            c.globalAlpha = this.opacity // set global to render THIS item
+            c.fillRect(this.position.x, this.position.y, this.width, this.height) // draw rect
+            c.globalAlpha = 1  // set global back to 1 to render EVERYTHING ELSE
+        }
+    update() {
+        this.draw
+    }
+}
+// -------- White CLASS -------- //
+class White {    // ------ Platform Class used for ground and all platforms. ------
+    constructor({ x, y, image, opacity }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = canvas.width+100  //580
+        this.height = canvas.height+100  //125
+        this.opacity = opacity || 0  // default to 1
+    }
+    draw() {      
+        c.fillStyle = 'white'
+        
+        c.drawImage(
+            this.image,  
+            this.position.x, 
+            this.position.y)
+            c.globalAlpha = this.opacity // set global to render THIS item
+            c.fillRect(this.position.x, this.position.y, this.width, this.height) // draw rect
+            c.globalAlpha = 1  // set global back to 1 to render EVERYTHING ELSE
+        }
+    update() {
+        this.draw
+    }
+}
 // // -------- ARROW CLASS -------- //
 // class ARROW {    // ------ Platform Class used for ground and all platforms. ------
 //     constructor({ x, y, image }) {

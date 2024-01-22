@@ -210,7 +210,11 @@ let animateLoop = false
 
 let loseModal = false
 let loseReason = 'none'
+let lose = false
 let win = false
+let winHandled = false
+let blackStart = false
+let whiteStart = false
 // -------- GAMEPAD VARIABLES -------- //
 
 
@@ -319,6 +323,8 @@ let moveBug1 = 0
 let movingBugs = []
 let WinBar2Item
 let WinBar3Item
+let blackItem 
+let whiteItem
 // -------- ELEMENT VARIABLES --------
 
 // ---- Key pressed variables ----
@@ -341,9 +347,19 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 }
 
 function init() {
+    console.log('init');
     scrollOffset = 0 //  clear scroll offset. Fixes winning bug.
     loseReason = 'none'
-    win = false
+    if(win || lose){
+        setTimeout(()=> {
+            winHandled = false
+            lose = false
+            win = false
+            // blackStart = false
+            // whiteStart = false
+
+        }, 2000)
+    }
     // console.log('init function');
     // modalHGAOff()
     // helpModalOn()
@@ -438,8 +454,11 @@ arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, Ar
             new Sign({x: 6450, y: canvas.height - SightHGAPic.height - 100, image: SightHGAPic}),
             new Sign({x: 30000+500, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
 ] 
-WinBar3Item = [new Sign({x: 30000+510, y: 700, image: WinBar3})]
 WinBar2Item = [new Sign({x: 30000+600, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
+WinBar3Item = [new Sign({x: 30000+510, y: 700, image: WinBar3})]
+
+blackItem = [new Black({x: -100, y: -100, image: WinBar3, opacity: 0 })]
+whiteItem = [new White({x: -100, y: -100, image: WinBar3, opacity: 0 })]
 
 bugs = [ 
     new Bug({x: 5000, y: canvas.height - BugPic.height - 125, image: BugPic}),
@@ -595,25 +614,54 @@ function animate() {
         WinBar3.draw() // ------ DRAW PLATFORMd
     })
 
-    platformTwos.forEach(plate => {
-        plate.draw()
-    })
+
     bugs.forEach(bug => { // loop through array of 
         bug.draw() // ------ DRAW 
     })
     movingBugs.forEach(bug => { // loop through array of 
-            bug.position.x += 2 * direction; // ------ Platform Move Loop -------         
-            if (bug.position.x <= currentNullPosition+moveBug1 || bug.position.x >= currentNullPosition+(moveBug1+500) ){
-                direction *= -1; // ---- reverse platform move direction
-            }
+        bug.position.x += 2 * direction; // ------ Platform Move Loop -------         
+        if (bug.position.x <= currentNullPosition+moveBug1 || bug.position.x >= currentNullPosition+(moveBug1+500) ){
+            direction *= -1; // ---- reverse platform move direction
+        }
         // console.log('Null', currentNullPosition + moveBug1, 'bug', bug.position.x, 'moveBug1', moveBug1, 'currentNullPosition+(moveBug1+500)', currentNullPosition+(moveBug1+500));
         // console.log(bug.position.x);
         bug.draw() // ------ DRAW 
+    })
+    
+    whiteItem.forEach(item => { // White rectangle 
+        if (whiteStart ){
+            item.opacity = 1
+            win = false
+            lose = false
+            whiteStart = false
+        } else if (item.opacity > 0.01){
+            item.opacity -= 0.01
+        } else {
+            item.opacity = 0
+        }
+        console.log(item.opacity);
+        item.draw() 
+    })
+
+    blackItem.forEach(item => { // Black rectangle 
+        if (blackStart){
+            item.opacity += 0.01
+            console.log('black win');
+            win = false
+            lose = false
+        } else {
+            item.opacity = 0
+        }
+        item.draw() 
     })
 
 
 
     player.update() // ------ PLAYER UPDATE. Call this last, to render in front
+
+    platformTwos.forEach(plate => {
+        plate.draw()
+    })
     platforms.forEach(platform => { // loop through array of Platforms
         platform.draw() // ------ DRAW PLATFORM
     })
@@ -904,23 +952,27 @@ function animate() {
             ) 
             {   
                 loseReason = 'bug'
+                lose = true
+                whiteStart = true
                 loseModalOn()
                 init();
             } 
-    }) 
-
-    movingBugs.forEach(bug => { 
-        let adjust = 30
-        if ( 
-            player.position.y + player.height >= bug.position.y + adjust && // Bug Top
-            player.position.y <= bug.position.y + bug.height - adjust && // Bug Bottom
-            player.position.x + player.width >= bug.position.x + adjust && // Bug Right
-            player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
-            ) 
-            {   
-                loseReason = 'bug'
-                loseModalOn()
-                init();
+        }) 
+        
+        movingBugs.forEach(bug => { 
+            let adjust = 30
+            if ( 
+                player.position.y + player.height >= bug.position.y + adjust && // Bug Top
+                player.position.y <= bug.position.y + bug.height - adjust && // Bug Bottom
+                player.position.x + player.width >= bug.position.x + adjust && // Bug Right
+                player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
+                ) 
+                {   
+                    loseReason = 'bug'
+                    lose = true
+                    whiteStart = true
+                    loseModalOn()
+                    init();
             } 
     }) 
 
@@ -1037,14 +1089,20 @@ function animate() {
     pressX() 
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
-        console.log('scroll', scrollOffset);
+        // console.log('scroll', scrollOffset);
     if (scrollOffset > 30000) {
         console.log('You WIN!!!');
         win = true
+        winHandled = true
+        blackStart = true
+        whiteStart  = true
         // console.log('You WIN!!!', scrollOffset, '>', platformImage.width * 6); // Confirm winning area location it correct
     }
     // ---- LOOSE SCROLL ----
     if (player.position.y > (canvas.height) ){
+        lose = true
+        loseStart = true
+        whiteStart  = true
         loseReason = 'fall'
         loseModalOn()
         init();
