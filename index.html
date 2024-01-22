@@ -7,12 +7,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=DotGothic16&family=Press+Start+2P&family=Silkscreen&family=Sniglet:wght@400;800&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <title>Video-game Resume</title>
 </head>
 
 
 <body id="touchArea">
-  <div id="loader" class="loader"></div>
+
+
+
+
+  <div id="loader" class="loader">
+    <div class="flex-container">
+      <div id="bm">
+          <lottie-player class="LottieBanner" src="pageloader.json" 
+          background="Transparent" speed="1" 
+          direction="1" 
+          mode="normal" loop autoplay> </lottie-player>
+      </div>
+    </div>
+    <div class="messageHelp">Loading..</div>
+  <!-- Prime Color Teal #119a8f -->
+  </div>
 
   <div id="content" class="screenDiv" style="display:none">
     
@@ -182,7 +199,25 @@
       </div>
     </div>
 
-    <!--COYOTE MODAL -->
+    <!-- Freelance MODAL -->
+    <div id="modalFreelance" class="modal">
+      <h3 class="title">Graphic Designer/VFX Artist (part-time)</h3>
+      <p class="company">Freelance, Jan 2019 - May 2022</p>
+      <div class="message">
+        <ul>
+          <li>Fine-tuned video clips in custom podcast compositions using Adobe After Effects and Photoshop for weekly distribution on multiple social media sites.</li>
+          <li>Designed and created tour posters, comedy album covers, and event advertising in Photoshop.</li>
+          <li>Curated motion graphics for videos in various mediums and art styles including hand-drawn, 8-bit, 2D character
+            animations and animated text trailers for multiple projects.</li>
+        </ul>        
+      </div>
+      <div class="buttons">
+        <!-- <button id="btnOpen" class="btn">Open</button> -->
+        <button id="btnCloseFreelance" class="btn">Close</button>
+      </div>
+    </div>
+
+    <!-- COYOTE MODAL -->
     <div id="modalCoyote" class="modal">
       <h3 class="title">National Account Manager</h3>
       <p class="company">Coyote Logistics, Aug 2017 - Jan 2019</p>
@@ -212,6 +247,24 @@
       <div class="buttons">
         <!-- <button id="btnOpen" class="btn">Open</button> -->
         <button id="btnCloseMCTC" class="btn">Close</button>
+      </div>
+    </div>
+
+    <!-- Restaurant MODAL -->
+    <div id="modalRestaurant" class="modal">
+      <h3 class="title">Server/Bartender</h3>
+      <p class="company">(Various Locations) Sep 2007 - Aug 2017</p>
+      <div class="message">
+        <ul>
+          <li>Butcher and the Boar - Bartender, Server, OfficeAssistant, Barback, WaitAssist, FoodRunner.</li>
+          <li>112 Eatery - Wait Assistant, Food Runner, Expediter.</li>
+          <li>2021 Wolfgang Puck - Wait Assistant, Food Runner.</li>
+          <li>Grand Cafe - Server, Wait Assistant, Food Runner.</li>
+        </ul>        
+      </div>
+      <div class="buttons">
+        <!-- <button id="btnOpen" class="btn">Open</button> -->
+        <button id="btnCloseRestaurant" class="btn">Close</button>
       </div>
     </div>
 
