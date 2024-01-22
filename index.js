@@ -72,6 +72,7 @@ const modalPrime = document.getElementById('modalPrime')
 const modalCBRE = document.getElementById('modalCBRE')
 const modalCoyote = document.getElementById('modalCoyote')
 const modalMCTC = document.getElementById('modalMCTC')
+const modalRestaurant = document.getElementById('modalRestaurant')
 const modalWin = document.getElementById('modalWin')
 
 // const modalTextElement = document.getElementById('modalText'); // Was used with one modal that text changed dynamically
@@ -83,6 +84,7 @@ const closeButtonCBRE = document.getElementById('btnCloseCBRE');
 const closeButtonFreelance = document.getElementById('btnCloseFreelance');
 const closeButtonCoyote = document.getElementById('btnCloseCoyote');
 const closeButtonMCTC = document.getElementById('btnCloseMCTC');
+const closeButtonRestaurant= document.getElementById('btnCloseRestaurant');
 const closeButtonWin = document.getElementById('btnCloseWin');
 
 
@@ -180,6 +182,7 @@ let time = 1
 let animateRunning = false
 
 // -- Building Glow --
+let glowRestaurant = false
 let glowMCTC = false
 let glowFreelance = false
 let glowCOYOTE = false
@@ -195,6 +198,7 @@ let PrimeModal = false
 let CBREModal = false
 let CoyoteModal = false
 let MCTCModal = false
+let RestaurantModal = false
 
 // -------- GAMEPAD VARIABLES -------- //
 let lastKey
@@ -263,6 +267,9 @@ const spriteStandRight = new Image()   // spriteStandRight Image - Dimensions
 spriteStandRight.src = './img/spriteStandRight.png'
 
 // -------- Building Images -------- //
+const Restaurant = new Image()   
+Restaurant.src = './img/RestaurantSprite2.png'
+
 const MCTC = new Image()   
 MCTC.src = './img/MCTC LONG.png'
 
@@ -455,7 +462,8 @@ elementsPRIME = [ new ElementsPRIME(11500, canvas.height - PrimeElements.height 
 buildingCBRE = [ new BuildingCBRE(14500 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
 buildingFreelance = [ new BuildingFreelance(17800, canvas.height - Freelance.height - (platformHeight * 5)+10, Freelance)] // MCTC (x,y,(NOT USED --> w,h,image,))
 buildingCOYOTE = [ new BuildingCOYOTE (21000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
-buildingMCTC = [ new BuildingMCTC(25000, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingMCTC = [ new BuildingMCTC(28000, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingRestaurant = [ new BuildingRestaurant(25000, canvas.height - Restaurant.height - 115, Restaurant)] 
 
 
 arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
@@ -587,6 +595,10 @@ function animate() {
         cloud.position.x += (0.2 * time)
         cloud.draw() // ------ DRAW 
     })
+    buildingRestaurant.forEach(building => { 
+        building.draw()    
+        building.update()
+    }) 
     buildingMCTC.forEach(building => { // loop through array of buildingMCTC
         building.draw()     // ------ DRAW buildingMCTC
         building.update()
@@ -753,6 +765,9 @@ function animate() {
                 // console.log('platformNull', platformNull.position.x);
                 platform.position.x -= playerMovement
             });
+            buildingRestaurant.forEach(building => { // ---- building SCROLL ----
+                building.position.x -= (playerMovement)
+            });
             buildingMCTC.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
@@ -820,6 +835,9 @@ function animate() {
             });
             movingPlatform1.forEach(platform => { // loop through array of platforms
                 platform.position.x += playerMovement
+            });
+            buildingRestaurant.forEach(building => { // ---- Building SCROLL ----
+                building.position.x += (playerMovement)
             });
             buildingMCTC.forEach(building => { // ---- Building SCROLL ----
                 building.position.x += (playerMovement)
@@ -1021,10 +1039,28 @@ function animate() {
                 FreelanceModal = true
                 modalFreelanceOn()
                 // console.log('Freelance Modal On');
+            } else if (glowRestaurant) {
+                RestaurantModal = true
+                modalRestaurantOn()
+                // console.log('Freelance Modal On');
             }
         }
     }
     
+    // building Restaurant
+    buildingRestaurant.forEach(buildingRestaurant=> {
+        if (
+            player.position.x < buildingRestaurant.position.x + buildingRestaurant.width // player left plat right
+            && player.position.x + player.width > buildingRestaurant.position.x   // player right plat left 
+            && player.position.y < buildingRestaurant.position.y + buildingRestaurant.height // player top UNDER plat bottom
+            && player.position.y + player.height > buildingRestaurant.position.y  // player bottom ABOVE plat top 
+        ) {
+            glowRestaurant = true
+            xPressed()
+        } else {
+            glowRestaurant = false
+        }
+    })
     // building MCTC
     buildingMCTC.forEach(buildingMCTC => {
         if (
@@ -1111,7 +1147,7 @@ function animate() {
     })
 
     function pressX() {
-        if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC || glowFreelance){
+        if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC || glowFreelance || glowRestaurant){
             pressX = true
             PressXDiv.style.opacity = 1;
             // console.log('glowing');
@@ -1160,7 +1196,7 @@ animate()
 // ---- LISTEN FOR A KEY PRESSED ----
 addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode, key is event.key. ONLY works if they're listed in the EventListener
     // console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
-    if(!helpModal && !MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !winModal && !loseModal){
+    if(!helpModal && !MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !winModal && !loseModal && !RestaurantModal){
     switch (keyCode) {
         case 68:        // D
             // console.log('right/D');
@@ -1445,6 +1481,16 @@ function modalCoyoteOff(){
 
 
 // -------------------- modalMCTC ON --------------------
+ function modalRestaurantOn(){
+    RestaurantModal = true
+    modalRestaurant.style.display = 'flex'
+}
+// -------------------- modalMCTC ON --------------------
+ function modalRestaurantOff(){
+    RestaurantModal = false
+    modalRestaurant.style.display = 'none'
+}
+// -------------------- modalMCTC ON --------------------
  function modalMCTCOn(){
     MCTCModal = true
     modalMCTC.style.display = 'flex'
@@ -1479,7 +1525,9 @@ function helpModalOff(){
 // -------------------- modalWin ON --------------------
 function winModalOn(){
    winModal = true
-   modalWin.style.display = 'flex'
+   setTimeout(()=>{
+       modalWin.style.display = 'flex'
+   }, 1500)
 }
 // -------------------- Lose modal ON --------------------
 function loseModalOn(){
@@ -1556,6 +1604,12 @@ closeButtonCoyote.addEventListener('click', function() {
 closeButtonMCTC.addEventListener('click', function() {
     setTimeout(modalMCTCOff, 100); 
     // console.log('btncloseMCTC clicked');
+})
+
+// ---- Click listener for Restaurant Close button -- 
+closeButtonRestaurant.addEventListener('click', function() {
+    setTimeout(modalRestaurantOff, 100); 
+    // console.log('closeButtonRestaurant clicked');
 })
 
 
