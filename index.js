@@ -109,37 +109,37 @@ let windowInnerWidth = window.innerWidth
 // }
 
 document.addEventListener("DOMContentLoaded", function() {
-    console.log('DOMContentLoaded');
+    // console.log('DOMContentLoaded');
     setTimeout( function () {
-        console.log("Inside Timeout function.");
+        // console.log("Inside Timeout function.");
         document.getElementById("loader").style.display = "none";
 
         let loaderDisplay = window.getComputedStyle(loaderDiv)
         if(loaderDisplay.display === "none") {
-            console.log('loader = HIDDEN');
+            // console.log('loader = HIDDEN');
             document.getElementById("content").style.display = "flex";
             
         } else {
-            console.log('loader VISIBLE');
+            // console.log('loader VISIBLE');
         }
         if(mobileModal) {
             mobileModalOn()
         } 
         // document.getElementById("content").style.display = "block";
         // document.getElementById("content").style.display = "flex";
-    }, 1000 );
+    }, 2000 );
 });
 
 // ---- window.onload fixed the rendering issues ----
 window.onload = function () {
-    console.log('window.onload function');
+    // console.log('window.onload function');
     
     canvasHeight = canvas.height
     canvasWidth = canvas.width
     if (document.readyState !== "complete"){
         console.log('page load NOT Complete'); 
     } else {
-        console.log('page load complete!');
+        // console.log('page load complete!');
         // onPageload()
     }
     // initial canvas dimensions options 2
@@ -658,7 +658,7 @@ function animate() {
     blackItem.forEach(item => { // Black rectangle 
         if (blackStart){
             item.opacity += 0.01
-            console.log('black win');
+            // console.log('black win');
             win = false
             lose = false
         } else {
@@ -702,7 +702,7 @@ function animate() {
         WinBar2.draw() // ------ DRAW PLATFORM
     })
 
-    console.log('player X:', player.position.x + scrollOffset);
+    // console.log('player X:', player.position.x + scrollOffset);
     // ------------ PLAYER MOVEMENT ------------
     // ------ LEFT & RIGHT ------
     if (keys.left.pressed == true && keys.right.pressed == true ) { // if BOTH Left & Right pressed
@@ -1162,7 +1162,7 @@ function animate() {
     // if (scrollOffset > 1500) {
         // console.log('scroll', scrollOffset);
     if (scrollOffset > 30000) {
-        console.log('You WIN!!!');
+        // console.log('You WIN!!!');
         win = true
         winHandled = true
         blackStart = true
@@ -1537,7 +1537,7 @@ function loseModalOn(){
     } else if (loseReason == 'fall') {
         loseParagraph.textContent = 'Player fell off. You lose :(';   
     } 
-    console.log('lose Reason:',loseReason);
+    // console.log('lose Reason:',loseReason);
     modalLose.style.display = 'flex'
     setInterval(function() {
         modalLose.style.display = 'none'
@@ -1555,7 +1555,7 @@ closeLose.addEventListener('click', function() {
 })
 
 
-// ---- Click listener for Lose Close button -- 
+// ---- Click listener for Win Close button -- 
 closeButtonWin.addEventListener('click', function() {
     // setTimeout(function() {
     //     modalWin.style.display = 'none';
