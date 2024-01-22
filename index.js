@@ -615,20 +615,6 @@ function animate() {
         }
         WinBar3.draw() // ------ DRAW PLATFORMd
     })
-
-
-    bugs.forEach(bug => { // loop through array of 
-        bug.draw() // ------ DRAW 
-    })
-    movingBugs.forEach(bug => { // loop through array of 
-        bug.position.x += 2 * direction; // ------ Platform Move Loop -------         
-        if (bug.position.x <= currentNullPosition+moveBug1 || bug.position.x >= currentNullPosition+(moveBug1+500) ){
-            direction *= -1; // ---- reverse platform move direction
-        }
-        // console.log('Null', currentNullPosition + moveBug1, 'bug', bug.position.x, 'moveBug1', moveBug1, 'currentNullPosition+(moveBug1+500)', currentNullPosition+(moveBug1+500));
-        // console.log(bug.position.x);
-        bug.draw() // ------ DRAW 
-    })
     
     whiteItem.forEach(item => { // White rectangle 
         if (whiteStart ){
@@ -657,10 +643,6 @@ function animate() {
         item.draw() 
     })
 
-
-
-    player.update() // ------ PLAYER UPDATE. Call this last, to render in front
-
     platformTwos.forEach(plate => {
         plate.draw()
     })
@@ -677,6 +659,21 @@ function animate() {
             }
         movingPlatform.draw() // ------ DRAW PLATFORMd
     })
+
+    bugs.forEach(bug => { // loop through array of 
+        bug.draw() // ------ DRAW 
+    })
+    movingBugs.forEach(bug => { // loop through array of 
+        bug.position.x += 2 * direction; // ------ Platform Move Loop -------         
+        if (bug.position.x <= currentNullPosition+moveBug1 || bug.position.x >= currentNullPosition+(moveBug1+500) ){
+            direction *= -1; // ---- reverse platform move direction
+        }
+        // console.log('Null', currentNullPosition + moveBug1, 'bug', bug.position.x, 'moveBug1', moveBug1, 'currentNullPosition+(moveBug1+500)', currentNullPosition+(moveBug1+500));
+        // console.log(bug.position.x);
+        bug.draw() // ------ DRAW 
+    })
+
+       player.update() // ------ PLAYER UPDATE. Call this last, to render in front
     WinBar2Item.forEach(WinBar2 => { // loop through array of Platforms
         WinBar2.draw() // ------ DRAW PLATFORM
     })
