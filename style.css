@@ -552,3 +552,7 @@ html {
   max-height: 80%; 
   overflow-y: auto; 
 }
+#gameOver {
+  font-size: 2em;
+  font-family: 'Press Start 2P';
+}
