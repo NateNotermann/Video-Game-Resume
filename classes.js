@@ -34,7 +34,7 @@ class Player {
         this.currentCropWidth = 177
     }
     draw() { 
-        // c.fillStyle = 'red' // draw a rectangle that matches the size and position of the Player Sprite
+        // c.fillStyle = 'blue' // draw a rectangle that matches the size and position of the Player Sprite
         // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
 
         c.drawImage( // player sprite image
@@ -523,6 +523,110 @@ class Cloud {    // ---- Background Class used for Cloud Image ------
 }
 
 
+
+// -------- PLATFORM CLASS -------- //
+class Bug {    // ------ Platform Class used for ground and all platforms. ------
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width  //580
+        this.height = image.height //125
+    }
+    draw() {   
+        // platform's rectangle
+        // c.fillStyle = 'red'
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        
+        c.drawImage(
+            this.image,  
+            this.position.x, 
+            this.position.y)
+            // this.width, 
+            // this.height ) 
+    }
+    update() {
+        this.draw
+    }
+}
+
+// -------- PLATFORM CLASS -------- //
+class Sign {    // ------ Platform Class used for ground and all platforms. ------
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width  //580
+        this.height = image.height //125
+    }
+    draw() {      
+        c.drawImage(
+            this.image,  
+            this.position.x, 
+            this.position.y)
+    }
+    update() {
+        this.draw
+    }
+}
+// -------- Black CLASS -------- //
+class Black {    // ------ Platform Class used for ground and all platforms. ------
+    constructor({ x, y, image, opacity }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = canvas.width+100  //580
+        this.height = canvas.height+100  //125
+        this.opacity = opacity || 0  // default to 1
+    }
+    draw() {      
+        c.fillStyle = 'black'
+        
+        c.drawImage(
+            this.image,  
+            this.position.x, 
+            this.position.y)
+            c.globalAlpha = this.opacity // set global to render THIS item
+            c.fillRect(this.position.x, this.position.y, this.width, this.height) // draw rect
+            c.globalAlpha = 1  // set global back to 1 to render EVERYTHING ELSE
+        }
+    update() {
+        this.draw
+    }
+}
+// -------- White CLASS -------- //
+class White {    // ------ Platform Class used for ground and all platforms. ------
+    constructor({ x, y, image, opacity }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = canvas.width+100  //580
+        this.height = canvas.height+100  //125
+        this.opacity = opacity || 0  // default to 1
+    }
+    draw() {      
+        c.fillStyle = 'white'
+        
+        c.drawImage(
+            this.image,  
+            this.position.x, 
+            this.position.y)
+            c.globalAlpha = this.opacity // set global to render THIS item
+            c.fillRect(this.position.x, this.position.y, this.width, this.height) // draw rect
+            c.globalAlpha = 1  // set global back to 1 to render EVERYTHING ELSE
+        }
+    update() {
+        this.draw
+    }
+}
 // // -------- ARROW CLASS -------- //
 // class ARROW {    // ------ Platform Class used for ground and all platforms. ------
 //     constructor({ x, y, image }) {

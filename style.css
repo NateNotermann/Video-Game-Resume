@@ -51,11 +51,12 @@
 
 
 .title{
+  font-size: 1.3em;
   text-decoration: underline;
   margin-right: 10px;
 }
 .company {
-  font-size: 22px;
+  font-size: 1.3em;
   display: inline-block;
 }
 
@@ -213,6 +214,7 @@ html {
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
     margin-top: 0em; 
     font-family: 'Concert One';
+    
     /* font-family: aldrich; */
     /* font-family: "DotGothic16"; */
     /* font-family: 'Pixelify Sans', sans-serif; */
@@ -229,6 +231,12 @@ html {
     margin-top: 0rem;
     line-height: 1;
   }
+  .messagePrime {
+    font-size:1rem;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
+    line-height: .7;
+  }
   .btn {
     color:inherit;
     font-family:inherit;
@@ -236,7 +244,7 @@ html {
     background: white;
     padding: 0.3rem 3.4rem;
     border: 3px solid black;
-    margin-right: 2.6rem;
+    /* margin-right: 2.6rem; */
     box-shadow: 0 0 0 black;
     transition: all 0.2s;
     font-family: 'Press Start 2P';
@@ -517,4 +525,34 @@ html {
   background-color: #f3f3f3;
   font-family: 'Concert One';
   /* font-family: 'Silkscreen'; */
+}
+#modalLose {
+  width: 50%;
+  /* display: flex; */
+}
+#modalWin {
+  margin: auto;
+  width: 50%;
+}
+#winLinks {
+  margin: auto;
+  /* outline-style: auto; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+#modalPrime {
+  max-height: 80%; 
+  overflow-y: auto; 
+}
+#modalHGA {
+  max-height: 80%; 
+  overflow-y: auto; 
+}
+#gameOver {
+  font-size: 2em;
+  font-family: 'Press Start 2P';
 }
