@@ -72,6 +72,7 @@ const modalPrime = document.getElementById('modalPrime')
 const modalCBRE = document.getElementById('modalCBRE')
 const modalCoyote = document.getElementById('modalCoyote')
 const modalMCTC = document.getElementById('modalMCTC')
+const modalWin = document.getElementById('modalWin')
 
 // const modalTextElement = document.getElementById('modalText'); // Was used with one modal that text changed dynamically
 
@@ -81,6 +82,7 @@ const closeButtonPrime = document.getElementById('btnClosePrime');
 const closeButtonCBRE = document.getElementById('btnCloseCBRE');
 const closeButtonCoyote = document.getElementById('btnCloseCoyote');
 const closeButtonMCTC = document.getElementById('btnCloseMCTC');
+const closeButtonWin = document.getElementById('btnCloseWin');
 
 
 // canvas.width = window.innerWidth
@@ -209,6 +211,7 @@ let connected = false
 let animateLoop = false
 
 let loseModal = false
+let winModal = false
 let loseReason = 'none'
 let lose = false
 let win = false
@@ -347,9 +350,9 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 }
 
 function init() {
-    console.log('init');
     scrollOffset = 0 //  clear scroll offset. Fixes winning bug.
     loseReason = 'none'
+
     if(win || lose){
         setTimeout(()=> {
             winHandled = false
@@ -360,9 +363,8 @@ function init() {
 
         }, 2000)
     }
-    // console.log('init function');
-    // modalHGAOff()
-    // helpModalOn()
+    blackStart = false
+    winModal = false
 // -------- ELEMENT VARIABLES --------
 player = new Player() //  ---- NEED THIS. Resets the player. ----
 
@@ -1096,6 +1098,7 @@ function animate() {
         winHandled = true
         blackStart = true
         whiteStart  = true
+        winModalOn()
         // console.log('You WIN!!!', scrollOffset, '>', platformImage.width * 6); // Confirm winning area location it correct
     }
     // ---- LOOSE SCROLL ----
@@ -1124,7 +1127,7 @@ animate()
 // ---- LISTEN FOR A KEY PRESSED ----
 addEventListener('keydown', ({keyCode, key}, ) => { // keyCode is event.keyCode, key is event.key. ONLY works if they're listed in the EventListener
     // console.log('event', event, 'keyCode:', event.keyCode, 'Key:', event.key); // check Key Pressed
-    if(!helpModal && !MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal){
+    if(!helpModal && !MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !winModal && !loseModal){
     switch (keyCode) {
         case 68:        // D
             // console.log('right/D');
@@ -1422,36 +1425,52 @@ function modalMCTCOff(){
  // -------------------- modalHelp ON --------------------
  function helpModalOn(){
     helpModal = true
-    modalHelp.style.display = 'block'
+    modalHelp.style.display = 'flex'
 }
-  // ---- modalHelp OFF ----
+// ---- modalHelp OFF ----
 function helpModalOff(){
     helpModal = false
     modalHelp.style.display = 'none'
 }
-
- // -------------------- Lose modal ON --------------------
- function loseModalOn(){
+// -------------------- modalWin ON --------------------
+function winModalOn(){
+   winModal = true
+   modalWin.style.display = 'flex'
+}
+// -------------------- Lose modal ON --------------------
+function loseModalOn(){
+    loseModal = true
     if (loseReason == 'bug') {
         loseParagraph.textContent = 'Your code has a bug, you lose!';   
     } else if (loseReason == 'fall') {
         loseParagraph.textContent = 'Player fell off. You lose :(';   
     } 
-        console.log('lose Reason:',loseReason);
-        modalLose.style.display = 'flex'
-        setInterval(function() {
-            modalLose.style.display = 'none'
-        }, 4000);     
-    }
+    console.log('lose Reason:',loseReason);
+    modalLose.style.display = 'flex'
+    setInterval(function() {
+        modalLose.style.display = 'none'
+    }, 4000);     
+}
 
     
-    // ---- Click listener for Lose Close button -- 
-    closeLose.addEventListener('click', function() {
-        setTimeout(function() {
-            modalLose.style.display = 'none';
-        }, 100); 
-        // console.log('btncloseHGA clicked');
-    })
+// ---- Click listener for Lose Close button -- 
+closeLose.addEventListener('click', function() {
+    setTimeout(function() {
+        modalLose.style.display = 'none';
+        loseModal = false
+    }, 100); 
+    // console.log('btncloseHGA clicked');
+})
+
+
+// ---- Click listener for Lose Close button -- 
+closeButtonWin.addEventListener('click', function() {
+    // setTimeout(function() {
+    //     modalWin.style.display = 'none';
+    // }, 100); 
+    init();
+   modalWin.style.display = 'none'
+})
 
 
 

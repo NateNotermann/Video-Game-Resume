@@ -236,7 +236,7 @@ html {
     background: white;
     padding: 0.3rem 3.4rem;
     border: 3px solid black;
-    margin-right: 2.6rem;
+    /* margin-right: 2.6rem; */
     box-shadow: 0 0 0 black;
     transition: all 0.2s;
     font-family: 'Press Start 2P';
@@ -521,4 +521,17 @@ html {
 #modalLose {
   width: 50%;
   /* display: flex; */
+}
+#modalWin {
+  margin: auto;
+  width: 50%;
+}
+#winLinks {
+  margin: auto;
+  /* outline-style: auto; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
