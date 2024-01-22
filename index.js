@@ -453,7 +453,7 @@ buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (pl
 buildingPRIME = [ new BuildingPRIME(11500, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
 elementsPRIME = [ new ElementsPRIME(11500, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
 buildingCBRE = [ new BuildingCBRE(14500 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
-buildingFreelance = [ new BuildingFreelance(500, canvas.height - Freelance.height - 125, 250, 422, Freelance)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingFreelance = [ new BuildingFreelance(17800, canvas.height - Freelance.height - (platformHeight * 5)+10, Freelance)] // MCTC (x,y,(NOT USED --> w,h,image,))
 buildingCOYOTE = [ new BuildingCOYOTE (21000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 buildingMCTC = [ new BuildingMCTC(25000, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
 
@@ -473,7 +473,7 @@ whiteItem = [new White({x: -100, y: -100, image: WinBar3, opacity: 0 })]
 bugs = [ 
     new Bug({x: 5000, y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 8950, y: canvas.height - BugPic.height - 125, image: BugPic}),
-    new Bug({x: 9080+(bugWidth*2), y: canvas.height - BugPic.height - 250, image: BugPic}),
+    // new Bug({x: 9080+(bugWidth*2), y: canvas.height - BugPic.height - 250, image: BugPic}),
     new Bug({x: 9080+(bugWidth*4), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
@@ -484,7 +484,7 @@ bugs = [
 moveBug1 = 13000
 movingBugs = [ 
     new Bug({x: moveBug1, y: canvas.height - BugPic.height - 125, image: BugPic}),
-    // new Bug({x: moveBug1+200, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: moveBug1+200, y: canvas.height - BugPic.height - 125, image: BugPic}),
 ]
 
 platformTwos = [
@@ -690,7 +690,7 @@ function animate() {
         WinBar2.draw() // ------ DRAW PLATFORM
     })
 
-    // console.log('player X:', player.position.x + scrollOffset);
+    console.log('player X:', player.position.x + scrollOffset);
     // ------------ PLAYER MOVEMENT ------------
     // ------ LEFT & RIGHT ------
     if (keys.left.pressed == true && keys.right.pressed == true ) { // if BOTH Left & Right pressed
