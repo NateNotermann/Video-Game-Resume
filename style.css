@@ -482,7 +482,7 @@ html {
   align-items: space-between;
   justify-content: center;
   margin-left: 0em;
-  margin-top: .5em;
+  margin-top: 0em;
   margin-bottom: .5em;
 }
 
@@ -493,6 +493,10 @@ html {
   margin-left: 18%;
   width: 2em;
   height: 1.2em;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 
 #arrowsLeft {
@@ -503,13 +507,23 @@ html {
   transform: scaleX(-1);
   width: 2em;
   height: 1.2em;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 
 #arrowsUp, #arrowsDown {
   font-size: 100px;
   /* width: 90px; */
-  width: 1.5em;
+  width: 1.4em;
   height: 1.2em;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
   /* min-width: 80px; */
 }
 
@@ -552,7 +566,7 @@ html {
 
 #btnSpace {
   /* min-width: 150px; */
-  min-width: 2em;  
+  min-width: 1em;  
 }
 
 #pressX {
