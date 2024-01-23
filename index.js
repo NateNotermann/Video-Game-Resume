@@ -9,15 +9,18 @@ const buttonsDiv = document.getElementById('buttonsDiv');
 const PressXDiv = document.getElementById('pressX');
 const modalLose = document.getElementById('modalLose');
 const closeLose = document.getElementById('btnCloseLose');
+const flexDiv = document.getElementById('flexDiv');
 
 let mobileModal = false
 
 function checkOrientation() {
     if (window.matchMedia("(orientation: portrait)").matches && mobileModal){
+        // flexDiv.style.setProperty('flex-direction', 'column');
+        // flexDiv.style.setProperty('align-items',  'center');
         // console.log('Portrait orientation');
     } else if (window.matchMedia("(orientation: landscape)").matches && mobileModal){
         // alert('Please make sure device is Vertical.')
-        console.log("landscape orientation");
+        // console.log("landscape orientation");
     }
 }
 
@@ -45,12 +48,12 @@ function isMobileDevice() {
   if (isMobileDevice()) {
     // console.log("User is using a mobile device");
     mobileModal = true
-    buttonsDiv.style.display = 'flex';
+    // buttonsDiv.style.display = 'flex';
     // mobileModalOn()
     // window.alert("This app works best on a computer browser.")
 } else {
       mobileModal = false
-      buttonsDiv.style.display = 'none';
+    //   buttonsDiv.style.display = 'none';
     //   mobileModalOn()
     //   mobileModalOff()
     // console.log("User is using a computer browser");
@@ -302,8 +305,26 @@ BugTalkPic.src = './img/Bug/bugTalkSprite.webp'
 const spacebarPic = new Image()   
 spacebarPic.src = './img/Sign/spacebar.webp'
 
-const SightHGAPic = new Image()   
-SightHGAPic.src = './img/Sign/SignHGA.webp'
+const signMCTCPic = new Image()   
+signMCTCPic.src = './img/Sign/MCTC.webp'
+
+const signRestaurantPic = new Image()   
+signRestaurantPic.src = './img/Sign/restaurant.webp'
+
+const signCoyotePic = new Image()   
+signCoyotePic.src = './img/Sign/Coyote.webp'
+
+const signVFXPic = new Image()   
+signVFXPic.src = './img/Sign/VFX.webp'
+
+const signCBREPic = new Image()   
+signCBREPic.src = './img/Sign/CBRE.webp'
+
+const signPrimePic = new Image()   
+signPrimePic.src = './img/Sign/Prime.webp'
+
+const SignHGAPic = new Image()   
+SignHGAPic.src = './img/Sign/SignHGA.webp'
 
 const WinBar1 = new Image()   
 WinBar1.src = './img/WinBars/winBar1.webp'
@@ -455,21 +476,28 @@ movingPlatform1 = [
     new Platform({x: movePlate1, y: canvas.height - platformHeight*5, image: platformTwoImage})
 ];
 let buildingNull = 3500
-buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
-buildingPRIME = [ new BuildingPRIME(11500, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
-elementsPRIME = [ new ElementsPRIME(11500, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
-buildingCBRE = [ new BuildingCBRE(14500 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
+buildingMCTC = [ new BuildingMCTC( buildingNull*2, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingRestaurant = [ new BuildingRestaurant(11500, canvas.height - Restaurant.height - 115, Restaurant)] 
+buildingCOYOTE = [ new BuildingCOYOTE (14500, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 buildingFreelance = [ new BuildingFreelance(17800, canvas.height - Freelance.height - (platformHeight * 5)+10, Freelance)] // MCTC (x,y,(NOT USED --> w,h,image,))
-buildingCOYOTE = [ new BuildingCOYOTE (21000, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
-buildingMCTC = [ new BuildingMCTC(28000, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
-buildingRestaurant = [ new BuildingRestaurant(25000, canvas.height - Restaurant.height - 115, Restaurant)] 
+buildingCBRE = [ new BuildingCBRE(21000 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
+buildingPRIME = [ new BuildingPRIME(25000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
+elementsPRIME = [ new ElementsPRIME(25000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
+buildingHGA = [ new BuildingHGA(28000, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
 
 
 arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
             new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
             new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
-            new Sign({x: 6450, y: canvas.height - SightHGAPic.height - 100, image: SightHGAPic}),
             new Sign({x: 30000+500, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
+            
+            new Sign({x: 6450, y: canvas.height - signMCTCPic.height - 125, image: signMCTCPic}),
+            new Sign({x: 11100, y: canvas.height - signRestaurantPic.height - 125, image: signRestaurantPic}),
+            new Sign({x: 13900, y: canvas.height - signCoyotePic.height - 125, image: signCoyotePic}),
+            new Sign({x: 17200, y: canvas.height - (platformHeight * 4)- signVFXPic.height, image: signVFXPic}),
+            new Sign({x: 20400, y: canvas.height - signCBREPic.height - 125, image: signCBREPic}),
+            new Sign({x: 27400, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
+            new Sign({x: 24400, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
 ] 
 WinBar2Item = [new Sign({x: 30000+600, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
 WinBar3Item = [new Sign({x: 30000+510, y: 700, image: WinBar3})]
@@ -491,7 +519,7 @@ bugs = [
 moveBug1 = 13000
 movingBugs = [ 
     new Bug({x: moveBug1, y: canvas.height - BugPic.height - 125, image: BugPic}),
-    new Bug({x: moveBug1+200, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    // new Bug({x: moveBug1+200, y: canvas.height - BugPic.height - 125, image: BugPic}),
 ]
 
 platformTwos = [
