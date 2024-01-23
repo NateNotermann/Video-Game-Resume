@@ -182,7 +182,7 @@ window.onload = function () {
 const gravity = 2
 const floor = 125 // or platformImage.height. pixel from the bottom player stops at
 const jump = 35 // amount player should jump
-const playerMovement = 20 // 20 //  amount player moves left and right
+let playerMovement = 20 // 20 //  amount player moves left and right
 const platformWidth = 2500 //579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
 
@@ -190,7 +190,7 @@ const platformTwoWidth = 580
 const platformTwoHeight = 125 //  
 const bugWidth = 150
 
-const playerSize = 2 // used when referencing height in player class
+let playerSize = 2 // used when referencing height in player class
 const buildingSize = 2
 const buildingSize2 = 1.5
 const backgroundWidth = 2560
@@ -216,8 +216,10 @@ let glowCOYOTE = false
 let glowCBRE = false
 let glowPRIME = false
 let glowHGA = false
+let glowPlayer = false
 let PressX = false
-
+let playerColor = ['red', 'orange', 'pink', 'yellow', 'green', 'purple', 'blue', 'white', 'black']
+let number2 = 0
 // -- Building Modals --
 let helpModal = true 
 let HGAModal = false
@@ -410,7 +412,10 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 function init() {
     scrollOffset = 0 //  clear scroll offset. Fixes winning bug.
     loseReason = 'none'
-
+    playerMovement = 20
+    playerSize = 2
+    glowPlayer = false
+    modalWin.style.display = 'none'
     if(win || lose){
         setTimeout(()=> {
             winHandled = false
@@ -538,6 +543,9 @@ bugs = [
     new Bug({x: 9080+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*7), y: canvas.height - BugPic.height - 125, image: BugPic}),
+
+    new Bug({x: 23000, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 23000, y: canvas.height - BugPic.height*2 - 125, image: BugPic}),
     // move Bug 1
 ]
 
@@ -560,7 +568,8 @@ platformTwos = [
     new PlatformTwo({x:16000+(platformTwoWidth*3), y: canvas.height - (platformHeight * 5), image: platformTwoImage }),
 
     new PlatformTwo({x:19350, y: canvas.height - (platformHeight * 5), image: platformTwoImage }),
-    // new PlatformTwo({x:1000 + (platformTwoImage.width * 2) , y: 1080-375, image: platformTwoImage }),
+
+    new PlatformTwo({x:22400, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 3), y: 1080-500, image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 4), y: 1080-375, image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 5), y: 1080-250, image: platformTwoImage }),
@@ -655,6 +664,23 @@ setInterval(changeFavicon, 100);
 // let string = 'Nate Notermanns Video Game Resume '
 animateTitle(array);
 
+
+// ---------------- Player GLOW ---------------- //
+// function changeColor(){
+//     setInterval(()=>{
+//         if(glowPlayer){
+//             if(number2 > playerColor.length -1) {
+//                 number2 = 0  
+//             } else {
+//                 number2 ++
+//             }
+//         }
+//     },300)
+// }
+// changeColor();
+// ---------------- Player GLOW ---------------- //
+
+
 // ------ MAIN ANIMATION FUNCTION ------ //
 function animate() { 
     // console.log(mobileModal); // constantly checks if mobileModal is T/F
@@ -675,6 +701,29 @@ function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height)
     // c.fillStyle = 'blue'
     // c.fillRect(0, 0, canvas.width, canvas.height)
+    // console.log('sco', scrollOffset);
+
+    // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
+    // if(scrollOffset >= 25000){
+    //     playerMovement = 40
+    //         if (playerSize < 4){
+    //             playerSize =  4
+    //             player = new Player()
+    //             console.log('bigger');
+    //         }
+    //     glowPlayer = true
+
+    //     // if(number2 > playerColor.length -1) {
+    //     //  number2 = 0  
+    //     // } else {
+    //     //     number2 ++
+    //     // }
+    //     console.log('n2', number2);
+    //     console.log('speed boost');
+    // }
+    // console.log('psize', playerSize);
+    // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
+
 
     sky.forEach(sky => { // loop through array of Backgrounds
         sky.position.x += (0.3 * time)
@@ -1269,6 +1318,7 @@ function animate() {
         blackStart = true
         whiteStart  = true
         winModalOn()
+        scrollOffset = 0
         // console.log('You WIN!!!', scrollOffset, '>', platformImage.width * 6); // Confirm winning area location it correct
     }
     // ---- LOOSE SCROLL ----
@@ -1661,8 +1711,8 @@ closeButtonWin.addEventListener('click', function() {
     // setTimeout(function() {
     //     modalWin.style.display = 'none';
     // }, 100); 
+    modalWin.style.display = 'none'
     init();
-   modalWin.style.display = 'none'
 })
 
 
