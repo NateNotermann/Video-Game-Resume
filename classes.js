@@ -36,6 +36,12 @@ class Player {
     draw() { 
         // c.fillStyle = 'blue' // draw a rectangle that matches the size and position of the Player Sprite
         // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+        if (glowPlayer) {
+            c.shadowColor = playerColor[number2] // 'yellow'; // Set the color of the glow
+            c.shadowBlur = 150; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+        }
 
         c.drawImage( // player sprite image
             // this.image,
@@ -48,6 +54,11 @@ class Player {
             this.position.y,
             this.width,
             this.height ) 
+             // this turns off glow for any/all other canvas element
+             c.shadowColor = 'transparent';
+             c.shadowBlur = 0;
+             c.shadowOffsetX = 0;
+             c.shadowOffsetY = 0;
     }
     update() {
         this.frames++
