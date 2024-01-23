@@ -104,7 +104,11 @@ body {
 }
 
 .button-link {
-  display: inline-block;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 
 .button-link:hover {
@@ -255,13 +259,16 @@ html {
     font-family:inherit;
     font-size: inherit;
     background: white;
-    padding: 0.3rem 3.4rem;
+    padding: 0.3rem 2rem;
     border: 3px solid black;
     /* margin-right: 2.6rem; */
     box-shadow: 0 0 0 black;
     transition: all 0.2s;
     font-family: 'Press Start 2P';
     text-align: center;
+    width: 10em;
+    text-decoration:none;
+    font-family: 'Concert One';
   }
   
   .btn:last-child {
@@ -332,11 +339,12 @@ html {
   }
 
   #controls {
-    margin: auto;
+    margin: 1em;
     outline-style: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    min-width: 50%;
     /* line-height: 5; */
   }
   .controlsItem {
@@ -378,12 +386,16 @@ html {
 
 	line-height: 1.5em;
 	text-align: center;
-	display: inline-block;
-	width: 1.5em;
+	display: flex;
+  align-items: center;
+  justify-content: center;
+	/* width: 1.5em; */
+  min-width: 3em;
+  min-height: 3em;
 	-webkit-border-radius: .75em;
 	-moz-border-radius: .75em;
 	-o-border-radius: .75em;
-		border-radius: .75em;
+		border-radius: 1.75em;
 	background-color: red;
 	-webkit-box-shadow:  0 .2em #023020;
 	-moz-box-shadow:  0 .2em #023020;
@@ -406,12 +418,16 @@ html {
 	text-shadow: 1px 1px #90EE90, -1px -1px maroon;
 	line-height: 1.5em;
 	text-align: center;
-	display: inline-block;
-	width: 1.5em;
+	display: flex;
+  align-items: center;
+  justify-content: center;
+	/* width: 1.5em; */
+  min-width: 3em;
+  min-height: 3em;
 	-webkit-border-radius: .75em;
 	-moz-border-radius: .75em;
 	-o-border-radius: .75em;
-		border-radius: .75em;
+		border-radius: 1.75em;
 	background-color: red;
 	-webkit-box-shadow:  0 .2em #023020;
 	-moz-box-shadow:  0 .2em #023020;
@@ -545,16 +561,40 @@ html {
 }
 #modalWin {
   margin: auto;
+  max-height: 80%;
   max-width: 80%;
+  padding: 1em;
+  overflow: auto;
+  /* display: flex; */
+  align-content: flex-start;
 }
 #winLinks {
   margin: auto;
   /* outline-style: auto; */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    align-items: flex-start;
+  align-content: space-around;
+  justify-content:space-around;
+  line-height: 0.9;
+  margin-top: .5em;
+  margin-bottom: 0em;
+}
+
+.br {
+  line-height: 0.1;
+}
+
+#links {
+  margin: auto;
+  /* outline-style: auto; */
+  display: flex;
+  flex-direction: column;
+    align-items: flex-start;
+  align-content: space-around;
+  justify-content:space-around;
   line-height: 1;
+  margin: 0.2em;
 }
 
 #modalPrime {
@@ -571,4 +611,50 @@ html {
 }
 #bm {
   background-color: 'red';
+}
+
+#flexDiv {
+  margin: auto;
+  /* max-width: 100%; */
+  /* outline-style: auto; */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: space-around;
+  justify-content: space-around;
+  min-width: 100%;
+  /* line-height: 5; */
+}
+#controlsParent, #linksParent {
+  min-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+  justify-content: space-between;
+}
+
+h2 {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+@media (orientation: landscape) {
+  #flexDiv {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  #buttonsDiv {
+    display: none;
+  }
+}
+
+@media (orientation: portrait) {
+  #flexDiv {
+    flex-direction: column;
+    align-items: center;
+  }
+  #buttonsDiv {
+    display: flex;
+  }
 }

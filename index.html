@@ -7,9 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=DotGothic16&family=Press+Start+2P&family=Silkscreen&family=Sniglet:wght@400;800&display=swap" rel="stylesheet">
-  
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-  <title>Video-game Resume</title>
+  <link rel="icon" href="icoFrames/favicon export_00000.ico" id="favicon" type="image/x-icon">
+  <title>Video Game Resume</title>
 </head>
 
 
@@ -60,18 +60,43 @@
     <div id="modalHelp" class="modal">
       <!-- <p class="message">Hello! My name is Nate Notermann.</p> -->
       <!-- <p class="message">Welcome to my javascript video-game resume!</p> -->
-      <p class="messageHelp underline">Welcome to Nate Notermann's Javascript Video-Game Resume!</p>
+      <p class="messageHelp underline">Welcome to Nate Notermann's Javascript Video Game Resume!</p>
       <!-- <p class="message underline">Javascript Video-Game Resume!</p> -->
       <p id="intro">Embark on an interactive journey through my career and education using vanilla javascript. Experience a unique blend of gameplay and professional history.</p>
       <p>It is also playable with a gamepad/controller!</p>
-      <h2>Keyboard Controls</h2>
-      <div id="controls" >
-        <p class="controlsItem">HELP: "?" Key or click "HELP"</p>
-        <p class="controlsItem">Jump: Up Arrow or Space Bar or "W" Key</p>
-        <p class="controlsItem">Right:  Right Arrow or "D" key</p>
-        <p class="controlsItem">Left:  Left Arrow or "A" key</p>
-        <p class="controlsItem">Interact:  "X" key</p>
+
+      <div id="flexDiv">
+
+        <div id="controlsParent">
+          <h2>Keyboard Controls</h2>
+          <div id="controls" >
+            <p class="controlsItem">HELP: "?" Key or click "HELP"</p>
+            <p class="controlsItem">Jump: Up Arrow or Space Bar or "W" Key</p>
+            <p class="controlsItem">Right:  Right Arrow or "D" key</p>
+            <p class="controlsItem">Left:  Left Arrow or "A" key</p>
+            <p class="controlsItem">Interact:  "X" key</p>
+          </div>
+        </div>
+
+        <div id="linksParent">
+          <h2>Links</h2>
+          <div id="links" >
+            <a href="https://linktr.ee/natenotermann" class="button-link btn" target="_blank">Linktree</a>
+            <br>
+            <a href="https://www.linkedin.com/in/nate-notermann/" class="button-link btn" target="_blank">LinkedIn</a>
+            <br>
+            <a href="mailto:nate.notermann@gmail.com?subject=Lets Connect!" class="button-link btn" target="_blank">Email</a>
+            <br>
+            <a href="https://github.com/NateNotermann/Video-Game-Resume" class="button-link btn" target="_blank">GitHub Repo</a>
+            <br>
+            <a href="https://github.com/NateNotermann" class="button-link btn" target="_blank">GitHub Profile</a>
+            <br>
+            <a href="https://www.dropbox.com/scl/fi/du9m9bdpvip02d3bob8rm/Nate-Notermann-Resume.pdf?rlkey=rye5t32ltk76v6h2jcspusxwj&dl=0" class="button-link btn" target="_blank">Resume PDF</a>
+            <br>
+          </div>
       </div>
+    </div>
+
       <br>
       <div id="buttons" class="buttons">
         <!-- <button id="btnOpen" class="btn">Open</button> -->
@@ -87,17 +112,25 @@
       <p class="messageHelp">The 2 small exceptions are the custom page loader animation that uses the Lottie library to animate the Prime Digital Academy logo.</p>
       <p class="messageHelp">And then the gamepad API to connect and play with a video game controller.</p>
       <br>
-      <p class="messageHelp">Feel free to reach out to me via any of the links below.</p>
+      <p class="messageHelp">Feel free to reach out or view more of my work with any of the links below.</p>
+
       <div id="winLinks" >
+        <a href="https://linktr.ee/natenotermann" class="button-link btn" target="_blank">Linktree</a>
         <br>
         <a href="https://www.linkedin.com/in/nate-notermann/" class="button-link btn" target="_blank">LinkedIn</a>
         <br>
         <a href="mailto:nate.notermann@gmail.com?subject=Lets Connect!" class="button-link btn" target="_blank">Email</a>
         <br>
-        <a href="https://github.com/NateNotermann" class="button-link btn" target="_blank">GitHub</a>
+        <a href="https://github.com/NateNotermann/Video-Game-Resume" class="button-link btn" target="_blank">GitHub Repo</a>
+        <br>
+        <a href="https://github.com/NateNotermann" class="button-link btn" target="_blank">GitHub Profile</a>
+        <br>
+        <a href="https://www.dropbox.com/scl/fi/du9m9bdpvip02d3bob8rm/Nate-Notermann-Resume.pdf?rlkey=rye5t32ltk76v6h2jcspusxwj&dl=0" class="button-link btn" target="_blank">Resume PDF</a>
         <br>
       </div>
-      <br>
+
+
+    
       <div class="buttons">
         <button id="btnCloseWin" class="btn">Restart</button>
       </div>
@@ -272,8 +305,6 @@
         <button id="btnCloseRestaurant" class="btn">Close</button>
       </div>
     </div>
-
-
     
     <canvas></canvas>
     
@@ -284,34 +315,6 @@
     </div>
 
     <div id="pressX">Press 'X' to interact!</div>
-    
-    <!-- <div class="buttonsDiv">
-      <div class="flex">
-        <div class="rect1 border"></div>
-        <label>up/down</label>
-        <div class="rect2 border"></div>
-        <label>left/right</label>
-      </div>
-  
-      <div class="flex">
-        <div class="oval1"></div>
-        <label>select</label>
-        <div class="oval2"></div>
-        <label>start</label>
-      </div>
-  
-      <div class="flex">
-        <div class="circle1"></div>
-        <label>green</label>
-        <div class="circle2"></div>
-        <label>red</label>
-        <button class="pushable">
-          <span class="front">
-            Push me
-          </span>
-        </button>
-      </div>
-    </div> -->
 
     <div id="buttonsDiv" class="buttonsDiv">
       <div class="arrowsMain">
