@@ -71,6 +71,7 @@
 }
 
 body {
+  border-style: double;
   /* disable text select on mobile! */
   -webkit-user-select: none;
   user-select: none;
@@ -100,7 +101,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .button-link {
@@ -448,7 +449,7 @@ html {
     display: inline-block;
     margin:5px;
     font-weight: bold;
-    padding: 10px 0 10px 10px ;
+    padding: 10px 10px 10px 10px ;
     background-color: lightgray;
     text-shadow: -1px -1px black, 1px 1px white;
     color: gray;
@@ -471,31 +472,44 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 5%;
 }
 
 #arrowsLeftRight {
-  width: 300px;
+  width: 110%;
   display: flex;
   flex-direction: row;
   align-items: space-between;
   justify-content: center;
+  margin-left: 0em;
+  margin-top: .5em;
+  margin-bottom: .5em;
 }
 
 #arrowsRight {
-  width: 80px;
-  height: 50px;
-  margin-left: 15%;
+  font-size: 100px;
+  /* width: 80px;
+  height: 50px; */
+  margin-left: 18%;
+  width: 2em;
+  height: 1.2em;
 }
 
 #arrowsLeft {
-  width: 80px;
-  height: 50px;
-  margin-right: 15%;
+  font-size: 100px;
+  /* width: 80px;
+  height: 50px; */
+  margin-right: 18%;
   transform: scaleX(-1);
+  width: 2em;
+  height: 1.2em;
 }
 
 #arrowsUp, #arrowsDown {
-  width: 90px;
+  font-size: 100px;
+  /* width: 90px; */
+  width: 1.5em;
+  height: 1.2em;
   /* min-width: 80px; */
 }
 
@@ -510,7 +524,7 @@ html {
   flex-direction: column;
   min-width: 300px;
   margin-right: 10px;
-  margin-left: 10px;
+  margin-left: 0em;
 }
 
 .video-game-buttonX {
@@ -537,7 +551,8 @@ html {
 }
 
 #btnSpace {
-  min-width: 150px;
+  /* min-width: 150px; */
+  min-width: 2em;  
 }
 
 #pressX {
@@ -656,5 +671,6 @@ h2 {
   }
   #buttonsDiv {
     display: flex;
+    justify-content:space-around
   }
 }

@@ -385,7 +385,7 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 function init() {
     scrollOffset = 0 //  clear scroll offset. Fixes winning bug.
     loseReason = 'none'
-
+    modalWin.style.display = 'none'
     if(win || lose){
         setTimeout(()=> {
             winHandled = false
@@ -1636,8 +1636,8 @@ closeButtonWin.addEventListener('click', function() {
     // setTimeout(function() {
     //     modalWin.style.display = 'none';
     // }, 100); 
+    modalWin.style.display = 'none'
     init();
-   modalWin.style.display = 'none'
 })
 
 
