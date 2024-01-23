@@ -546,9 +546,58 @@ function animateTitle(array) {
         }, 250 );
     }
 }
-let originalString = 'Nate Notermanns Video Game Resume🏃‍♂️ '
+let originalString = 'Nate Notermanns Video Game Resume - '
 let array = originalString.split('')
 // let array = ['N', 'a', 't', 'e', ' ', 'N','o', 't', 'e','r','m','a','n','n','s',' ', 'V','i', 'd', 'e','o','-','g','a','m','e',' ','R','e','s','u','m','e',];
+
+// ---- Animated favicon loop ---- //
+const faviconImages = [
+    "icoFrames/favicon export_00000.ico",
+    "icoFrames/favicon export_00001.ico",
+    "icoFrames/favicon export_00002.ico",
+    "icoFrames/favicon export_00003.ico",
+    "icoFrames/favicon export_00004.ico",
+    "icoFrames/favicon export_00005.ico",
+    "icoFrames/favicon export_00006.ico",
+    "icoFrames/favicon export_00007.ico",
+    "icoFrames/favicon export_00008.ico",
+    "icoFrames/favicon export_00009.ico",
+    "icoFrames/favicon export_00010.ico",
+    "icoFrames/favicon export_00011.ico",
+    "icoFrames/favicon export_00012.ico",
+    "icoFrames/favicon export_00013.ico",
+    "icoFrames/favicon export_00014.ico",
+    "icoFrames/favicon export_00015.ico",
+    "icoFrames/favicon export_00016.ico",
+    "icoFrames/favicon export_00017.ico",
+    "icoFrames/favicon export_00018.ico",
+    "icoFrames/favicon export_00019.ico",
+    "icoFrames/favicon export_00020.ico",
+    "icoFrames/favicon export_00021.ico",
+    "icoFrames/favicon export_00022.ico",
+    "icoFrames/favicon export_00023.ico",
+    "icoFrames/favicon export_00024.ico",
+    "icoFrames/favicon export_00025.ico",
+    "icoFrames/favicon export_00026.ico",
+    "icoFrames/favicon export_00027.ico",
+    "icoFrames/favicon export_00028.ico",
+    "icoFrames/favicon export_00029.ico"
+]
+
+let faviconNumber = 0
+function changeFavicon() {
+    // console.log(faviconNumber);
+    const faviconElement = document.getElementById('favicon');
+    let newFaviconPath = faviconImages[faviconNumber];
+    faviconElement.href = newFaviconPath
+    if (faviconNumber > 28){
+        faviconNumber = 0
+    }else {
+        faviconNumber ++
+    }
+}
+setInterval(changeFavicon, 100);
+// ---- Animated favicon loop ---- //
 
 // let string = 'Nate Notermanns Video Game Resume '
 animateTitle(array);
