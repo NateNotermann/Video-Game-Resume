@@ -386,12 +386,16 @@ html {
 
 	line-height: 1.5em;
 	text-align: center;
-	display: inline-block;
-	width: 1.5em;
+	display: flex;
+  align-items: center;
+  justify-content: center;
+	/* width: 1.5em; */
+  min-width: 3em;
+  min-height: 3em;
 	-webkit-border-radius: .75em;
 	-moz-border-radius: .75em;
 	-o-border-radius: .75em;
-		border-radius: .75em;
+		border-radius: 1.75em;
 	background-color: red;
 	-webkit-box-shadow:  0 .2em #023020;
 	-moz-box-shadow:  0 .2em #023020;
@@ -414,12 +418,16 @@ html {
 	text-shadow: 1px 1px #90EE90, -1px -1px maroon;
 	line-height: 1.5em;
 	text-align: center;
-	display: inline-block;
-	width: 1.5em;
+	display: flex;
+  align-items: center;
+  justify-content: center;
+	/* width: 1.5em; */
+  min-width: 3em;
+  min-height: 3em;
 	-webkit-border-radius: .75em;
 	-moz-border-radius: .75em;
 	-o-border-radius: .75em;
-		border-radius: .75em;
+		border-radius: 1.75em;
 	background-color: red;
 	-webkit-box-shadow:  0 .2em #023020;
 	-moz-box-shadow:  0 .2em #023020;

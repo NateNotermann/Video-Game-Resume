@@ -131,8 +131,8 @@ Make controller & keyboard buttons react when pressed. - Done
 #### Final Steps      
 Place More/All Platforms - Done      
 Deploy to Netlify - Done  
-Celebratory Dance    
+Celebratory Dance - Done     
 
 ### Stretch Goals:    
-Add Sound Effects
+Add Sound Effects    
 Add Music    
