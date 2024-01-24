@@ -1,42 +1,62 @@
 # Video Game Resume!
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7c00f1c0-b166-41c5-b1ba-5f3c45001266/deploy-status)](https://app.netlify.com/sites/aquamarine-bubblegum-1105d2/deploys)    
-I am turning my resume into a playable video game! This is very much a **work in progress**. 
-It will be a platformer, possibly with some fighting mechanics. It works with a **Xbox/PS5 controller** using the **gamepad API**. It will have custom pixel art for the player & player animations, background and animated Gif foreground building elements. (you'll see what I mean when it's done.)    
-<br>
-This a continuation of another project I made. You can test the original project out [HERE](https://javascriptfightinggame.netlify.app/)!    
-You can also **start your own repo** off of the [Javascript Fighting Game Template](https://github.com/NateNotermann/Javascript-Fighting-Game-2.0) I made by following a great [Tutorial](https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses) by [Chris Course](https://github.com/chriscourses).    
-I highly recommend checking out his tutorial and other work on his [YouTube Page](https://www.youtube.com/@ChrisCourses).   
+I turned my resume into a playable video game!
+It is a classic platformer. It works with a **Xbox/PS5 controller** using the **Gamepad API**.    
+It has custom character art and animations for the backgrounds, buildings and player.   
 
-The original app uses just basic **HTML**, **CSS** and **Javascript**. I then added some libraries and the **Gamepad API**. See below.  
-**Libraries:**
-    [GSAP](https://greensock.com/gsap/),
-    [Google Fonts](https://fonts.google.com/)   
-**Xbox Controller API/Code created by CodingWith-Adam:**
+The application just uses vanilla **Javascript**, **HTML** and **CSS**.   
+A couple small exceptions are **Google Fonts**, a custom page loader animation that uses the **Lottie** library to animate the Prime Digital Academy logo. And the **Gamepad API** to connect and play with a **video game controller!**
+
+**Play the game -->**  [**HERE!**](https://aquamarine-bubblegum-1105d2.netlify.app/)   
+
+**Additional Tech:**  
+**Lottie/LottieFiles:** Custom page loader animation. [Lottie](https://airbnb.design/lottie/#get-started)   
+<!-- [GSAP](https://greensock.com/gsap/), -->
+**Fonts:** [Google Fonts](https://fonts.google.com/)   
+**Xbox Controller API/Code:** created by CodingWith-Adam:
     [GitHub](https://github.com/CodingWith-Adam/gamepad-api-simple-game),
     [Main Tutorial](https://www.youtube.com/watch?v=GOjMP6WY8CU&ab_channel=CodingWithAdam),
     [GamePad Tester](https://github.com/NateNotermann/GamePad-API),
     [GamePad Game](https://github.com/NateNotermann/GamePad-API-Test-Game)
 
-## Development Evolution
-### A.Early Preview, B.Original Template WITHOUT Custom Art
+**Deekay Tool:** Custom character animations in After Effects. [Deekay Tool](https://motiondesign.school/products/deekay-tool/)   
+**MidJourney:** AI Image generation for all custom building & background art, with lots of tweaking in **Photoshop**. [MidJourney](https://www.midjourney.com/)
+
+## Controls: 
+**Move right:** D Key    
+**Move left:** A Key    
+**Jump:** W Key   
+**Attack:** Space Bar  
+
+
+This is a continuation of another project I made. You can test the original project out [HERE](https://javascriptfightinggame.netlify.app/)!    
+You can also **start your own repo** off of the [Javascript Fighting Game Template](https://github.com/NateNotermann/Javascript-Fighting-Game-2.0) I made by following a great [Tutorial](https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses) by [Chris Course](https://github.com/chriscourses).    
+I highly recommend checking out his tutorial and other work on his [YouTube Page](https://www.youtube.com/@ChrisCourses).   
+
+## Gameplay Preview
+<img src="img/ReadMe/new2-ezgif.com-optimize.gif" style="width: 80%;">
+
+## Character Design
+<img src="img/ReadMe/run2-ezgif.com-video-to-gif-converter.gif" style="width: 50%;">
+<img src="img/ReadMe/new1-ezgif.com-optimize.gif" style="width: 80%;">
+
+
+<!-- ### A.Early Preview, B.Original Template WITHOUT Custom Art
 A.-><img src="img/ReadMe/EarlyPreview.gif" style="width: 350px;"> -> B.<img src="img/ReadMe/FinishedPreview.gif" style="width: 350px;"> 
 
-### A. Character & Movement Tests 1, B. Custom Character Test 2
-A.-><img src="img/ReadMe/screenvid3.gif" style="width: 350px;"> -> B.<img src="img/ReadMe/screenvid4.gif" style="width: 350px;"> 
+<!-- ### A. Character & Movement Tests 1, B. Custom Character Test 2
+A.-><img src="img/ReadMe/screenvid3.gif" style="width: 350px;"> -> B.<img src="img/ReadMe/screenvid4.gif" style="width: 350px;">  -->
 
-### Background (work in progress)
-<img src="img/ReadMe/backgroundPreview.jpg" style="width: 100%;">
+<!-- ### Background (work in progress)
+<img src="img/ReadMe/backgroundPreview.jpg" style="width: 100%;"> -->
 
-### Foreground Buildings (work in progress)
-<img src="img/ReadMe/foregroundBuildingspreview.gif" style="width: 1000px;">   
+<!-- ### Foreground Buildings (work in progress)
+<img src="img/ReadMe/foregroundBuildingspreview.gif" style="width: 1000px;">    --> 
 
 
-### Controls: 
-**Player 1**  
-Move right: D key  
-Move left: A key  
-Jump: W  
-Attack: Space Bar  
+
+
+
 <!-- **Player 2**  
 Move right: Right Arrow  
  Move left: Left Arrow  
@@ -44,7 +64,7 @@ Jump: Up Arrow
 Attack: (left)Option button   -->
 
 
-## To Do List:
+<!-- ## To Do List:
 ### Phase 1. Full Javascript Fighting Game -- DONE
 #### Basic Fighting Mechanics:   
 Project Setup - DONE   
@@ -135,4 +155,4 @@ Celebratory Dance - Done
 
 ### Stretch Goals:    
 Add Sound Effects    
-Add Music    
+Add Music     -->
