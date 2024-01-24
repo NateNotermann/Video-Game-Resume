@@ -236,6 +236,7 @@ let win = false
 let winHandled = false
 let blackStart = false
 let whiteStart = false
+let winBarStart = canvas.height - (platformHeight*3)
 // -------- GAMEPAD VARIABLES -------- //
 
 
@@ -337,11 +338,11 @@ const SignHGAPic = new Image()
 SignHGAPic.src = './img/Sign/SignHGA.webp'
 
 const PowerUp1 = new Image()   
-PowerUp1.src = './img/Sign/powerUp1.png'
+PowerUp1.src = './img/Sign/powerUp1.webp'
 const PowerUp2 = new Image()   
-PowerUp2.src = './img/Sign/powerUp2.png'
+PowerUp2.src = './img/Sign/powerUp2.webp'
 const PowerUp3 = new Image()   
-PowerUp3.src = './img/Sign/powerUp3.png'
+PowerUp3.src = './img/Sign/powerUp3.webp'
 
 const WinBar1 = new Image()   
 WinBar1.src = './img/WinBars/winBar1.webp'
@@ -457,7 +458,8 @@ foregrounds = [
     new Foreground({x:4250 , y: 1080-525, image: foregroundImage}),
     new Foreground({x:4250*2 , y: 1080-525, image: foregroundImage}),
     new Foreground({x:4250*3 , y: 1080-525, image: foregroundImage}),
-    new Foreground({x:4250*4 , y: 1080-525, image: foregroundImage})
+    new Foreground({x:4250*4 , y: 1080-525, image: foregroundImage}),
+    new Foreground({x:4250*5 , y: 1080-525, image: foregroundImage}),
 ]
 
 // -------------------------- LARGE PLATFORMS --------------------------
@@ -487,11 +489,11 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
     new Platform({x: platformWidth* 16, y: canvas.height - 125, image: platformImage}), // Platform 14
     new Platform({x: platformWidth* 17, y: canvas.height - 125, image: platformImage}), // Platform 14
     new Platform({x: platformWidth* 18, y: canvas.height - 125, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 19, y: canvas.height - 125, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 19.5, y: canvas.height - 125, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 21, y: canvas.height - 125, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 22, y: canvas.height - 125, image: platformImage}), // Platform 14
-    new Platform({x: platformWidth* 23, y: canvas.height - 125, image: platformImage}), // Platform 14
+    // new Platform({x: platformWidth* 19, y: canvas.height - 125, image: platformImage}), // Platform 14
+    // new Platform({x: platformWidth* 19.5, y: canvas.height - 125, image: platformImage}), // Platform 14
+    // new Platform({x: platformWidth* 21, y: canvas.height - 125, image: platformImage}), // Platform 14
+    // new Platform({x: platformWidth* 22, y: canvas.height - 125, image: platformImage}), // Platform 14
+    // new Platform({x: platformWidth* 23, y: canvas.height - 125, image: platformImage}), // Platform 14
 ];
 // -------------------------- SMALL PLATFORMS --------------------------
 platformTwos = [
@@ -544,7 +546,7 @@ arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, Ar
             new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
             new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
 
-            new Sign({x: 40000+500, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
+            new Sign({x: 41000, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
 
             new Sign({x: 6450, y: canvas.height - signMCTCPic.height - 125, image: signMCTCPic}),
             new Sign({x: 11100, y: canvas.height - signRestaurantPic.height - 125, image: signRestaurantPic}),
@@ -554,21 +556,21 @@ arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, Ar
             new Sign({x: 24500, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
             new Sign({x: 34500, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
 ] 
+// -------------------------- WIN BARS--------------------------
+WinBar2Item = [new Sign({x: 41100, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
+WinBar3Item = [new Sign({x: 41010, y: canvas.height - WinBar3.height - 325 , image: WinBar3})]
 
 // -------------------------- POWER UPS --------------------------
 powerUps1 = [
     new powerUp({x: 26200, y: canvas.height - PowerUp1.height - 125, image: PowerUp1}),
 ]
 powerUps2 = [
-    new powerUp({x: 30000, y: canvas.height - PowerUp2.height - 125, image: PowerUp2}),
+    new powerUp({x: 30500, y: canvas.height - PowerUp2.height - 125, image: PowerUp2}),
 ]
 powerUps3 = [
     new powerUp({x: 36250, y: canvas.height - PowerUp3.height - 125, image: PowerUp3}),
 ]
 // 26500, 27000, 29500
-// -------------------------- WIN BARS--------------------------
-WinBar2Item = [new Sign({x: 40000+600, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
-WinBar3Item = [new Sign({x: 40000+510, y: 700, image: WinBar3})]
 
 // -------------------------- BLACK/WHITE RECTS --------------------------
 blackItem = [new Black({x: -100, y: -100, image: WinBar3, opacity: 0 })]
@@ -592,7 +594,7 @@ bugs = [
     new Bug({x: 27000, y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 27000, y: canvas.height - BugPic.height*2 - 125, image: BugPic}),
     new Bug({x: 27000, y: canvas.height - BugPic.height*3 - 125, image: BugPic}),
-    new Bug({x: 27000, y: canvas.height - BugPic.height*4 - 125, image: BugPic}),
+    // new Bug({x: 27000, y: canvas.height - BugPic.height*4 - 125, image: BugPic}),
     // new Bug({x: 27000, y: canvas.height - BugPic.height*5 - 125, image: BugPic}),
     
     new Bug({x: 31500, y: canvas.height - BugPic.height - 125, image: BugPic}),
@@ -602,7 +604,7 @@ bugs = [
     new Bug({x: 31500+(bugWidth*4), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 31500+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 31500+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
-    new Bug({x: 31500+(bugWidth*7), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    // new Bug({x: 31500+(bugWidth*7), y: canvas.height - BugPic.height - 125, image: BugPic}),
 ]
 
 moveBug1 = 13000
@@ -822,10 +824,11 @@ function animate() {
         arrowArray1.draw() 
         arrowArray1.update()
     })
-
+    
     WinBar3Item.forEach(WinBar3 => { // loop through array of Platforms
             WinBar3.position.y += 2 * direction2;
-        if(WinBar3.position.y <= 550 || WinBar3.position.y >= 900){
+        if(WinBar3.position.y <= (canvas.height - WinBar3.height - 425) 
+        || WinBar3.position.y >= (canvas.height - WinBar3.height - 125)){
             direction2 *= -1
         }
         WinBar3.draw() // ------ DRAW PLATFORMd
@@ -896,6 +899,7 @@ function animate() {
     })
 
        player.update() // ------ PLAYER UPDATE. Call this last, to render in front
+
     WinBar2Item.forEach(WinBar2 => { // loop through array of Platforms
         WinBar2.draw() // ------ DRAW PLATFORM
     })
@@ -1460,7 +1464,7 @@ function animate() {
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
         // console.log('scroll', scrollOffset);
-    if (scrollOffset > 40000) {
+    if (scrollOffset > 41100 -500) {
         // console.log('You WIN!!!');
         win = true
         winHandled = true
