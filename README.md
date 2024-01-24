@@ -34,11 +34,11 @@ You can also **start your own repo** off of the [Javascript Fighting Game Templa
 I highly recommend checking out his tutorial and other work on his [YouTube Page](https://www.youtube.com/@ChrisCourses).   
 
 ## Gameplay Preview
-<img src="img/ReadMe/new2-ezgif.com-optimize.gif" style="width: 80%;">
+<img src="img/ReadMe/new2-ezgif.com-optimize.gif" style="width: 100%;">
 
 ## Character Design
 <img src="img/ReadMe/run2-ezgif.com-video-to-gif-converter.gif" style="width: 50%;">
-<img src="img/ReadMe/new1-ezgif.com-optimize.gif" style="width: 80%;">
+<img src="img/ReadMe/new1-ezgif.com-optimize.gif" style="width: 100%;">
 
 
 <!-- ### A.Early Preview, B.Original Template WITHOUT Custom Art
