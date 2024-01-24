@@ -36,8 +36,18 @@ class Player {
     draw() { 
         // c.fillStyle = 'blue' // draw a rectangle that matches the size and position of the Player Sprite
         // c.fillRect(this.position.x,  this.position.y, this.width, this.height)
+        
         if (glowPlayer) {
-            c.shadowColor = playerColor[number2] // 'yellow'; // Set the color of the glow
+            if (powerUp1 && powerUp2 && powerUp3){
+                color = "white"; 
+            } else if (powerUp3){ // VB.NET
+                color = "purple"; 
+            } else if (powerUp2){ // SQL
+                color = "red";
+            } else if (powerUp1) { //REACT 
+                color = "lightgreen"; 
+            } 
+            c.shadowColor = color; //playerColor[number2] // 'yellow'; // Set the color of the glow
             c.shadowBlur = 150; // Set the blur radius
             c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
             c.shadowOffsetY = 0; // Set the vertical offset of the shadow
@@ -690,6 +700,50 @@ class Sign {    // ------ Platform Class used for ground and all platforms. ----
         this.draw
     }
 }
+
+// -------- powerUp CLASS -------- //
+class powerUp {    // ------ Platform Class used for ground and all platforms. ------
+    constructor({ x, y, image }) {
+        this.position = {
+            x: x, // x is now equal to the passed in x.  // x: 600,
+            y: y // y is now equal to the passed in y.  // y: 300
+        }
+        this.image = image
+        this.width = image.width/2  //580
+        this.height = image.height/2 //125
+    }
+    draw() {      
+
+        if (glowPowerUp3){ // VB.NET
+            color = "purple"; 
+        } else if (glowPowerUp2){ // SQL
+            color = "red";
+        } else if (glowPowerUp1) { //REACT 
+            color = "lightgreen"; 
+        } else {
+            color = ''
+        }
+           c.shadowColor = color; 
+            c.shadowBlur = 50; // Set the blur radius
+            c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
+            c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+
+        c.drawImage(
+            this.image,  
+            this.position.x, 
+            this.position.y)
+            // this turns off glow for any/all other canvas element
+            c.shadowColor = 'transparent';
+            c.shadowBlur = 0;
+            c.shadowOffsetX = 0;
+            c.shadowOffsetY = 0;
+    }
+    update() {
+        this.draw
+    }
+}
+// -------- Bl
+
 // -------- Black CLASS -------- //
 class Black {    // ------ Platform Class used for ground and all platforms. ------
     constructor({ x, y, image, opacity }) {
