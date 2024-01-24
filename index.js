@@ -340,6 +340,7 @@ let player = new Player() //  calling the "Player" class
 player.draw()
 player.update()
 let movingPlatform1 = []
+let movingPlatform2 = []
 let platformTwos = []
 let platforms = []     // Array of Platforms
 let platformNull = []     // Array of Platforms
@@ -480,6 +481,11 @@ movePlate1 = 18280
 movingPlatform1 = [
     new Platform({x: movePlate1, y: canvas.height - platformHeight*5, image: platformTwoImage})
 ];
+movingPlatform2 = [
+    // new Platform({x: 23000, y: canvas.height - platformHeight*5, image: platformTwoImage})
+];
+
+
 let buildingNull = 3500
 buildingMCTC = [ new BuildingMCTC( buildingNull*2, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
 buildingRestaurant = [ new BuildingRestaurant(11500, canvas.height - Restaurant.height - 115, Restaurant)] 
@@ -521,6 +527,8 @@ bugs = [
 
     new Bug({x: 23000, y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 23000, y: canvas.height - BugPic.height*2 - 125, image: BugPic}),
+    new Bug({x: 23000, y: canvas.height - BugPic.height*3 - 125, image: BugPic}),
+    new Bug({x: 23000, y: canvas.height - BugPic.height*4 - 125, image: BugPic}),
     // move Bug 1
 ]
 
@@ -544,7 +552,9 @@ platformTwos = [
 
     new PlatformTwo({x:19350, y: canvas.height - (platformHeight * 5), image: platformTwoImage }),
 
-    new PlatformTwo({x:22400, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
+    // new PlatformTwo({x:22400, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
+    new PlatformTwo({x:22600 - platformTwoWidth, y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
+    new PlatformTwo({x:22200 , y: canvas.height - (platformHeight * 5), image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 3), y: 1080-500, image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 4), y: 1080-375, image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 5), y: 1080-250, image: platformTwoImage }),
@@ -808,6 +818,13 @@ function animate() {
             }
         movingPlatform.draw() // ------ DRAW PLATFORMd
     })
+    movingPlatform2.forEach(movingPlatform => { // loop through array of Platforms
+            movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
+            if (movingPlatform.position.x <= currentNullPosition+movePlate1 || movingPlatform.position.x >= currentNullPosition+(movePlate1+500) ){
+                direction *= -1; // ---- reverse platform move direction
+            }
+        movingPlatform.draw() // ------ DRAW PLATFORMd
+    })
 
     bugs.forEach(bug => { // loop through array of 
         bug.draw() // ------ DRAW 
@@ -890,6 +907,10 @@ function animate() {
                 // console.log('platformNull', platformNull.position.x);
                 platform.position.x -= playerMovement
             });
+            movingPlatform2.forEach(platform => { // loop through array of platforms
+                // console.log('platformNull', platformNull.position.x);
+                platform.position.x -= playerMovement
+            });
             buildingRestaurant.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
@@ -959,6 +980,9 @@ function animate() {
                 currentNullPosition += playerMovement
             });
             movingPlatform1.forEach(platform => { // loop through array of platforms
+                platform.position.x += playerMovement
+            });
+            movingPlatform2.forEach(platform => { // loop through array of platforms
                 platform.position.x += playerMovement
             });
             buildingRestaurant.forEach(building => { // ---- Building SCROLL ----
@@ -1086,6 +1110,23 @@ function animate() {
 
     // ------ MOVING PLATFORM COLLISION DETECTION ------ // 
     movingPlatform1.forEach(platform => { 
+        if (//player bottom is <= than platform top
+            player.position.y + player.height <= platform.position.y
+            // player bottom + player Velocity >= with platform top side. (Player lands on platform)
+            && player.position.y + player.height + player.velocity.y >= platform.position.y
+            //  // players left side overlap with platform right side
+            && player.position.x <= platform.position.x + platform.width 
+            //  // players right side overlap with platform left side
+            && player.position.x + player.width >= platform.position.x 
+            // // players top overlap with platform bottom (Players head is under but still colliding with platform bottom)
+            && player.position.y + player.velocity.y <= platform.position.y + platform.height
+            ) 
+            {   
+                player.velocity.y = 0   // player does not fall
+        }
+    })
+    // ------ MOVING PLATFORM COLLISION DETECTION ------ // 
+    movingPlatform2.forEach(platform => { 
         if (//player bottom is <= than platform top
             player.position.y + player.height <= platform.position.y
             // player bottom + player Velocity >= with platform top side. (Player lands on platform)
