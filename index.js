@@ -588,7 +588,21 @@ bugs = [
     new Bug({x: 23000, y: canvas.height - BugPic.height*2 - 125, image: BugPic}),
     new Bug({x: 23000, y: canvas.height - BugPic.height*3 - 125, image: BugPic}),
     new Bug({x: 23000, y: canvas.height - BugPic.height*4 - 125, image: BugPic}),
-    // move Bug 1
+    
+    new Bug({x: 27000, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 27000, y: canvas.height - BugPic.height*2 - 125, image: BugPic}),
+    new Bug({x: 27000, y: canvas.height - BugPic.height*3 - 125, image: BugPic}),
+    new Bug({x: 27000, y: canvas.height - BugPic.height*4 - 125, image: BugPic}),
+    // new Bug({x: 27000, y: canvas.height - BugPic.height*5 - 125, image: BugPic}),
+    
+    new Bug({x: 31500, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth*2), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth*3), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth*4), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth*7), y: canvas.height - BugPic.height - 125, image: BugPic}),
 ]
 
 moveBug1 = 13000
