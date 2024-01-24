@@ -714,19 +714,22 @@ class powerUp {    // ------ Platform Class used for ground and all platforms. -
     }
     draw() {      
 
-        if (glowPowerUp3){ // VB.NET
-            color = "purple"; 
-        } else if (glowPowerUp2){ // SQL
-            color = "red";
-        } else if (glowPowerUp1) { //REACT 
-            color = "lightgreen"; 
-        } else {
-            color = ''
-        }
-           c.shadowColor = color; 
+        // if (glowPowerUp3){ // VB.NET
+        //     color = "purple"; 
+        // } else if (glowPowerUp2){ // SQL
+        //     color = "red";
+        // } else if (glowPowerUp1) { //REACT 
+        //     color = "lightgreen"; 
+        // } else {
+        //     color = ''
+        // }
+
+        if(glowPowerUp1 || glowPowerUp2 || glowPowerUp3){
+            c.shadowColor = "white"; 
             c.shadowBlur = 50; // Set the blur radius
             c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
             c.shadowOffsetY = 0; // Set the vertical offset of the shadow
+        }
 
         c.drawImage(
             this.image,  

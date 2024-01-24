@@ -537,21 +537,22 @@ buildingFreelance = [ new BuildingFreelance(17800, canvas.height - Freelance.hei
 buildingCBRE = [ new BuildingCBRE(21000 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
 buildingPRIME = [ new BuildingPRIME(25000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
 elementsPRIME = [ new ElementsPRIME(25000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
-buildingHGA = [ new BuildingHGA(28000, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
+buildingHGA = [ new BuildingHGA(30000, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
 
 // -------------------------- ARROWS & SIGNS --------------------------
 arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
             new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
             new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
-            new Sign({x: 30000+500, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
-            
+
+            new Sign({x: 40000+500, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
+
             new Sign({x: 6450, y: canvas.height - signMCTCPic.height - 125, image: signMCTCPic}),
             new Sign({x: 11100, y: canvas.height - signRestaurantPic.height - 125, image: signRestaurantPic}),
             new Sign({x: 13900, y: canvas.height - signCoyotePic.height - 125, image: signCoyotePic}),
             new Sign({x: 17200, y: canvas.height - (platformHeight * 4)- signVFXPic.height, image: signVFXPic}),
             new Sign({x: 20400, y: canvas.height - signCBREPic.height - 125, image: signCBREPic}),
-            new Sign({x: 27400, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
-            new Sign({x: 24400, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
+            new Sign({x: 24500, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
+            new Sign({x: 29500, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
 ] 
 
 // -------------------------- POWER UPS --------------------------
@@ -559,15 +560,15 @@ powerUps1 = [
     new powerUp({x: 26500, y: canvas.height - PowerUp1.height - 125, image: PowerUp1}),
 ]
 powerUps2 = [
-    new powerUp({x: 27000, y: canvas.height - PowerUp2.height - 125, image: PowerUp2}),
+    new powerUp({x: 28000, y: canvas.height - PowerUp2.height - 125, image: PowerUp2}),
 ]
 powerUps3 = [
-    new powerUp({x: 29500, y: canvas.height - PowerUp3.height - 125, image: PowerUp3}),
+    new powerUp({x: 31000, y: canvas.height - PowerUp3.height - 125, image: PowerUp3}),
 ]
-
+// 26500, 27000, 29500
 // -------------------------- WIN BARS--------------------------
-WinBar2Item = [new Sign({x: 30000+600, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
-WinBar3Item = [new Sign({x: 30000+510, y: 700, image: WinBar3})]
+WinBar2Item = [new Sign({x: 40000+600, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
+WinBar3Item = [new Sign({x: 40000+510, y: 700, image: WinBar3})]
 
 // -------------------------- BLACK/WHITE RECTS --------------------------
 blackItem = [new Black({x: -100, y: -100, image: WinBar3, opacity: 0 })]
@@ -1444,7 +1445,7 @@ function animate() {
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
         // console.log('scroll', scrollOffset);
-    if (scrollOffset > 30000) {
+    if (scrollOffset > 40000) {
         // console.log('You WIN!!!');
         win = true
         winHandled = true
