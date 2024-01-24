@@ -179,9 +179,9 @@ window.onload = function () {
 // canvas.height = windowInnerHeight //  aspectRatio  //window.innerHeight  // canvas.height 687
 
 // global variables. 
-const gravity = 2
+let gravity = 2
 const floor = 125 // or platformImage.height. pixel from the bottom player stops at
-const jump = 35 // amount player should jump
+let jump = 35 // amount player should jump
 let playerMovement = 20 // 20 //  amount player moves left and right
 const platformWidth = 2500 //579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
@@ -217,6 +217,14 @@ let glowCBRE = false
 let glowPRIME = false
 let glowHGA = false
 let glowPlayer = false
+let color
+let glowPowerUp1 = false
+let glowPowerUp2 = false
+let glowPowerUp3 = false
+
+let powerUp1 = false
+let powerUp2 = false
+let powerUp3 = false
 let PressX = false
 let playerColor = ['red', 'orange', 'pink', 'yellow', 'green', 'purple', 'blue', 'white', 'black']
 let number2 = 0
@@ -353,6 +361,13 @@ signPrimePic.src = './img/Sign/Prime.webp'
 const SignHGAPic = new Image()   
 SignHGAPic.src = './img/Sign/SignHGA.webp'
 
+const PowerUp1 = new Image()   
+PowerUp1.src = './img/Sign/powerUp1.png'
+const PowerUp2 = new Image()   
+PowerUp2.src = './img/Sign/powerUp2.png'
+const PowerUp3 = new Image()   
+PowerUp3.src = './img/Sign/powerUp3.png'
+
 const WinBar1 = new Image()   
 WinBar1.src = './img/WinBars/winBar1.webp'
 const WinBar2 = new Image()   
@@ -365,6 +380,7 @@ let player = new Player() //  calling the "Player" class
 player.draw()
 player.update()
 let movingPlatform1 = []
+let movingPlatform2 = []
 let platformTwos = []
 let platforms = []     // Array of Platforms
 let platformNull = []     // Array of Platforms
@@ -380,6 +396,9 @@ let buildingPRIME = []
 let elementsPRIME = []
 let buildingHGA = []
 let arrowArray = []
+let powerUps1 = []
+let powerUps2 = []
+let powerUps3 = []
 let bugs = []
 let movePlate1 = 0
 let moveBug1 = 0
@@ -412,9 +431,14 @@ let keys = {      // access using keys.left.pressed, or keys.right.pressed etc. 
 function init() {
     scrollOffset = 0 //  clear scroll offset. Fixes winning bug.
     loseReason = 'none'
-    playerMovement = 20
-    playerSize = 2
+    powerUp1 = false
+    powerUp2 = false
+    powerUp3 = false
     glowPlayer = false
+    jump = 35
+    playerSize = 2
+    playerMovement = 20
+
     modalWin.style.display = 'none'
     if(win || lose){
         setTimeout(()=> {
@@ -436,25 +460,23 @@ currentNullPosition = 0 // Anchor Point for all moving platforms
 direction = 1; // 1 represents moving to the right, -1 represents moving to the left
 direction = 1
 
+// -------------------------- ALL BACKGROUNDS --------------------------
 sky = [
     new Sky({x:-skyWidth, y: 0, image: skyImage}),
     new Sky({x:0, y: 0, image: skyImage}),
     new Sky({x:skyWidth, y: 0, image: skyImage}),
     // new Sky({x:skyWidth*2, y: 0, image: skyImage}),
 ]
-
 backgrounds = [
     new Background({x:0, y: 0, image: backgroundImage}),
     new Background({x:backgroundWidth, y: 0, image: backgroundImage}),
     new Background({x:backgroundWidth*2, y: 0, image: backgroundImage})
 ]
-
 midgrounds = [ 
     new Midground({x:0 , y: 1080-650, image: midgroundImage}),
     new Midground({x:7500 , y: 1080-650, image: midgroundImage}),
     new Midground({x:7500*2 , y: 1080-650, image: midgroundImage})
 ]
-
 foregrounds = [ 
     new Foreground({x:0 , y: 1080-525, image: foregroundImage}),
     new Foreground({x:4250 , y: 1080-525, image: foregroundImage}),
@@ -463,6 +485,7 @@ foregrounds = [
     new Foreground({x:4250*4 , y: 1080-525, image: foregroundImage})
 ]
 
+// -------------------------- LARGE PLATFORMS --------------------------
 let adjustPlat = 1000
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
     new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
@@ -495,66 +518,7 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580�
     new Platform({x: platformWidth* 22, y: canvas.height - 125, image: platformImage}), // Platform 14
     new Platform({x: platformWidth* 23, y: canvas.height - 125, image: platformImage}), // Platform 14
 ];
-
-
-platformNull = [
-    new Platform({x: -platformTwoWidth*2, y: canvas.height - (platformHeight * 5), image: platformTwoImage}) // -- Hidden off screen.
-];
-
-movePlate1 = 18280
-movingPlatform1 = [
-    new Platform({x: movePlate1, y: canvas.height - platformHeight*5, image: platformTwoImage})
-];
-let buildingNull = 3500
-buildingMCTC = [ new BuildingMCTC( buildingNull*2, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
-buildingRestaurant = [ new BuildingRestaurant(11500, canvas.height - Restaurant.height - 115, Restaurant)] 
-buildingCOYOTE = [ new BuildingCOYOTE (14500, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
-buildingFreelance = [ new BuildingFreelance(17800, canvas.height - Freelance.height - (platformHeight * 5)+10, Freelance)] // MCTC (x,y,(NOT USED --> w,h,image,))
-buildingCBRE = [ new BuildingCBRE(21000 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
-buildingPRIME = [ new BuildingPRIME(25000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
-elementsPRIME = [ new ElementsPRIME(25000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
-buildingHGA = [ new BuildingHGA(28000, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
-
-
-arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
-            new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
-            new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
-            new Sign({x: 30000+500, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
-            
-            new Sign({x: 6450, y: canvas.height - signMCTCPic.height - 125, image: signMCTCPic}),
-            new Sign({x: 11100, y: canvas.height - signRestaurantPic.height - 125, image: signRestaurantPic}),
-            new Sign({x: 13900, y: canvas.height - signCoyotePic.height - 125, image: signCoyotePic}),
-            new Sign({x: 17200, y: canvas.height - (platformHeight * 4)- signVFXPic.height, image: signVFXPic}),
-            new Sign({x: 20400, y: canvas.height - signCBREPic.height - 125, image: signCBREPic}),
-            new Sign({x: 27400, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
-            new Sign({x: 24400, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
-] 
-WinBar2Item = [new Sign({x: 30000+600, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
-WinBar3Item = [new Sign({x: 30000+510, y: 700, image: WinBar3})]
-
-blackItem = [new Black({x: -100, y: -100, image: WinBar3, opacity: 0 })]
-whiteItem = [new White({x: -100, y: -100, image: WinBar3, opacity: 0 })]
-
-bugs = [ 
-    new Bug({x: 5000, y: canvas.height - BugPic.height - 125, image: BugPic}),
-    new Bug({x: 8950, y: canvas.height - BugPic.height - 125, image: BugPic}),
-    // new Bug({x: 9080+(bugWidth*2), y: canvas.height - BugPic.height - 250, image: BugPic}),
-    new Bug({x: 9080+(bugWidth*4), y: canvas.height - BugPic.height - 125, image: BugPic}),
-    new Bug({x: 9080+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
-    new Bug({x: 9080+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
-    new Bug({x: 9080+(bugWidth*7), y: canvas.height - BugPic.height - 125, image: BugPic}),
-
-    new Bug({x: 23000, y: canvas.height - BugPic.height - 125, image: BugPic}),
-    new Bug({x: 23000, y: canvas.height - BugPic.height*2 - 125, image: BugPic}),
-    // move Bug 1
-]
-
-moveBug1 = 13000
-movingBugs = [ 
-    new Bug({x: moveBug1, y: canvas.height - BugPic.height - 125, image: BugPic}),
-    // new Bug({x: moveBug1+200, y: canvas.height - BugPic.height - 125, image: BugPic}),
-]
-
+// -------------------------- SMALL PLATFORMS --------------------------
 platformTwos = [
     new PlatformTwo({x:8500, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
     new PlatformTwo({x:8500+platformTwoWidth, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
@@ -569,19 +533,113 @@ platformTwos = [
 
     new PlatformTwo({x:19350, y: canvas.height - (platformHeight * 5), image: platformTwoImage }),
 
-    new PlatformTwo({x:22400, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
+    // new PlatformTwo({x:22400, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
+    new PlatformTwo({x:22600 - platformTwoWidth, y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
+    new PlatformTwo({x:22200 , y: canvas.height - (platformHeight * 5), image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 3), y: 1080-500, image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 4), y: 1080-375, image: platformTwoImage }),
     // new PlatformTwo({x:1000 + (platformTwoImage.width * 5), y: 1080-250, image: platformTwoImage }),
 ] 
 
+platformNull = [
+    new Platform({x: -platformTwoWidth*2, y: canvas.height - (platformHeight * 5), image: platformTwoImage}) // -- Hidden off screen.
+];
+
+movePlate1 = 18280
+movingPlatform1 = [
+    new Platform({x: movePlate1, y: canvas.height - platformHeight*5, image: platformTwoImage})
+];
+movingPlatform2 = [
+    // new Platform({x: 23000, y: canvas.height - platformHeight*5, image: platformTwoImage})
+];
+
+// -------------------------- BUILDINGS --------------------------
+let buildingNull = 3500
+buildingMCTC = [ new BuildingMCTC( buildingNull*2, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingRestaurant = [ new BuildingRestaurant(11500, canvas.height - Restaurant.height - 115, Restaurant)] 
+buildingCOYOTE = [ new BuildingCOYOTE (14500, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
+buildingFreelance = [ new BuildingFreelance(17800, canvas.height - Freelance.height - (platformHeight * 5)+10, Freelance)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingCBRE = [ new BuildingCBRE(21000 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
+buildingPRIME = [ new BuildingPRIME(25000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
+elementsPRIME = [ new ElementsPRIME(25000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
+buildingHGA = [ new BuildingHGA(35000, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
+
+// -------------------------- ARROWS & SIGNS --------------------------
+arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
+            new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
+            new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
+
+            new Sign({x: 40000+500, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
+
+            new Sign({x: 6450, y: canvas.height - signMCTCPic.height - 125, image: signMCTCPic}),
+            new Sign({x: 11100, y: canvas.height - signRestaurantPic.height - 125, image: signRestaurantPic}),
+            new Sign({x: 13900, y: canvas.height - signCoyotePic.height - 125, image: signCoyotePic}),
+            new Sign({x: 17200, y: canvas.height - (platformHeight * 4)- signVFXPic.height, image: signVFXPic}),
+            new Sign({x: 20400, y: canvas.height - signCBREPic.height - 125, image: signCBREPic}),
+            new Sign({x: 24500, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
+            new Sign({x: 34500, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
+] 
+
+// -------------------------- POWER UPS --------------------------
+powerUps1 = [
+    new powerUp({x: 26200, y: canvas.height - PowerUp1.height - 125, image: PowerUp1}),
+]
+powerUps2 = [
+    new powerUp({x: 30000, y: canvas.height - PowerUp2.height - 125, image: PowerUp2}),
+]
+powerUps3 = [
+    new powerUp({x: 36250, y: canvas.height - PowerUp3.height - 125, image: PowerUp3}),
+]
+// 26500, 27000, 29500
+// -------------------------- WIN BARS--------------------------
+WinBar2Item = [new Sign({x: 40000+600, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
+WinBar3Item = [new Sign({x: 40000+510, y: 700, image: WinBar3})]
+
+// -------------------------- BLACK/WHITE RECTS --------------------------
+blackItem = [new Black({x: -100, y: -100, image: WinBar3, opacity: 0 })]
+whiteItem = [new White({x: -100, y: -100, image: WinBar3, opacity: 0 })]
+
+// -------------------------- BUGS --------------------------
+bugs = [ 
+    new Bug({x: 5000, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 8950, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    // new Bug({x: 9080+(bugWidth*2), y: canvas.height - BugPic.height - 250, image: BugPic}),
+    new Bug({x: 9080+(bugWidth*4), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 9080+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 9080+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 9080+(bugWidth*7), y: canvas.height - BugPic.height - 125, image: BugPic}),
+
+    new Bug({x: 23000, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 23000, y: canvas.height - BugPic.height*2 - 125, image: BugPic}),
+    new Bug({x: 23000, y: canvas.height - BugPic.height*3 - 125, image: BugPic}),
+    new Bug({x: 23000, y: canvas.height - BugPic.height*4 - 125, image: BugPic}),
+    
+    new Bug({x: 27000, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 27000, y: canvas.height - BugPic.height*2 - 125, image: BugPic}),
+    new Bug({x: 27000, y: canvas.height - BugPic.height*3 - 125, image: BugPic}),
+    new Bug({x: 27000, y: canvas.height - BugPic.height*4 - 125, image: BugPic}),
+    // new Bug({x: 27000, y: canvas.height - BugPic.height*5 - 125, image: BugPic}),
+    
+    new Bug({x: 31500, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth*2), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth*3), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth*4), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 31500+(bugWidth*7), y: canvas.height - BugPic.height - 125, image: BugPic}),
+]
+
+moveBug1 = 13000
+movingBugs = [ 
+    new Bug({x: moveBug1, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    // new Bug({x: moveBug1+200, y: canvas.height - BugPic.height - 125, image: BugPic}),
+]
 
 
-clouds = [
-    // new Cloud({x: 20, y: 50, image: cloudImage}), new Cloud({x: 600, y: 150, image: cloudImage}), new Cloud({x: 1000, y: 0, image: cloudImage})
-];  
-}
-// -------- ELEMENT VARIABLES -------- //
+
+} // ------------------------------ END OF INIT() ------------------------------ //
+
 
 
 // ------ frame/refresh rate limiting code: variables: start ------ //
@@ -741,10 +799,6 @@ function animate() {
     foregrounds.forEach(foreground => { // loop through array of midgrounds
         foreground.draw() // ------ DRAW BACKGROUND
     })
-    clouds.forEach(cloud => { // loop through array of 
-        cloud.position.x += (0.2 * time)
-        cloud.draw() // ------ DRAW 
-    })
     buildingRestaurant.forEach(building => { 
         building.draw()    
         building.update()
@@ -774,6 +828,18 @@ function animate() {
         building.update()
     }) 
     buildingHGA.forEach(building => { // loop through array of buildingCBRE
+        building.draw()     // ------ DRAW buildingHGA
+        building.update()
+    }) 
+    powerUps1.forEach(building => { // loop through array of buildingCBRE
+        building.draw()     // ------ DRAW buildingHGA
+        building.update()
+    }) 
+    powerUps2.forEach(building => { // loop through array of buildingCBRE
+        building.draw()     // ------ DRAW buildingHGA
+        building.update()
+    }) 
+    powerUps3.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingHGA
         building.update()
     }) 
@@ -827,6 +893,13 @@ function animate() {
         platform.draw() // ------ DRAW PLATFORM
     })
     movingPlatform1.forEach(movingPlatform => { // loop through array of Platforms
+            movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
+            if (movingPlatform.position.x <= currentNullPosition+movePlate1 || movingPlatform.position.x >= currentNullPosition+(movePlate1+500) ){
+                direction *= -1; // ---- reverse platform move direction
+            }
+        movingPlatform.draw() // ------ DRAW PLATFORMd
+    })
+    movingPlatform2.forEach(movingPlatform => { // loop through array of Platforms
             movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
             if (movingPlatform.position.x <= currentNullPosition+movePlate1 || movingPlatform.position.x >= currentNullPosition+(movePlate1+500) ){
                 direction *= -1; // ---- reverse platform move direction
@@ -915,6 +988,10 @@ function animate() {
                 // console.log('platformNull', platformNull.position.x);
                 platform.position.x -= playerMovement
             });
+            movingPlatform2.forEach(platform => { // loop through array of platforms
+                // console.log('platformNull', platformNull.position.x);
+                platform.position.x -= playerMovement
+            });
             buildingRestaurant.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
@@ -937,6 +1014,15 @@ function animate() {
                 building.position.x -= (playerMovement)
             });
             buildingHGA.forEach(building => { // ---- building SCROLL ----
+                building.position.x -= (playerMovement)
+            });
+            powerUps1.forEach(building => { // ---- building SCROLL ----
+                building.position.x -= (playerMovement)
+            });
+            powerUps2.forEach(building => { // ---- building SCROLL ----
+                building.position.x -= (playerMovement)
+            });
+            powerUps3.forEach(building => { // ---- building SCROLL ----
                 building.position.x -= (playerMovement)
             });
             arrowArray.forEach(arrowArray => { // ---- building SCROLL ----
@@ -986,6 +1072,9 @@ function animate() {
             movingPlatform1.forEach(platform => { // loop through array of platforms
                 platform.position.x += playerMovement
             });
+            movingPlatform2.forEach(platform => { // loop through array of platforms
+                platform.position.x += playerMovement
+            });
             buildingRestaurant.forEach(building => { // ---- Building SCROLL ----
                 building.position.x += (playerMovement)
             });
@@ -1008,6 +1097,15 @@ function animate() {
                 building.position.x += (playerMovement)
             });
             buildingHGA.forEach(building => { // ---- Building SCROLL ----
+                building.position.x += (playerMovement)
+            });
+            powerUps1.forEach(building => { // ---- Building SCROLL ----
+                building.position.x += (playerMovement)
+            });
+            powerUps2.forEach(building => { // ---- Building SCROLL ----
+                building.position.x += (playerMovement)
+            });
+            powerUps3.forEach(building => { // ---- Building SCROLL ----
                 building.position.x += (playerMovement)
             });
             arrowArray.forEach(arrowArray => { // ---- Building SCROLL ----
@@ -1126,6 +1224,23 @@ function animate() {
                 player.velocity.y = 0   // player does not fall
         }
     })
+    // ------ MOVING PLATFORM COLLISION DETECTION ------ // 
+    movingPlatform2.forEach(platform => { 
+        if (//player bottom is <= than platform top
+            player.position.y + player.height <= platform.position.y
+            // player bottom + player Velocity >= with platform top side. (Player lands on platform)
+            && player.position.y + player.height + player.velocity.y >= platform.position.y
+            //  // players left side overlap with platform right side
+            && player.position.x <= platform.position.x + platform.width 
+            //  // players right side overlap with platform left side
+            && player.position.x + player.width >= platform.position.x 
+            // // players top overlap with platform bottom (Players head is under but still colliding with platform bottom)
+            && player.position.y + player.velocity.y <= platform.position.y + platform.height
+            ) 
+            {   
+                player.velocity.y = 0   // player does not fall
+        }
+    })
 
     bugs.forEach(bug => { 
         let adjust = 30
@@ -1193,10 +1308,27 @@ function animate() {
                 RestaurantModal = true
                 modalRestaurantOn()
                 // console.log('Freelance Modal On');
+            } else if (glowPowerUp1) {  // JUMP
+                powerUp1 = true
+                glowPlayer = true
+                jump = 55
+                console.log('powerUp1');
+            } else if (glowPowerUp2){   // SPEED
+                powerUp2 = true
+                glowPlayer = true
+                playerMovement = 40
+                // gravity = 2
+                console.log(gravity);
+                console.log('powerUp2');
+            } else if (glowPowerUp3){   // SIZE
+                powerUp3 = true
+                glowPlayer = true
+                playerSize = 4
+                player = new Player()
+                console.log('powerUp3');
             }
         }
     }
-    
     // building Restaurant
     buildingRestaurant.forEach(buildingRestaurant=> {
         if (
@@ -1295,9 +1427,51 @@ function animate() {
             glowHGA= false
         }
     })
+    //powerUps1
+    powerUps1.forEach(powerUp => {
+        if (
+            player.position.x < powerUp.position.x + powerUp.width // player left plat right
+            && player.position.x + player.width > powerUp.position.x   // player right plat left 
+            && player.position.y < powerUp.position.y + powerUp.height // player top UNDER plat bottom
+            && player.position.y + player.height > powerUp.position.y  // player bottom ABOVE plat top 
+        ) {
+            glowPowerUp1 = true
+            xPressed()
+        } else {
+            glowPowerUp1= false
+        }
+    })
+    //powerUps2
+    powerUps2.forEach(powerUp => {
+        if (
+            player.position.x < powerUp.position.x + powerUp.width // player left plat right
+            && player.position.x + player.width > powerUp.position.x   // player right plat left 
+            && player.position.y < powerUp.position.y + powerUp.height // player top UNDER plat bottom
+            && player.position.y + player.height > powerUp.position.y  // player bottom ABOVE plat top 
+        ) {
+            glowPowerUp2 = true
+            xPressed()
+        } else {
+            glowPowerUp2= false
+        }
+    })
+    //powerUps3
+    powerUps3.forEach(powerUp => {
+        if (
+            player.position.x < powerUp.position.x + powerUp.width // player left plat right
+            && player.position.x + player.width > powerUp.position.x   // player right plat left 
+            && player.position.y < powerUp.position.y + powerUp.height // player top UNDER plat bottom
+            && player.position.y + player.height > powerUp.position.y  // player bottom ABOVE plat top 
+        ) {
+            glowPowerUp3 = true
+            xPressed()
+        } else {
+            glowPowerUp3= false
+        }
+    })
 
     function pressX() {
-        if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC || glowFreelance || glowRestaurant){
+        if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC || glowFreelance || glowRestaurant || glowPowerUp1 || glowPowerUp2 || glowPowerUp3){
             pressX = true
             PressXDiv.style.opacity = 1;
             // console.log('glowing');
@@ -1311,7 +1485,7 @@ function animate() {
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
         // console.log('scroll', scrollOffset);
-    if (scrollOffset > 30000) {
+    if (scrollOffset > 40000) {
         // console.log('You WIN!!!');
         win = true
         winHandled = true
