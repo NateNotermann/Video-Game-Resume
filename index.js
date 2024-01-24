@@ -537,7 +537,7 @@ buildingFreelance = [ new BuildingFreelance(17800, canvas.height - Freelance.hei
 buildingCBRE = [ new BuildingCBRE(21000 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
 buildingPRIME = [ new BuildingPRIME(25000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
 elementsPRIME = [ new ElementsPRIME(25000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
-buildingHGA = [ new BuildingHGA(30000, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
+buildingHGA = [ new BuildingHGA(35000, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
 
 // -------------------------- ARROWS & SIGNS --------------------------
 arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
@@ -552,18 +552,18 @@ arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, Ar
             new Sign({x: 17200, y: canvas.height - (platformHeight * 4)- signVFXPic.height, image: signVFXPic}),
             new Sign({x: 20400, y: canvas.height - signCBREPic.height - 125, image: signCBREPic}),
             new Sign({x: 24500, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
-            new Sign({x: 29500, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
+            new Sign({x: 34500, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
 ] 
 
 // -------------------------- POWER UPS --------------------------
 powerUps1 = [
-    new powerUp({x: 26500, y: canvas.height - PowerUp1.height - 125, image: PowerUp1}),
+    new powerUp({x: 26200, y: canvas.height - PowerUp1.height - 125, image: PowerUp1}),
 ]
 powerUps2 = [
-    new powerUp({x: 28000, y: canvas.height - PowerUp2.height - 125, image: PowerUp2}),
+    new powerUp({x: 30000, y: canvas.height - PowerUp2.height - 125, image: PowerUp2}),
 ]
 powerUps3 = [
-    new powerUp({x: 31000, y: canvas.height - PowerUp3.height - 125, image: PowerUp3}),
+    new powerUp({x: 36250, y: canvas.height - PowerUp3.height - 125, image: PowerUp3}),
 ]
 // 26500, 27000, 29500
 // -------------------------- WIN BARS--------------------------
@@ -1269,22 +1269,23 @@ function animate() {
                 RestaurantModal = true
                 modalRestaurantOn()
                 // console.log('Freelance Modal On');
-            } else if (glowPowerUp1) {  // SIZE
+            } else if (glowPowerUp1) {  // JUMP
                 powerUp1 = true
                 glowPlayer = true
-                playerSize = 4
+                jump = 55
                 console.log('powerUp1');
-            } else if (glowPowerUp2){   // JUMP
+            } else if (glowPowerUp2){   // SPEED
                 powerUp2 = true
                 glowPlayer = true
-                jump = 55
+                playerMovement = 40
                 // gravity = 2
                 console.log(gravity);
                 console.log('powerUp2');
-            } else if (glowPowerUp3){   // SPEED    
+            } else if (glowPowerUp3){   // SIZE
                 powerUp3 = true
                 glowPlayer = true
-                playerMovement = 40
+                playerSize = 4
+                player = new Player()
                 console.log('powerUp3');
             }
         }
