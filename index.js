@@ -1231,7 +1231,7 @@ function animate() {
             ) 
             {   
                 loseReason = 'bug'
-                lose = true
+                lose = true 
                 whiteStart = true
                 loseModalOn()
                 init();
