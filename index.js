@@ -120,6 +120,16 @@ const closeButtonWin = document.getElementById('btnCloseWin');
 canvas.width =  1920  //visualViewport.width - 10
 canvas.height = 1080  //visualViewport.height - 10
 
+console.log('viewport');
+console.log(visualViewport.width);
+console.log(visualViewport.height);
+console.log('canvas');
+console.log(canvas.width);
+console.log(canvas.height);
+console.log('window');
+console.log(window.innerWidth);
+console.log(window.innerHeight);
+
 let canvasHeight = canvas.height
 let canvasWidth = canvas.width
 let windowInnerHeight = window.innerHeight  
