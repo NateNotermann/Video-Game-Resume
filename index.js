@@ -910,62 +910,7 @@ function moveRight(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ------ MAIN ANIMATION FUNCTION ------ //
-function animate() { 
-    // console.log(mobileModal); // constantly checks if mobileModal is T/F
-    // requestAnimationFrame(animate) 
-    // window.requestAnimationFrame(animate)
-    
-        // ------ frame/refresh rate limiting code: start ------ //
-        now = Date.now();
-        delta = now - then;
-        if (delta > interval) {   // ------------------ BRACKET START HERE --------------------------
-            then = now - (delta % interval);
-        // ------ frame/refresh rate limiting code: open bracket ------ //
-
-
-    animateRunning = true // variable to check if animate function is running
-    // requestAnimationFrame(animate)
-    
-    c.clearRect(0, 0, canvas.width, canvas.height)
-    // c.fillStyle = 'blue'
-    // c.fillRect(0, 0, canvas.width, canvas.height)
-    // console.log('sco', scrollOffset);
-
-    // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
-    // if(scrollOffset >= 25000){
-    //     playerMovement = 40
-    //         if (playerSize < 4){
-    //             playerSize =  4
-    //             player = new Player()
-    //             console.log('bigger');
-    //         }
-    //     glowPlayer = true
-
-    //     // if(number2 > playerColor.length -1) {
-    //     //  number2 = 0  
-    //     // } else {
-    //     //     number2 ++
-    //     // }
-    //     console.log('n2', number2);
-    //     console.log('speed boost');
-    // }
-    // console.log('psize', playerSize);
-    // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
-
+function drawStuff(){
 
     sky.forEach(sky => { // loop through array of Backgrounds
         sky.position.x += (0.3 * time)
@@ -1110,6 +1055,208 @@ function animate() {
     WinBar2Item.forEach(WinBar2 => { // loop through array of Platforms
         WinBar2.draw() // ------ DRAW PLATFORM
     })
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// ------ MAIN ANIMATION FUNCTION ------ //
+function animate() { 
+    // console.log(mobileModal); // constantly checks if mobileModal is T/F
+    // requestAnimationFrame(animate) 
+    // window.requestAnimationFrame(animate)
+    
+        // ------ frame/refresh rate limiting code: start ------ //
+        now = Date.now();
+        delta = now - then;
+        if (delta > interval) {   // ------------------ BRACKET START HERE --------------------------
+            then = now - (delta % interval);
+        // ------ frame/refresh rate limiting code: open bracket ------ //
+
+
+    animateRunning = true // variable to check if animate function is running
+    // requestAnimationFrame(animate)
+    
+    c.clearRect(0, 0, canvas.width, canvas.height)
+    // c.fillStyle = 'blue'
+    // c.fillRect(0, 0, canvas.width, canvas.height)
+    // console.log('sco', scrollOffset);
+
+    // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
+    // if(scrollOffset >= 25000){
+    //     playerMovement = 40
+    //         if (playerSize < 4){
+    //             playerSize =  4
+    //             player = new Player()
+    //             console.log('bigger');
+    //         }
+    //     glowPlayer = true
+
+    //     // if(number2 > playerColor.length -1) {
+    //     //  number2 = 0  
+    //     // } else {
+    //     //     number2 ++
+    //     // }
+    //     console.log('n2', number2);
+    //     console.log('speed boost');
+    // }
+    // console.log('psize', playerSize);
+    // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
+
+    // ------ NEW DRAW FUNCTION ------ //
+     drawStuff()       
+    // sky.forEach(sky => { // loop through array of Backgrounds
+    //     sky.position.x += (0.3 * time)
+    //     if (sky.position.x > canvas.width) {
+    //         sky.position.x = -skyWidth;
+    //       }
+    //     sky.draw() // ------ DRAW BACKGROUND
+    // })
+    // backgrounds.forEach(background => { // loop through array of Backgrounds
+    //     background.draw() // ------ DRAW BACKGROUND
+    // })
+    // midgrounds.forEach(midground => { // loop through array of midgrounds
+    //     midground.draw() // ------ DRAW BACKGROUND
+    // })
+    // foregrounds.forEach(foreground => { // loop through array of midgrounds
+    //     foreground.draw() // ------ DRAW BACKGROUND
+    // })
+    // buildingRestaurant.forEach(building => { 
+    //     building.draw()    
+    //     building.update()
+    // }) 
+    // buildingMCTC.forEach(building => { // loop through array of buildingMCTC
+    //     building.draw()     // ------ DRAW buildingMCTC
+    //     building.update()
+    // }) 
+    // buildingFreelance.forEach(building => { // loop through array of buildingMCTC
+    //     building.draw()     // ------ DRAW buildingMCTC
+    //     building.update()
+    // }) 
+    // buildingCOYOTE.forEach(building => { // loop through array of buildingCOYOTE
+    //     building.draw()     // ------ DRAW buildingCOYOTE
+    //     building.update()
+    // }) 
+    // buildingCBRE.forEach(building => { // loop through array of buildingCBRE
+    //     building.draw()     // ------ DRAW buildingCBRE
+    //     building.update()
+    // }) 
+    // elementsPRIME.forEach(element => { // loop through array of buildingCBRE
+    //     element.draw()     // ------ DRAW buildingCBRE
+    //     element.update()
+    // }) 
+    // buildingPRIME.forEach(building => { // loop through array of buildingCBRE
+    //     building.draw()     // ------ DRAW buildingCBRE
+    //     building.update()
+    // }) 
+    // buildingHGA.forEach(building => { // loop through array of buildingCBRE
+    //     building.draw()     // ------ DRAW buildingHGA
+    //     building.update()
+    // }) 
+    // powerUps1.forEach(building => { // loop through array of buildingCBRE
+    //     building.draw()     // ------ DRAW buildingHGA
+    //     building.update()
+    // }) 
+    // powerUps2.forEach(building => { // loop through array of buildingCBRE
+    //     building.draw()     // ------ DRAW buildingHGA
+    //     building.update()
+    // }) 
+    // powerUps3.forEach(building => { // loop through array of buildingCBRE
+    //     building.draw()     // ------ DRAW buildingHGA
+    //     building.update()
+    // }) 
+    // arrowArray.forEach(arrowArray1 => { // loop arrow sign frames
+    //     arrowArray1.draw() 
+    //     arrowArray1.update()
+    // })
+    
+    // WinBar3Item.forEach(WinBar3 => { // loop through array of Platforms
+    //         WinBar3.position.y += 2 * direction2;
+    //     if(WinBar3.position.y <= (canvas.height - WinBar3.height - 425) 
+    //     || WinBar3.position.y >= (canvas.height - WinBar3.height - 125)){
+    //         direction2 *= -1
+    //     }
+    //     WinBar3.draw() // ------ DRAW PLATFORMd
+    // })
+    
+    // whiteItem.forEach(item => { // White rectangle 
+    //     if (whiteStart ){
+    //         item.opacity = 1
+    //         win = false
+    //         lose = false
+    //         whiteStart = false
+    //     } else if (item.opacity > 0.01){
+    //         item.opacity -= 0.01
+    //     } else {
+    //         item.opacity = 0
+    //     }
+    //     // console.log(item.opacity);
+    //     item.draw() 
+    // })
+
+    // blackItem.forEach(item => { // Black rectangle 
+    //     if (blackStart){
+    //         item.opacity += 0.01
+    //         // console.log('black win');
+    //         win = false
+    //         lose = false
+    //     } else {
+    //         item.opacity = 0
+    //     }
+    //     item.draw() 
+    // })
+
+    // platformTwos.forEach(plate => {
+    //     plate.draw()
+    // })
+    // platforms.forEach(platform => { // loop through array of Platforms
+    //     platform.draw() // ------ DRAW PLATFORM
+    // })
+    // platformNull.forEach(platform => { // loop through array of Platforms
+    //     platform.draw() // ------ DRAW PLATFORM
+    // })
+    // movingPlatform1.forEach(movingPlatform => { // loop through array of Platforms
+    //         movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
+    //         if (movingPlatform.position.x <= currentNullPosition+movePlate1 || movingPlatform.position.x >= currentNullPosition+(movePlate1+500) ){
+    //             direction *= -1; // ---- reverse platform move direction
+    //         }
+    //     movingPlatform.draw() // ------ DRAW PLATFORMd
+    // })
+    // movingPlatform2.forEach(movingPlatform => { // loop through array of Platforms
+    //         movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
+    //         if (movingPlatform.position.x <= currentNullPosition+movePlate1 || movingPlatform.position.x >= currentNullPosition+(movePlate1+500) ){
+    //             direction *= -1; // ---- reverse platform move direction
+    //         }
+    //     movingPlatform.draw() // ------ DRAW PLATFORMd
+    // })
+
+    // bugs.forEach(bug => { // loop through array of 
+    //     bug.draw() // ------ DRAW 
+    // })
+    // movingBugs.forEach(bug => { // loop through array of 
+    //     bug.position.x += 2 * direction; // ------ Platform Move Loop -------         
+    //     if (bug.position.x <= currentNullPosition+moveBug1 || bug.position.x >= currentNullPosition+(moveBug1+500) ){
+    //         direction *= -1; // ---- reverse platform move direction
+    //     }
+    //     // console.log('Null', currentNullPosition + moveBug1, 'bug', bug.position.x, 'moveBug1', moveBug1, 'currentNullPosition+(moveBug1+500)', currentNullPosition+(moveBug1+500));
+    //     // console.log(bug.position.x);
+    //     bug.draw() // ------ DRAW 
+    // })
+
+    //    player.update() // ------ PLAYER UPDATE. Call this last, to render in front
+
+    // WinBar2Item.forEach(WinBar2 => { // loop through array of Platforms
+    //     WinBar2.draw() // ------ DRAW PLATFORM
+    // })
 
     // console.log('player X:', player.position.x + scrollOffset);
     // ------------ PLAYER MOVEMENT ------------
