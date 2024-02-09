@@ -1281,6 +1281,8 @@ function animate() {
             player.currentCropWidth = player.sprites.run.cropWidth
             player.width = player.sprites.run.width
 
+            hitSprite()
+
     // ------------ IF VELOCITY IS 0, then.. ------------
     } else { // If player is NOT moving left/right then..
         player.velocity.x = 0
@@ -1472,6 +1474,7 @@ function animate() {
                 player.width = player.sprites.stand.width
             }
         }
+        hitSprite()
         // console.log('scrollOffset:', scrollOffset); // -------- check how much scroll is currently offsetting
     }  // ------ frame/refresh rate limiting code: closing bracket ------ //
     }
@@ -2393,7 +2396,9 @@ closeButtonMobile.addEventListener('click', function() {
 
 function hitTaken() {
     if(canHurt){
+        // Tempsprite = player.currentSprite
        health -= 10
+    //    player.currentSprite = player.sprites.stand.left
        canHurt = false
        console.log('Hit taken!');
        gsap.to('#player1Health', {
@@ -2403,7 +2408,7 @@ function hitTaken() {
        setTimeout(()=> {
            canHurt = true
            console.log('can hurt again');
-       }, 1000)
+       }, 500)
    }
    console.log('health:', health);
 }
@@ -2417,7 +2422,14 @@ function death(){
     } 
 }
 
-
+function hitSprite(){
+    if(!canHurt){
+        player.currentSprite = player.sprites.run.left
+        player.currentCropWidth = player.sprites.run.cropWidth
+        player.width = player.sprites.run.width
+        console.log('hit sprite');
+    }
+}
 
 function handleClick() {
     if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !mobileModal){          
