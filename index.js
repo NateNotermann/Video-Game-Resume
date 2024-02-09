@@ -95,20 +95,20 @@ const closeButtonWin = document.getElementById('btnCloseWin');
 canvas.width =  1920  //visualViewport.width - 10
 canvas.height = 1080  //visualViewport.height - 10
 
-console.log('viewport');
-console.log(visualViewport.width);
-console.log(visualViewport.height);
-console.log('canvas');
-console.log(canvas.width);
-console.log(canvas.height);
-console.log('window');
-console.log(window.innerWidth);
-console.log(window.innerHeight);
+// console.log('viewport');
+// console.log(visualViewport.width);
+// console.log(visualViewport.height);
+// console.log('canvas');
+// console.log(canvas.width);
+// console.log(canvas.height);
+// console.log('window');
+// console.log(window.innerWidth);
+// console.log(window.innerHeight);
 
-let canvasHeight = canvas.height
-let canvasWidth = canvas.width
-let windowInnerHeight = window.innerHeight  
-let windowInnerWidth = window.innerWidth
+// let canvasHeight = canvas.height
+// let canvasWidth = canvas.width
+// let windowInnerHeight = window.innerHeight  
+// let windowInnerWidth = window.innerWidth
 
 // document.onreadystatechange = function() {
 //     console.log('document.onreadystatechange function');
@@ -164,9 +164,9 @@ window.onload = function () {
 // canvas.height = windowInnerHeight //  aspectRatio  //window.innerHeight  // canvas.height 687
 
 // global variables. 
-let gravity = 2
+let gravity = 1.5
 const floor = 125 // or platformImage.height. pixel from the bottom player stops at
-let jump = 35 // amount player should jump
+let jump = 40 // amount player should jump
 let playerMovement = 20 // 20 //  amount player moves left and right
 const platformWidth = 2500 //579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
