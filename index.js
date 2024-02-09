@@ -489,6 +489,9 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
     new Platform({x: (platformWidth* 6) - 1000, y: canvas.height - 125, image: platformImage}), // Platform 8
     new Platform({x: (platformWidth* 7) - 1000, y: canvas.height - 125, image: platformImage}), // Platform 8
 
+    // -------- This is the new platform to cover the second ground hole -------- //
+    new Platform({x: (platformWidth* 8) - 1000, y: canvas.height - 125, image: platformImage}), // Platform 8
+
     new Platform({x: platformWidth* 8, y: canvas.height - 125, image: platformImage}), // Platform 9
     
     new Platform({x: platformWidth* 9, y: canvas.height - 125, image: platformImage}), // Platform 10
@@ -2424,9 +2427,9 @@ function death(){
 
 function hitSprite(){
     if(!canHurt){
-        player.currentSprite = player.sprites.run.left
-        player.currentCropWidth = player.sprites.run.cropWidth
-        player.width = player.sprites.run.width
+        // player.currentSprite = player.sprites.run.left
+        // player.currentCropWidth = player.sprites.run.cropWidth
+        // player.width = player.sprites.run.width
         console.log('hit sprite');
     }
 }
