@@ -426,7 +426,7 @@ function init() {
     jump = 35
     playerSize = 2
     playerMovement = 20
-
+    health = 100
     modalWin.style.display = 'none'
     if(win || lose){
         setTimeout(()=> {
@@ -1575,24 +1575,12 @@ function animate() {
             player.position.x + player.width >= bug.position.x + adjust && // Bug Right
             player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
             ) 
-            {   
-                if(canHurt){
-                    health -= 5
-                    canHurt = false
-                    console.log('Ouch!!');
-                    // -- after health lowered, wait 1 sec before player can get hurt again
-                    setTimeout(()=> {
-                        canHurt = true
-                        console.log('can hurt again');
-                    }, 1000)
-                }
-                console.log('health:', health);
-                // loseReason = 'bug'
-                // lose = true 
-                // whiteStart = true
-                // loseModalOn()
-                // init();
-            } 
+        {   
+            hitTaken()
+        }
+
+            loseReason = 'bug'
+            death()
         }) 
         
         movingBugs.forEach(bug => { 
@@ -1603,13 +1591,16 @@ function animate() {
                 player.position.x + player.width >= bug.position.x + adjust && // Bug Right
                 player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
                 ) 
-                {   
-                    loseReason = 'bug'
-                    lose = true
-                    whiteStart = true
-                    loseModalOn()
-                    init();
+            {   
+                hitTaken() 
+                // loseReason = 'bug'
+                // lose = true
+                // whiteStart = true
+                // loseModalOn()
+                // init();
             } 
+                loseReason = 'bug'
+                death()
     }) 
 
 
@@ -2399,6 +2390,31 @@ closeButtonMobile.addEventListener('click', function() {
    // Reset visual feedback if needed
 //    touchArea.style.backgroundColor = '#ccc';
  }
+
+function hitTaken() {
+    if(canHurt){
+       health -= 10
+       canHurt = false
+       console.log('Hit taken!');
+       // -- after health lowered, wait 1 sec before player can get hurt again
+       setTimeout(()=> {
+           canHurt = true
+           console.log('can hurt again');
+       }, 1000)
+   }
+   console.log('health:', health);
+}
+
+function death(){
+    if(health <= 0) {
+        lose = true 
+        whiteStart = true
+        loseModalOn()
+        init();
+    } 
+}
+
+
 
 function handleClick() {
     if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !mobileModal){          
