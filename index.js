@@ -2348,7 +2348,9 @@ closeButtonMobile.addEventListener('click', function() {
    var endY = event.changedTouches[0].clientY;
 
    // Check for a swipe or tap gesture based on start and end coordinates
-   if (Math.abs(endX - startX) < 10 && Math.abs(endY - startY) < 10) {
+   // --------------- turned off checking for swipe ------------ //
+//    if (Math.abs(endX - startX) < 50 && Math.abs(endY - startY) < 50) {
+    // --------------- turned off checking for swipe ------------ //
      // It's a tap gesture
     //  alert('Tap!');
     // rightPressed = false
@@ -2375,11 +2377,12 @@ closeButtonMobile.addEventListener('click', function() {
         // console.log(id, 'off');
     }
     // console.log('end touch');
-   } else {
+    // --------------- turned off checking for swipe ------------ //
+//    } else {
      // It's a swipe gesture
     //  alert('Swipe!');
-   }
-
+//    }
+// --------------- turned off checking for swipe ------------ //
    // Reset visual feedback if needed
 //    touchArea.style.backgroundColor = '#ccc';
  }
