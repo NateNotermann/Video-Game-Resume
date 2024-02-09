@@ -688,3 +688,10 @@ h2 {
     justify-content:space-around
   }
 }
+
+
+.player1 {
+  background: linear-gradient(90deg, #f4033f, #f441ee, #3bffff, #03a9f4, #f4033f);
+  background-size: 50%;
+  animation: p2HealthGradient 4s linear infinite;
+}
