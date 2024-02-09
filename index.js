@@ -120,10 +120,20 @@ const closeButtonWin = document.getElementById('btnCloseWin');
 canvas.width =  1920  //visualViewport.width - 10
 canvas.height = 1080  //visualViewport.height - 10
 
-let canvasHeight = canvas.height
-let canvasWidth = canvas.width
-let windowInnerHeight = window.innerHeight  
-let windowInnerWidth = window.innerWidth
+// console.log('viewport');
+// console.log(visualViewport.width);
+// console.log(visualViewport.height);
+// console.log('canvas');
+// console.log(canvas.width);
+// console.log(canvas.height);
+// console.log('window');
+// console.log(window.innerWidth);
+// console.log(window.innerHeight);
+
+// let canvasHeight = canvas.height
+// let canvasWidth = canvas.width
+// let windowInnerHeight = window.innerHeight  
+// let windowInnerWidth = window.innerWidth
 
 // document.onreadystatechange = function() {
 //     console.log('document.onreadystatechange function');
@@ -179,10 +189,12 @@ window.onload = function () {
 // canvas.height = windowInnerHeight //  aspectRatio  //window.innerHeight  // canvas.height 687
 
 // global variables. 
-let gravity = 2
+let gravity = 1.5
 const floor = 125 // or platformImage.height. pixel from the bottom player stops at
-let jump = 35 // amount player should jump
+let jump = 40 // amount player should jump
 let playerMovement = 20 // 20 //  amount player moves left and right
+let health = 100
+let canHurt = true
 const platformWidth = 2500 //579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
 
@@ -439,7 +451,10 @@ function init() {
     jump = 35
     playerSize = 2
     playerMovement = 20
-
+    health = 100
+    gsap.to('#player1Health', {
+        width: health + '%'
+    })
     modalWin.style.display = 'none'
     if(win || lose){
         setTimeout(()=> {
@@ -502,6 +517,9 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
     new Platform({x: (platformWidth* 6) - 1000, y: canvas.height - 125, image: platformImage}), // Platform 8
     new Platform({x: (platformWidth* 7) - 1000, y: canvas.height - 125, image: platformImage}), // Platform 8
 
+    // -------- This is the new platform to cover the second ground hole -------- //
+    new Platform({x: (platformWidth* 8) - 1000, y: canvas.height - 125, image: platformImage}), // Platform 8
+
     new Platform({x: platformWidth* 8, y: canvas.height - 125, image: platformImage}), // Platform 9
     
     new Platform({x: platformWidth* 9, y: canvas.height - 125, image: platformImage}), // Platform 10
@@ -523,6 +541,7 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
 // -------------------------- SMALL PLATFORMS --------------------------
 platformTwos = [
     new PlatformTwo({x:8500, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
+    new PlatformTwo({x:3003, y: canvas.height - platformHeight, image: platformTwoImage }),
     new PlatformTwo({x:8500+platformTwoWidth, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
     new PlatformTwo({x:8500+platformTwoWidth, y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
     new PlatformTwo({x:8500+(platformTwoWidth*3), y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
@@ -606,6 +625,9 @@ bugs = [
     new Bug({x: 5000, y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 8950, y: canvas.height - BugPic.height - 125, image: BugPic}),
     // new Bug({x: 9080+(bugWidth*2), y: canvas.height - BugPic.height - 250, image: BugPic}),
+    new Bug({x: 18000, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 18000, y: canvas.height - BugPic.height*2 - 125, image: BugPic}),
+    
     new Bug({x: 9080+(bugWidth*4), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
@@ -637,8 +659,6 @@ movingBugs = [
     new Bug({x: moveBug1, y: canvas.height - BugPic.height - 125, image: BugPic}),
     // new Bug({x: moveBug1+200, y: canvas.height - BugPic.height - 125, image: BugPic}),
 ]
-
-
 
 } // ------------------------------ END OF INIT() ------------------------------ //
 
@@ -741,49 +761,178 @@ animateTitle(array);
 // ---------------- Player GLOW ---------------- //
 
 
-// ------ MAIN ANIMATION FUNCTION ------ //
-function animate() { 
-    // console.log(mobileModal); // constantly checks if mobileModal is T/F
-    // requestAnimationFrame(animate) 
-    // window.requestAnimationFrame(animate)
-    
-        // ------ frame/refresh rate limiting code: start ------ //
-        now = Date.now();
-        delta = now - then;
-        if (delta > interval) {   // ------------------ BRACKET START HERE --------------------------
-            then = now - (delta % interval);
-        // ------ frame/refresh rate limiting code: open bracket ------ //
 
 
-    animateRunning = true // variable to check if animate function is running
-    // requestAnimationFrame(animate)
-    
-    c.clearRect(0, 0, canvas.width, canvas.height)
-    // c.fillStyle = 'blue'
-    // c.fillRect(0, 0, canvas.width, canvas.height)
-    // console.log('sco', scrollOffset);
+// ------ New Move Left function
+function moveLeft(){
+     
+    platformTwos.forEach(platformTwo => { // loop through array of platforms
+        platformTwo.position.x -= playerMovement
+    });
+    platforms.forEach(platform => { // loop through array of platforms
+        // platform.draw() // ------ PLATFORM INITIAL DRAW 
+        platform.position.x -= playerMovement
+    });
+    platformNull.forEach(platform => { // loop through array of platforms
+        // platform.draw() // ------ PLATFORM INITIAL DRAW 
+        platform.position.x -= playerMovement
+        currentNullPosition -= playerMovement
+    });
+    movingPlatform1.forEach(platform => { // loop through array of platforms
+        // console.log('platformNull', platformNull.position.x);
+        platform.position.x -= playerMovement
+    });
+    movingPlatform2.forEach(platform => { // loop through array of platforms
+        // console.log('platformNull', platformNull.position.x);
+        platform.position.x -= playerMovement
+    });
+    buildingRestaurant.forEach(building => { // ---- building SCROLL ----
+        building.position.x -= (playerMovement)
+    });
+    buildingMCTC.forEach(building => { // ---- building SCROLL ----
+        building.position.x -= (playerMovement)
+    });
+    buildingFreelance.forEach(building => { // ---- building SCROLL ----
+        building.position.x -= (playerMovement)
+    });
+    buildingCOYOTE.forEach(building => { // ---- building SCROLL ----
+        building.position.x -= (playerMovement)
+    });
+    buildingCBRE.forEach(building => { // ---- building SCROLL ----
+        building.position.x -= (playerMovement)
+    });
+    elementsPRIME.forEach(element => { // ---- building SCROLL ----
+        element.position.x -= (playerMovement)
+    });
+    buildingPRIME.forEach(building => { // ---- building SCROLL ----
+        building.position.x -= (playerMovement)
+    });
+    buildingHGA.forEach(building => { // ---- building SCROLL ----
+        building.position.x -= (playerMovement)
+    });
+    powerUps1.forEach(building => { // ---- building SCROLL ----
+        building.position.x -= (playerMovement)
+    });
+    powerUps2.forEach(building => { // ---- building SCROLL ----
+        building.position.x -= (playerMovement)
+    });
+    powerUps3.forEach(building => { // ---- building SCROLL ----
+        building.position.x -= (playerMovement)
+    });
+    arrowArray.forEach(arrowArray => { // ---- building SCROLL ----
+        arrowArray.position.x -= (playerMovement)
+    });
+    WinBar2Item.forEach(WinBar2 => { // ---- building SCROLL ----
+        WinBar2.position.x -= (playerMovement)
+    });
+    WinBar3Item.forEach(WinBar3 => { // ---- building SCROLL ----
+        WinBar3.position.x -= (playerMovement)
+    });
+    bugs.forEach(bug => { // ---- building SCROLL ----
+        bug.position.x -= (playerMovement)
+    });
+    movingBugs.forEach(bug => { // ---- building SCROLL ----
+        bug.position.x -= (playerMovement)
+    });
+    sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
+        sky.position.x -= (playerMovement/30)
+    });
+    backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
+        background.position.x -= (playerMovement/8)
+    });
+    midgrounds.forEach(midground => { // ---- BACKGROUND SCROLL ----
+        midground.position.x -= (playerMovement/6)
+    });
+    foregrounds.forEach(foreground => { // ---- BACKGROUND SCROLL ----
+        foreground.position.x -= (playerMovement/2)
+    });
+}
 
-    // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
-    // if(scrollOffset >= 25000){
-    //     playerMovement = 40
-    //         if (playerSize < 4){
-    //             playerSize =  4
-    //             player = new Player()
-    //             console.log('bigger');
-    //         }
-    //     glowPlayer = true
 
-    //     // if(number2 > playerColor.length -1) {
-    //     //  number2 = 0  
-    //     // } else {
-    //     //     number2 ++
-    //     // }
-    //     console.log('n2', number2);
-    //     console.log('speed boost');
-    // }
-    // console.log('psize', playerSize);
-    // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
+// ------- New move right function ------- //
+function moveRight(){
+    platformTwos.forEach(platformTwo => { // loop through array of platforms
+        platformTwo.position.x += playerMovement
+    });
+    platforms.forEach(platform => { // loop through array of platforms
+        // platform.draw() // ------ PLATFORM INITIAL DRAW 
+        platform.position.x += playerMovement
+    });
+    platformNull.forEach(platform => { // loop through array of platforms
+        platform.position.x += playerMovement
+        currentNullPosition += playerMovement
+    });
+    movingPlatform1.forEach(platform => { // loop through array of platforms
+        platform.position.x += playerMovement
+    });
+    movingPlatform2.forEach(platform => { // loop through array of platforms
+        platform.position.x += playerMovement
+    });
+    buildingRestaurant.forEach(building => { // ---- Building SCROLL ----
+        building.position.x += (playerMovement)
+    });
+    buildingMCTC.forEach(building => { // ---- Building SCROLL ----
+        building.position.x += (playerMovement)
+    });
+    buildingFreelance.forEach(building => { // ---- Building SCROLL ----
+        building.position.x += (playerMovement)
+    });
+    buildingCOYOTE.forEach(building => { // ---- Building SCROLL ----
+        building.position.x += (playerMovement)
+    });
+    buildingCBRE.forEach(building => { // ---- Building SCROLL ----
+        building.position.x += (playerMovement)
+    });
+    elementsPRIME.forEach(element => { // ---- Building SCROLL ----
+        element.position.x += (playerMovement)
+    });
+    buildingPRIME.forEach(building => { // ---- Building SCROLL ----
+        building.position.x += (playerMovement)
+    });
+    buildingHGA.forEach(building => { // ---- Building SCROLL ----
+        building.position.x += (playerMovement)
+    });
+    powerUps1.forEach(building => { // ---- Building SCROLL ----
+        building.position.x += (playerMovement)
+    });
+    powerUps2.forEach(building => { // ---- Building SCROLL ----
+        building.position.x += (playerMovement)
+    });
+    powerUps3.forEach(building => { // ---- Building SCROLL ----
+        building.position.x += (playerMovement)
+    });
+    arrowArray.forEach(arrowArray => { // ---- Building SCROLL ----
+        arrowArray.position.x += (playerMovement)
+    });
+    WinBar3Item.forEach(WinBar3 => { // ---- Building SCROLL ----
+        WinBar3.position.x += (playerMovement)
+    });
+    WinBar2Item.forEach(WinBar2 => { // ---- Building SCROLL ----
+        WinBar2.position.x += (playerMovement)
+    });
+    bugs.forEach(bug => { // ---- Building SCROLL ----
+        bug.position.x += (playerMovement)
+    });
+    movingBugs.forEach(bug => { // ---- Building SCROLL ----
+        bug.position.x += (playerMovement)
+    });
+    sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
+        sky.position.x += (playerMovement/30)
+    });
+    backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
+        background.position.x += (playerMovement/8)
+    });
+    midgrounds.forEach(midground => { // ---- BACKGROUND SCROLL ----
+        midground.position.x += (playerMovement/6)
+    });
+    foregrounds.forEach(foreground => { // ---- BACKGROUND SCROLL ----
+        foreground.position.x += (playerMovement/2)
+    });
+}
 
+
+
+function drawStuff(){
 
     sky.forEach(sky => { // loop through array of Backgrounds
         sky.position.x += (0.3 * time)
@@ -929,6 +1078,208 @@ function animate() {
         WinBar2.draw() // ------ DRAW PLATFORM
     })
 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// ------ MAIN ANIMATION FUNCTION ------ //
+function animate() { 
+    // console.log(mobileModal); // constantly checks if mobileModal is T/F
+    // requestAnimationFrame(animate) 
+    // window.requestAnimationFrame(animate)
+    
+        // ------ frame/refresh rate limiting code: start ------ //
+        now = Date.now();
+        delta = now - then;
+        if (delta > interval) {   // ------------------ BRACKET START HERE --------------------------
+            then = now - (delta % interval);
+        // ------ frame/refresh rate limiting code: open bracket ------ //
+
+
+    animateRunning = true // variable to check if animate function is running
+    // requestAnimationFrame(animate)
+    
+    c.clearRect(0, 0, canvas.width, canvas.height)
+    // c.fillStyle = 'blue'
+    // c.fillRect(0, 0, canvas.width, canvas.height)
+    // console.log('sco', scrollOffset);
+
+    // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
+    // if(scrollOffset >= 25000){
+    //     playerMovement = 40
+    //         if (playerSize < 4){
+    //             playerSize =  4
+    //             player = new Player()
+    //             console.log('bigger');
+    //         }
+    //     glowPlayer = true
+
+    //     // if(number2 > playerColor.length -1) {
+    //     //  number2 = 0  
+    //     // } else {
+    //     //     number2 ++
+    //     // }
+    //     console.log('n2', number2);
+    //     console.log('speed boost');
+    // }
+    // console.log('psize', playerSize);
+    // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
+
+    // ------ NEW DRAW FUNCTION ------ //
+     drawStuff()       
+    // sky.forEach(sky => { // loop through array of Backgrounds
+    //     sky.position.x += (0.3 * time)
+    //     if (sky.position.x > canvas.width) {
+    //         sky.position.x = -skyWidth;
+    //       }
+    //     sky.draw() // ------ DRAW BACKGROUND
+    // })
+    // backgrounds.forEach(background => { // loop through array of Backgrounds
+    //     background.draw() // ------ DRAW BACKGROUND
+    // })
+    // midgrounds.forEach(midground => { // loop through array of midgrounds
+    //     midground.draw() // ------ DRAW BACKGROUND
+    // })
+    // foregrounds.forEach(foreground => { // loop through array of midgrounds
+    //     foreground.draw() // ------ DRAW BACKGROUND
+    // })
+    // buildingRestaurant.forEach(building => { 
+    //     building.draw()    
+    //     building.update()
+    // }) 
+    // buildingMCTC.forEach(building => { // loop through array of buildingMCTC
+    //     building.draw()     // ------ DRAW buildingMCTC
+    //     building.update()
+    // }) 
+    // buildingFreelance.forEach(building => { // loop through array of buildingMCTC
+    //     building.draw()     // ------ DRAW buildingMCTC
+    //     building.update()
+    // }) 
+    // buildingCOYOTE.forEach(building => { // loop through array of buildingCOYOTE
+    //     building.draw()     // ------ DRAW buildingCOYOTE
+    //     building.update()
+    // }) 
+    // buildingCBRE.forEach(building => { // loop through array of buildingCBRE
+    //     building.draw()     // ------ DRAW buildingCBRE
+    //     building.update()
+    // }) 
+    // elementsPRIME.forEach(element => { // loop through array of buildingCBRE
+    //     element.draw()     // ------ DRAW buildingCBRE
+    //     element.update()
+    // }) 
+    // buildingPRIME.forEach(building => { // loop through array of buildingCBRE
+    //     building.draw()     // ------ DRAW buildingCBRE
+    //     building.update()
+    // }) 
+    // buildingHGA.forEach(building => { // loop through array of buildingCBRE
+    //     building.draw()     // ------ DRAW buildingHGA
+    //     building.update()
+    // }) 
+    // powerUps1.forEach(building => { // loop through array of buildingCBRE
+    //     building.draw()     // ------ DRAW buildingHGA
+    //     building.update()
+    // }) 
+    // powerUps2.forEach(building => { // loop through array of buildingCBRE
+    //     building.draw()     // ------ DRAW buildingHGA
+    //     building.update()
+    // }) 
+    // powerUps3.forEach(building => { // loop through array of buildingCBRE
+    //     building.draw()     // ------ DRAW buildingHGA
+    //     building.update()
+    // }) 
+    // arrowArray.forEach(arrowArray1 => { // loop arrow sign frames
+    //     arrowArray1.draw() 
+    //     arrowArray1.update()
+    // })
+    
+    // WinBar3Item.forEach(WinBar3 => { // loop through array of Platforms
+    //         WinBar3.position.y += 2 * direction2;
+    //     if(WinBar3.position.y <= (canvas.height - WinBar3.height - 425) 
+    //     || WinBar3.position.y >= (canvas.height - WinBar3.height - 125)){
+    //         direction2 *= -1
+    //     }
+    //     WinBar3.draw() // ------ DRAW PLATFORMd
+    // })
+    
+    // whiteItem.forEach(item => { // White rectangle 
+    //     if (whiteStart ){
+    //         item.opacity = 1
+    //         win = false
+    //         lose = false
+    //         whiteStart = false
+    //     } else if (item.opacity > 0.01){
+    //         item.opacity -= 0.01
+    //     } else {
+    //         item.opacity = 0
+    //     }
+    //     // console.log(item.opacity);
+    //     item.draw() 
+    // })
+
+    // blackItem.forEach(item => { // Black rectangle 
+    //     if (blackStart){
+    //         item.opacity += 0.01
+    //         // console.log('black win');
+    //         win = false
+    //         lose = false
+    //     } else {
+    //         item.opacity = 0
+    //     }
+    //     item.draw() 
+    // })
+
+    // platformTwos.forEach(plate => {
+    //     plate.draw()
+    // })
+    // platforms.forEach(platform => { // loop through array of Platforms
+    //     platform.draw() // ------ DRAW PLATFORM
+    // })
+    // platformNull.forEach(platform => { // loop through array of Platforms
+    //     platform.draw() // ------ DRAW PLATFORM
+    // })
+    // movingPlatform1.forEach(movingPlatform => { // loop through array of Platforms
+    //         movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
+    //         if (movingPlatform.position.x <= currentNullPosition+movePlate1 || movingPlatform.position.x >= currentNullPosition+(movePlate1+500) ){
+    //             direction *= -1; // ---- reverse platform move direction
+    //         }
+    //     movingPlatform.draw() // ------ DRAW PLATFORMd
+    // })
+    // movingPlatform2.forEach(movingPlatform => { // loop through array of Platforms
+    //         movingPlatform.position.x += 2 * direction; // ------ Platform Move Loop -------         
+    //         if (movingPlatform.position.x <= currentNullPosition+movePlate1 || movingPlatform.position.x >= currentNullPosition+(movePlate1+500) ){
+    //             direction *= -1; // ---- reverse platform move direction
+    //         }
+    //     movingPlatform.draw() // ------ DRAW PLATFORMd
+    // })
+
+    // bugs.forEach(bug => { // loop through array of 
+    //     bug.draw() // ------ DRAW 
+    // })
+    // movingBugs.forEach(bug => { // loop through array of 
+    //     bug.position.x += 2 * direction; // ------ Platform Move Loop -------         
+    //     if (bug.position.x <= currentNullPosition+moveBug1 || bug.position.x >= currentNullPosition+(moveBug1+500) ){
+    //         direction *= -1; // ---- reverse platform move direction
+    //     }
+    //     // console.log('Null', currentNullPosition + moveBug1, 'bug', bug.position.x, 'moveBug1', moveBug1, 'currentNullPosition+(moveBug1+500)', currentNullPosition+(moveBug1+500));
+    //     // console.log(bug.position.x);
+    //     bug.draw() // ------ DRAW 
+    // })
+
+    //    player.update() // ------ PLAYER UPDATE. Call this last, to render in front
+
+    // WinBar2Item.forEach(WinBar2 => { // loop through array of Platforms
+    //     WinBar2.draw() // ------ DRAW PLATFORM
+    // })
+
     // console.log('player X:', player.position.x + scrollOffset);
     // ------------ PLAYER MOVEMENT ------------
     // ------ LEFT & RIGHT ------
@@ -965,6 +1316,8 @@ function animate() {
             player.currentCropWidth = player.sprites.run.cropWidth
             player.width = player.sprites.run.width
 
+            hitSprite()
+
     // ------------ IF VELOCITY IS 0, then.. ------------
     } else { // If player is NOT moving left/right then..
         player.velocity.x = 0
@@ -975,170 +1328,175 @@ function animate() {
         if (keys.right.pressed || rightPressed) { // if right key is pressed, move platform to the left by playMovement
             scrollOffset +=playerMovement // record how much platforms are offsetting
 
-            
-            platformTwos.forEach(platformTwo => { // loop through array of platforms
-                platformTwo.position.x -= playerMovement
-            });
-            platforms.forEach(platform => { // loop through array of platforms
-                // platform.draw() // ------ PLATFORM INITIAL DRAW 
-                platform.position.x -= playerMovement
-            });
-            platformNull.forEach(platform => { // loop through array of platforms
-                // platform.draw() // ------ PLATFORM INITIAL DRAW 
-                platform.position.x -= playerMovement
-                currentNullPosition -= playerMovement
-            });
-            movingPlatform1.forEach(platform => { // loop through array of platforms
-                // console.log('platformNull', platformNull.position.x);
-                platform.position.x -= playerMovement
-            });
-            movingPlatform2.forEach(platform => { // loop through array of platforms
-                // console.log('platformNull', platformNull.position.x);
-                platform.position.x -= playerMovement
-            });
-            buildingRestaurant.forEach(building => { // ---- building SCROLL ----
-                building.position.x -= (playerMovement)
-            });
-            buildingMCTC.forEach(building => { // ---- building SCROLL ----
-                building.position.x -= (playerMovement)
-            });
-            buildingFreelance.forEach(building => { // ---- building SCROLL ----
-                building.position.x -= (playerMovement)
-            });
-            buildingCOYOTE.forEach(building => { // ---- building SCROLL ----
-                building.position.x -= (playerMovement)
-            });
-            buildingCBRE.forEach(building => { // ---- building SCROLL ----
-                building.position.x -= (playerMovement)
-            });
-            elementsPRIME.forEach(element => { // ---- building SCROLL ----
-                element.position.x -= (playerMovement)
-            });
-            buildingPRIME.forEach(building => { // ---- building SCROLL ----
-                building.position.x -= (playerMovement)
-            });
-            buildingHGA.forEach(building => { // ---- building SCROLL ----
-                building.position.x -= (playerMovement)
-            });
-            powerUps1.forEach(building => { // ---- building SCROLL ----
-                building.position.x -= (playerMovement)
-            });
-            powerUps2.forEach(building => { // ---- building SCROLL ----
-                building.position.x -= (playerMovement)
-            });
-            powerUps3.forEach(building => { // ---- building SCROLL ----
-                building.position.x -= (playerMovement)
-            });
-            arrowArray.forEach(arrowArray => { // ---- building SCROLL ----
-                arrowArray.position.x -= (playerMovement)
-            });
-            WinBar2Item.forEach(WinBar2 => { // ---- building SCROLL ----
-                WinBar2.position.x -= (playerMovement)
-            });
-            WinBar3Item.forEach(WinBar3 => { // ---- building SCROLL ----
-                WinBar3.position.x -= (playerMovement)
-            });
-            bugs.forEach(bug => { // ---- building SCROLL ----
-                bug.position.x -= (playerMovement)
-            });
-            movingBugs.forEach(bug => { // ---- building SCROLL ----
-                bug.position.x -= (playerMovement)
-            });
-            sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
-                sky.position.x -= (playerMovement/30)
-            });
-            backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
-                background.position.x -= (playerMovement/8)
-            });
-            midgrounds.forEach(midground => { // ---- BACKGROUND SCROLL ----
-                midground.position.x -= (playerMovement/6)
-            });
-            foregrounds.forEach(foreground => { // ---- BACKGROUND SCROLL ----
-                foreground.position.x -= (playerMovement/2)
-            });
+            // ------------ NEW MOVE LEFT FUNCTION  ------------ //
+            moveLeft()
+            // platformTwos.forEach(platformTwo => { // loop through array of platforms
+            //     platformTwo.position.x -= playerMovement
+            // });
+            // platforms.forEach(platform => { // loop through array of platforms
+            //     // platform.draw() // ------ PLATFORM INITIAL DRAW 
+            //     platform.position.x -= playerMovement
+            // });
+            // platformNull.forEach(platform => { // loop through array of platforms
+            //     // platform.draw() // ------ PLATFORM INITIAL DRAW 
+            //     platform.position.x -= playerMovement
+            //     currentNullPosition -= playerMovement
+            // });
+            // movingPlatform1.forEach(platform => { // loop through array of platforms
+            //     // console.log('platformNull', platformNull.position.x);
+            //     platform.position.x -= playerMovement
+            // });
+            // movingPlatform2.forEach(platform => { // loop through array of platforms
+            //     // console.log('platformNull', platformNull.position.x);
+            //     platform.position.x -= playerMovement
+            // });
+            // buildingRestaurant.forEach(building => { // ---- building SCROLL ----
+            //     building.position.x -= (playerMovement)
+            // });
+            // buildingMCTC.forEach(building => { // ---- building SCROLL ----
+            //     building.position.x -= (playerMovement)
+            // });
+            // buildingFreelance.forEach(building => { // ---- building SCROLL ----
+            //     building.position.x -= (playerMovement)
+            // });
+            // buildingCOYOTE.forEach(building => { // ---- building SCROLL ----
+            //     building.position.x -= (playerMovement)
+            // });
+            // buildingCBRE.forEach(building => { // ---- building SCROLL ----
+            //     building.position.x -= (playerMovement)
+            // });
+            // elementsPRIME.forEach(element => { // ---- building SCROLL ----
+            //     element.position.x -= (playerMovement)
+            // });
+            // buildingPRIME.forEach(building => { // ---- building SCROLL ----
+            //     building.position.x -= (playerMovement)
+            // });
+            // buildingHGA.forEach(building => { // ---- building SCROLL ----
+            //     building.position.x -= (playerMovement)
+            // });
+            // powerUps1.forEach(building => { // ---- building SCROLL ----
+            //     building.position.x -= (playerMovement)
+            // });
+            // powerUps2.forEach(building => { // ---- building SCROLL ----
+            //     building.position.x -= (playerMovement)
+            // });
+            // powerUps3.forEach(building => { // ---- building SCROLL ----
+            //     building.position.x -= (playerMovement)
+            // });
+            // arrowArray.forEach(arrowArray => { // ---- building SCROLL ----
+            //     arrowArray.position.x -= (playerMovement)
+            // });
+            // WinBar2Item.forEach(WinBar2 => { // ---- building SCROLL ----
+            //     WinBar2.position.x -= (playerMovement)
+            // });
+            // WinBar3Item.forEach(WinBar3 => { // ---- building SCROLL ----
+            //     WinBar3.position.x -= (playerMovement)
+            // });
+            // bugs.forEach(bug => { // ---- building SCROLL ----
+            //     bug.position.x -= (playerMovement)
+            // });
+            // movingBugs.forEach(bug => { // ---- building SCROLL ----
+            //     bug.position.x -= (playerMovement)
+            // });
+            // sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
+            //     sky.position.x -= (playerMovement/30)
+            // });
+            // backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
+            //     background.position.x -= (playerMovement/8)
+            // });
+            // midgrounds.forEach(midground => { // ---- BACKGROUND SCROLL ----
+            //     midground.position.x -= (playerMovement/6)
+            // });
+            // foregrounds.forEach(foreground => { // ---- BACKGROUND SCROLL ----
+            //     foreground.position.x -= (playerMovement/2)
+            // });
             // console.log('move = 0, but SCROLLING----R----');
             player.currentSprite = player.sprites.run.right
             player.currentCropWidth = player.sprites.run.cropWidth
             player.width = player.sprites.run.width
         } else if((keys.left.pressed && player.position.x > 0) || ( leftPressed && player.position.x > 0)) {  // if left key pressed & player.X GREATER than 0, move platform to the right by playMovement
             scrollOffset -=playerMovement // record how much platforms are offsetting
-            platformTwos.forEach(platformTwo => { // loop through array of platforms
-                platformTwo.position.x += playerMovement
-            });
-            platforms.forEach(platform => { // loop through array of platforms
-                // platform.draw() // ------ PLATFORM INITIAL DRAW 
-                platform.position.x += playerMovement
-            });
-            platformNull.forEach(platform => { // loop through array of platforms
-                platform.position.x += playerMovement
-                currentNullPosition += playerMovement
-            });
-            movingPlatform1.forEach(platform => { // loop through array of platforms
-                platform.position.x += playerMovement
-            });
-            movingPlatform2.forEach(platform => { // loop through array of platforms
-                platform.position.x += playerMovement
-            });
-            buildingRestaurant.forEach(building => { // ---- Building SCROLL ----
-                building.position.x += (playerMovement)
-            });
-            buildingMCTC.forEach(building => { // ---- Building SCROLL ----
-                building.position.x += (playerMovement)
-            });
-            buildingFreelance.forEach(building => { // ---- Building SCROLL ----
-                building.position.x += (playerMovement)
-            });
-            buildingCOYOTE.forEach(building => { // ---- Building SCROLL ----
-                building.position.x += (playerMovement)
-            });
-            buildingCBRE.forEach(building => { // ---- Building SCROLL ----
-                building.position.x += (playerMovement)
-            });
-            elementsPRIME.forEach(element => { // ---- Building SCROLL ----
-                element.position.x += (playerMovement)
-            });
-            buildingPRIME.forEach(building => { // ---- Building SCROLL ----
-                building.position.x += (playerMovement)
-            });
-            buildingHGA.forEach(building => { // ---- Building SCROLL ----
-                building.position.x += (playerMovement)
-            });
-            powerUps1.forEach(building => { // ---- Building SCROLL ----
-                building.position.x += (playerMovement)
-            });
-            powerUps2.forEach(building => { // ---- Building SCROLL ----
-                building.position.x += (playerMovement)
-            });
-            powerUps3.forEach(building => { // ---- Building SCROLL ----
-                building.position.x += (playerMovement)
-            });
-            arrowArray.forEach(arrowArray => { // ---- Building SCROLL ----
-                arrowArray.position.x += (playerMovement)
-            });
-            WinBar3Item.forEach(WinBar3 => { // ---- Building SCROLL ----
-                WinBar3.position.x += (playerMovement)
-            });
-            WinBar2Item.forEach(WinBar2 => { // ---- Building SCROLL ----
-                WinBar2.position.x += (playerMovement)
-            });
-            bugs.forEach(bug => { // ---- Building SCROLL ----
-                bug.position.x += (playerMovement)
-            });
-            movingBugs.forEach(bug => { // ---- Building SCROLL ----
-                bug.position.x += (playerMovement)
-            });
-            sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
-                sky.position.x += (playerMovement/30)
-            });
-            backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
-                background.position.x += (playerMovement/8)
-            });
-            midgrounds.forEach(midground => { // ---- BACKGROUND SCROLL ----
-                midground.position.x += (playerMovement/6)
-            });
-            foregrounds.forEach(foreground => { // ---- BACKGROUND SCROLL ----
-                foreground.position.x += (playerMovement/2)
-            });
+            
+
+            // ------------ NEW MOVE LEFT FUNCTION  ------------ //
+            moveRight()
+            // platformTwos.forEach(platformTwo => { // loop through array of platforms
+            //     platformTwo.position.x += playerMovement
+            // });
+            // platforms.forEach(platform => { // loop through array of platforms
+            //     // platform.draw() // ------ PLATFORM INITIAL DRAW 
+            //     platform.position.x += playerMovement
+            // });
+            // platformNull.forEach(platform => { // loop through array of platforms
+            //     platform.position.x += playerMovement
+            //     currentNullPosition += playerMovement
+            // });
+            // movingPlatform1.forEach(platform => { // loop through array of platforms
+            //     platform.position.x += playerMovement
+            // });
+            // movingPlatform2.forEach(platform => { // loop through array of platforms
+            //     platform.position.x += playerMovement
+            // });
+            // buildingRestaurant.forEach(building => { // ---- Building SCROLL ----
+            //     building.position.x += (playerMovement)
+            // });
+            // buildingMCTC.forEach(building => { // ---- Building SCROLL ----
+            //     building.position.x += (playerMovement)
+            // });
+            // buildingFreelance.forEach(building => { // ---- Building SCROLL ----
+            //     building.position.x += (playerMovement)
+            // });
+            // buildingCOYOTE.forEach(building => { // ---- Building SCROLL ----
+            //     building.position.x += (playerMovement)
+            // });
+            // buildingCBRE.forEach(building => { // ---- Building SCROLL ----
+            //     building.position.x += (playerMovement)
+            // });
+            // elementsPRIME.forEach(element => { // ---- Building SCROLL ----
+            //     element.position.x += (playerMovement)
+            // });
+            // buildingPRIME.forEach(building => { // ---- Building SCROLL ----
+            //     building.position.x += (playerMovement)
+            // });
+            // buildingHGA.forEach(building => { // ---- Building SCROLL ----
+            //     building.position.x += (playerMovement)
+            // });
+            // powerUps1.forEach(building => { // ---- Building SCROLL ----
+            //     building.position.x += (playerMovement)
+            // });
+            // powerUps2.forEach(building => { // ---- Building SCROLL ----
+            //     building.position.x += (playerMovement)
+            // });
+            // powerUps3.forEach(building => { // ---- Building SCROLL ----
+            //     building.position.x += (playerMovement)
+            // });
+            // arrowArray.forEach(arrowArray => { // ---- Building SCROLL ----
+            //     arrowArray.position.x += (playerMovement)
+            // });
+            // WinBar3Item.forEach(WinBar3 => { // ---- Building SCROLL ----
+            //     WinBar3.position.x += (playerMovement)
+            // });
+            // WinBar2Item.forEach(WinBar2 => { // ---- Building SCROLL ----
+            //     WinBar2.position.x += (playerMovement)
+            // });
+            // bugs.forEach(bug => { // ---- Building SCROLL ----
+            //     bug.position.x += (playerMovement)
+            // });
+            // movingBugs.forEach(bug => { // ---- Building SCROLL ----
+            //     bug.position.x += (playerMovement)
+            // });
+            // sky.forEach(sky => { // ---- BACKGROUND SCROLL ----
+            //     sky.position.x += (playerMovement/30)
+            // });
+            // backgrounds.forEach(background => { // ---- BACKGROUND SCROLL ----
+            //     background.position.x += (playerMovement/8)
+            // });
+            // midgrounds.forEach(midground => { // ---- BACKGROUND SCROLL ----
+            //     midground.position.x += (playerMovement/6)
+            // });
+            // foregrounds.forEach(foreground => { // ---- BACKGROUND SCROLL ----
+            //     foreground.position.x += (playerMovement/2)
+            // });
             // console.log('move = 0, but SCROLLING----L----');
         } else {
                 if (lastKey === 'right') { // if last pressed = right AND  R/L are NOT pressed then..
@@ -1151,6 +1509,7 @@ function animate() {
                 player.width = player.sprites.stand.width
             }
         }
+        hitSprite()
         // console.log('scrollOffset:', scrollOffset); // -------- check how much scroll is currently offsetting
     }  // ------ frame/refresh rate limiting code: closing bracket ------ //
     }
@@ -1254,13 +1613,12 @@ function animate() {
             player.position.x + player.width >= bug.position.x + adjust && // Bug Right
             player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
             ) 
-            {   
-                loseReason = 'bug'
-                lose = true
-                whiteStart = true
-                loseModalOn()
-                init();
-            } 
+        {   
+            hitTaken()
+        }
+
+            loseReason = 'bug'
+            death()
         }) 
         
         movingBugs.forEach(bug => { 
@@ -1271,13 +1629,16 @@ function animate() {
                 player.position.x + player.width >= bug.position.x + adjust && // Bug Right
                 player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
                 ) 
-                {   
-                    loseReason = 'bug'
-                    lose = true
-                    whiteStart = true
-                    loseModalOn()
-                    init();
+            {   
+                hitTaken() 
+                // loseReason = 'bug'
+                // lose = true
+                // whiteStart = true
+                // loseModalOn()
+                // init();
             } 
+                loseReason = 'bug'
+                death()
     }) 
 
 
@@ -2029,7 +2390,9 @@ closeButtonMobile.addEventListener('click', function() {
    var endY = event.changedTouches[0].clientY;
 
    // Check for a swipe or tap gesture based on start and end coordinates
-   if (Math.abs(endX - startX) < 10 && Math.abs(endY - startY) < 10) {
+   // --------------- turned off checking for swipe ------------ //
+//    if (Math.abs(endX - startX) < 50 && Math.abs(endY - startY) < 50) {
+    // --------------- turned off checking for swipe ------------ //
      // It's a tap gesture
     //  alert('Tap!');
     // rightPressed = false
@@ -2056,14 +2419,52 @@ closeButtonMobile.addEventListener('click', function() {
         // console.log(id, 'off');
     }
     // console.log('end touch');
-   } else {
+    // --------------- turned off checking for swipe ------------ //
+//    } else {
      // It's a swipe gesture
     //  alert('Swipe!');
-   }
-
+//    }
+// --------------- turned off checking for swipe ------------ //
    // Reset visual feedback if needed
 //    touchArea.style.backgroundColor = '#ccc';
  }
+
+function hitTaken() {
+    if(canHurt){
+        // Tempsprite = player.currentSprite
+       health -= 10
+    //    player.currentSprite = player.sprites.stand.left
+       canHurt = false
+    //    console.log('Hit taken!');
+       gsap.to('#player1Health', {
+        width: health + '%'
+    })
+       // -- after health lowered, wait 1 sec before player can get hurt again
+       setTimeout(()=> {
+           canHurt = true
+        //    console.log('can hurt again');
+       }, 500)
+   }
+//    console.log('health:', health);
+}
+
+function death(){
+    if(health <= 0) {
+        lose = true 
+        whiteStart = true
+        loseModalOn()
+        init();
+    } 
+}
+
+function hitSprite(){
+    if(!canHurt){
+        // player.currentSprite = player.sprites.run.left
+        // player.currentCropWidth = player.sprites.run.cropWidth
+        // player.width = player.sprites.run.width
+        console.log('hit sprite');
+    }
+}
 
 function handleClick() {
     if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !mobileModal){          

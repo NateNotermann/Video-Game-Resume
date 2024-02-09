@@ -1,0 +1,31 @@
+{
+    "name": "video-game-resume",
+    "short_name": "video-game-resume",
+    "description": "Video Game Resume",
+    "start_url": "/#/",
+
+    "icons": [
+        {
+            "src": "icon512.webp",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icon144.webp",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "icon144.webp",
+            "sizes":"144x144",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+  }
+  
