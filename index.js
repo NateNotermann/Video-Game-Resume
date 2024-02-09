@@ -427,6 +427,9 @@ function init() {
     playerSize = 2
     playerMovement = 20
     health = 100
+    gsap.to('#player1Health', {
+        width: health + '%'
+    })
     modalWin.style.display = 'none'
     if(win || lose){
         setTimeout(()=> {
@@ -513,6 +516,7 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
 // -------------------------- SMALL PLATFORMS --------------------------
 platformTwos = [
     new PlatformTwo({x:8500, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
+    new PlatformTwo({x:3003, y: canvas.height - platformHeight, image: platformTwoImage }),
     new PlatformTwo({x:8500+platformTwoWidth, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
     new PlatformTwo({x:8500+platformTwoWidth, y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
     new PlatformTwo({x:8500+(platformTwoWidth*3), y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
@@ -596,6 +600,9 @@ bugs = [
     new Bug({x: 5000, y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 8950, y: canvas.height - BugPic.height - 125, image: BugPic}),
     // new Bug({x: 9080+(bugWidth*2), y: canvas.height - BugPic.height - 250, image: BugPic}),
+    new Bug({x: 18000, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 18000, y: canvas.height - BugPic.height*2 - 125, image: BugPic}),
+    
     new Bug({x: 9080+(bugWidth*4), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
@@ -2403,17 +2410,17 @@ function hitTaken() {
        health -= 10
     //    player.currentSprite = player.sprites.stand.left
        canHurt = false
-       console.log('Hit taken!');
+    //    console.log('Hit taken!');
        gsap.to('#player1Health', {
         width: health + '%'
     })
        // -- after health lowered, wait 1 sec before player can get hurt again
        setTimeout(()=> {
            canHurt = true
-           console.log('can hurt again');
+        //    console.log('can hurt again');
        }, 500)
    }
-   console.log('health:', health);
+//    console.log('health:', health);
 }
 
 function death(){
