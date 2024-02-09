@@ -168,6 +168,8 @@ let gravity = 1.5
 const floor = 125 // or platformImage.height. pixel from the bottom player stops at
 let jump = 40 // amount player should jump
 let playerMovement = 20 // 20 //  amount player moves left and right
+let health = 100
+let canHurt = true
 const platformWidth = 2500 //579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
 
@@ -1574,11 +1576,22 @@ function animate() {
             player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
             ) 
             {   
-                loseReason = 'bug'
-                lose = true 
-                whiteStart = true
-                loseModalOn()
-                init();
+                if(canHurt){
+                    health -= 5
+                    canHurt = false
+                    console.log('Ouch!!');
+                    // -- after health lowered, wait 1 sec before player can get hurt again
+                    setTimeout(()=> {
+                        canHurt = true
+                        console.log('can hurt again');
+                    }, 1000)
+                }
+                console.log('health:', health);
+                // loseReason = 'bug'
+                // lose = true 
+                // whiteStart = true
+                // loseModalOn()
+                // init();
             } 
         }) 
         
