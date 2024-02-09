@@ -120,20 +120,20 @@ const closeButtonWin = document.getElementById('btnCloseWin');
 canvas.width =  1920  //visualViewport.width - 10
 canvas.height = 1080  //visualViewport.height - 10
 
-console.log('viewport');
-console.log(visualViewport.width);
-console.log(visualViewport.height);
-console.log('canvas');
-console.log(canvas.width);
-console.log(canvas.height);
-console.log('window');
-console.log(window.innerWidth);
-console.log(window.innerHeight);
+// console.log('viewport');
+// console.log(visualViewport.width);
+// console.log(visualViewport.height);
+// console.log('canvas');
+// console.log(canvas.width);
+// console.log(canvas.height);
+// console.log('window');
+// console.log(window.innerWidth);
+// console.log(window.innerHeight);
 
-let canvasHeight = canvas.height
-let canvasWidth = canvas.width
-let windowInnerHeight = window.innerHeight  
-let windowInnerWidth = window.innerWidth
+// let canvasHeight = canvas.height
+// let canvasWidth = canvas.width
+// let windowInnerHeight = window.innerHeight  
+// let windowInnerWidth = window.innerWidth
 
 // document.onreadystatechange = function() {
 //     console.log('document.onreadystatechange function');
@@ -189,10 +189,12 @@ window.onload = function () {
 // canvas.height = windowInnerHeight //  aspectRatio  //window.innerHeight  // canvas.height 687
 
 // global variables. 
-let gravity = 2
+let gravity = 1.5
 const floor = 125 // or platformImage.height. pixel from the bottom player stops at
-let jump = 35 // amount player should jump
+let jump = 40 // amount player should jump
 let playerMovement = 20 // 20 //  amount player moves left and right
+let health = 100
+let canHurt = true
 const platformWidth = 2500 //579 // actually 580 but leaves 1px gap if 580
 const platformHeight = 125 // actually 580 but leaves 1px gap if 5 80
 
@@ -449,7 +451,10 @@ function init() {
     jump = 35
     playerSize = 2
     playerMovement = 20
-
+    health = 100
+    gsap.to('#player1Health', {
+        width: health + '%'
+    })
     modalWin.style.display = 'none'
     if(win || lose){
         setTimeout(()=> {
@@ -512,6 +517,9 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
     new Platform({x: (platformWidth* 6) - 1000, y: canvas.height - 125, image: platformImage}), // Platform 8
     new Platform({x: (platformWidth* 7) - 1000, y: canvas.height - 125, image: platformImage}), // Platform 8
 
+    // -------- This is the new platform to cover the second ground hole -------- //
+    new Platform({x: (platformWidth* 8) - 1000, y: canvas.height - 125, image: platformImage}), // Platform 8
+
     new Platform({x: platformWidth* 8, y: canvas.height - 125, image: platformImage}), // Platform 9
     
     new Platform({x: platformWidth* 9, y: canvas.height - 125, image: platformImage}), // Platform 10
@@ -533,6 +541,7 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
 // -------------------------- SMALL PLATFORMS --------------------------
 platformTwos = [
     new PlatformTwo({x:8500, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
+    new PlatformTwo({x:3003, y: canvas.height - platformHeight, image: platformTwoImage }),
     new PlatformTwo({x:8500+platformTwoWidth, y: canvas.height - (platformHeight * 2), image: platformTwoImage }),
     new PlatformTwo({x:8500+platformTwoWidth, y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
     new PlatformTwo({x:8500+(platformTwoWidth*3), y: canvas.height - (platformHeight * 3), image: platformTwoImage }),
@@ -616,6 +625,9 @@ bugs = [
     new Bug({x: 5000, y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 8950, y: canvas.height - BugPic.height - 125, image: BugPic}),
     // new Bug({x: 9080+(bugWidth*2), y: canvas.height - BugPic.height - 250, image: BugPic}),
+    new Bug({x: 18000, y: canvas.height - BugPic.height - 125, image: BugPic}),
+    new Bug({x: 18000, y: canvas.height - BugPic.height*2 - 125, image: BugPic}),
+    
     new Bug({x: 9080+(bugWidth*4), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*5), y: canvas.height - BugPic.height - 125, image: BugPic}),
     new Bug({x: 9080+(bugWidth*6), y: canvas.height - BugPic.height - 125, image: BugPic}),
@@ -1304,6 +1316,8 @@ function animate() {
             player.currentCropWidth = player.sprites.run.cropWidth
             player.width = player.sprites.run.width
 
+            hitSprite()
+
     // ------------ IF VELOCITY IS 0, then.. ------------
     } else { // If player is NOT moving left/right then..
         player.velocity.x = 0
@@ -1495,6 +1509,7 @@ function animate() {
                 player.width = player.sprites.stand.width
             }
         }
+        hitSprite()
         // console.log('scrollOffset:', scrollOffset); // -------- check how much scroll is currently offsetting
     }  // ------ frame/refresh rate limiting code: closing bracket ------ //
     }
@@ -1598,13 +1613,12 @@ function animate() {
             player.position.x + player.width >= bug.position.x + adjust && // Bug Right
             player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
             ) 
-            {   
-                loseReason = 'bug'
-                lose = true 
-                whiteStart = true
-                loseModalOn()
-                init();
-            } 
+        {   
+            hitTaken()
+        }
+
+            loseReason = 'bug'
+            death()
         }) 
         
         movingBugs.forEach(bug => { 
@@ -1615,13 +1629,16 @@ function animate() {
                 player.position.x + player.width >= bug.position.x + adjust && // Bug Right
                 player.position.x <= bug.position.x + bug.width - adjust //  Bug Left
                 ) 
-                {   
-                    loseReason = 'bug'
-                    lose = true
-                    whiteStart = true
-                    loseModalOn()
-                    init();
+            {   
+                hitTaken() 
+                // loseReason = 'bug'
+                // lose = true
+                // whiteStart = true
+                // loseModalOn()
+                // init();
             } 
+                loseReason = 'bug'
+                death()
     }) 
 
 
@@ -2373,7 +2390,9 @@ closeButtonMobile.addEventListener('click', function() {
    var endY = event.changedTouches[0].clientY;
 
    // Check for a swipe or tap gesture based on start and end coordinates
-   if (Math.abs(endX - startX) < 10 && Math.abs(endY - startY) < 10) {
+   // --------------- turned off checking for swipe ------------ //
+//    if (Math.abs(endX - startX) < 50 && Math.abs(endY - startY) < 50) {
+    // --------------- turned off checking for swipe ------------ //
      // It's a tap gesture
     //  alert('Tap!');
     // rightPressed = false
@@ -2400,14 +2419,52 @@ closeButtonMobile.addEventListener('click', function() {
         // console.log(id, 'off');
     }
     // console.log('end touch');
-   } else {
+    // --------------- turned off checking for swipe ------------ //
+//    } else {
      // It's a swipe gesture
     //  alert('Swipe!');
-   }
-
+//    }
+// --------------- turned off checking for swipe ------------ //
    // Reset visual feedback if needed
 //    touchArea.style.backgroundColor = '#ccc';
  }
+
+function hitTaken() {
+    if(canHurt){
+        // Tempsprite = player.currentSprite
+       health -= 10
+    //    player.currentSprite = player.sprites.stand.left
+       canHurt = false
+    //    console.log('Hit taken!');
+       gsap.to('#player1Health', {
+        width: health + '%'
+    })
+       // -- after health lowered, wait 1 sec before player can get hurt again
+       setTimeout(()=> {
+           canHurt = true
+        //    console.log('can hurt again');
+       }, 500)
+   }
+//    console.log('health:', health);
+}
+
+function death(){
+    if(health <= 0) {
+        lose = true 
+        whiteStart = true
+        loseModalOn()
+        init();
+    } 
+}
+
+function hitSprite(){
+    if(!canHurt){
+        // player.currentSprite = player.sprites.run.left
+        // player.currentCropWidth = player.sprites.run.cropWidth
+        // player.width = player.sprites.run.width
+        console.log('hit sprite');
+    }
+}
 
 function handleClick() {
     if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !mobileModal){          
