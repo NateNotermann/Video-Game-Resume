@@ -2396,6 +2396,9 @@ function hitTaken() {
        health -= 10
        canHurt = false
        console.log('Hit taken!');
+       gsap.to('#player1Health', {
+        width: health + '%'
+    })
        // -- after health lowered, wait 1 sec before player can get hurt again
        setTimeout(()=> {
            canHurt = true

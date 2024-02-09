@@ -315,8 +315,9 @@
     
 
 
-  <div style="
+  <div id="healthbar" style="
       position: relative; 
+      top: 100px;
       height: 30px; 
       width: 80%;
       display: flex; 
@@ -332,18 +333,21 @@
             width: 100%;">
       </div>
 
-      
+
         <!-- Player1 back Health Bar -->
         <div id="player1Health" class="player1"
         style="position: absolute; 
+          
             background-color: blue; 
-            top: 0; bottom: 0; right: 0; 
+            top: 0; bottom: 0; left: 0; 
             width: 100%; ">
         </div>
     
   
   </div>
 
+  <div id="pressX">Press 'X' to interact!</div>
+  
     <canvas></canvas>
     
     <!-- help button -->
@@ -352,7 +356,6 @@
       <span id="buttonHelp" class="start-btn">HELP</span>
     </div>
 
-    <div id="pressX">Press 'X' to interact!</div>
 
     <div id="buttonsDiv" class="buttonsDiv">
       <div class="arrowsMain">
@@ -391,5 +394,9 @@
 <!-- <script src="./js/canvas.js" type="module"></script> -->
 <script src="classes.js"></script>
 <script src="index.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" 
+        integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer">
+        </script>    
 </html>
