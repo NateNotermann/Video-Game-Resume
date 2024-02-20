@@ -1,13 +1,20 @@
 # Video Game Resume!
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7c00f1c0-b166-41c5-b1ba-5f3c45001266/deploy-status)](https://app.netlify.com/sites/aquamarine-bubblegum-1105d2/deploys)    
-I turned my resume into a playable video game!
+I turned my resume into a playable video game!   
+**Play the game -->**  [**HERE!**](https://aquamarine-bubblegum-1105d2.netlify.app/)   
+
+<img src="img/ReadMe/new2-ezgif.com-optimize.gif" style="width: 100%;">   
+
 It is a classic platformer. It works with a **Xbox/PS5 controller** using the **Gamepad API**.    
 It has custom character art and animations for the backgrounds, buildings and player.   
 
 The application just uses vanilla **Javascript**, **HTML** and **CSS**.   
 A couple small exceptions are **Google Fonts**, a custom page loader animation that uses the **Lottie** library to animate the Prime Digital Academy logo. And the **Gamepad API** to connect and play with a **video game controller!**
 
-**Play the game -->**  [**HERE!**](https://aquamarine-bubblegum-1105d2.netlify.app/)   
+
+
+
+
 
 **Additional Tech:**  
 **Lottie/LottieFiles:** Custom page loader animation. [Lottie](https://airbnb.design/lottie/#get-started)   
@@ -33,10 +40,8 @@ This is a continuation of another project I made. You can test the original proj
 You can also **start your own repo** off of the [Javascript Fighting Game Template](https://github.com/NateNotermann/Javascript-Fighting-Game-2.0) I made by following a great [Tutorial](https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses) by [Chris Course](https://github.com/chriscourses).    
 I highly recommend checking out his tutorial and other work on his [YouTube Page](https://www.youtube.com/@ChrisCourses).   
 
-## Gameplay Preview
-<img src="img/ReadMe/new2-ezgif.com-optimize.gif" style="width: 100%;">
 
-## Character Design
+## Preview
 <img src="img/ReadMe/run2-ezgif.com-video-to-gif-converter.gif" style="width: 50%;">
 <img src="img/ReadMe/new1-ezgif.com-optimize.gif" style="width: 100%;">
 
