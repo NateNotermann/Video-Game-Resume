@@ -279,70 +279,70 @@ let winBarStart = canvas.height - (platformHeight*3)
 
 // -------- IMAGE VARIABLES --------
 const platformImage = new Image()   
-platformImage.src = './img/platform.webp'
+platformImage.src = './img/Platforms/platform.webp'
 
 const platformTwoImage = new Image()   
-platformTwoImage.src = './img/platformTwo.webp'
+platformTwoImage.src = './img/Platforms/platformTwo.webp'
 
 // const tallPlatform = new Image()   
 // tallPlatform.src = './img/platformSmallTall.webp'
 
 // -------- Background Images -------- //
 const skyImage = new Image()   
-skyImage.src = './img/Sky.webp'
+skyImage.src = './img/Backgrounds/Sky.webp'
 
 const backgroundImage = new Image()   
-backgroundImage.src = './img/background.webp'
+backgroundImage.src = './img/Backgrounds/background.webp'
 
 const midgroundImage = new Image()   
-midgroundImage.src = './img/midground.webp'
+midgroundImage.src = './img/Backgrounds/midground.webp'
 
 const foregroundImage = new Image()   
-foregroundImage.src = './img/foreground.webp'
+foregroundImage.src = './img/Backgrounds/foreground.webp'
 
 // const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
 // cloudImage.src = './img/cloud.webp'
 
 // -------- Player Images -------- //
 const spriteRunLeft = new Image()   // spriteRunLeft Image - Dimensions
-spriteRunLeft.src = './img/spriteRunLeft.webp'
+spriteRunLeft.src = './img/Sprites/spriteRunLeft.webp'
 
 const spriteRunRight = new Image()   // spriteRunRight Image - Dimensions
-spriteRunRight.src = './img/spriteRunRight.webp'
+spriteRunRight.src = './img/Sprites/spriteRunRight.webp'
 
 const spriteStandLeft = new Image()   // spriteStandLeft Image - Dimensions
-spriteStandLeft.src = './img/spriteStandLeft.webp'
+spriteStandLeft.src = './img/Sprites/spriteStandLeft.webp'
 
 const spriteStandRight = new Image()   // spriteStandRight Image - Dimensions
-spriteStandRight.src = './img/spriteStandRight.webp'
+spriteStandRight.src = './img/Sprites/spriteStandRight.webp'
 
 // -------- Building Images -------- //
 const Restaurant = new Image()   
-Restaurant.src = './img/RestaurantSprite2.webp'
+Restaurant.src = './img/Jobs/RestaurantSprite2.webp'
 
 const MCTC = new Image()   
-MCTC.src = './img/MCTC LONG.png'
+MCTC.src = './img/Jobs/MCTC LONG.png'
 
 const Freelance  = new Image()   
-Freelance .src = './img/FreelanceSprite3.webp'
+Freelance .src = 'img/Jobs/FreelanceSprite3.webp'
 
 const COYOTE  = new Image()   
-COYOTE .src = './img/COYOTE.webp'
+COYOTE .src = './img/Jobs/COYOTE.webp'
 
 const CBRE = new Image()   
-CBRE.src = './img/CBRE LONG.webp'
+CBRE.src = './img/Jobs/CBRE LONG.webp'
 
 const HGA = new Image()   
-HGA.src = './img/HGA Long.png'
+HGA.src = './img/Jobs/HGA Long.png'
 
 const PRIME = new Image()   
-PRIME.src = './img/Prime.webp'
+PRIME.src = './img/Jobs/Prime.webp'
 
 const PrimeElements = new Image()   
-PrimeElements.src = './img/PrimeFlag2.png'
+PrimeElements.src = './img/Jobs/PrimeFlag2.png'
 
 const ArrowPic = new Image()   
-ArrowPic.src = './img/arrow3.png'
+ArrowPic.src = './img/Sign/arrow3.png'
 
 const BugPic = new Image()   
 BugPic.src = './img/Bug/bug2.webp'
