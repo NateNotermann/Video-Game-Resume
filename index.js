@@ -279,114 +279,115 @@ let winBarStart = canvas.height - (platformHeight*3)
 
 // -------- IMAGE VARIABLES --------
 const platformImage = new Image()   
-platformImage.src = './img/Platforms/platform.webp'
+platformImage.src = './platform.webp'
 
 const platformTwoImage = new Image()   
-platformTwoImage.src = './img/Platforms/platformTwo.webp'
+platformTwoImage.src = './platformTwo.webp'
 
 // const tallPlatform = new Image()   
 // tallPlatform.src = './img/platformSmallTall.webp'
 
 // -------- Background Images -------- //
 const skyImage = new Image()   
-skyImage.src = './img/Backgrounds/Sky.webp'
+skyImage.src = './Sky.webp'
 
 const backgroundImage = new Image()   
-backgroundImage.src = './img/Backgrounds/background.webp'
+backgroundImage.src = './background.webp'
 
 const midgroundImage = new Image()   
-midgroundImage.src = './img/Backgrounds/midground.webp'
+midgroundImage.src = './midground.webp'
 
 const foregroundImage = new Image()   
-foregroundImage.src = './img/Backgrounds/foreground.webp'
+foregroundImage.src = './foreground.webp'
 
 // const cloudImage = new Image()   // Cloud Image - Dimensions 10620 × 400
 // cloudImage.src = './img/cloud.webp'
 
 // -------- Player Images -------- //
 const spriteRunLeft = new Image()   // spriteRunLeft Image - Dimensions
-spriteRunLeft.src = './img/Sprites/spriteRunLeft.webp'
+spriteRunLeft.src = './spriteRunLeft.webp'
 
 const spriteRunRight = new Image()   // spriteRunRight Image - Dimensions
-spriteRunRight.src = './img/Sprites/spriteRunRight.webp'
+spriteRunRight.src = './spriteRunRight.webp'
 
 const spriteStandLeft = new Image()   // spriteStandLeft Image - Dimensions
-spriteStandLeft.src = './img/Sprites/spriteStandLeft.webp'
+spriteStandLeft.src = './spriteStandLeft.webp'
 
 const spriteStandRight = new Image()   // spriteStandRight Image - Dimensions
-spriteStandRight.src = './img/Sprites/spriteStandRight.webp'
+spriteStandRight.src = './spriteStandRight.webp'
 
 // -------- Building Images -------- //
 const Restaurant = new Image()   
-Restaurant.src = './img/Jobs/RestaurantSprite2.webp'
+Restaurant.src = './RestaurantSprite2.webp'
 
 const MCTC = new Image()   
-MCTC.src = './img/Jobs/MCTC LONG.png'
+MCTC.src = './MCTC LONG.png'
 
 const Freelance  = new Image()   
-Freelance .src = 'img/Jobs/FreelanceSprite3.webp'
+Freelance .src = 'FreelanceSprite3.webp'
 
 const COYOTE  = new Image()   
-COYOTE .src = './img/Jobs/COYOTE.webp'
+COYOTE .src = './COYOTEBLDG.webp'
 
 const CBRE = new Image()   
-CBRE.src = './img/Jobs/CBRE LONG.webp'
+CBRE.src = './CBRE LONG.webp'
 
 const HGA = new Image()   
-HGA.src = './img/Jobs/HGA Long.png'
+HGA.src = './HGA Long.png'
 
 const PRIME = new Image()   
-PRIME.src = './img/Jobs/Prime.webp'
+PRIME.src = './PrimeBLDG.webp'
 
 const PrimeElements = new Image()   
-PrimeElements.src = './img/Jobs/PrimeFlag2.png'
+PrimeElements.src = './PrimeFlag2.png'
 
 const ArrowPic = new Image()   
-ArrowPic.src = './img/Sign/arrow3.png'
+ArrowPic.src = './arrow3.png'
 
 const BugPic = new Image()   
-BugPic.src = './img/Bug/bug2.webp'
+BugPic.src = './bug2.webp'
 
 const BugTalkPic = new Image()   
-BugTalkPic.src = './img/Bug/bugTalkSprite.webp'
+BugTalkPic.src = './bugTalkSprite.webp'
 
 const spacebarPic = new Image()   
-spacebarPic.src = './img/Sign/spacebar.webp'
+spacebarPic.src = './spacebar.webp'
 
 const signMCTCPic = new Image()   
-signMCTCPic.src = './img/Sign/MCTC.webp'
+signMCTCPic.src = './MCTC.webp'
 
 const signRestaurantPic = new Image()   
-signRestaurantPic.src = './img/Sign/restaurant.webp'
+signRestaurantPic.src = './restaurant.webp'
 
 const signCoyotePic = new Image()   
-signCoyotePic.src = './img/Sign/Coyote.webp'
+signCoyotePic.src = './Coyote.webp'
 
 const signVFXPic = new Image()   
-signVFXPic.src = './img/Sign/VFX.webp'
+signVFXPic.src = './VFX.webp'
 
 const signCBREPic = new Image()   
-signCBREPic.src = './img/Sign/CBRE.webp'
+signCBREPic.src = './CBRE.webp'
 
 const signPrimePic = new Image()   
-signPrimePic.src = './img/Sign/Prime.webp'
+signPrimePic.src = './Prime.webp'
 
 const SignHGAPic = new Image()   
-SignHGAPic.src = './img/Sign/SignHGA.webp'
+SignHGAPic.src = './SignHGA.webp'
 
 const PowerUp1 = new Image()   
-PowerUp1.src = './img/Sign/powerUp1.webp'
+PowerUp1.src = './powerUp1.webp'
 const PowerUp2 = new Image()   
-PowerUp2.src = './img/Sign/powerUp2.webp'
+PowerUp2.src = './powerUp2.webp'
 const PowerUp3 = new Image()   
-PowerUp3.src = './img/Sign/powerUp3.webp'
+PowerUp3.src = './powerUp3.webp'
 
 const WinBar1 = new Image()   
-WinBar1.src = './img/WinBars/winBar1.webp'
+WinBar1.src = './winBar1.webp'
 const WinBar2 = new Image()   
-WinBar2.src = './img/WinBars/winBar2.webp'
+WinBar2.src = './winBar2.webp'
 const WinBar3 = new Image()   
-WinBar3.src = './img/WinBars/winBar3.webp'
+WinBar3.src = './winBar3.webp'
+
 
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
@@ -694,36 +695,36 @@ let array = originalString.split('')
 
 // ---- Animated favicon loop ---- //
 const faviconImages = [
-    "icoFrames/favicon export_00000.ico",
-    "icoFrames/favicon export_00001.ico",
-    "icoFrames/favicon export_00002.ico",
-    "icoFrames/favicon export_00003.ico",
-    "icoFrames/favicon export_00004.ico",
-    "icoFrames/favicon export_00005.ico",
-    "icoFrames/favicon export_00006.ico",
-    "icoFrames/favicon export_00007.ico",
-    "icoFrames/favicon export_00008.ico",
-    "icoFrames/favicon export_00009.ico",
-    "icoFrames/favicon export_00010.ico",
-    "icoFrames/favicon export_00011.ico",
-    "icoFrames/favicon export_00012.ico",
-    "icoFrames/favicon export_00013.ico",
-    "icoFrames/favicon export_00014.ico",
-    "icoFrames/favicon export_00015.ico",
-    "icoFrames/favicon export_00016.ico",
-    "icoFrames/favicon export_00017.ico",
-    "icoFrames/favicon export_00018.ico",
-    "icoFrames/favicon export_00019.ico",
-    "icoFrames/favicon export_00020.ico",
-    "icoFrames/favicon export_00021.ico",
-    "icoFrames/favicon export_00022.ico",
-    "icoFrames/favicon export_00023.ico",
-    "icoFrames/favicon export_00024.ico",
-    "icoFrames/favicon export_00025.ico",
-    "icoFrames/favicon export_00026.ico",
-    "icoFrames/favicon export_00027.ico",
-    "icoFrames/favicon export_00028.ico",
-    "icoFrames/favicon export_00029.ico"
+    "./favicon export_00000.ico",
+    "./favicon export_00001.ico",
+    "./favicon export_00002.ico",
+    "./favicon export_00003.ico",
+    "./favicon export_00004.ico",
+    "./favicon export_00005.ico",
+    "./favicon export_00006.ico",
+    "./favicon export_00007.ico",
+    "./favicon export_00008.ico",
+    "./favicon export_00009.ico",
+    "./favicon export_00010.ico",
+    "./favicon export_00011.ico",
+    "./favicon export_00012.ico",
+    "./favicon export_00013.ico",
+    "./favicon export_00014.ico",
+    "./favicon export_00015.ico",
+    "./favicon export_00016.ico",
+    "./favicon export_00017.ico",
+    "./favicon export_00018.ico",
+    "./favicon export_00019.ico",
+    "./favicon export_00020.ico",
+    "./favicon export_00021.ico",
+    "./favicon export_00022.ico",
+    "./favicon export_00023.ico",
+    "./favicon export_00024.ico",
+    "./favicon export_00025.ico",
+    "./favicon export_00026.ico",
+    "./favicon export_00027.ico",
+    "./favicon export_00028.ico",
+    "./favicon export_00029.ico"
 ]
 
 let faviconNumber = 0
