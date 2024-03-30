@@ -507,7 +507,7 @@ let adjustPlat = 1000
 platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580 × 125 -------------
     new Platform({x: 0, y: canvas.height - platformHeight, image: platformImage}), // Ground 1
     new Platform({x: adjustPlat, y: canvas.height - 125, image: platformImage}), // Ground 2
-    new Platform({x: 3900, y: canvas.height - 125, image: platformImage}), // Ground 3
+    new Platform({x: 3550, y: canvas.height - 125, image: platformImage}), // Ground 3
     new Platform({x: (platformWidth * 2) + adjustPlat, y: canvas.height - 125, image: platformImage}), // Ground 4
     new Platform({x: (platformWidth * 3) + adjustPlat, y: canvas.height - 125, image: platformImage}), // Ground 5
     new Platform({x: platformWidth * 4, y: canvas.height - 125, image: platformImage}), // Ground 6
