@@ -388,6 +388,9 @@ WinBar2.src = './img/WinBars/winBar2.webp'
 const WinBar3 = new Image()   
 WinBar3.src = './img/WinBars/winBar3.webp'
 
+const titlePic = new Image()   
+titlePic.src = './img/videogame-title.webp'
+
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
 player.draw()
@@ -486,7 +489,11 @@ sky = [
 backgrounds = [
     new Background({x:0, y: 0, image: backgroundImage}),
     new Background({x:backgroundWidth, y: 0, image: backgroundImage}),
-    new Background({x:backgroundWidth*2, y: 0, image: backgroundImage})
+    new Background({x:backgroundWidth*2, y: 0, image: backgroundImage}),
+
+    // ------ TITLE ------
+    new Sign({x: 650, y:  110, image: titlePic})
+    
 ]
 midgrounds = [ 
     new Midground({x:0 , y: 1080-650, image: midgroundImage}),
@@ -500,6 +507,7 @@ foregrounds = [
     new Foreground({x:4250*3 , y: 1080-525, image: foregroundImage}),
     new Foreground({x:4250*4 , y: 1080-525, image: foregroundImage}),
     new Foreground({x:4250*5 , y: 1080-525, image: foregroundImage}),
+    
 ]
 
 // -------------------------- LARGE PLATFORMS --------------------------
