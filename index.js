@@ -1,4 +1,4 @@
-const modalMobile = document.getElementById('modalMobile');
+// const modalMobile = document.getElementById('modalMobile');
 const arrowRight = document.getElementById('arrowsRight');
 const arrowLeft = document.getElementById('arrowsLeft');
 const arrowUp = document.getElementById('arrowsUp');
@@ -79,15 +79,15 @@ window.addEventListener('load', checkOrientation);
 window.addEventListener('resize', checkOrientation);
 
  // -------------------- modalmobileON --------------------
-function mobileModalOn(){
-    mobileModal = true
-    modalMobile.style.display = 'flex'
-}
-  // ---- modalMobile OFF ----
-function mobileModalOff(){
-    mobileModal = false
-    modalMobile.style.display = 'none'
-}
+// function mobileModalOn(){
+//     mobileModal = true
+//     modalMobile.style.display = 'flex'
+// }
+//   // ---- modalMobile OFF ----
+// function mobileModalOff(){
+//     mobileModal = false
+//     modalMobile.style.display = 'none'
+// }
 // ------ CHECK IF USING MOBILE ------
 function isMobileDevice() {
     // Check if the user agent contains keywords indicative of mobile devices
