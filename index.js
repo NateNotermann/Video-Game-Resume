@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // console.log('loader VISIBLE');
         }
         if(mobileModal) {
-            mobileModalOn()
+            // mobileModalOn()
         } 
         // document.getElementById("content").style.display = "block";
         // document.getElementById("content").style.display = "flex";
@@ -2369,10 +2369,10 @@ closeButtonHelp.addEventListener('click', function() {
 })
 
 // ---- Click listener for Mobile Close button -- closed CBREModal
-closeButtonMobile.addEventListener('click', function() {
-    setTimeout(mobileModalOff, 100); 
-    // console.log('btncloseMobile clicked');
-})
+// closeButtonMobile.addEventListener('click', function() {
+//     setTimeout(mobileModalOff, 100); 
+//     // console.log('btncloseMobile clicked');
+// })
 
  // Add touchstart event listener
 //  arrowRight.addEventListener('touchstart', handleTouchStart, false);
