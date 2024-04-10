@@ -576,13 +576,14 @@ html {
   padding-left: 10px;
   padding-right: 10px;
   position: relative;
-  top: 150px;
+  top: 160px;
   left: 200px;
   border-style: solid;
   border-color: #000000;
   background-color: #f3f3f3;
   font-family: 'Concert One';
-  font-size: 50px
+  /* font-size: 50px */
+  transform: scale(1.75)
 
   /* font-family: 'Silkscreen'; */
 }
@@ -719,7 +720,7 @@ h2 {
   border-radius: 10px;
 
   /* position: relative; */
-  top: 132px;
+  top: 100px;
   /* left: 200px; */
 }
 
