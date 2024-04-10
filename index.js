@@ -401,8 +401,8 @@ BugPic.src = './img/Bug/bug2.webp'
 const BugTalkPic = new Image()   
 BugTalkPic.src = './img/Bug/bugTalkSprite.webp'
 
-const spacebarPic = new Image()   
-spacebarPic.src = './img/Sign/spacebar.webp'
+// const spacebarPic = new Image()   
+// spacebarPic.src = './img/Sign/spacebar.webp'
 
 const signMCTCPic = new Image()   
 signMCTCPic.src = './img/Sign/MCTC.webp'
@@ -442,6 +442,8 @@ WinBar3.src = './img/WinBars/winBar3.webp'
 const titlePic = new Image()   
 titlePic.src = './img/videogame-title2.webp'
 
+const newMenu = new Image()   
+newMenu.src = './img/new-button-menu.webp'
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
 player.draw()
@@ -541,15 +543,12 @@ backgrounds = [
     new Background({x:0, y: 0, image: backgroundImage}),
     new Background({x:backgroundWidth, y: 0, image: backgroundImage}),
     new Background({x:backgroundWidth*2, y: 0, image: backgroundImage}),
-
-    // ------ TITLE ------
-    new Sign({x: 610, y:  110, image: titlePic})
     
 ]
 midgrounds = [ 
     new Midground({x:0 , y: 1080-650, image: midgroundImage}),
     new Midground({x:7500 , y: 1080-650, image: midgroundImage}),
-    new Midground({x:7500*2 , y: 1080-650, image: midgroundImage})
+    new Midground({x:7500*2 , y: 1080-650, image: midgroundImage}),
 ]
 foregrounds = [ 
     new Foreground({x:0 , y: 1080-525, image: foregroundImage}),
@@ -559,6 +558,8 @@ foregrounds = [
     new Foreground({x:4250*4 , y: 1080-525, image: foregroundImage}),
     new Foreground({x:4250*5 , y: 1080-525, image: foregroundImage}),
     
+     // ------ NEW BUTTON MENU ------
+    new Midground({x: 2000, y:  150, image: newMenu})
 ]
 
 // -------------------------- LARGE PLATFORMS --------------------------
@@ -596,6 +597,9 @@ platforms = [     // Array of Platforms. ------------- Platform Dimensions: 580â
     // new Platform({x: platformWidth* 21, y: canvas.height - 125, image: platformImage}), // Platform 14
     // new Platform({x: platformWidth* 22, y: canvas.height - 125, image: platformImage}), // Platform 14
     // new Platform({x: platformWidth* 23, y: canvas.height - 125, image: platformImage}), // Platform 14
+
+    // ------ TITLE ------
+    new Sign({x: 610, y:  110, image: titlePic}),
 ];
 // -------------------------- SMALL PLATFORMS --------------------------
 platformTwos = [
@@ -645,8 +649,8 @@ elementsPRIME = [ new ElementsPRIME(25000, canvas.height - PrimeElements.height 
 buildingHGA = [ new BuildingHGA(35000, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
 
 // -------------------------- ARROWS & SIGNS --------------------------
-arrowArray = [ new ARROW(800, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
-            new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
+arrowArray = [ new ARROW(1200, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
+            // new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
             new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
 
             new Sign({x: 41000, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
