@@ -369,10 +369,12 @@ spriteStandRight.src = './img/Sprites/spriteStandRight.webp'
 
 // -------- Building Images -------- //
 const Restaurant = new Image()   
-Restaurant.src = './img/Jobs/RestaurantSprite2.webp'
+// Restaurant.src = './img/Jobs/RestaurantSprite2.webp'
+Restaurant.src = './img/Jobs/Restaurant SHORT.webp'
 
 const MCTC = new Image()   
-MCTC.src = './img/Jobs/MCTC LONG.png'
+// MCTC.src = './img/Jobs/MCTC LONG.png'
+MCTC.src = './img/Jobs/MCTC Short2.webp'
 
 const Freelance  = new Image()   
 Freelance .src = 'img/Jobs/FreelanceSprite3.webp'
@@ -381,10 +383,12 @@ const COYOTE  = new Image()
 COYOTE .src = './img/Jobs/COYOTE.webp'
 
 const CBRE = new Image()   
-CBRE.src = './img/Jobs/CBRE LONG.webp'
+// CBRE.src = './img/Jobs/CBRE LONG.webp'
+CBRE.src = './img/Jobs/CBRE SHORT.webp'
 
 const HGA = new Image()   
-HGA.src = './img/Jobs/HGA Long.png'
+// HGA.src = './img/Jobs/HGA Long.png'
+HGA.src = './img/Jobs/HGA SHORT.webp'
 
 const PRIME = new Image()   
 PRIME.src = './img/Jobs/Prime.webp'
@@ -637,7 +641,7 @@ movingPlatform2 = [
     // new Platform({x: 23000, y: canvas.height - platformHeight*5, image: platformTwoImage})
 ];
 
-// -------------------------- BUILDINGS --------------------------
+// -------------------------- BUILDINGS -------------------------- buildingNull*2
 let buildingNull = 3500
 buildingMCTC = [ new BuildingMCTC( buildingNull*2, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
 buildingRestaurant = [ new BuildingRestaurant(11500, canvas.height - Restaurant.height - 115, Restaurant)] 
@@ -1015,23 +1019,23 @@ function drawStuff(){
     })
     buildingRestaurant.forEach(building => { 
         building.draw()    
-        building.update()
+        // building.update()
     }) 
     buildingMCTC.forEach(building => { // loop through array of buildingMCTC
         building.draw()     // ------ DRAW buildingMCTC
-        building.update()
+        // building.update()
     }) 
-    buildingFreelance.forEach(building => { // loop through array of buildingMCTC
-        building.draw()     // ------ DRAW buildingMCTC
+    buildingFreelance.forEach(building => { // loop through array of buildingFreelance
+        building.draw()     // ------ DRAW buildingFreelance
         building.update()
     }) 
     buildingCOYOTE.forEach(building => { // loop through array of buildingCOYOTE
         building.draw()     // ------ DRAW buildingCOYOTE
-        building.update()
+        // building.update()
     }) 
     buildingCBRE.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingCBRE
-        building.update()
+        // building.update()
     }) 
     elementsPRIME.forEach(element => { // loop through array of buildingCBRE
         element.draw()     // ------ DRAW buildingCBRE
@@ -1039,27 +1043,27 @@ function drawStuff(){
     }) 
     buildingPRIME.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingCBRE
-        building.update()
+        // building.update()
     }) 
     buildingHGA.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingHGA
-        building.update()
+        // building.update()
     }) 
     powerUps1.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingHGA
-        building.update()
+        // building.update()
     }) 
     powerUps2.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingHGA
-        building.update()
+        // building.update()
     }) 
     powerUps3.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingHGA
-        building.update()
+        // building.update()
     }) 
     arrowArray.forEach(arrowArray1 => { // loop arrow sign frames
         arrowArray1.draw() 
-        arrowArray1.update()
+        // arrowArray1.update()
     })
     
     WinBar3Item.forEach(WinBar3 => { // loop through array of Platforms
@@ -1897,18 +1901,18 @@ function animate() {
         }
     })
 
-    function pressX() {
-        if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC || glowFreelance || glowRestaurant || glowPowerUp1 || glowPowerUp2 || glowPowerUp3){
-            pressX = true
-            PressXDiv.style.opacity = 1;
-            // console.log('glowing');
-        } else {
-            pressX = false
-            PressXDiv.style.opacity = 0;
-            // console.log('NOT glowing');
-        }
-    }
-    pressX() 
+    // function pressX() {
+    //     if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC || glowFreelance || glowRestaurant || glowPowerUp1 || glowPowerUp2 || glowPowerUp3){
+    //         pressX = true
+    //         PressXDiv.style.opacity = 1;
+    //         // console.log('glowing');
+    //     } else {
+    //         pressX = false
+    //         PressXDiv.style.opacity = 0;
+    //         // console.log('NOT glowing');
+    //     }
+    // }
+    // pressX() 
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
         // console.log('scroll', scrollOffset);
