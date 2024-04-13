@@ -465,6 +465,7 @@ let buildingPRIME = []
 let elementsPRIME = []
 let buildingHGA = []
 let arrowArray = []
+let signArray = []
 let powerUps1 = []
 let powerUps2 = []
 let powerUps3 = []
@@ -651,6 +652,8 @@ buildingHGA = [ new BuildingHGA(35000, canvas.height - HGA.height - (platformHei
 // -------------------------- ARROWS & SIGNS --------------------------
 arrowArray = [ new ARROW(1200, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
             // new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
+        ] 
+signArray = [
             new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
 
             new Sign({x: 41000, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
@@ -662,7 +665,7 @@ arrowArray = [ new ARROW(1200, canvas.height - ArrowPic.height - 50, 250, 422, A
             new Sign({x: 20400, y: canvas.height - signCBREPic.height - 125, image: signCBREPic}),
             new Sign({x: 24500, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
             new Sign({x: 34500, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
-] 
+]
 // -------------------------- WIN BARS--------------------------
 WinBar2Item = [new Sign({x: 41100, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
 WinBar3Item = [new Sign({x: 41010, y: canvas.height - WinBar3.height - 325 , image: WinBar3})]
@@ -882,8 +885,11 @@ function moveLeft(){
     powerUps3.forEach(building => { // ---- building SCROLL ----
         building.position.x -= (playerMovement)
     });
-    arrowArray.forEach(arrowArray => { // ---- building SCROLL ----
+    arrowArray.forEach(arrowArray => { // ---- arrow sign SCROLL ----
         arrowArray.position.x -= (playerMovement)
+    });
+    signArray.forEach(sign => { // ---- simple sign SCROLL ----
+        sign.position.x -= (playerMovement)
     });
     WinBar2Item.forEach(WinBar2 => { // ---- building SCROLL ----
         WinBar2.position.x -= (playerMovement)
@@ -964,8 +970,11 @@ function moveRight(){
     powerUps3.forEach(building => { // ---- Building SCROLL ----
         building.position.x += (playerMovement)
     });
-    arrowArray.forEach(arrowArray => { // ---- Building SCROLL ----
+    arrowArray.forEach(arrowArray => { // ---- arrow sign SCROLL ----
         arrowArray.position.x += (playerMovement)
+    });
+    signArray.forEach(sign => { // ---- simple signs SCROLL ----
+        sign.position.x += (playerMovement)
     });
     WinBar3Item.forEach(WinBar3 => { // ---- Building SCROLL ----
         WinBar3.position.x += (playerMovement)
@@ -1060,6 +1069,10 @@ function drawStuff(){
     arrowArray.forEach(arrowArray1 => { // loop arrow sign frames
         arrowArray1.draw() 
         arrowArray1.update()
+    })
+    signArray.forEach(sign => { // loop sign frames
+        sign.draw() 
+        // arrowArray1.update()
     })
     
     WinBar3Item.forEach(WinBar3 => { // loop through array of Platforms
@@ -1908,7 +1921,7 @@ function animate() {
             // console.log('NOT glowing');
         }
     }
-    pressX() 
+    // pressX() 
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
         // console.log('scroll', scrollOffset);
@@ -2494,7 +2507,7 @@ closeButtonHelp.addEventListener('click', function() {
 function hitTaken() {
     if(canHurt){
         // Tempsprite = player.currentSprite
-       health -= 10
+       health -= 5
     //    player.currentSprite = player.sprites.stand.left
        canHurt = false
     //    console.log('Hit taken!');

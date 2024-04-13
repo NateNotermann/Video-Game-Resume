@@ -1,5 +1,17 @@
 .DS_Store
+# .DS_Store in any location
+**/.DS_Store
 
 # Docker
+.docker/
 .dockerignore
 docker-compose.yml
+Dockerfile
+.Dockerfile
+
+
+# Node stuff
+package.json
+
+#ngnix
+nginx.conf
