@@ -3,3 +3,9 @@
 # Docker
 .dockerignore
 docker-compose.yml
+Dockerfile
+
+
+package.json
+
+nginx.conf
