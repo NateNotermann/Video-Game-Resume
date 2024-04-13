@@ -369,8 +369,8 @@ spriteStandRight.src = './img/Sprites/spriteStandRight.webp'
 
 // -------- Building Images -------- //
 const Restaurant = new Image()   
-// Restaurant.src = './img/Jobs/RestaurantSprite2.webp'
-Restaurant.src = './img/Jobs/Restaurant SHORT.webp'
+Restaurant.src = './img/Jobs/RestaurantSprite2.webp'
+// Restaurant.src = './img/Jobs/Restaurant SHORT.webp'
 
 const MCTC = new Image()   
 // MCTC.src = './img/Jobs/MCTC LONG.png'
@@ -1028,7 +1028,7 @@ function drawStuff(){
     })
     buildingRestaurant.forEach(building => { 
         building.draw()    
-        // building.update()
+        building.update()
     }) 
     buildingMCTC.forEach(building => { // loop through array of buildingMCTC
         building.draw()     // ------ DRAW buildingMCTC
@@ -1072,7 +1072,7 @@ function drawStuff(){
     }) 
     arrowArray.forEach(arrowArray1 => { // loop arrow sign frames
         arrowArray1.draw() 
-        // arrowArray1.update()
+        arrowArray1.update()
     })
     signArray.forEach(sign => { // loop sign frames
         sign.draw() 
@@ -1926,7 +1926,7 @@ function animate() {
             // console.log('NOT glowing');
         }
     }
-    // pressX() 
+    pressX() 
     // ---- WIN SCROLL ----
     // if (scrollOffset > 1500) {
         // console.log('scroll', scrollOffset);
@@ -2547,7 +2547,14 @@ function hitSprite(){
 }
 
 function handleClick() {
-    if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !mobileModal){          
+    console.log(helpModal);
+    console.log('MCTCModal', MCTCModal);
+    console.log('CoyoteModal', CoyoteModal);
+    console.log('CBREModal', CBREModal);
+    console.log('PrimeModal', PrimeModal);
+    console.log('MCTCMHGAModalodal', HGAModal);
+    console.log('mobileModal', mobileModal);
+    if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal ){          
         // console.log('No building modals are open');
         helpModal = !helpModal
         // console.log(keys.QuestionMark.pressed);
