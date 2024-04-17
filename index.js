@@ -242,7 +242,7 @@ window.onload = function () {
 // global variables. 
 let gravity = 1.5
 const floor = 125 // or platformImage.height. pixel from the bottom player stops at
-let jump = 40 // amount player should jump
+let jump = 25 // amount player should jump
 let playerMovement = 20 // 20 //  amount player moves left and right
 let health = 100
 let canHurt = true
@@ -370,9 +370,11 @@ spriteStandRight.src = './img/Sprites/spriteStandRight.webp'
 // -------- Building Images -------- //
 const Restaurant = new Image()   
 Restaurant.src = './img/Jobs/RestaurantSprite2.webp'
+// Restaurant.src = './img/Jobs/Restaurant SHORT.webp'
 
 const MCTC = new Image()   
-MCTC.src = './img/Jobs/MCTC LONG.png'
+// MCTC.src = './img/Jobs/MCTC LONG.png'
+MCTC.src = './img/Jobs/MCTC Short2.webp'
 
 const Freelance  = new Image()   
 Freelance .src = 'img/Jobs/FreelanceSprite3.webp'
@@ -381,10 +383,12 @@ const COYOTE  = new Image()
 COYOTE .src = './img/Jobs/COYOTE.webp'
 
 const CBRE = new Image()   
-CBRE.src = './img/Jobs/CBRE LONG.webp'
+// CBRE.src = './img/Jobs/CBRE LONG.webp'
+CBRE.src = './img/Jobs/CBRE SHORT.webp'
 
 const HGA = new Image()   
-HGA.src = './img/Jobs/HGA Long.png'
+// HGA.src = './img/Jobs/HGA Long.png'
+HGA.src = './img/Jobs/HGA SHORT.webp'
 
 const PRIME = new Image()   
 PRIME.src = './img/Jobs/Prime.webp'
@@ -465,6 +469,7 @@ let buildingPRIME = []
 let elementsPRIME = []
 let buildingHGA = []
 let arrowArray = []
+let signArray = []
 let powerUps1 = []
 let powerUps2 = []
 let powerUps3 = []
@@ -504,7 +509,7 @@ function init() {
     powerUp2 = false
     powerUp3 = false
     glowPlayer = false
-    jump = 35
+    jump = 28 
     playerSize = 2
     playerMovement = 20
     health = 100
@@ -637,45 +642,49 @@ movingPlatform2 = [
     // new Platform({x: 23000, y: canvas.height - platformHeight*5, image: platformTwoImage})
 ];
 
-// -------------------------- BUILDINGS --------------------------
+// -------------------------- BUILDINGS -------------------------- buildingNull*2
 let buildingNull = 3500
-buildingMCTC = [ new BuildingMCTC( buildingNull*2, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
-buildingRestaurant = [ new BuildingRestaurant(11500, canvas.height - Restaurant.height - 115, Restaurant)] 
-buildingCOYOTE = [ new BuildingCOYOTE (14500, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
+buildingMCTC = [ new BuildingMCTC( 35000, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingRestaurant = [ new BuildingRestaurant(25000, canvas.height - Restaurant.height - 115, Restaurant)] 
+buildingCOYOTE = [ new BuildingCOYOTE (20200, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 buildingFreelance = [ new BuildingFreelance(17800, canvas.height - Freelance.height - (platformHeight * 5)+10, Freelance)] // MCTC (x,y,(NOT USED --> w,h,image,))
-buildingCBRE = [ new BuildingCBRE(21000 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
-buildingPRIME = [ new BuildingPRIME(25000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
-elementsPRIME = [ new ElementsPRIME(25000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
-buildingHGA = [ new BuildingHGA(35000, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
+buildingCBRE = [ new BuildingCBRE(14500 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
+buildingPRIME = [ new BuildingPRIME(11500, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
+elementsPRIME = [ new ElementsPRIME(11500, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
+buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
 
 // -------------------------- ARROWS & SIGNS --------------------------
 arrowArray = [ new ARROW(1200, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
             // new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
+        ] 
+signArray = [
             new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
 
             new Sign({x: 41000, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
 
-            new Sign({x: 6450, y: canvas.height - signMCTCPic.height - 125, image: signMCTCPic}),
-            new Sign({x: 11100, y: canvas.height - signRestaurantPic.height - 125, image: signRestaurantPic}),
-            new Sign({x: 13900, y: canvas.height - signCoyotePic.height - 125, image: signCoyotePic}),
+            new Sign({x: 34500, y: canvas.height - signMCTCPic.height - 125, image: signMCTCPic}),
+            new Sign({x: 24500, y: canvas.height - signRestaurantPic.height - 125, image: signRestaurantPic}),
+
+            new Sign({x: 19600, y: canvas.height - signCoyotePic.height - 125, image: signCoyotePic}),
             new Sign({x: 17200, y: canvas.height - (platformHeight * 4)- signVFXPic.height, image: signVFXPic}),
-            new Sign({x: 20400, y: canvas.height - signCBREPic.height - 125, image: signCBREPic}),
-            new Sign({x: 24500, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
-            new Sign({x: 34500, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
-] 
+            new Sign({x: 13900, y: canvas.height - signCBREPic.height - 125, image: signCBREPic}),
+            
+            new Sign({x: 11000, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
+            new Sign({x: 6450, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
+]
 // -------------------------- WIN BARS--------------------------
 WinBar2Item = [new Sign({x: 41100, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
 WinBar3Item = [new Sign({x: 41010, y: canvas.height - WinBar3.height - 325 , image: WinBar3})]
 
 // -------------------------- POWER UPS --------------------------
-powerUps1 = [
-    new powerUp({x: 26200, y: canvas.height - PowerUp1.height - 125, image: PowerUp1}),
+powerUps1 = [ // jump
+    new powerUp({x: 8300, y: canvas.height - PowerUp1.height - 125, image: PowerUp1}),
 ]
-powerUps2 = [
-    new powerUp({x: 30500, y: canvas.height - PowerUp2.height - 125, image: PowerUp2}),
+powerUps2 = [ // speed
+    new powerUp({x: 12800, y: canvas.height - PowerUp2.height - 125, image: PowerUp2}),
 ]
-powerUps3 = [
-    new powerUp({x: 36250, y: canvas.height - PowerUp3.height - 125, image: PowerUp3}),
+powerUps3 = [ // size
+    new powerUp({x: 16400, y: canvas.height - PowerUp3.height - (platformHeight * 2), image: PowerUp3}),
 ]
 // 26500, 27000, 29500
 
@@ -882,8 +891,11 @@ function moveLeft(){
     powerUps3.forEach(building => { // ---- building SCROLL ----
         building.position.x -= (playerMovement)
     });
-    arrowArray.forEach(arrowArray => { // ---- building SCROLL ----
+    arrowArray.forEach(arrowArray => { // ---- arrow sign SCROLL ----
         arrowArray.position.x -= (playerMovement)
+    });
+    signArray.forEach(sign => { // ---- simple sign SCROLL ----
+        sign.position.x -= (playerMovement)
     });
     WinBar2Item.forEach(WinBar2 => { // ---- building SCROLL ----
         WinBar2.position.x -= (playerMovement)
@@ -964,8 +976,11 @@ function moveRight(){
     powerUps3.forEach(building => { // ---- Building SCROLL ----
         building.position.x += (playerMovement)
     });
-    arrowArray.forEach(arrowArray => { // ---- Building SCROLL ----
+    arrowArray.forEach(arrowArray => { // ---- arrow sign SCROLL ----
         arrowArray.position.x += (playerMovement)
+    });
+    signArray.forEach(sign => { // ---- simple signs SCROLL ----
+        sign.position.x += (playerMovement)
     });
     WinBar3Item.forEach(WinBar3 => { // ---- Building SCROLL ----
         WinBar3.position.x += (playerMovement)
@@ -1019,19 +1034,19 @@ function drawStuff(){
     }) 
     buildingMCTC.forEach(building => { // loop through array of buildingMCTC
         building.draw()     // ------ DRAW buildingMCTC
-        building.update()
+        // building.update()
     }) 
-    buildingFreelance.forEach(building => { // loop through array of buildingMCTC
-        building.draw()     // ------ DRAW buildingMCTC
+    buildingFreelance.forEach(building => { // loop through array of buildingFreelance
+        building.draw()     // ------ DRAW buildingFreelance
         building.update()
     }) 
     buildingCOYOTE.forEach(building => { // loop through array of buildingCOYOTE
         building.draw()     // ------ DRAW buildingCOYOTE
-        building.update()
+        // building.update()
     }) 
     buildingCBRE.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingCBRE
-        building.update()
+        // building.update()
     }) 
     elementsPRIME.forEach(element => { // loop through array of buildingCBRE
         element.draw()     // ------ DRAW buildingCBRE
@@ -1039,27 +1054,31 @@ function drawStuff(){
     }) 
     buildingPRIME.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingCBRE
-        building.update()
+        // building.update()
     }) 
     buildingHGA.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingHGA
-        building.update()
+        // building.update()
     }) 
     powerUps1.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingHGA
-        building.update()
+        // building.update()
     }) 
     powerUps2.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingHGA
-        building.update()
+        // building.update()
     }) 
     powerUps3.forEach(building => { // loop through array of buildingCBRE
         building.draw()     // ------ DRAW buildingHGA
-        building.update()
+        // building.update()
     }) 
     arrowArray.forEach(arrowArray1 => { // loop arrow sign frames
         arrowArray1.draw() 
         arrowArray1.update()
+    })
+    signArray.forEach(sign => { // loop sign frames
+        sign.draw() 
+        // arrowArray1.update()
     })
     
     WinBar3Item.forEach(WinBar3 => { // loop through array of Platforms
@@ -1174,7 +1193,7 @@ function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height)
     // c.fillStyle = 'blue'
     // c.fillRect(0, 0, canvas.width, canvas.height)
-    // console.log('sco', scrollOffset);
+    // console.log('scrollOffset', scrollOffset);
 
     // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
     // if(scrollOffset >= 25000){
@@ -1739,7 +1758,7 @@ function animate() {
             } else if (glowPowerUp1) {  // JUMP
                 powerUp1 = true
                 glowPlayer = true
-                jump = 55
+                jump = 40
                 console.log('powerUp1');
             } else if (glowPowerUp2){   // SPEED
                 powerUp2 = true
@@ -1897,6 +1916,7 @@ function animate() {
             glowPowerUp3= false
         }
     })
+
 
     function pressX() {
         if (glowHGA || glowPRIME || glowCBRE || glowCOYOTE || glowMCTC || glowFreelance || glowRestaurant || glowPowerUp1 || glowPowerUp2 || glowPowerUp3){
@@ -2495,7 +2515,7 @@ closeButtonHelp.addEventListener('click', function() {
 function hitTaken() {
     if(canHurt){
         // Tempsprite = player.currentSprite
-       health -= 10
+       health -= 5
     //    player.currentSprite = player.sprites.stand.left
        canHurt = false
     //    console.log('Hit taken!');
@@ -2530,7 +2550,14 @@ function hitSprite(){
 }
 
 function handleClick() {
-    if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal && !mobileModal){          
+    console.log(helpModal);
+    console.log('MCTCModal', MCTCModal);
+    console.log('CoyoteModal', CoyoteModal);
+    console.log('CBREModal', CBREModal);
+    console.log('PrimeModal', PrimeModal);
+    console.log('MCTCMHGAModalodal', HGAModal);
+    console.log('mobileModal', mobileModal);
+    if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal ){          
         // console.log('No building modals are open');
         helpModal = !helpModal
         // console.log(keys.QuestionMark.pressed);
