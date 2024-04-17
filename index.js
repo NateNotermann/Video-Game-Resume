@@ -242,7 +242,7 @@ window.onload = function () {
 // global variables. 
 let gravity = 1.5
 const floor = 125 // or platformImage.height. pixel from the bottom player stops at
-let jump = 40 // amount player should jump
+let jump = 25 // amount player should jump
 let playerMovement = 20 // 20 //  amount player moves left and right
 let health = 100
 let canHurt = true
@@ -509,7 +509,7 @@ function init() {
     powerUp2 = false
     powerUp3 = false
     glowPlayer = false
-    jump = 35
+    jump = 28 
     playerSize = 2
     playerMovement = 20
     health = 100
@@ -677,14 +677,14 @@ WinBar2Item = [new Sign({x: 41100, y: canvas.height - WinBar2.height - 125, imag
 WinBar3Item = [new Sign({x: 41010, y: canvas.height - WinBar3.height - 325 , image: WinBar3})]
 
 // -------------------------- POWER UPS --------------------------
-powerUps1 = [
-    new powerUp({x: 26200, y: canvas.height - PowerUp1.height - 125, image: PowerUp1}),
+powerUps1 = [ // jump
+    new powerUp({x: 8300, y: canvas.height - PowerUp1.height - 125, image: PowerUp1}),
 ]
-powerUps2 = [
-    new powerUp({x: 30500, y: canvas.height - PowerUp2.height - 125, image: PowerUp2}),
+powerUps2 = [ // speed
+    new powerUp({x: 12800, y: canvas.height - PowerUp2.height - 125, image: PowerUp2}),
 ]
-powerUps3 = [
-    new powerUp({x: 36250, y: canvas.height - PowerUp3.height - 125, image: PowerUp3}),
+powerUps3 = [ // size
+    new powerUp({x: 16400, y: canvas.height - PowerUp3.height - (platformHeight * 2), image: PowerUp3}),
 ]
 // 26500, 27000, 29500
 
@@ -1192,7 +1192,7 @@ function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height)
     // c.fillStyle = 'blue'
     // c.fillRect(0, 0, canvas.width, canvas.height)
-    // console.log('sco', scrollOffset);
+    console.log('scrollOffset', scrollOffset);
 
     // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
     // if(scrollOffset >= 25000){
@@ -1757,7 +1757,7 @@ function animate() {
             } else if (glowPowerUp1) {  // JUMP
                 powerUp1 = true
                 glowPlayer = true
-                jump = 55
+                jump = 40
                 console.log('powerUp1');
             } else if (glowPowerUp2){   // SPEED
                 powerUp2 = true
