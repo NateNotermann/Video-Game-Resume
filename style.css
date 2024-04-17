@@ -593,6 +593,27 @@ html {
 
   /* font-family: 'Silkscreen'; */
 }
+
+#healthBarText {
+  top: 50px;
+  z-index: 1000;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+  top: 20px;
+  /* left: 100px; */
+  /* border-style: solid; */
+  color: white;
+  /* border-color: #000000; */
+  /* background-color: #f3f3f3; */
+  font-family: 'Concert One';
+  /* font-size: 50px */
+  /* transform: scale(1.75) */
+
+  /* font-family: 'Silkscreen'; */
+}
 #modalLose {
   width: 50%;
   /* display: flex; */
@@ -702,6 +723,7 @@ h2 {
 .player1 {
   /* background: linear-gradient(90deg, #f4033f, #f441ee, #3bffff, #03a9f4, #f4033f); */
   background-size: 100%;
+  /* background-size: 50%; */
   /* animation: p1HealthGradient 5s linear infinite; */
 }
 

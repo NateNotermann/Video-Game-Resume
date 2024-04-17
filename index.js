@@ -650,7 +650,7 @@ buildingCOYOTE = [ new BuildingCOYOTE (20200, canvas.height - COYOTE.height - pl
 buildingFreelance = [ new BuildingFreelance(17800, canvas.height - Freelance.height - (platformHeight * 5)+10, Freelance)] // MCTC (x,y,(NOT USED --> w,h,image,))
 buildingCBRE = [ new BuildingCBRE(14500 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
 buildingPRIME = [ new BuildingPRIME(11500, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
-elementsPRIME = [ new ElementsPRIME(11500, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
+// elementsPRIME = [ new ElementsPRIME(11500, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
 buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
 
 // -------------------------- ARROWS & SIGNS --------------------------
@@ -1193,7 +1193,7 @@ function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height)
     // c.fillStyle = 'blue'
     // c.fillRect(0, 0, canvas.width, canvas.height)
-    console.log('scrollOffset', scrollOffset);
+    // console.log('scrollOffset', scrollOffset);
 
     // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
     // if(scrollOffset >= 25000){
