@@ -644,14 +644,14 @@ movingPlatform2 = [
 
 // -------------------------- BUILDINGS -------------------------- buildingNull*2
 let buildingNull = 3500
-buildingMCTC = [ new BuildingMCTC( buildingNull*2, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
-buildingRestaurant = [ new BuildingRestaurant(11500, canvas.height - Restaurant.height - 115, Restaurant)] 
-buildingCOYOTE = [ new BuildingCOYOTE (14500, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
+buildingMCTC = [ new BuildingMCTC( 35000, canvas.height - MCTC.height - platformHeight, 250, 422, MCTC)] // MCTC (x,y,(NOT USED --> w,h,image,))
+buildingRestaurant = [ new BuildingRestaurant(25000, canvas.height - Restaurant.height - 115, Restaurant)] 
+buildingCOYOTE = [ new BuildingCOYOTE (20200, canvas.height - COYOTE.height - platformHeight, 250, 422, COYOTE)] // COYOTE
 buildingFreelance = [ new BuildingFreelance(17800, canvas.height - Freelance.height - (platformHeight * 5)+10, Freelance)] // MCTC (x,y,(NOT USED --> w,h,image,))
-buildingCBRE = [ new BuildingCBRE(21000 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
-buildingPRIME = [ new BuildingPRIME(25000, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
-elementsPRIME = [ new ElementsPRIME(25000, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
-buildingHGA = [ new BuildingHGA(35000, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
+buildingCBRE = [ new BuildingCBRE(14500 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
+buildingPRIME = [ new BuildingPRIME(11500, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
+elementsPRIME = [ new ElementsPRIME(11500, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
+buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
 
 // -------------------------- ARROWS & SIGNS --------------------------
 arrowArray = [ new ARROW(1200, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
@@ -662,13 +662,15 @@ signArray = [
 
             new Sign({x: 41000, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
 
-            new Sign({x: 6450, y: canvas.height - signMCTCPic.height - 125, image: signMCTCPic}),
-            new Sign({x: 11100, y: canvas.height - signRestaurantPic.height - 125, image: signRestaurantPic}),
-            new Sign({x: 13900, y: canvas.height - signCoyotePic.height - 125, image: signCoyotePic}),
+            new Sign({x: 34500, y: canvas.height - signMCTCPic.height - 125, image: signMCTCPic}),
+            new Sign({x: 24500, y: canvas.height - signRestaurantPic.height - 125, image: signRestaurantPic}),
+
+            new Sign({x: 19600, y: canvas.height - signCoyotePic.height - 125, image: signCoyotePic}),
             new Sign({x: 17200, y: canvas.height - (platformHeight * 4)- signVFXPic.height, image: signVFXPic}),
-            new Sign({x: 20400, y: canvas.height - signCBREPic.height - 125, image: signCBREPic}),
-            new Sign({x: 24500, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
-            new Sign({x: 34500, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
+            new Sign({x: 13900, y: canvas.height - signCBREPic.height - 125, image: signCBREPic}),
+            
+            new Sign({x: 11000, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
+            new Sign({x: 6450, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
 ]
 // -------------------------- WIN BARS--------------------------
 WinBar2Item = [new Sign({x: 41100, y: canvas.height - WinBar2.height - 125, image: WinBar2})]

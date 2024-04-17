@@ -515,10 +515,10 @@ class ElementsPRIME {
     }
 
     update() {
-            this.frames++;
-        if (this.frames > 29 ) {
-            this.frames = 0;
-        } 
+        //     this.frames++;
+        // if (this.frames > 29 ) {
+        //     this.frames = 0;
+        // } 
         this.draw()
     } 
 } // End of Building2 Sprite
