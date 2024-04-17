@@ -721,9 +721,10 @@ h2 {
 
 
 .player1 {
-  background: linear-gradient(90deg, #f4033f, #f441ee, #3bffff, #03a9f4, #f4033f);
-  background-size: 50%;
-  animation: p1HealthGradient 5s linear infinite;
+  /* background: linear-gradient(90deg, #f4033f, #f441ee, #3bffff, #03a9f4, #f4033f); */
+  background-size: 100%;
+  /* background-size: 50%; */
+  /* animation: p1HealthGradient 5s linear infinite; */
 }
 
 @keyframes p1HealthGradient {
