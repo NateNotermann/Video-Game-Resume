@@ -1192,7 +1192,7 @@ function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height)
     // c.fillStyle = 'blue'
     // c.fillRect(0, 0, canvas.width, canvas.height)
-    console.log('scrollOffset', scrollOffset);
+    // console.log('scrollOffset', scrollOffset);
 
     // ---------------- PLAYER SPEED & SIZE POWER UP ---------------- //
     // if(scrollOffset >= 25000){
