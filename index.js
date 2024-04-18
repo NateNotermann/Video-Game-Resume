@@ -394,7 +394,8 @@ const PRIME = new Image()
 PRIME.src = './img/Jobs/Prime.webp'
 
 const PrimeElements = new Image()   
-PrimeElements.src = './img/Jobs/PrimeFlag2.png'
+// PrimeElements.src = './img/Jobs/PrimeFlag2.png'
+PrimeElements.src = './img/Jobs/Prime-Flag-Static.webp'
 
 const ArrowPic = new Image()   
 ArrowPic.src = './img/Sign/arrow3.png'
@@ -650,7 +651,7 @@ buildingCOYOTE = [ new BuildingCOYOTE (20200, canvas.height - COYOTE.height - pl
 buildingFreelance = [ new BuildingFreelance(17800, canvas.height - Freelance.height - (platformHeight * 5)+10, Freelance)] // MCTC (x,y,(NOT USED --> w,h,image,))
 buildingCBRE = [ new BuildingCBRE(14500 , canvas.height - CBRE.height - platformHeight, 250, 422, CBRE)] // CBRE (x,y,w,h,image,)
 buildingPRIME = [ new BuildingPRIME(11500, canvas.height - PRIME.height - platformHeight, 500, 500, PRIME)] // HGA (x,y,w,h,image,)
-// elementsPRIME = [ new ElementsPRIME(11500, canvas.height - PrimeElements.height - platformHeight, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
+elementsPRIME = [ new ElementsPRIME(11650, canvas.height - PrimeElements.height - platformHeight - 200, 500, 500, PrimeElements)] // HGA (x,y,w,h,image,)
 buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (platformHeight -15), HGA)] // PRIME (x,y,w,h,image,)
 
 // -------------------------- ARROWS & SIGNS --------------------------
