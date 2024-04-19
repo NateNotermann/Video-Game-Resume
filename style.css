@@ -173,11 +173,6 @@ canvas {
     background-color: gray;
 }
 
-/* .border {
-    border-radius: 2px;
-    border-style: solid;
-    border-color: black;
-} */
 
 .flex {
     display: flex;
@@ -311,7 +306,7 @@ html {
   }
   
   p {
-    margin: 0.5em;
+    /* margin: 0.5em; */
   }
 
   ul {
@@ -343,6 +338,7 @@ html {
     display: inline-flex; 
     text-align: center; 
     line-height: .3;
+    overflow: auto;
   }
 
   #controls {
@@ -698,26 +694,6 @@ h2 {
   margin-bottom: .5em;
 }
 
-@media (orientation: landscape) {
-  #flexDiv {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  #buttonsDiv {
-    display: none;
-  }
-}
-
-@media (orientation: portrait) {
-  #flexDiv {
-    flex-direction: column;
-    align-items: center;
-  }
-  #buttonsDiv {
-    display: flex;
-    justify-content:space-around
-  }
-}
 
 
 .player1 {
@@ -771,3 +747,59 @@ h2 {
 .fit-picture {
   max-width: 100%;
 }
+
+@media (orientation: landscape) {
+  #flexDiv {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  #buttonsDiv {
+    display: none;
+  }
+}
+
+@media (orientation: portrait) {
+  #flexDiv {
+    flex-direction: column;
+    align-items: center;
+    max-height: 80%;
+  }
+  #buttonsDiv {
+    display: flex;
+    justify-content:space-around
+  }
+  #controller {
+    display: none;
+  }
+  .modal {
+    max-height: 85%;
+    /* min-height: 50%; */
+    font-size: 1.5rem;
+    /* height: 85%; */
+    overflow: auto;
+  }
+  .company {
+    overflow: auto;
+  }
+  #modalHelp{
+    overflow: auto;
+  }
+  /* 
+  #linksParent {
+    margin: 0px;
+    padding: 0px;
+    gap: 0px;
+  }
+  #links {
+    line-height: 1;
+    margin: 0 0 0 0;
+  } */
+
+
+}
+
+/* .border {
+    border-radius: 2px;
+    border-style: solid;
+    border-color: black;
+} */
