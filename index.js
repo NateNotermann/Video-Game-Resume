@@ -663,14 +663,14 @@ signArray = [
 
             new Sign({x: 41000, y: canvas.height - WinBar1.height - 125, image: WinBar1}),
 
-            new Sign({x: 34500, y: canvas.height - signMCTCPic.height - 125, image: signMCTCPic}),
+            new Sign({x: 34300, y: canvas.height - signMCTCPic.height - 125, image: signMCTCPic}),
             new Sign({x: 24500, y: canvas.height - signRestaurantPic.height - 125, image: signRestaurantPic}),
 
-            new Sign({x: 19600, y: canvas.height - signCoyotePic.height - 125, image: signCoyotePic}),
-            new Sign({x: 17200, y: canvas.height - (platformHeight * 4)- signVFXPic.height, image: signVFXPic}),
-            new Sign({x: 13900, y: canvas.height - signCBREPic.height - 125, image: signCBREPic}),
+            new Sign({x: 19500, y: canvas.height - signCoyotePic.height - 125, image: signCoyotePic}),
+            new Sign({x: 17050, y: canvas.height - (platformHeight * 4)- signVFXPic.height, image: signVFXPic}),
+            new Sign({x: 13800, y: canvas.height - signCBREPic.height - 125, image: signCBREPic}),
             
-            new Sign({x: 11000, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
+            new Sign({x: 10950, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
             new Sign({x: 6450, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
 ]
 // -------------------------- WIN BARS--------------------------
