@@ -347,7 +347,7 @@ html {
 
   #controls {
     margin: 1em;
-    outline-style: auto;
+    /* outline-style: auto; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -766,4 +766,8 @@ h2 {
   height: 30px; 
   width: 100%;
   border-radius: 5px;
+}
+
+.fit-picture {
+  max-width: 100%;
 }
