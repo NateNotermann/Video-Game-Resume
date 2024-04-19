@@ -68,10 +68,10 @@ function checkOrientation() {
     if (window.matchMedia("(orientation: portrait)").matches && mobileModal){
         // flexDiv.style.setProperty('flex-direction', 'column');
         // flexDiv.style.setProperty('align-items',  'center');
-        // console.log('Portrait orientation');
+        console.log('Portrait orientation');
     } else if (window.matchMedia("(orientation: landscape)").matches && mobileModal){
         // alert('Please make sure device is Vertical.')
-        // console.log("landscape orientation");
+        console.log("landscape orientation");
     }
 }
 
@@ -449,6 +449,9 @@ titlePic.src = './img/videogame-title2.webp'
 
 const newMenu = new Image()   
 newMenu.src = './img/new-button-menu.webp'
+
+const heart = new Image()   
+heart.src = './img/Sign/heart.png'
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
 player.draw()
@@ -471,6 +474,7 @@ let elementsPRIME = []
 let buildingHGA = []
 let arrowArray = []
 let signArray = []
+let heartArray = []
 let powerUps1 = []
 let powerUps2 = []
 let powerUps3 = []
@@ -673,6 +677,8 @@ signArray = [
             new Sign({x: 10950, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
             new Sign({x: 6450, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
 ]
+
+heartArray = [ new Sign({x: 100, y: 20, image: heart})]
 // -------------------------- WIN BARS--------------------------
 WinBar2Item = [new Sign({x: 41100, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
 WinBar3Item = [new Sign({x: 41010, y: canvas.height - WinBar3.height - 325 , image: WinBar3})]
@@ -1079,6 +1085,10 @@ function drawStuff(){
     })
     signArray.forEach(sign => { // loop sign frames
         sign.draw() 
+        // arrowArray1.update()
+    })
+    heartArray.forEach(heart => { // loop sign frames
+        heart.draw() 
         // arrowArray1.update()
     })
     
