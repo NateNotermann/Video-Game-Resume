@@ -41,6 +41,31 @@
   background: radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(5,111,188,1) 50%, rgba(0,9,68,1) 100%);
   width: 100%;
   height: 100%;
+
+  /* background: linear-gradient(90deg, #f4033f, #f441ee, #3bffff, #03a9f4, #f4033f); */
+  /* background:   repeating-linear-gradient(
+    90deg,
+    #f4033f 0%,
+    #f441ee 20%,
+    #3bffff 40%,
+    #03a9f4 60%,
+    #f4033f 80%,
+    #f4033f 100%
+  );; */
+  /* background-size: 100%; */
+  /* background-size: 50%; */
+  /* animation: loadingGradient 5s linear infinite; */
+}
+
+/* @keyframes loadingGradient {
+  0% {
+      background-position: 0%, 0;
+  }
+  100% {
+      background-position: 100%, 0;
+  }
+} */
+
   /* background: rgb(0,212,255);
   background: radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(5,111,188,1) 50%, rgba(0,9,68,1) 100%); */
   /* position: absolute;
@@ -54,7 +79,6 @@
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite; */
-}
 /* @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -698,10 +722,10 @@ h2 {
 
 
 .player1 {
-  /* background: linear-gradient(90deg, #f4033f, #f441ee, #3bffff, #03a9f4, #f4033f); */
-  background-size: 100%;
-  /* background-size: 50%; */
-  /* animation: p1HealthGradient 5s linear infinite; */
+  background: linear-gradient(90deg, #f4033f, #f441ee, #3bffff, #03a9f4, #f4033f);
+  /* background-size: 100%; */
+  background-size: 50%;
+  animation: p1HealthGradient 5s linear infinite;
 }
 
 @keyframes p1HealthGradient {
