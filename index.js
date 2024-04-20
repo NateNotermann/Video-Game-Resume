@@ -2559,7 +2559,6 @@ function death(){
 function hitSprite(){
     if(!canHurt){
         // player.currentSprite = player.sprites.run.left
-        player.currentSprite = player.sprites.hurt.right
         // player.currentCropWidth = player.sprites.run.cropWidth
         // player.width = player.sprites.run.width
         console.log('hit sprite');
