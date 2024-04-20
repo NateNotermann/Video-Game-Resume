@@ -408,8 +408,8 @@ BugPic.src = './img/Bug/bug2.webp'
 const BugTalkPic = new Image()   
 BugTalkPic.src = './img/Bug/bugTalkSprite.webp'
 
-// const spacebarPic = new Image()   
-// spacebarPic.src = './img/Sign/spacebar.webp'
+const spacebarPic = new Image()   
+spacebarPic.src = './img/Sign/spacebar.webp'
 
 const signMCTCPic = new Image()   
 signMCTCPic.src = './img/Sign/MCTC.webp'
@@ -664,7 +664,7 @@ buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (pl
 
 // -------------------------- ARROWS & SIGNS --------------------------
 arrowArray = [ new ARROW(1200, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
-            // new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
+            new Sign({x: 7700, y: canvas.height - spacebarPic.height - 500, image: spacebarPic}),
         ] 
 signArray = [
             new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
@@ -2559,6 +2559,7 @@ function death(){
 function hitSprite(){
     if(!canHurt){
         // player.currentSprite = player.sprites.run.left
+        player.currentSprite = player.sprites.hurt.right
         // player.currentCropWidth = player.sprites.run.cropWidth
         // player.width = player.sprites.run.width
         console.log('hit sprite');
