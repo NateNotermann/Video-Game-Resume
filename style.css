@@ -37,9 +37,35 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: white;
+  /* background-color: white; */
+  background: radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(5,111,188,1) 50%, rgba(0,9,68,1) 100%);
   width: 100%;
   height: 100%;
+
+  /* background: linear-gradient(90deg, #f4033f, #f441ee, #3bffff, #03a9f4, #f4033f); */
+  /* background:   repeating-linear-gradient(
+    90deg,
+    #f4033f 0%,
+    #f441ee 20%,
+    #3bffff 40%,
+    #03a9f4 60%,
+    #f4033f 80%,
+    #f4033f 100%
+  );; */
+  /* background-size: 100%; */
+  /* background-size: 50%; */
+  /* animation: loadingGradient 5s linear infinite; */
+}
+
+/* @keyframes loadingGradient {
+  0% {
+      background-position: 0%, 0;
+  }
+  100% {
+      background-position: 100%, 0;
+  }
+} */
+
   /* background: rgb(0,212,255);
   background: radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(5,111,188,1) 50%, rgba(0,9,68,1) 100%); */
   /* position: absolute;
@@ -53,7 +79,6 @@
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite; */
-}
 /* @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -63,7 +88,7 @@
 .title{
   font-size: 1.3em;
   text-decoration: underline;
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
 .company {
   font-size: 1.3em;
@@ -263,8 +288,14 @@ html {
     font-family: 'Press Start 2P';
     text-align: center;
     width: 10em;
-    text-decoration:none;
+    /* text-decoration:none; */
     font-family: 'Concert One';
+  }
+  #btnCloseHelp {
+    background: #00FF00;
+  }
+  #btnCloseHGA, #btnClosePrime, #btnCloseCBRE, #btnCloseFreelance, #btnCloseCoyote, #btnCloseRestaurant, #btnCloseMCTC, #btnCloseWin {
+    background: #00FF00;
   }
   
   .btn:last-child {
@@ -298,7 +329,7 @@ html {
     /* text-decoration: underline; */
   } 
   h4 {
-    text-decoration: underline;
+    /* text-decoration: underline; */
     margin-top: .2em; 
     margin-bottom: 0em; 
     margin-left: 0em;
@@ -307,12 +338,14 @@ html {
   
   p {
     /* margin: 0.5em; */
+    margin-top: 0.3em; 
+    margin-bottom: 0.3em; 
   }
 
   ul {
     list-style-type: circle;
-   margin-top: .3em; 
-   margin-bottom: 0em; 
+    margin-top: .3em; 
+    margin-bottom: 0em; 
       /* margin-left: 0em;
     margin-right: 0em; */
   }
@@ -324,7 +357,7 @@ html {
   }
   
   .tech {
-    font-weight: bold;
+    /* font-weight: bold; */
   }
 
   
@@ -355,6 +388,9 @@ html {
   }
   
   #intro {
+    line-height: 1.3;
+  }
+  #hello {
     line-height: 1.3;
   }
   
@@ -450,7 +486,7 @@ html {
     text-align: center;
     display: inline-block;
     margin:5px;
-    font-weight: bold;
+    /* font-weight: bold; */
     padding: 10px 10px 10px 10px ;
     background-color: lightgray;
     text-shadow: -1px -1px black, 1px 1px white;
@@ -461,7 +497,7 @@ html {
     border-radius: 7px;
     box-shadow: 0 .2em gray; 
     cursor: pointer;
-    font-weight: bold;
+    /* font-weight: bold; */
     font-family: 'Press Start 2p';
 } 
 .video-game-buttonA:active, .video-game-buttonX:active, .start-btn:active {
@@ -680,9 +716,17 @@ html {
   min-width: 100%;
   /* line-height: 5; */
 }
-#controlsParent, #linksParent {
+#linksParent {
   min-width: 50%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+  justify-content: space-between;
+}
+#controlsParent {
+  min-width: 50%;
+  display: none;
   flex-direction: column;
   align-items: center;
   align-content: space-around;
@@ -697,10 +741,10 @@ h2 {
 
 
 .player1 {
-  /* background: linear-gradient(90deg, #f4033f, #f441ee, #3bffff, #03a9f4, #f4033f); */
-  background-size: 100%;
-  /* background-size: 50%; */
-  /* animation: p1HealthGradient 5s linear infinite; */
+  background: linear-gradient(90deg, #f4033f, #f441ee, #3bffff, #03a9f4, #f4033f);
+  /* background-size: 100%; */
+  background-size: 50%;
+  animation: p1HealthGradient 5s linear infinite;
 }
 
 @keyframes p1HealthGradient {
@@ -784,6 +828,16 @@ h2 {
   #modalHelp{
     overflow: auto;
   }
+  .messageHelp {
+    font-size:1.8rem;
+  }
+  .message {
+    font-size:1.8rem;
+    margin-bottom: 1rem;
+    margin-top: 0rem;
+    line-height: 1;
+  }
+  
   /* 
   #linksParent {
     margin: 0px;

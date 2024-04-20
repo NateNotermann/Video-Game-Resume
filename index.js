@@ -10,6 +10,8 @@ const PressXDiv = document.getElementById('pressX');
 const modalLose = document.getElementById('modalLose');
 const closeLose = document.getElementById('btnCloseLose');
 const flexDiv = document.getElementById('flexDiv');
+const controlsImage = document.getElementById('controlsImage');
+const controlsParent = document.getElementById('controlsParent');
 
 let mobileModal = false
 
@@ -534,6 +536,8 @@ function init() {
     }
     blackStart = false
     winModal = false
+
+    // helpModalOff()
 // -------- ELEMENT VARIABLES --------
 player = new Player() //  ---- NEED THIS. Resets the player. ----
 
@@ -2300,6 +2304,8 @@ function modalFreelanceOff(){
  function helpModalOn(){
     helpModal = true
     modalHelp.style.display = 'flex'
+    controlsImage.style.display = 'flex'
+    controlsParent.style.display = 'flex'
 }
 // ---- modalHelp OFF ----
 function helpModalOff(){
@@ -2561,13 +2567,13 @@ function hitSprite(){
 }
 
 function handleClick() {
-    console.log(helpModal);
-    console.log('MCTCModal', MCTCModal);
-    console.log('CoyoteModal', CoyoteModal);
-    console.log('CBREModal', CBREModal);
-    console.log('PrimeModal', PrimeModal);
-    console.log('MCTCMHGAModalodal', HGAModal);
-    console.log('mobileModal', mobileModal);
+    // console.log(helpModal);
+    // console.log('MCTCModal', MCTCModal);
+    // console.log('CoyoteModal', CoyoteModal);
+    // console.log('CBREModal', CBREModal);
+    // console.log('PrimeModal', PrimeModal);
+    // console.log('MCTCMHGAModalodal', HGAModal);
+    // console.log('mobileModal', mobileModal);
     if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal ){          
         // console.log('No building modals are open');
         helpModal = !helpModal
