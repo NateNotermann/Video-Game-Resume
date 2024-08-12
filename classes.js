@@ -48,7 +48,7 @@ class Player {
                 color = "lightgreen"; 
             } 
             c.shadowColor = color; //playerColor[number2] // 'yellow'; // Set the color of the glow
-            c.shadowBlur = 150; // Set the blur radius
+            c.shadowBlur = 50; // Set the blur radius
             c.shadowOffsetX = 0; // Set the horizontal offset of the shadow
             c.shadowOffsetY = 0; // Set the vertical offset of the shadow
         }

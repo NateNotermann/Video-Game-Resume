@@ -10,6 +10,8 @@ const PressXDiv = document.getElementById('pressX');
 const modalLose = document.getElementById('modalLose');
 const closeLose = document.getElementById('btnCloseLose');
 const flexDiv = document.getElementById('flexDiv');
+const controlsImage = document.getElementById('controlsImage');
+const controlsParent = document.getElementById('controlsParent');
 
 let mobileModal = false
 
@@ -68,10 +70,10 @@ function checkOrientation() {
     if (window.matchMedia("(orientation: portrait)").matches && mobileModal){
         // flexDiv.style.setProperty('flex-direction', 'column');
         // flexDiv.style.setProperty('align-items',  'center');
-        // console.log('Portrait orientation');
+        console.log('Portrait orientation');
     } else if (window.matchMedia("(orientation: landscape)").matches && mobileModal){
         // alert('Please make sure device is Vertical.')
-        // console.log("landscape orientation");
+        console.log("landscape orientation");
     }
 }
 
@@ -406,8 +408,8 @@ BugPic.src = './img/Bug/bug2.webp'
 const BugTalkPic = new Image()   
 BugTalkPic.src = './img/Bug/bugTalkSprite.webp'
 
-// const spacebarPic = new Image()   
-// spacebarPic.src = './img/Sign/spacebar.webp'
+const spacebarPic = new Image()   
+spacebarPic.src = './img/Sign/spacebar.webp'
 
 const signMCTCPic = new Image()   
 signMCTCPic.src = './img/Sign/MCTC.webp'
@@ -449,6 +451,9 @@ titlePic.src = './img/videogame-title2.webp'
 
 const newMenu = new Image()   
 newMenu.src = './img/new-button-menu.webp'
+
+const heart = new Image()   
+heart.src = './img/Sign/heart.png'
 // -------- ELEMENT VARIABLES --------
 let player = new Player() //  calling the "Player" class
 player.draw()
@@ -471,6 +476,7 @@ let elementsPRIME = []
 let buildingHGA = []
 let arrowArray = []
 let signArray = []
+let heartArray = []
 let powerUps1 = []
 let powerUps2 = []
 let powerUps3 = []
@@ -530,6 +536,8 @@ function init() {
     }
     blackStart = false
     winModal = false
+
+    // helpModalOff()
 // -------- ELEMENT VARIABLES --------
 player = new Player() //  ---- NEED THIS. Resets the player. ----
 
@@ -656,7 +664,7 @@ buildingHGA = [ new BuildingHGA(buildingNull*2, canvas.height - HGA.height - (pl
 
 // -------------------------- ARROWS & SIGNS --------------------------
 arrowArray = [ new ARROW(1200, canvas.height - ArrowPic.height - 50, 250, 422, ArrowPic),
-            // new Sign({x: 2850, y: canvas.height - spacebarPic.height - 125, image: spacebarPic}),
+            new Sign({x: 7700, y: canvas.height - spacebarPic.height - 500, image: spacebarPic}),
         ] 
 signArray = [
             new Sign({x: 4700, y: canvas.height - BugTalkPic.height - 200, image: BugTalkPic}),
@@ -673,6 +681,8 @@ signArray = [
             new Sign({x: 10950, y: canvas.height - signPrimePic.height - 125, image: signPrimePic}),
             new Sign({x: 6450, y: canvas.height - SignHGAPic.height - 100, image: SignHGAPic}),
 ]
+
+heartArray = [ new Sign({x: 100, y: 20, image: heart})]
 // -------------------------- WIN BARS--------------------------
 WinBar2Item = [new Sign({x: 41100, y: canvas.height - WinBar2.height - 125, image: WinBar2})]
 WinBar3Item = [new Sign({x: 41010, y: canvas.height - WinBar3.height - 325 , image: WinBar3})]
@@ -1079,6 +1089,10 @@ function drawStuff(){
     })
     signArray.forEach(sign => { // loop sign frames
         sign.draw() 
+        // arrowArray1.update()
+    })
+    heartArray.forEach(heart => { // loop sign frames
+        heart.draw() 
         // arrowArray1.update()
     })
     
@@ -2290,6 +2304,8 @@ function modalFreelanceOff(){
  function helpModalOn(){
     helpModal = true
     modalHelp.style.display = 'flex'
+    controlsImage.style.display = 'flex'
+    controlsParent.style.display = 'flex'
 }
 // ---- modalHelp OFF ----
 function helpModalOff(){
@@ -2551,13 +2567,13 @@ function hitSprite(){
 }
 
 function handleClick() {
-    console.log(helpModal);
-    console.log('MCTCModal', MCTCModal);
-    console.log('CoyoteModal', CoyoteModal);
-    console.log('CBREModal', CBREModal);
-    console.log('PrimeModal', PrimeModal);
-    console.log('MCTCMHGAModalodal', HGAModal);
-    console.log('mobileModal', mobileModal);
+    // console.log(helpModal);
+    // console.log('MCTCModal', MCTCModal);
+    // console.log('CoyoteModal', CoyoteModal);
+    // console.log('CBREModal', CBREModal);
+    // console.log('PrimeModal', PrimeModal);
+    // console.log('MCTCMHGAModalodal', HGAModal);
+    // console.log('mobileModal', mobileModal);
     if(!MCTCModal && !CoyoteModal && !CBREModal && !PrimeModal && !HGAModal ){          
         // console.log('No building modals are open');
         helpModal = !helpModal
