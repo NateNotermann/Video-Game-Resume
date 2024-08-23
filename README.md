@@ -1,7 +1,7 @@
 # Video Game Resume!
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7c00f1c0-b166-41c5-b1ba-5f3c45001266/deploy-status)](https://app.netlify.com/sites/aquamarine-bubblegum-1105d2/deploys)    
 I turned my resume into a playable video game!   
-**Play the game -->**  [**HERE!**](https://aquamarine-bubblegum-1105d2.netlify.app/)   
+**Play the game -->**  [**HERE!**](https://www.natenotermann.com/)   
 
 <img src="img/ReadMe/new2-ezgif.com-optimize.gif" style="width: 100%;">   
 
